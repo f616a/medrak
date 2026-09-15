@@ -62,6 +62,29 @@
       </div>
     </div>
   </section>
+  <!-- ===== اختبار المصطلحات (نقاط + تحدي صديق) ===== -->
+  <section id="glossary-quiz">
+    <div class="wrap">
+      <h2 class="section-title">اختبر معلوماتك بالمصطلحات 🏆</h2>
+      <p class="section-sub">10 أسئلة صح/خطأ واختيارات، كل سؤال بنقطة، وبآخر الاختبار تقدر تتحدى زميلك يتخطى نتيجتك.</p>
+      <div class="quiz-box" id="gqBox">
+        <div id="gqLive">
+          <p style="margin:0 0 6px;font-size:12.5px;color:var(--ink-soft)">السؤال <span id="gqNum">1</span> من 10 — نقاطك: <b id="gqScore" style="color:var(--gold)">0</b></p>
+          <p id="gqQuestion" style="margin:0 0 14px;font-weight:700;color:var(--navy)"></p>
+          <div class="quiz-opts" id="gqOpts"></div>
+        </div>
+        <div id="gqResult" style="display:none;text-align:center">
+          <div style="font-size:40px">🎯</div>
+          <h3 style="margin:8px 0" id="gqFinalScore"></h3>
+          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px">
+            <button class="btn btn-primary" id="gqShare">تحدَّ صديقك 📤</button>
+            <button class="btn btn-outline" id="gqRestart">أعد الاختبار</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== تدريب على التعبير (لأن أغلب اختبارات القسم مقالية) ===== -->
   <section id="essay" class="alt">
     <div class="wrap">
@@ -97,7 +120,7 @@
   <!-- ===== تحسين اللغة الإنجليزية ===== -->
   <section id="english">
     <div class="wrap">
-      <h2 class="section-title">حسّن إنجليزيك السياسي 🌍</h2>
+      <h2 class="section-title">طوّر لغتك الإنجليزية في المصطلحات السياسية 🌍</h2>
       <p class="section-sub">مصادر مجانية موثوقة تساعدك تفهم وتستخدم المصطلحات السياسية بالإنجليزي بثقة أكثر.</p>
       <div class="grid-cards">
         <div class="field-card"><div class="emoji">📻</div><h3>BBC Learning English</h3><p>دروس مجانية بمستويات مختلفة، وبرامج أخبار مبسطة تساعدك تتعود على المصطلحات بسياقها الحقيقي.</p></div>
@@ -338,6 +361,80 @@
   document.getElementById('termSearch').addEventListener('input', function(){ renderTerms(this.value); });
   document.getElementById('termOfDay').textContent = terms.length ? (function(){ const t = terms[Math.floor(Math.random()*terms.length)]; return t.en + ' — ' + t.ar; })() : 'قريبًا...';
 
+  /* ============================================================
+     اختبار المصطلحات — يُولَّد تلقائيًا من قائمة terms الحقيقية (بدون أي محتوى مخترع)
+     كل سؤال يقارن مصطلح إنجليزي بترجمة عربية: إما ترجمته الصحيحة، أو ترجمة مصطلح آخر (خطأ)
+     ============================================================ */
+  const GQ_TOTAL = 10;
+  let gqIndex = 0, gqScore = 0, gqQuestions = [];
+
+  function buildGqQuestions(){
+    const pool = [...terms].sort(() => 0.5 - Math.random()).slice(0, GQ_TOTAL);
+    return pool.map(t => {
+      const isTrueStatement = Math.random() < 0.5;
+      if (isTrueStatement) {
+        return { type:'tf', en:t.en, shown:t.ar, correct:true };
+      } else {
+        let wrong;
+        do { wrong = terms[Math.floor(Math.random()*terms.length)]; } while (wrong.ar === t.ar);
+        return { type:'tf', en:t.en, shown:wrong.ar, correct:false };
+      }
+    });
+  }
+
+  function gqRenderQuestion(){
+    const q = gqQuestions[gqIndex];
+    document.getElementById('gqNum').textContent = gqIndex + 1;
+    document.getElementById('gqScore').textContent = gqScore;
+    document.getElementById('gqQuestion').textContent = 'معنى "' + q.en + '" هو: ' + q.shown;
+    const opts = document.getElementById('gqOpts');
+    opts.innerHTML = '';
+    ['صح', 'خطأ'].forEach((label, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt';
+      btn.textContent = label;
+      btn.addEventListener('click', function(){
+        const answeredTrue = (i === 0);
+        const isCorrect = answeredTrue === q.correct;
+        if (isCorrect) gqScore++;
+        opts.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+        this.style.borderColor = isCorrect ? '#3fa76b' : '#c0392b';
+        this.style.background = isCorrect ? 'rgba(63,167,107,0.12)' : 'rgba(192,57,41,0.12)';
+        setTimeout(() => {
+          gqIndex++;
+          if (gqIndex >= gqQuestions.length) { gqShowResult(); }
+          else { gqRenderQuestion(); }
+        }, 550);
+      });
+      opts.appendChild(btn);
+    });
+  }
+
+  function gqShowResult(){
+    document.getElementById('gqLive').style.display = 'none';
+    document.getElementById('gqResult').style.display = 'block';
+    document.getElementById('gqFinalScore').textContent = 'نتيجتك: ' + gqScore + ' من ' + GQ_TOTAL;
+  }
+
+  function gqStart(){
+    gqIndex = 0; gqScore = 0;
+    gqQuestions = buildGqQuestions();
+    document.getElementById('gqLive').style.display = 'block';
+    document.getElementById('gqResult').style.display = 'none';
+    gqRenderQuestion();
+  }
+  gqStart();
+
+  document.getElementById('gqRestart').addEventListener('click', gqStart);
+  document.getElementById('gqShare').addEventListener('click', function(){
+    const msg = 'تحديتك في اختبار مصطلحات مِدراك السياسية! جبت ' + gqScore + ' من ' + GQ_TOTAL + ' 🏆 جرّب تتخطاني: ' + window.location.href;
+    if (navigator.share) {
+      navigator.share({ text: msg }).catch(() => {});
+    } else {
+      window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+    }
+  });
+
 
   /* ===== تدريب على التعبير — أسئلة تدريبية تبقى محليًا بالمتصفح فقط ===== */
   const essayPrompts = [
@@ -371,9 +468,6 @@
     lines.push('🍔 عدد الفقرات: <b>' + paraCount + '</b>' + (paraCount < 3 ? ' — حاول تفصل مقدمة/صلب الموضوع/خاتمة كل وحدة بفقرة (اضغط Enter مرتين بينها)' : ' — شكلك مقسم فقرات، تمام 👍'));
     if (usedTerms.length > 0) {
       lines.push('✅ استخدمت ' + usedTerms.length + ' من مصطلحات قاموسنا: ' + usedTerms.slice(0,6).map(t => t.ar).join('، '));
-    } else {
-      const suggestions = [...terms].sort(() => 0.5 - Math.random()).slice(0,4).map(t => t.ar + ' (' + t.en + ')');
-      lines.push('💡 ما لقيت أي مصطلح من قاموسنا بإجابتك — جرّب تستخدم مصطلحات زي: ' + suggestions.join('، '));
     }
     resultBox.innerHTML = lines.map(l => '<div style="margin-bottom:8px">' + l + '</div>').join('');
     resultBox.style.display = 'block';
