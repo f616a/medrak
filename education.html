@@ -44,11 +44,11 @@
       <h2 class="section-title" data-ar="قاموس مِدراك السياسي 📖" data-en="Medrak Political Glossary 📖">قاموس مِدراك السياسي 📖</h2>
       <p class="section-sub">أكثر من 400 مصطلح سياسي بالإنجليزي مع ترجمته العربية. إعداد: <b>د. صادق مالكي</b> — أستاذ العلوم السياسية بالجامعة.</p>
 
-      <!-- تسجيل صوتي حقيقي بنطق المصطلحات، من إعداد د. صادق مالكي -->
+      <!-- تسجيل صوتي بنطق المصطلحات، من إعداد مِدراك (المصطلحات نفسها من إعداد د. صادق مالكي، لكن التسجيل الصوتي سواه فريق مِدراك) -->
       <div class="info-card" style="margin-bottom:20px">
         <p style="margin:0 0 10px;font-size:13.5px;font-weight:700;color:var(--navy)">🎧 استمع لنطق المصطلحات</p>
         <audio controls preload="none" style="width:100%" src="assets/glossary-audio.mp3"></audio>
-        <p style="margin:8px 0 0;font-size:11.5px;color:var(--ink-soft)">تسجيل صوتي واحد يغطي المصطلحات، إعداد د. صادق مالكي.</p>
+        <p style="margin:8px 0 0;font-size:11.5px;color:var(--ink-soft)">تسجيل صوتي واحد يغطي المصطلحات، إعداد مِدراك.</p>
       </div>
 
       <!-- بحث سريع فوق قائمة مضغوطة قابلة للتمرير، بدل قائمة طويلة تاخذ مساحة الصفحة كلها -->
@@ -82,8 +82,13 @@
       <div class="info-card">
         <h3 style="margin:0 0 10px;color:var(--navy);font-size:16px">🎯 جرّب على هذا السؤال</h3>
         <p style="margin:0 0 12px;font-size:14px" id="essayPrompt"></p>
-        <textarea rows="6" id="essayBox" placeholder="اكتب إجابتك هنا وطبّق طريقة الهمبورجر... (يبقى بالصفحة بس، ما يُرسل لأحد)"></textarea>
-        <button class="btn btn-outline" id="essayNewPrompt" style="margin-top:10px">سؤال ثاني</button>
+        <textarea rows="6" id="essayBox" placeholder="اكتب إجابتك هنا وطبّق طريقة الهمبورجر..."></textarea>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+          <button class="btn btn-primary" id="essayCheck" style="padding:9px 18px;font-size:13.5px">قيّم إجابتي</button>
+          <button class="btn btn-outline" id="essayNewPrompt" style="padding:9px 18px;font-size:13.5px">سؤال ثاني</button>
+        </div>
+        <div id="essayResult" style="display:none;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);font-size:13.5px"></div>
+        <p style="margin:10px 0 0;font-size:11.5px;color:var(--ink-soft)">⚠️ هذا تحليل تلقائي بسيط (طول، تقسيم فقرات، استخدام مصطلحات) — مو تصحيح فعلي لمحتوى إجابتك أو دقتها العلمية. يبقى كل شي بمتصفحك، ما يُرسل لأي مكان.</p>
       </div>
     </div>
   </section>
@@ -350,6 +355,28 @@
   document.getElementById('essayNewPrompt').addEventListener('click', function(){
     essayIndex = (essayIndex + 1) % essayPrompts.length;
     renderEssayPrompt();
+    document.getElementById('essayResult').style.display = 'none';
+  });
+
+  /* تحليل محلي بسيط (بدون AI) — طول، فقرات، ومطابقة مع مصطلحات القاموس الحقيقية (terms معرّفة أعلاه في هذا الملف) */
+  document.getElementById('essayCheck').addEventListener('click', function(){
+    const text = document.getElementById('essayBox').value.trim();
+    const resultBox = document.getElementById('essayResult');
+    if (!text) { resultBox.innerHTML = 'اكتب إجابتك أول قبل التقييم 🙂'; resultBox.style.display = 'block'; return; }
+    const wordCount = text.split(/\s+/).filter(Boolean).length;
+    const paraCount = text.split(/\n+/).filter(p => p.trim()).length;
+    const usedTerms = terms.filter(t => text.includes(t.ar) || text.toLowerCase().includes(t.en.toLowerCase()));
+    const lines = [];
+    lines.push('📊 عدد الكلمات: <b>' + wordCount + '</b>' + (wordCount < 80 ? ' — قصيرة شوي، حاول توسّع أكثر' : wordCount > 400 ? ' — طويلة، حاول تختصر لصلب الفكرة' : ' — طول مناسب 👍'));
+    lines.push('🍔 عدد الفقرات: <b>' + paraCount + '</b>' + (paraCount < 3 ? ' — حاول تفصل مقدمة/صلب الموضوع/خاتمة كل وحدة بفقرة (اضغط Enter مرتين بينها)' : ' — شكلك مقسم فقرات، تمام 👍'));
+    if (usedTerms.length > 0) {
+      lines.push('✅ استخدمت ' + usedTerms.length + ' من مصطلحات قاموسنا: ' + usedTerms.slice(0,6).map(t => t.ar).join('، '));
+    } else {
+      const suggestions = [...terms].sort(() => 0.5 - Math.random()).slice(0,4).map(t => t.ar + ' (' + t.en + ')');
+      lines.push('💡 ما لقيت أي مصطلح من قاموسنا بإجابتك — جرّب تستخدم مصطلحات زي: ' + suggestions.join('، '));
+    }
+    resultBox.innerHTML = lines.map(l => '<div style="margin-bottom:8px">' + l + '</div>').join('');
+    resultBox.style.display = 'block';
   });
 
 
