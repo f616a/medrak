@@ -87,10 +87,19 @@
     cursor: pointer; font-family: inherit;
   }
   #medrak-root .gender-btn.active { background: var(--navy); color: #fff; }
-  #medrak-root .menu-toggle { display: none; }
-
+  #medrak-root .menu-toggle {
+    display: none; background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+    width: 38px; height: 38px; align-items: center; justify-content: center; cursor: pointer; font-size: 18px;
+  }
   @media (max-width: 860px) {
-    #medrak-root nav.links { display: none; }
+    #medrak-root .menu-toggle { display: flex; order: -1; }
+    #medrak-root nav.links {
+      display: none; position: absolute; top: 100%; right: 0; left: 0;
+      background: var(--paper); flex-direction: column; gap: 0; padding: 6px 20px 14px;
+      border-bottom: 1px solid var(--line); box-shadow: var(--shadow); z-index: 40;
+    }
+    #medrak-root nav.links.open { display: flex; }
+    #medrak-root nav.links a { padding: 12px 4px; border-bottom: 1px solid var(--line); }
   }
 
   /* ===== Hero ===== */

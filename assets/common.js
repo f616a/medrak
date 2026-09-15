@@ -56,6 +56,24 @@
     langToggleBtn.addEventListener('click', function(){ setLanguage(window.medrakState.lang === 'en' ? 'ar' : 'en'); });
   }
 
+  /* ===== قائمة الجوال (Hamburger) ===== */
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.querySelector('#medrak-root nav.links');
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', function(){
+      const isOpen = navLinks.classList.toggle('open');
+      this.setAttribute('aria-expanded', String(isOpen));
+      this.textContent = isOpen ? '✕' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', function(){
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.textContent = '☰';
+      });
+    });
+  }
+
   /* ===== العودة للأعلى ===== */
   const backTop = document.getElementById('backTop');
   if (backTop) {
