@@ -181,10 +181,10 @@
           GitHub Pages يستضيف ملفات ثابتة فقط بدون أي خادم خلفي، فما يقدر يستقبل بيانات النماذج مباشرة.
           أسهل حل مجاني: خدمة Formspree (formspree.io) — سجل حساب مجاني، أنشئ Form جديد،
           وبيعطيك رابط شبيه بـ: https://formspree.io/f/xxxxxxxx
-          استبدل "YOUR_FORM_ID" أدناه بمعرف الفورم الحقيقي (نفسه يصلح لنموذجي التقييم والتواصل، أو أنشئ فورم منفصل لكل واحد).
+          نموذجا التقييم والتواصل مربوطان بنفس فورم Formspree (mljdrjly) — أي رد يوصل إيميلك مباشرة.
           بعدها أي إجابة ترسل، توصلك على إيميلك وتقدر تشوف كل الردود بلوحة تحكم Formspree.
         -->
-        <form id="ratingForm" class="native-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <form id="ratingForm" class="native-form" action="https://formspree.io/f/mljdrjly" method="POST">
           <div class="stars" id="starRating">
             <span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span>
           </div>
@@ -200,8 +200,8 @@
       <!-- ===== التواصل ===== -->
       <div id="contact">
         <h2 class="section-title" data-ar="تبغى تتواصل معانا؟ حياك 👋" data-en="Want to reach us? Welcome 👋">تبغى تتواصل معانا؟ حياك 👋</h2>
-        <!-- نفس ملاحظة نموذج التقييم أعلاه: استبدل YOUR_FORM_ID برقم فورم Formspree الحقيقي -->
-        <form id="contactForm" class="native-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <!-- مربوط بنفس فورم Formspree (mljdrjly) -->
+        <form id="contactForm" class="native-form" action="https://formspree.io/f/mljdrjly" method="POST">
           <label class="field-label">الاسم</label>
           <input type="text" name="الاسم" placeholder="اسمك">
           <label class="field-label">وسيلة التواصل</label>
