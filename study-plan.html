@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الخطة الدراسية | مِدراك</title>
+<meta name="description" content="الخطة الدراسية التفاعلية لتخصص العلوم السياسية بجامعة الملك عبدالعزيز، مع نصائح للتخرج المبكر.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body style="margin:0">
+<div id="medrak-root">
+<a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>
+
+<header class="site">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand" style="text-decoration:none">مِدراك <small>Medrak</small></a>
+    <nav class="links">
+      <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+      <a href="index.html#kau" data-ar="القسم" data-en="Department">القسم</a>
+      <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+      <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+      <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
+      <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+    </nav>
+    <div class="nav-actions">
+      <div class="gender-toggle" role="group" aria-label="اختر طلاب أو طالبات">
+        <button class="gender-btn active" id="genderMale" aria-pressed="true">طلاب</button>
+        <button class="gender-btn" id="genderFemale" aria-pressed="false">طالبات</button>
+      </div>
+      <button class="icon-btn" id="langToggle" aria-label="Switch language" style="width:auto;padding:0 10px;font-size:13px;font-weight:700">EN</button>
+      <button class="icon-btn" id="darkToggle" aria-label="تبديل الوضع الداكن">🌙</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section id="plan" class="alt">
+    <div class="wrap">
+      <h2 class="section-title" data-ar="الخطة الدراسية 🗺️" data-en="Study Plan 🗺️">الخطة الدراسية 🗺️</h2>
+      <p class="section-sub" data-ar="اختر مجال تركيزك عشان تشوف كيف تتوزع موادك بالسنتين الثالثة والرابعة. اضغط على أي مادة عشان تشوف تفاصيلها." data-en="Choose your concentration to see how your courses are distributed in years 3 and 4. Click any course to see its details.">اختر مجال تركيزك عشان تشوف كيف تتوزع موادك بالسنتين الثالثة والرابعة. اضغط على أي مادة عشان تشوف تفاصيلها.</p>
+
+      <div class="plan-summary">
+        <div class="summary-chip"><b>35</b>متطلبات جامعة وكلية</div>
+        <div class="summary-chip"><b>58</b>مقررات القسم الإجبارية</div>
+        <div class="summary-chip"><b>21</b>مقررات مجال التركيز</div>
+        <div class="summary-chip"><b>8+6</b>اختيارية + حرة</div>
+      </div>
+
+      <div class="plan-controls">
+        <label class="field-label" style="margin-bottom:0">مجال التركيز:</label>
+        <select id="trackSelect">
+          <option value="ipe">الاقتصاد السياسي العالمي (IPE)</option>
+          <option value="ppd">السياسة العامة والتنمية (PP&D)</option>
+        </select>
+      </div>
+
+      <div id="planContainer"></div>
+      <p style="font-size:12.5px;color:var(--ink-soft);margin-top:6px">* السنتان الأولى والثانية (بعد السنة التحضيرية) متطابقتان في المسارين. الفروقات تبدأ من الفصل السابع. <a class="source-link" href="https://political-science.kau.edu.sa/Files/120006/Files/157420_Study-plan-ps-ar.pdf" target="_blank" rel="noopener">المصدر الرسمي ↗</a></p>
+    </div>
+  </section>
+<div class="modal-overlay" id="courseModal">
+    <div class="modal-box">
+      <span class="code-tag" id="modalCode"></span>
+      <h3 id="modalName"></h3>
+      <div class="modal-meta">
+        <div id="modalHours"></div>
+        <div id="modalPrereq"></div>
+      </div>
+      <p style="font-size:13px;color:var(--ink-soft)">لا يتوفر وصف أكاديمي رسمي منشور لهذا المقرر ضمن مصادرنا الحالية — راجع دليل القسم للتفاصيل الكاملة.</p>
+      <button class="btn btn-outline modal-close" onclick="document.getElementById('courseModal').classList.remove('show')">إغلاق</button>
+    </div>
+  </div>
+<section id="quiz" class="alt">
+    <div class="wrap">
+      <h2 class="section-title" data-ar="اختبر نفسك ✅" data-en="Test Yourself ✅">اختبر نفسك ✅</h2>
+      <p class="section-sub" data-ar="6 أسئلة بس، وطلعلك أقرب مجال تركيز يناسبك." data-en="Just 6 quick questions to find the concentration that suits you.">6 أسئلة بس، وطلعلك أقرب مجال تركيز يناسبك.</p>
+      <div class="quiz-box" id="quizBox">
+        <div id="quizQuestions"></div>
+        <div class="quiz-result" id="quizResult">
+          <div class="badge" id="quizBadge">🎯</div>
+          <h3 id="quizResultTitle"></h3>
+          <p id="quizResultDesc" style="color:var(--ink-soft)"></p>
+          <p style="font-size:12.5px;color:var(--ink-soft);border-top:1px dashed var(--line);padding-top:10px;margin-top:10px">لسا متردد؟ ولا يهمك — ممكن تسأل مرشدك الأكاديمي يساعدك تتأكد من قرارك 🙌</p>
+          <button class="btn btn-outline" onclick="restartQuiz()" data-m="أعد الاختبار" data-f="أعيدي الاختبار" data-en="Retake Quiz">أعد الاختبار</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== خطة التخرج المبكر ===== -->
+  <section id="early-grad" class="alt">
+    <div class="wrap">
+      <h2 class="section-title">تبي تتخرج بدري؟ 🚀</h2>
+      <p class="section-sub">نصايح عملية من مِدراك للاستفادة من الفصول الصيفية وتسريع تخرجك — <b>مو قواعد رسمية</b>، تأكد من الأرقام والشروط الدقيقة مع مرشدك الأكاديمي وعمادة القبول والتسجيل.</p>
+      <div class="grid-cards">
+        <div class="field-card">
+          <div class="emoji">☀️</div>
+          <h3>استغل الفصل الصيفي</h3>
+          <p>في أغلب الجامعات السعودية عدد الساعات المسموح بها بالفصل الصيفي محدود (غالبًا حوالي 9 ساعات، وقد تزيد لمن تبقى له القليل للتخرج) — تأكد من الرقم بالضبط لهذا العام من عمادة القبول والتسجيل.</p>
+        </div>
+        <div class="field-card">
+          <div class="emoji">🗓️</div>
+          <h3>خطط من أول سنة</h3>
+          <p>اجلس مع مرشدك الأكاديمي بداية كل سنة وارسم مسار موادك للسنوات الجاية، خصوصًا مواد مجال التركيز اللي تعتمد على متطلبات سابقة.</p>
+        </div>
+        <div class="field-card">
+          <div class="emoji">🔗</div>
+          <h3>راقب المتطلبات السابقة</h3>
+          <p>بعض المواد ما تقدر تسجلها إلا بعد اجتياز مادة ثانية (Prerequisite) — لو فاتتك مادة أساسية بدري، ممكن تأخر عليك التخرج فصل كامل.</p>
+        </div>
+        <div class="field-card">
+          <div class="emoji">📈</div>
+          <h3>حافظ على معدلك</h3>
+          <p>بعض المواد أو الفصول الصيفية تكون أولوية التسجيل فيها للمعدلات الأعلى — معدل تراكمي جيد يعطيك مرونة أكثر بالتسجيل المبكر.</p>
+        </div>
+        <div class="field-card">
+          <div class="emoji">📚</div>
+          <h3>وزّع المتطلبات العامة</h3>
+          <p>حاول تخلص متطلبات الجامعة والكلية (مثل الثقافة الإسلامية) بالفصول الصيفية بدل ما تزاحم بها فصولك الدراسية العادية المليئة بمواد التخصص.</p>
+        </div>
+        <div class="field-card">
+          <div class="emoji">🙋</div>
+          <h3>اسأل قبل لا تسجل</h3>
+          <p>أي قرار يخص التخرج المبكر لازم يمر على مرشدك الأكاديمي أولاً — هو اللي يقدر يتأكد من خطتك ما تتعارض مع أي شرط رسمي محدث.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-notice" data-ar="مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز." data-en="Medrak is an independent student platform and not an official King Abdulaziz University website.">مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز.</div>
+    <div class="foot-grid">
+      <div>
+        <h5>مِدراك | Medrak</h5>
+        <p style="max-width:32ch" data-ar="دليلك الطلابي لتخصص العلوم السياسية." data-en="Your student guide to the Political Science major.">دليلك الطلابي لتخصص العلوم السياسية.</p>
+      </div>
+      <div>
+        <h5 data-ar="الأقسام" data-en="Sections">الأقسام</h5>
+        <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+        <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+        <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+        <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      </div>
+      <div>
+        <h5 data-ar="روابط أخرى" data-en="Other Links">روابط أخرى</h5>
+        <a href="index.html#sources" data-ar="المصادر" data-en="Sources">المصادر</a>
+        <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      </div>
+    </div>
+    <div class="foot-bottom" data-ar="© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر." data-en="© Medrak — All rights reserved to their respective official owners where noted.">© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر.</div>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="عودة للأعلى">↑</button>
+
+</div>
+
+<script src="assets/common.js" defer></script>
+<script>
+(function(){
+  const root = document.getElementById('medrak-root');
+
+  /* ============================================================
+     الخطة الدراسية — بيانات رسمية من دليل القسم (PDF)
+     ============================================================ */
+  const commonYears = [
+    { year: "السنة الثانية (بداية دراسة القسم)", sems: [
+      { name: "الفصل الثالث", total: 18, courses: [
+        {code:"ساس 101", name:"مبادئ العلوم السياسية", hours:3, prereq:"—"},
+        {code:"ساس 111", name:"النظام السياسي السعودي", hours:3, prereq:"—"},
+        {code:"ساس 221", name:"تطور الفكر السياسي العالمي", hours:3, prereq:"ساس 101"},
+        {code:"درع 101", name:"مبادئ الإدارة العامة", hours:3, prereq:"—"},
+        {code:"قصد 102", name:"مبادئ الاقتصاد الكلي", hours:3, prereq:"—"},
+        {code:"عرب 201", name:"تحرير كتابي", hours:3, prereq:"—"},
+      ]},
+      { name: "الفصل الرابع", total: 17, courses: [
+        {code:"ساس 212", name:"نظم سياسية مقارنة", hours:3, prereq:"ساس 101"},
+        {code:"ساس 231", name:"العلاقات الدولية", hours:3, prereq:"ساس 101"},
+        {code:"ساس 213", name:"علم الاجتماع السياسي", hours:3, prereq:"—"},
+        {code:"ساس 300", name:"البحث الكمي وتطبيقاته في علم السياسة", hours:3, prereq:"ساس 101"},
+        {code:"سلم 201", name:"ثقافة إسلامية II", hours:2, prereq:"—"},
+        {code:"—", name:"مقرر حر", hours:3, prereq:"—"},
+      ]},
+    ]},
+    { year: "السنة الثالثة", sems: [
+      { name: "الفصل الخامس", total: 17, courses: [
+        {code:"ساس 233", name:"منظمات دولية", hours:3, prereq:"ساس 231"},
+        {code:"ساس 315", name:"التنمية السياسية", hours:3, prereq:"ساس 212"},
+        {code:"ساس 334", name:"تحليل السياسة الخارجية", hours:3, prereq:"ساس 231"},
+        {code:"ساس 336", name:"السياسة الدولية", hours:3, prereq:"ساس 231"},
+        {code:"ساس 337", name:"العلاقات الدولية العربية", hours:3, prereq:"ساس 231"},
+        {code:"قصد 312", name:"المالية العامة", hours:2, prereq:"قصد 102"},
+      ]},
+      { name: "الفصل السادس", total: 17, courses: [
+        {code:"ساس 314", name:"السياسة العامة", hours:3, prereq:"ساس 212"},
+        {code:"ساس 316", name:"نظم وسياسات عربية وإقليمية", hours:3, prereq:"ساس 212"},
+        {code:"ساس 323", name:"الفكر والنظام السياسي الإسلامي", hours:3, prereq:"ساس 101"},
+        {code:"ساس 330", name:"الدبلوماسية والمفاوضات", hours:3, prereq:"ساس 231"},
+        {code:"ساس 403", name:"مفاهيم سياسية باللغة الإنجليزية", hours:2, prereq:"ساس 101"},
+        {code:"—", name:"مقرر اختياري", hours:3, prereq:"—"},
+      ]},
+    ]},
+  ];
+
+  const trackYear4 = {
+    ipe: { name:"السنة الرابعة — مسار الاقتصاد السياسي العالمي", sems: [
+      { name:"الفصل السابع", total:17, courses:[
+        {code:"ساس 335", name:"منظمات إقليمية", hours:3, prereq:"ساس 231"},
+        {code:"ساس 439", name:"الاقتصاد السياسي العالمي", hours:3, prereq:"قصد 102، ساس 336"},
+        {code:"ساس 491", name:"بحث وتدريب", hours:3, prereq:"ساس 300، ساس 336"},
+        {code:"قصد 320", name:"اقتصاد دولي", hours:3, prereq:"قصد 102"},
+        {code:"سلم 301", name:"ثقافة إسلامية III", hours:2, prereq:"—"},
+        {code:"—", name:"مقرر اختياري", hours:3, prereq:"—"},
+      ]},
+      { name:"الفصل الثامن", total:16, courses:[
+        {code:"ساس 432", name:"الاتحاد الأوربي", hours:3, prereq:"ساس 233"},
+        {code:"ساس 437", name:"العولمة", hours:3, prereq:"ساس 231"},
+        {code:"ساس 438", name:"سياسات نفط", hours:3, prereq:"ساس 231"},
+        {code:"سلم 401", name:"ثقافة إسلامية IV", hours:2, prereq:"—"},
+        {code:"—", name:"مقرر اختياري", hours:3, prereq:"—"},
+        {code:"—", name:"مقرر حر", hours:2, prereq:"—"},
+      ]},
+    ]},
+    ppd: { name:"السنة الرابعة — مسار السياسة العامة والتنمية", sems: [
+      { name:"الفصل السابع", total:17, courses:[
+        {code:"ساس 414", name:"سياسة عامة مقارنة", hours:3, prereq:"ساس 314"},
+        {code:"ساس 415", name:"نماذج في التنمية السياسية", hours:3, prereq:"ساس 315"},
+        {code:"ساس 493", name:"بحث وتدريب", hours:3, prereq:"ساس 300، ساس 314"},
+        {code:"سلم 301", name:"ثقافة إسلامية III", hours:2, prereq:"—"},
+        {code:"—", name:"مقرر اختياري", hours:3, prereq:"—"},
+        {code:"—", name:"مقرر حر", hours:2, prereq:"—"},
+      ]},
+      { name:"الفصل الثامن", total:16, courses:[
+        {code:"ساس 416", name:"تنمية محلية وحضرية", hours:3, prereq:"ساس 314"},
+        {code:"ساس 438", name:"سياسات نفط", hours:3, prereq:"ساس 231"},
+        {code:"درع 436", name:"تقييم البرامج الحكومية", hours:3, prereq:"درع 101"},
+        {code:"سلم 401", name:"ثقافة إسلامية IV", hours:2, prereq:"—"},
+        {code:"—", name:"مقرر اختياري", hours:3, prereq:"—"},
+      ]},
+    ]},
+  };
+
+  function renderPlan(track){
+    const container = document.getElementById('planContainer');
+    container.innerHTML = '';
+    const allYears = commonYears.concat([trackYear4[track]]);
+    allYears.forEach(y => {
+      const yearDiv = document.createElement('div');
+      yearDiv.className = 'year-block';
+      yearDiv.innerHTML = '<div class="year-title">'+y.year+'</div>';
+      const grid = document.createElement('div');
+      grid.className = 'sem-grid';
+      y.sems.forEach(sem => {
+        const card = document.createElement('div');
+        card.className = 'sem-card';
+        let rows = '<h4>'+sem.name+'</h4>';
+        sem.courses.forEach(c => {
+          rows += '<div class="course-row" data-code="'+c.code+'" data-name="'+c.name+'" data-hours="'+c.hours+'" data-prereq="'+c.prereq+'">'+
+                  '<span>'+c.name+'</span><span class="code">'+c.code+' · '+c.hours+' س</span></div>';
+        });
+        rows += '<div class="sem-total">إجمالي الفصل: '+sem.total+' وحدة</div>';
+        card.innerHTML = rows;
+        grid.appendChild(card);
+      });
+      yearDiv.appendChild(grid);
+      container.appendChild(yearDiv);
+    });
+    // wire modal
+    container.querySelectorAll('.course-row').forEach(row => {
+      row.addEventListener('click', function(){
+        document.getElementById('modalCode').textContent = this.dataset.code;
+        document.getElementById('modalName').textContent = this.dataset.name;
+        document.getElementById('modalHours').textContent = 'عدد الساعات: ' + this.dataset.hours;
+        document.getElementById('modalPrereq').textContent = 'المتطلب السابق: ' + this.dataset.prereq;
+        document.getElementById('courseModal').classList.add('show');
+      });
+    });
+  }
+  document.getElementById('trackSelect').addEventListener('change', function(){ renderPlan(this.value); });
+
+  /* ===== Quiz ===== */
+  const quizData = [
+    { q:"وش يشدّك أكثر؟", opts:[
+      {t:"متابعة أخبار الاقتصاد العالمي والعلاقات التجارية بين الدول", track:"ipe"},
+      {t:"متابعة القرارات الحكومية وأثرها على الناس والمجتمع", track:"ppd"},
+    ]},
+    { q:"لو تسوي مشروع تخرج، وش يحمسك أكثر؟", opts:[
+      {t:"تحليل تأثير العولمة على اقتصادات الدول", track:"ipe"},
+      {t:"تقييم برنامج حكومي وتحليل نجاحه", track:"ppd"},
+    ]},
+    { q:"وش المجال اللي تتخيل نفسك تشتغل فيه بعد التخرج؟", opts:[
+      {t:"منظمات دولية، تجارة خارجية، أو دبلوماسية اقتصادية", track:"ipe"},
+      {t:"جهات حكومية، تخطيط، أو تطوير سياسات عامة", track:"ppd"},
+    ]},
+    { q:"أي مادة تتوقع تستمتع فيها أكثر؟", opts:[
+      {t:"الاقتصاد الدولي والاتحاد الأوروبي وسياسات النفط", track:"ipe"},
+      {t:"السياسة العامة المقارنة وتقييم البرامج الحكومية", track:"ppd"},
+    ]},
+    { q:"لو حضرت مؤتمر، أي جلسة تختار؟", opts:[
+      {t:"مستقبل التجارة العالمية والعولمة الاقتصادية", track:"ipe"},
+      {t:"تجارب الدول الناجحة في التنمية المحلية والحضرية", track:"ppd"},
+    ]},
+    { q:"وش نوع القراءة اللي تفضلها؟", opts:[
+      {t:"تقارير عن أسواق عالمية ومنظمات دولية", track:"ipe"},
+      {t:"تحليلات عن قرارات وسياسات حكومية محلية", track:"ppd"},
+    ]},
+  ];
+  let quizIndex = 0; let scores = {ipe:0, ppd:0};
+  function renderQuiz(){
+    const box = document.getElementById('quizQuestions');
+    document.getElementById('quizResult').classList.remove('show');
+    box.style.display = 'block';
+    if (quizIndex >= quizData.length) { showQuizResult(); return; }
+    const q = quizData[quizIndex];
+    box.innerHTML = '<div class="quiz-q">سؤال '+(quizIndex+1)+' من '+quizData.length+': '+q.q+'</div><div class="quiz-opts"></div>';
+    const optsDiv = box.querySelector('.quiz-opts');
+    q.opts.forEach(o => {
+      const b = document.createElement('button');
+      b.className = 'quiz-opt';
+      b.textContent = o.t;
+      b.addEventListener('click', function(){ scores[o.track]++; quizIndex++; renderQuiz(); });
+      optsDiv.appendChild(b);
+    });
+  }
+  function showQuizResult(){
+    document.getElementById('quizQuestions').style.display = 'none';
+    const result = document.getElementById('quizResult');
+    result.classList.add('show');
+    const track = scores.ipe >= scores.ppd ? 'ipe' : 'ppd';
+    document.getElementById('quizResultTitle').textContent = track === 'ipe' ? 'يناسبك: الاقتصاد السياسي العالمي 🌐' : 'يناسبك: السياسة العامة والتنمية 🏛️';
+    document.getElementById('quizResultDesc').textContent = track === 'ipe'
+      ? 'تميل لتحليل العلاقة بين الاقتصاد والسياسة عالميًا — هذا مجال تركيزك المقترح.'
+      : 'تميل لتحليل صنع القرار وأثره على المجتمع — هذا مجال تركيزك المقترح.';
+  }
+  window.restartQuiz = function(){ quizIndex = 0; scores = {ipe:0, ppd:0}; renderQuiz(); };
+  renderQuiz();
+
+
+})();
+</script>
+
+</body>
+</html>

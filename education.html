@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>التعليم | مِدراك</title>
+<meta name="description" content="قاموس المصطلحات السياسية، تدريب على التعبير، تحسين الإنجليزي، والمكتبة — لطالب العلوم السياسية.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body style="margin:0">
+<div id="medrak-root">
+<a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>
+
+<header class="site">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand" style="text-decoration:none">مِدراك <small>Medrak</small></a>
+    <nav class="links">
+      <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+      <a href="index.html#kau" data-ar="القسم" data-en="Department">القسم</a>
+      <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+      <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+      <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
+      <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+    </nav>
+    <div class="nav-actions">
+      <div class="gender-toggle" role="group" aria-label="اختر طلاب أو طالبات">
+        <button class="gender-btn active" id="genderMale" aria-pressed="true">طلاب</button>
+        <button class="gender-btn" id="genderFemale" aria-pressed="false">طالبات</button>
+      </div>
+      <button class="icon-btn" id="langToggle" aria-label="Switch language" style="width:auto;padding:0 10px;font-size:13px;font-weight:700">EN</button>
+      <button class="icon-btn" id="darkToggle" aria-label="تبديل الوضع الداكن">🌙</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<section id="glossary">
+    <div class="wrap">
+      <h2 class="section-title" data-ar="قاموس مِدراك السياسي 📖" data-en="Medrak Political Glossary 📖">قاموس مِدراك السياسي 📖</h2>
+      <p class="section-sub">أكثر من 400 مصطلح سياسي بالإنجليزي مع ترجمته العربية. إعداد: <b>د. صادق مالكي</b> — أستاذ العلوم السياسية بالجامعة.</p>
+
+      <!-- تسجيل صوتي حقيقي بنطق المصطلحات، من إعداد د. صادق مالكي -->
+      <div class="info-card" style="margin-bottom:20px">
+        <p style="margin:0 0 10px;font-size:13.5px;font-weight:700;color:var(--navy)">🎧 استمع لنطق المصطلحات</p>
+        <audio controls preload="none" style="width:100%" src="assets/glossary-audio.mp3"></audio>
+        <p style="margin:8px 0 0;font-size:11.5px;color:var(--ink-soft)">تسجيل صوتي واحد يغطي المصطلحات، إعداد د. صادق مالكي.</p>
+      </div>
+
+      <!-- بحث سريع فوق قائمة مضغوطة قابلة للتمرير، بدل قائمة طويلة تاخذ مساحة الصفحة كلها -->
+      <input type="search" id="termSearch" placeholder="🔍 ابحث عن مصطلح (إنجليزي أو عربي)..." style="width:100%;padding:12px 16px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font-family:inherit;font-size:14px;margin-bottom:10px">
+      <div style="font-size:12.5px;color:var(--ink-soft);margin-bottom:12px" id="termCount"></div>
+
+      <div class="term-scroll" id="termScroll"><div class="term-compact-grid" id="termList"></div></div>
+
+      <div class="term-of-day">
+        <b>💡 مصطلح اليوم:</b> <span id="termOfDay"></span>
+      </div>
+    </div>
+  </section>
+  <!-- ===== تدريب على التعبير (لأن أغلب اختبارات القسم مقالية) ===== -->
+  <section id="essay" class="alt">
+    <div class="wrap">
+      <h2 class="section-title">تدريب على التعبير ✍️</h2>
+      <p class="section-sub">أغلب اختبارات القسم مقالية — هذي طريقة بسيطة تساعدك ترتب إجابتك، مستوحاة من مقالة د. هيثم لنجاوي "سباجيتي أم همبورجر".</p>
+
+      <div class="info-card" style="margin-bottom:20px">
+        <h3 style="margin:0 0 10px;color:var(--navy);font-size:16px">🍔 طريقة الهمبورجر بدل السباجيتي</h3>
+        <p style="margin:0 0 10px;font-size:14px">بدل ما تكتب إجابتك بشكل عشوائي (سباجيتي تقدر تاكلها من أي جهة)، رتبها زي الهمبورجر:</p>
+        <div class="grid-cards">
+          <div class="field-card"><div class="emoji">🍞</div><h3>المقدمة</h3><p>عرّف المصطلح أو الفكرة الأساسية بجملتين بس.</p></div>
+          <div class="field-card"><div class="emoji">🥩</div><h3>صلب الموضوع</h3><p>اشرح فكرتك الرئيسية بالتفصيل — هذا أهم جزء وياخذ أكبر مساحة.</p></div>
+          <div class="field-card"><div class="emoji">🧀</div><h3>الأمثلة والأدلة</h3><p>ادعم كلامك بمثال أو حدث أو نظرية تقوّي إجابتك.</p></div>
+          <div class="field-card"><div class="emoji">🍞</div><h3>الخاتمة</h3><p>لخّص رأيك أو النتيجة بجملة أو جملتين.</p></div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <h3 style="margin:0 0 10px;color:var(--navy);font-size:16px">🎯 جرّب على هذا السؤال</h3>
+        <p style="margin:0 0 12px;font-size:14px" id="essayPrompt"></p>
+        <textarea rows="6" id="essayBox" placeholder="اكتب إجابتك هنا وطبّق طريقة الهمبورجر... (يبقى بالصفحة بس، ما يُرسل لأحد)"></textarea>
+        <button class="btn btn-outline" id="essayNewPrompt" style="margin-top:10px">سؤال ثاني</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== تحسين اللغة الإنجليزية ===== -->
+  <section id="english">
+    <div class="wrap">
+      <h2 class="section-title">حسّن إنجليزيك السياسي 🌍</h2>
+      <p class="section-sub">مصادر مجانية موثوقة تساعدك تفهم وتستخدم المصطلحات السياسية بالإنجليزي بثقة أكثر.</p>
+      <div class="grid-cards">
+        <div class="field-card"><div class="emoji">📻</div><h3>BBC Learning English</h3><p>دروس مجانية بمستويات مختلفة، وبرامج أخبار مبسطة تساعدك تتعود على المصطلحات بسياقها الحقيقي.</p></div>
+        <div class="field-card"><div class="emoji">🎬</div><h3>TED با ترجمة إنجليزية</h3><p>شاهد محاضرات سياسية أو اجتماعية بترجمة إنجليزية (Subtitles) عشان تربط النطق بالكلمة المكتوبة.</p></div>
+        <div class="field-card"><div class="emoji">🗂️</div><h3>اعمل Flashcards من قاموسنا</h3><p>استخدم قاموس مِدراك بنفس هذا الموقع كأساس لبطاقات تعلم (Flashcards) خاصة فيك.</p></div>
+        <div class="field-card"><div class="emoji">📰</div><h3>اقرأ عناوين الأخبار بالإنجليزي</h3><p>عوّد نفسك تقرأ عناوين المواقع الإخبارية الدولية يوميًا — أغلب مصطلحاتنا السياسية تتكرر فيها.</p></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== المكتبة والكتب ===== -->
+  <section id="library" class="alt">
+    <div class="wrap">
+      <h2 class="section-title">المكتبة والكتب 📚</h2>
+      <p class="section-sub">المكتبة المقصودة هنا هي مكتبة الجامعة الرسمية.</p>
+      <div class="info-card" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+        <div style="font-size:36px">🏛️</div>
+        <div style="flex:1;min-width:220px">
+          <h3 style="margin:0 0 6px;color:var(--navy);font-size:16px">المكتبة المركزية بجامعة الملك عبدالعزيز</h3>
+          <p style="margin:0 0 10px;font-size:13.5px;color:var(--ink-soft)">توفر كتب ودوريات وأطروحات وقواعد بيانات إلكترونية تغطي مختلف التخصصات، مع خدمات إعارة وإرشاد بحثي.</p>
+          <a class="source-link" href="https://www.kau.edu.sa/ar/page/central-library" target="_blank" rel="noopener">الموقع الرسمي للمكتبة ↗</a>
+        </div>
+      </div>
+      <div class="info-card" style="margin-top:16px">
+        <h3 style="margin:0 0 8px;color:var(--navy);font-size:16px">📖 كتب مقترحة لطالب العلوم السياسية</h3>
+        <p style="margin:0;font-size:14px;color:var(--ink-soft)">سيتم إضافتها قريبًا.</p>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-notice" data-ar="مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز." data-en="Medrak is an independent student platform and not an official King Abdulaziz University website.">مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز.</div>
+    <div class="foot-grid">
+      <div>
+        <h5>مِدراك | Medrak</h5>
+        <p style="max-width:32ch" data-ar="دليلك الطلابي لتخصص العلوم السياسية." data-en="Your student guide to the Political Science major.">دليلك الطلابي لتخصص العلوم السياسية.</p>
+      </div>
+      <div>
+        <h5 data-ar="الأقسام" data-en="Sections">الأقسام</h5>
+        <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+        <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+        <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+        <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      </div>
+      <div>
+        <h5 data-ar="روابط أخرى" data-en="Other Links">روابط أخرى</h5>
+        <a href="index.html#sources" data-ar="المصادر" data-en="Sources">المصادر</a>
+        <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      </div>
+    </div>
+    <div class="foot-bottom" data-ar="© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر." data-en="© Medrak — All rights reserved to their respective official owners where noted.">© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر.</div>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="عودة للأعلى">↑</button>
+
+</div>
+
+<script src="assets/common.js" defer></script>
+<script>
+(function(){
+  const root = document.getElementById('medrak-root');
+
+  /* ============================================================
+     قاموس مِدراك — قائمة المصطلحات الحقيقية الكاملة
+     المصدر: قاموس المصطلحات السياسية (PDF) — إعداد د. صادق مالكي، أستاذ العلوم السياسية بالجامعة.
+     كل عنصر: [English, الترجمة العربية] فقط — بدون شرح إضافي (المصدر الأصلي لا يحتوي شرحًا).
+     ============================================================ */
+  const rawTerms = [
+    ["Genocide","إبادة جماعية"],["Peace agreement","اتفاقية سلام"],["Commercial agreement","اتفاقية تجارية"],
+    ["Bilateral agreement","اتفاقية ثنائية"],["International agreement","اتفاقية دولية"],["Repressive measures","إجراءات قمعية"],
+    ["Oil reserves","احتياطيات البترول"],["Administration","إدارة، حكومة"],["Business administration","إدارة أعمال"],
+    ["Political will","إرادة سياسية"],["Terrorism","إرهاب"],["Financial crisis","أزمة مالية"],
+    ["World financial crisis","أزمة مالية عالمية"],["Tyranny","استبداد، حكومة استبدادية"],["Despotism","استبداد، طغيان"],
+    ["Foreign investments","استثمارات أجنبية"],["Strategy","إستراتيجية"],["Development strategy","إستراتيجية التنمية"],
+    ["Unconditional surrender","استسلام بدون شروط"],["Public opinion poll","استطلاع الرأي العام"],["Colonialism","استعمار"],
+    ["Independence","استقلال"],["State socialism","اشتراكية الدولة"],["Democratic socialism","اشتراكية ديمقراطية"],
+    ["Moderate socialism","اشتراكية معتدلة"],["Administrative reform","إصلاح إداري"],["Agrarian reform","إصلاح زراعي"],
+    ["Political reform","إصلاح سياسي"],["Constitutional reform","إصلاح دستوري"],["Fundamentalism","أصولية"],
+    ["Recognition","اعتراف بدولة أو حكومة"],["Sit-down strike, Sit-in","اعتصام"],["Arrest","اعتقال"],
+    ["Accession to the throne","اعتلاء العرش"],["Declaration of war","إعلان الحرب"],["Assassination","اغتيال"],
+    ["Political assassination","اغتيال سياسي"],["Absolute majority","أغلبية مطلقة"],["Secret ballot","اقتراع سري"],
+    ["Socialist economy","اقتصاد اشتراكي"],["Free market economy","اقتصاد السوق الحر"],["International economy","اقتصاد دولي"],
+    ["Capitalist economy","اقتصاد رأسمالي"],["Industrial economy","اقتصاد صناعي"],["Global economy","اقتصاد عالمي"],
+    ["Backward economy","اقتصاد متخلف"],["Advanced economy","اقتصاد متقدم"],["Mixed economy","اقتصاد مختلط"],
+    ["Planned economy","اقتصاد مخطط"],["Booming economy","اقتصاد مزدهر"],["Closed economy","اقتصاد مغلق"],
+    ["Business economics","اقتصاديات الأعمال"],["Development economics","اقتصاديات التنمية"],["Labor economics","اقتصاديات العمل"],
+    ["Minority","أقلية"],["Oppressed minority","أقلية مضطهدة"],["Autarky","اكتفاء ذاتي اقتصاديًا"],
+    ["Desegregation","إلغاء الفصل العنصري"],["Imperialism","إمبريالية"],["Arab Nation","أمة عربية"],
+    ["Multicultural nation","أمة متعددة الثقافات"],["National security","أمن قومي"],["Presidential elections","انتخابات رئاسية"],
+    ["General elections","انتخابات عامة"],["Early elections","انتخابات مبكرة"],["Political affiliation","انتماء سياسي"],
+    ["Opportunism","انتهازية"],["Human rights abuses","انتهاكات حقوق الإنسان"],["Separatism","انفصالية"],
+    ["Coup","انقلاب"],["Bloody coup","انقلاب دموي"],["Palace coup","انقلاب على القيادة من داخل الحكومة أو الحزب"],
+    ["Economic collapse","انهيار اقتصادي"],["Coalition","ائتلاف"],["Ruling coalition","ائتلاف حاكم"],
+    ["International coalition","ائتلاف دولي"],["Political ideology","أيديولوجية سياسية"],["Communist ideology","أيديولوجية شيوعية"],
+    ["Liberal ideology","أيديولوجية ليبرالية"],["Parliament","برلمان"],["Bicameral parliament","برلمان ذو مجلسين تشريعيين"],
+    ["Diplomatic mission","بعثة دبلوماسية"],["Backward countries","بلاد متخلفة"],["Development Bank","بنك التنمية"],
+    ["Infrastructure","بنية تحتية"],["Infrastructure of terrorism","بنية تحتية للإرهاب"],["Bureaucracy","بيروقراطية، روتين حكومي"],
+    ["Bilateral trade","تجارة ثنائية"],["Free trade","تجارة حرة"],["International trade","تجارة دولية"],
+    ["Regional alliance","تحالف إقليمي"],["Alliance of civilizations","تحالف الحضارات"],["International alliance","تحالف دولي"],
+    ["Liberation","تحرير"],["International arbitration","تحكيم دولي"],["Administrative planning","تخطيط إداري"],
+    ["Economic planning","تخطيط اقتصادي"],["Decentralized economic planning","تخطيط اقتصادي لا مركزي"],["Central economic planning","تخطيط اقتصادي مركزي"],
+    ["Human resources planning","تخطيط الموارد البشرية"],["National planning","تخطيط قومي"],["Economic underdevelopment","تخلف اقتصادي"],
+    ["Rotation of power","تداول السلطة (تناوب السلطة)"],["Government intervention","تدخل حكومي"],["Cultural heritage","تراث ثقافي"],
+    ["Peaceful settlement","تسوية سلمية"],["Fair settlement","تسوية عادلة"],["Arab solidarity","تضامن عربي"],
+    ["Normalization of diplomatic relations","تطبيع العلاقات الدبلوماسية"],["Extremism","تطرف"],["Religious extremism","تطرف ديني"],
+    ["Peaceful coexistence","تعايش سلمي"],["Multiculturalism","تعددية الثقافات"],["Arabization","تعريب"],
+    ["Racial superiority","تفوق عنصري"],["Power sharing","تقاسم السلطة"],["Progressivism","تقدمية"],
+    ["Economic integration","تكامل اقتصادي"],["Regional integration","تكامل إقليمي"],["Arab integration","تكامل عربي"],
+    ["Parliamentary representation","تمثيل برلماني"],["International financing","تمويل دولي"],["Discrimination against women","تمييز ضد المرأة"],
+    ["Ethnic discrimination","تمييز عرقي"],["Racial discrimination","تمييز عنصري"],["Revolutionary organization","تنظيم ثوري"],
+    ["Development","تنمية"],["Social development","تنمية اجتماعية"],["Administrative development","تنمية إدارية"],
+    ["Economic development","تنمية اقتصادية"],["Industrial development","تنمية صناعية"],["Balanced development","تنمية متوازنة"],
+    ["Cultural diversity","تنوع ثقافي"],["Religious diversity","تنوع ديني"],["Ethnic diversity","تنوع عرقي"],
+    ["Market equilibrium","توازن السوق"],["Balance of power","توازن القوى"],["Balance of economic power","توازن القوى الاقتصادية"],
+    ["Balance of political power","توازن القوى السياسية"],["Budget equilibrium","توازن الميزانية"],["International tension","توتر دولي"],
+    ["Sectarian tension","توتر طائفي"],["Administrative revolution","ثورة إدارية"],["Bloodless revolution","ثورة بيضاء"],
+    ["Bloody revolution","ثورة دموية"],["Peaceful revolution","ثورة سلمية"],["Industrial revolution","ثورة صناعية"],
+    ["Nobel Prize for Literature","جائزة نوبل للآداب"],["Nobel Prize for Economic Sciences","جائزة نوبل للاقتصاد"],["Nobel Peace Prize","جائزة نوبل للسلام"],
+    ["Nobel Prize for Physiology or Medicine","جائزة نوبل للطب"],["Nobel Prize for Physics","جائزة نوبل للفيزياء"],["Nobel Prize for Chemistry","جائزة نوبل للكيمياء"],
+    ["National front","جبهة وطنية"],["War crime","جريمة حرب"],["Pressure groups","جماعات الضغط"],
+    ["National assembly","جمعية وطنية"],["People's republic","جمهورية شعبية"],["Army of occupation","جيش الاحتلال"],
+    ["Liberation army","جيش التحرير"],["Social mobility","حراك اجتماعي"],["Political mobility","حراك سياسي"],
+    ["All-out war","حرب شاملة"],["Just war","حرب عادلة"],["Illegal war","حرب غير شرعية"],
+    ["Holy war","حرب مقدسة"],["Preventive war","حرب وقائية"],["Coast guard","حرس السواحل"],
+    ["Revolutionary guard","حرس ثوري"],["Republican guard","حرس جمهوري"],["Reformist movement","حركة إصلاحية"],
+    ["Liberation movement","حركة التحرير"],["Progressive movement","حركة تقدمية"],["Labor movement","حركة عمالية"],
+    ["Nationalist movement","حركة قومية"],["Resistance movement","حركة مقاومة"],["Basic liberties","حريات أساسية"],
+    ["Civil liberties","حريات مدنية"],["Freedom of trade","حرية التجارة"],["Freedom of speech","حرية الرأي"],
+    ["Freedom of the press","حرية الصحافة"],["Freedom of belief","حرية العقيدة"],["Freedom of thought","حرية الفكر"],
+    ["Majority party","حزب الأغلبية"],["Progressive party","حزب تقدمي"],["Democratic party","حزب ديمقراطي"],
+    ["Radical party","حزب راديكالي"],["Political party","حزب سياسي"],["Communist party","حزب شيوعي"],
+    ["Nationalist party","حزب قومي"],["Liberal party","حزب ليبرالي"],["Extremist party","حزب متطرف"],
+    ["Opposition party","حزب معارض"],["Moderate party","حزب معتدل"],["Center party","حزب وسط"],
+    ["Center-left party","حزب يسار الوسط"],["Leftist party","حزب يساري"],["Far-left party","حزب يساري متطرف"],
+    ["Center-right party","حزب يمين الوسط"],["Rightist party","حزب يميني"],["Far-right party","حزب يميني متطرف"],
+    ["Blockade","حصار"],["Economic blockade","حصار اقتصادي"],["Parliamentary immunity","حصانة برلمانية"],
+    ["Diplomatic immunity","حصانة دبلوماسية"],["Judicial immunity","حصانة قضائية"],["Suffrage","حق الاقتراع"],
+    ["Basic rights","حقوق أساسية"],["Human rights","حقوق الإنسان"],["Constitutional rights","حقوق دستورية"],
+    ["Civil rights","حقوق مدنية"],["Absolutism","حكم استبدادي"],["Colonial rule","حكم استعماري"],
+    ["Majority rule","حكم الأغلبية"],["Ochlocracy (mob rule)","حكم الغوغاء"],["Autocracy","حكم الفرد المطلق، أوتوقراطية"],
+    ["Meritocracy","حكم أهل الكفاءة"],["Democratic rule","حكم ديمقراطي"],["Autonomy","حكم ذاتي"],
+    ["Majority government","حكومة الأغلبية"],["Minority government","حكومة الأقلية"],["Oligarchy","حكومة القلة، حكم القلة"],
+    ["Transitional government","حكومة انتقالية"],["Coalition government","حكومة ائتلافية"],["Theocracy","حكومة دينية (ثيوقراطية)"],
+    ["Communist government","حكومة شيوعية"],["Local government","حكومة محلية"],["Central government","حكومة مركزية"],
+    ["National government","حكومة وطنية"],["Intercultural dialogue","حوار الثقافات"],["Intercivilizational dialogue","حوار الحضارات"],
+    ["National dialogue","حوار وطني"],["Neutrality","حياد، محايدة"],["Quisling","خائن، متعاون مع العدو"],
+    ["Breach of international law","خرق القانون الدولي"],["Violation of armistice","خرق الهدنة"],["Breach of international agreements","خرق للاتفاقيات الدولية"],
+    ["Privatization","خصخصة"],["Overall plan","خطة شاملة"],["Diplomacy","دبلوماسية"],
+    ["Shuttle diplomacy","دبلوماسية المكوك"],["Quiet diplomacy","دبلوماسية هادئة"],["Constitution","دستور"],
+    ["Dictatorship","دكتاتورية"],["Dictatorship of the proletariat","دكتاتورية البروليتاريا"],["Business cycle","دورة اقتصادية"],
+    ["Nonaligned nations","دول عدم الانحياز"],["Arab states","دول عربية"],["Satellite country","دولة تابعة لدولة كبرى"],
+    ["Expansionist state","دولة توسعية"],["Binational state","دولة ذات قوميتين"],["Oil-rich Arab country","دولة عربية غنية بالبترول"],
+    ["Multiethnic state","دولة متعددة الأعراق"],["Democracy","ديمقراطية"],["Parliamentary democracy","ديمقراطية برلمانية"],
+    ["Representative democracy","ديمقراطية نيابية"],["Radicalism","راديكالية"],["Capital","رأسمال"],
+    ["Capitalism","رأسمالية"],["State capitalism","رأسمالية الدولة"],["National capitalism","رأسمالية وطنية"],
+    ["Public opinion","رأي عام"],["Arab public opinion","رأي عام عربي"],["Parliamentary control","رقابة برلمانية"],
+    ["Recession","ركود النشاط الاقتصادي"],["Red tape","روتين حكومي"],["Parliament speaker","رئيس البرلمان"],
+    ["Head of diplomatic mission","رئيس بعثة دبلوماسية"],["President","رئيس جمهورية"],["Head of government","رئيس حكومة"],
+    ["Head of state","رئيس دولة"],["Premier","رئيس وزراء"],["Prime minister","رئيس وزراء"],
+    ["Parliamentary leaders","زعماء برلمانيون"],["Reformist leader","زعيم إصلاحي"],["Moderate leader","زعيم معتدل"],
+    ["Political prisoner","سجين سياسي"],["Ambassador","سفير"],["Ambassador extraordinary","سفير فوق العادة"],
+    ["Dynasty","سلالة حاكمة"],["Comprehensive, just, and lasting peace","سلام شامل وعادل ودائم"],["Legislative","سلطة تشريعية"],
+    ["Executive","سلطة تنفيذية"],["Judiciary","سلطة قضائية"],["Absolute power","سلطة مطلقة"],
+    ["Diplomatic corps","سلك دبلوماسي"],["Abuse of power","سوء استعمال السلطة"],["Law supremacy","سيادة القانون"],
+    ["Neutralism","سياسة الحياد، حيادية"],["Double-standard policy","سياسة المعايير المزدوجة"],["Imperialist policy","سياسة إمبريالية"],
+    ["Nonalignment policy","سياسة عدم الانحياز"],["Foreign domination","سيطرة أجنبية"],["International legitimacy","شرعية دولية"],
+    ["Multinational corporation","شركة متعددة الجنسيات"],["Totalitarianism","شمولية"],["Communism","شيوعية"],
+    ["Net national income","صافي الدخل القومي"],["Net national product","صافي الناتج القومي"],["Clash of cultures","صدام الثقافات"],
+    ["Clash of civilizations","صدام الحضارات"],["Regional conflict","صراع إقليمي"],["Internal power struggle","صراع داخلي على السلطة"],
+    ["Class struggle","صراع طبقي"],["Arab-Israeli conflict","صراع عربي إسرائيلي"],["Development Fund","صندوق التنمية"],
+    ["Arab Monetary Fund","صندوق النقد العربي"],["Decision making","صنع القرار"],["Christian Zionism","صهيونية مسيحية"],
+    ["Victims of war","ضحايا الحرب"],["Social pressures","ضغوط اجتماعية"],["Negotiating table","طاولة المفاوضات"],
+    ["Sectarianism","طائفية"],["Proletariat","طبقة العمال الكادحين (بروليتاريا)"],["Budget deficit","عجز الميزانية"],
+    ["Balance of payments deficit","عجز ميزان المدفوعات"],["Nonalignment","عدم الانحياز"],["Aggression","عدوان، اعتداء"],
+    ["Arabism","عروبة"],["Civil disobedience","عصيان مدني"],["Armed insurgency","عصيان مسلح"],
+    ["General amnesty","عفو عام"],["Collective punishment","عقاب جماعي"],["International economic relations","علاقات اقتصادية دولية"],
+    ["International trade relations","علاقات تجارية دولية"],["International political relations","علاقات سياسية دولية"],["Secularism","علمانية"],
+    ["Act of terrorism","عمل إرهابي"],["Act of provocation","عمل استفزازي"],["Dean of diplomatic corps","عميد السلك الدبلوماسي"],
+    ["Racism","عنصرية"],["Violence against civilians","عنف ضد المدنيين"],["Budget surplus","فائض الميزانية"],
+    ["Balance of payments surplus","فائض ميزان المدفوعات"],["Constitutional vacuum","فراغ دستوري"],["Political vacuum","فراغ سياسي"],
+    ["Political corruption","فساد سياسي"],["Separation of powers","فصل السلطات"],["Racial segregation","فصل عنصري"],
+    ["Political thought","فكر سياسي"],["Opinion leaders","قادة الرأي"],["Administrative Law","قانون إداري"],
+    ["Maritime Law","قانون بحري"],["Criminal Code","قانون جنائي"],["Constitutional Law","قانون دستوري"],
+    ["International Law","قانون دولي"],["Private International Law","قانون دولي خاص"],["Customary international law","قانون دولي عرفي"],
+    ["Customary law","قانون عرفي"],["Civil Law","قانون مدني"],["Republican decree","قرار جمهوري"],
+    ["Independent judiciary","قضاء مستقل"],["Multipolarity (multipolar system)","قطبية متعددة (نظام دولي متعدد الأقطاب)"],["Rupture of relations","قطع العلاقات بين الدول"],
+    ["Arab summit","قمة عربية"],["Suppression of human rights","قمع حقوق الإنسان"],["Political repression","قمع سياسي"],
+    ["Consul","قنصل"],["Consulate","قنصلية"],["Peacekeeping forces","قوات حفظ السلام"],
+    ["Armed forces","قوات مسلحة"],["Arab Nationalism","قومية عربية"],["Progressive forces","قوى تقدمية"],
+    ["Depression (economic)","كساد اقتصادي"],["Armed struggle","كفاح مسلح"],["Knesset","كنيست (البرلمان الإسرائيلي)"],
+    ["Political cadres","كوادر سياسية"],["Decentralization of administration","لامركزية الإدارة"],["Decentralization of political power","لامركزية السلطة السياسية"],
+    ["Political asylum","لجوء سياسي"],["Liberalism","ليبرالية"],["Neo-liberalism","ليبرالية جديدة"],
+    ["Marxism","ماركسية"],["Marxism-Leninism","ماركسية لينينية"],["Peace initiative","مبادرة السلام"],
+    ["Reconciliation initiative","مبادرة مصالحة"],["Epitome of democracy","مثال للديمقراطية"],["Civil society","مجتمع مدني"],
+    ["Security Council","مجلس الأمن"],["Council of State","مجلس الدولة"],["Senate","مجلس الشيوخ"],
+    ["House of Lords","مجلس اللوردات"],["House of Representatives","مجلس النواب"],["Cabinet, Council of ministers","مجلس الوزراء"],
+    ["Talks","محادثات"],["Bilateral talks","محادثات ثنائية"],["Fair trial","محاكمة عادلة"],
+    ["Assassination attempt","محاولة اغتيال"],["Coup attempt","محاولة انقلاب"],["Abortive coup attempt","محاولة انقلاب فاشلة"],
+    ["Administrative court","محكمة إدارية"],["Appellate court (court of appeals)","محكمة الاستئناف"],["International Court of Justice","محكمة العدل الدولية"],
+    ["Court of cassation","محكمة النقض"],["War crime court","محكمة جرائم الحرب"],["Criminal court","محكمة جنائية"],
+    ["Constitutional court","محكمة دستورية"],["International court (tribunal)","محكمة دولية"],["Court-martial","محكمة عسكرية"],
+    ["Supreme court","محكمة عليا"],["Axis of evil","محور الشر (مصطلح أطلقته إدارة الرئيس بوش على بعض الدول مثل كوريا الشمالية)"],["Butchery","مذبحة"],
+    ["Good offices","مساعي حميدة"],["Security adviser","مستشار الأمن"],["Colony","مستعمرة"],
+    ["Political consultations","مشاورات سياسية"],["National interests","مصالح وطنية"],["Opposition","معارضة"],
+    ["Bilateral treaty","معاهدة ثنائية"],["Political detainee","معتقل سياسي"],["Extermination camp","معسكر إبادة"],
+    ["Foreign aid","معونة أجنبية"],["Jingoism","مغالاة في الوطنية"],["Economic boycott","مقاطعة اقتصادية"],
+    ["Passive resistance","مقاومة سلبية"],["Armed resistance","مقاومة مسلحة"],["Fight against terrorism","مكافحة الإرهاب"],
+    ["Fight against organized crime","مكافحة الجريمة المنظمة"],["Fight against racism","مكافحة العنصرية"],["Attaché","ملحق (في سفارة)"],
+    ["Administrative attaché","ملحق إداري في سفارة"],["Commercial attaché","ملحق تجاري في سفارة"],["Press attaché","ملحق صحفي في سفارة"],
+    ["Labor attaché","ملحق عمالي في سفارة"],["Constitutional monarchy","ملكية دستورية"],["Absolute monarchy","ملكية مطلقة"],
+    ["Beacon of liberty","منارة الحرية"],["Beacon of civilization","منارة الحضارة"],["Beacon of democracy","منارة الديمقراطية"],
+    ["Dissident","منشق"],["Free trade zone (free zone)","منطقة تجارية حرة"],["Civil society organizations","منظمات المجتمع المدني"],
+    ["Terrorist organization","منظمة إرهابية"],["Amnesty International","منظمة العفو الدولية"],
+  ];
+  const terms = rawTerms.map(t => ({ en: t[0], ar: t[1] }));
+
+  const termList = document.getElementById('termList');
+  const termCount = document.getElementById('termCount');
+  function renderTerms(filter){
+    termList.innerHTML = '';
+    const f = (filter||'').trim().toLowerCase();
+    const filtered = terms.filter(t => !f || t.en.toLowerCase().includes(f) || t.ar.includes(f));
+    filtered.forEach(t => {
+      const el = document.createElement('div');
+      el.className = 'term-chip';
+      el.innerHTML = '<span class="term-en">'+t.en+'</span><span class="term-ar">'+t.ar+'</span>';
+      termList.appendChild(el);
+    });
+    termCount.textContent = 'عدد المصطلحات المعروضة: ' + filtered.length + ' من أصل ' + terms.length;
+  }
+  renderTerms('');
+  document.getElementById('termSearch').addEventListener('input', function(){ renderTerms(this.value); });
+  document.getElementById('termOfDay').textContent = terms.length ? (function(){ const t = terms[Math.floor(Math.random()*terms.length)]; return t.en + ' — ' + t.ar; })() : 'قريبًا...';
+
+
+  /* ===== تدريب على التعبير — أسئلة تدريبية تبقى محليًا بالمتصفح فقط ===== */
+  const essayPrompts = [
+    "قارن بين الاقتصاد السياسي العالمي والسياسة العامة والتنمية كمجالي تركيز.",
+    "اشرح كيف تؤثر العولمة على سيادة الدولة القومية.",
+    "ناقش دور المنظمات الدولية في حل النزاعات الإقليمية.",
+    "ما الفرق بين الواقعية والليبرالية في تفسير العلاقات الدولية؟",
+    "اشرح مفهوم 'ثقافة الفقر' وعلاقته بالتنمية السياسية.",
+  ];
+  let essayIndex = 0;
+  function renderEssayPrompt(){
+    document.getElementById('essayPrompt').textContent = essayPrompts[essayIndex];
+  }
+  renderEssayPrompt();
+  document.getElementById('essayNewPrompt').addEventListener('click', function(){
+    essayIndex = (essayIndex + 1) % essayPrompts.length;
+    renderEssayPrompt();
+  });
+
+
+})();
+</script>
+
+</body>
+</html>
