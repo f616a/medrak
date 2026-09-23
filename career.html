@@ -62,10 +62,10 @@
 
   <section>
     <div class="wrap">
-      <h2 class="section-title" data-ar="مستقبلك المهني 💼" data-en="Your Career 💼">مستقبلك المهني 💼</h2>
-      <p class="section-sub" data-ar="10 مسارات مهنية مرتبطة بتخصص العلوم السياسية — وصف محايد لكل مسار، ثم اختبار ميول قصير لمساعدتك تستكشف اهتماماتك." data-en="10 career paths linked to the Political Science major — a neutral description of each, plus a short interest quiz to help you explore.">10 مسارات مهنية مرتبطة بتخصص العلوم السياسية — وصف محايد لكل مسار، ثم اختبار ميول قصير لمساعدتك تستكشف اهتماماتك.</p>
+      <h2 class="section-title no-print" data-ar="مستقبلك المهني 💼" data-en="Your Career 💼">مستقبلك المهني 💼</h2>
+      <p class="section-sub no-print" data-ar="10 مسارات مهنية مرتبطة بتخصص العلوم السياسية — وصف محايد لكل مسار، ثم اختبار ميول قصير لمساعدتك تستكشف اهتماماتك." data-en="10 career paths linked to the Political Science major — a neutral description of each, plus a short interest quiz to help you explore.">10 مسارات مهنية مرتبطة بتخصص العلوم السياسية — وصف محايد لكل مسار، ثم اختبار ميول قصير لمساعدتك تستكشف اهتماماتك.</p>
 
-      <div class="tabs" data-group="career">
+      <div class="tabs no-print" data-group="career">
         <button class="tab-btn active" data-tab="paths" data-ar="المسارات المهنية" data-en="Career Paths">المسارات المهنية</button>
         <button class="tab-btn" data-tab="interview" data-ar="مقابلة وظيفية تجريبية" data-en="Mock Job Interview">مقابلة وظيفية تجريبية</button>
         <button class="tab-btn" data-tab="resume" data-ar="منشئ السيرة الذاتية (ATS)" data-en="Resume Builder (ATS)">منشئ السيرة الذاتية (ATS)</button>
@@ -127,11 +127,11 @@
 
       <!-- ===== منشئ السيرة الذاتية ATS ===== -->
       <div class="tab-panel" data-group="career" data-panel="resume">
-        <div class="info-card" style="margin-bottom:16px">
+        <div class="info-card no-print" style="margin-bottom:16px">
           <p style="margin:0;font-size:12.5px;color:var(--text-soft)">⚠️ توافق أنظمة ATS يختلف من جهة لأخرى، ولا يوجد قالب يضمن اجتياز جميع الأنظمة. سيرتك تبقى على جهازك فقط.</p>
         </div>
 
-        <div class="plan-controls">
+        <div class="plan-controls no-print">
           <label class="field-label" style="margin-bottom:0">لغة السيرة:</label>
           <select id="cvLang" class="form-select"><option value="ar">العربية (RTL)</option><option value="en">English (LTR)</option></select>
           <label class="field-label" style="margin-bottom:0">مسار للكلمات المفتاحية المقترحة:</label>
@@ -144,7 +144,7 @@
           </select>
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+        <div class="no-print" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
           <div id="cvFormSide">
             <div class="info-card" style="margin-bottom:14px">
               <label class="field-label">الاسم</label><input type="text" id="cv_name">
@@ -174,8 +174,14 @@
           <div id="cvPreviewSide">
             <div class="info-card" style="margin-bottom:14px">
               <h4 style="margin:0 0 10px;color:var(--purple);font-size:14px">🔑 كلمات مفتاحية مقترحة لمسارك</h4>
-              <p id="cvKeywords" style="font-size:12.5px;color:var(--text-soft);margin:0"></p>
-              <p style="font-size:11px;color:var(--text-faint);margin-top:8px">لا تضف مهارة ما تمتلكها فعليًا.</p>
+              <p id="cvKeywords" style="font-size:12.5px;color:var(--text-soft);margin:0 0 12px"></p>
+              <p style="font-size:11px;color:var(--text-faint);margin:0 0 12px">لا تضف مهارة ما تمتلكها فعليًا.</p>
+              <label class="field-label" style="font-size:12px">أو أضف كلماتك الخاصة يدويًا</label>
+              <div style="display:flex;gap:8px">
+                <input type="text" id="cvManualKeyword" placeholder="اكتب كلمة مفتاحية واضغط إضافة" style="margin-bottom:0;flex:1">
+                <button class="btn btn-outline" id="cvAddKeywordBtn" style="padding:8px 16px;font-size:12.5px;white-space:nowrap">+ إضافة</button>
+              </div>
+              <div id="cvManualKeywordsList" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px"></div>
             </div>
             <div class="info-card" style="margin-bottom:14px">
               <h4 style="margin:0 0 10px;color:var(--purple);font-size:14px">🔍 مراجع السيرة المحلي</h4>
@@ -193,8 +199,8 @@
         </div>
 
         <div class="info-card" id="cvPreviewBox" style="margin-top:20px;background:var(--surface)">
-          <h4 style="margin:0 0 12px;color:var(--purple)">معاينة السيرة (قالب ATS آمن — عمود واحد)</h4>
-          <div id="cvPreviewContent" style="font-size:13.5px;line-height:1.85"></div>
+          <h4 class="no-print" style="margin:0 0 12px;color:var(--purple)">معاينة السيرة (قالب ATS آمن — عمود واحد)</h4>
+          <div id="cvPreviewContent" style="font-size:13px;line-height:1.6;max-width:680px;margin:0 auto"></div>
         </div>
       </div>
 
@@ -488,6 +494,43 @@
   document.getElementById('cvTrackKeywords').addEventListener('change', cvRenderKeywords);
   cvRenderKeywords();
 
+  /* ===== كلمات مفتاحية يضيفها الطالب يدويًا (بالإضافة للمقترحة تلقائيًا) ===== */
+  let cvManualKeywords = MedrakStore.get('cvManualKeywords', []);
+  function cvRenderManualKeywords(){
+    const box = document.getElementById('cvManualKeywordsList');
+    box.innerHTML = '';
+    cvManualKeywords.forEach((kw, i) => {
+      const chip = document.createElement('span');
+      chip.style.cssText = 'display:inline-flex;align-items:center;gap:6px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:5px 10px;font-size:12px;cursor:pointer';
+      chip.title = 'اضغط لإضافتها لحقل المهارات';
+      chip.innerHTML = '<span>' + kw + '</span> <b style="color:var(--wrong-text)" data-remove="' + i + '">✕</b>';
+      chip.addEventListener('click', function(e){
+        if (e.target.dataset.remove !== undefined) {
+          cvManualKeywords.splice(parseInt(e.target.dataset.remove), 1);
+          MedrakStore.set('cvManualKeywords', cvManualKeywords);
+          cvRenderManualKeywords();
+          return;
+        }
+        const skillsInput = document.getElementById('cv_skills');
+        const current = skillsInput.value.trim();
+        skillsInput.value = current ? current + '، ' + kw : kw;
+        cvRenderPreview();
+      });
+      box.appendChild(chip);
+    });
+  }
+  cvRenderManualKeywords();
+  document.getElementById('cvAddKeywordBtn').addEventListener('click', function(){
+    const input = document.getElementById('cvManualKeyword');
+    const val = window.medrakSanitizeName ? medrakSanitizeName(input.value) : input.value.trim();
+    if (!val) return;
+    if (!cvManualKeywords.includes(val)) { cvManualKeywords.push(val); MedrakStore.set('cvManualKeywords', cvManualKeywords); cvRenderManualKeywords(); }
+    input.value = '';
+  });
+  document.getElementById('cvManualKeyword').addEventListener('keydown', function(e){
+    if (e.key === 'Enter') { e.preventDefault(); document.getElementById('cvAddKeywordBtn').click(); }
+  });
+
   const cvFieldIds = ['cv_name','cv_title','cv_contact','cv_summary','cv_education','cv_experience','cv_coop','cv_projects','cv_research','cv_volunteer','cv_courses','cv_certs','cv_skills','cv_tools','cv_languages','cv_achievements'];
   function cvGetData(){
     const d = {}; cvFieldIds.forEach(id => d[id] = document.getElementById(id).value);
@@ -504,27 +547,49 @@
     ar: { title:'المسمى المستهدف', summary:'نبذة مهنية', education:'التعليم', experience:'الخبرات', coop:'التدريب التعاوني', projects:'مشاريع', research:'أبحاث', volunteer:'عمل تطوعي', courses:'دورات', certs:'شهادات', skills:'المهارات', tools:'برامج وأدوات', languages:'اللغات', achievements:'إنجازات', refs:'المراجع عند الطلب' },
     en: { title:'Target Title', summary:'Professional Summary', education:'Education', experience:'Experience', coop:'Co-op Training', projects:'Projects', research:'Research', volunteer:'Volunteer Work', courses:'Courses', certs:'Certificates', skills:'Skills', tools:'Tools', languages:'Languages', achievements:'Achievements', refs:'References available upon request' },
   };
+  function cvLineBlock(key, text){
+    const entryKeys = ['education','experience','coop','projects','research','volunteer'];
+    const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+    if (!entryKeys.includes(key)) {
+      return '<p style="margin:0 0 4px;font-size:12.5px">' + lines.join(key === 'skills' || key === 'tools' || key === 'languages' ? ' • ' : '<br>') + '</p>';
+    }
+    return lines.map(line => {
+      if (line.startsWith('•') || line.startsWith('-')) {
+        return '<p style="margin:0 0 4px 14px;font-size:12.5px">' + line.replace(/^[-•]\s*/, '• ') + '</p>';
+      }
+      return '<p style="margin:10px 0 2px;font-weight:700;font-size:13px">' + line + '</p>';
+    }).join('');
+  }
+
   function cvRenderPreview(){
     const d = cvGetData();
     const L = cvSectionLabels[d.cv_lang];
     const box = document.getElementById('cvPreviewContent');
-    box.style.direction = d.cv_lang === 'en' ? 'ltr' : 'rtl';
-    box.style.textAlign = d.cv_lang === 'en' ? 'left' : 'right';
-    let html = '<h2 style="margin:0 0 4px;color:var(--purple)">' + (d.cv_name||'—') + '</h2>';
-    html += '<p style="margin:0 0 4px;color:var(--text-soft)">' + (d.cv_title||'') + '</p>';
-    html += '<p style="margin:0 0 16px;font-size:12.5px;color:var(--text-faint)">' + (d.cv_contact||'') + '</p>';
+    const isEn = d.cv_lang === 'en';
+    box.style.direction = isEn ? 'ltr' : 'rtl';
+    box.style.textAlign = isEn ? 'left' : 'right';
+    box.style.fontFamily = isEn ? "'Georgia', 'Times New Roman', serif" : "inherit";
+
+    let html = '<div style="text-align:center;border-bottom:2px solid #333;padding-bottom:14px;margin-bottom:16px">';
+    html += '<h1 style="margin:0 0 6px;font-size:24px;font-weight:800;letter-spacing:1px;color:#111">' + (d.cv_name||'—') + '</h1>';
+    if (d.cv_title) html += '<p style="margin:0 0 8px;font-size:13.5px;color:#555;letter-spacing:0.5px">' + d.cv_title + '</p>';
+    if (d.cv_contact) html += '<p style="margin:0;font-size:11.5px;color:#666">' + d.cv_contact.split('\n').filter(Boolean).join(' &nbsp;|&nbsp; ') + '</p>';
+    html += '</div>';
+
+    if (d.cv_summary) html += '<p style="margin:0 0 16px;font-size:12.5px;line-height:1.7;color:#333">' + d.cv_summary + '</p>';
+
     const sections = [
-      ['summary', d.cv_summary], ['education', d.cv_education], ['experience', d.cv_experience],
-      ['coop', d.cv_coop], ['projects', d.cv_projects], ['research', d.cv_research], ['volunteer', d.cv_volunteer],
-      ['courses', d.cv_courses], ['certs', d.cv_certs], ['skills', d.cv_skills], ['tools', d.cv_tools],
-      ['languages', d.cv_languages], ['achievements', d.cv_achievements],
+      ['experience', d.cv_experience], ['education', d.cv_education], ['coop', d.cv_coop],
+      ['projects', d.cv_projects], ['research', d.cv_research], ['volunteer', d.cv_volunteer],
+      ['skills', d.cv_skills], ['tools', d.cv_tools], ['courses', d.cv_courses],
+      ['certs', d.cv_certs], ['languages', d.cv_languages], ['achievements', d.cv_achievements],
     ];
     sections.forEach(([key, val]) => {
       if (!val) return;
-      html += '<h4 style="margin:14px 0 6px;color:var(--purple);font-size:13.5px">' + L[key] + '</h4>';
-      html += '<p style="margin:0;white-space:pre-line;font-size:13px">' + val + '</p>';
+      html += '<h4 style="margin:16px 0 8px;font-size:12.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#111;border-bottom:1px solid #ccc;padding-bottom:4px">' + L[key] + '</h4>';
+      html += cvLineBlock(key, val);
     });
-    if (d.cv_refs) html += '<h4 style="margin:14px 0 6px;color:var(--purple);font-size:13.5px">' + L.refs + '</h4>';
+    if (d.cv_refs) html += '<h4 style="margin:16px 0 4px;font-size:12.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#111;border-bottom:1px solid #ccc;padding-bottom:4px">' + L.refs + '</h4>';
     box.innerHTML = html;
   }
   cvFieldIds.concat(['cvLang']).forEach(id => document.getElementById(id).addEventListener('input', cvRenderPreview));
