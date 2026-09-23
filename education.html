@@ -37,9 +37,12 @@
       <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
       <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
       <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="communication.html" data-ar="التواصل والتفاوض" data-en="Communication &amp; Negotiation">التواصل والتفاوض</a>
+      <a href="research-lab.html" data-ar="البحث والتحليل" data-en="Research &amp; Analysis">البحث والتحليل</a>
       <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
       <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
       <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="alumni.html" data-ar="خريجو مِدراك" data-en="Medrak Alumni">خريجو مِدراك</a>
       <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
     </nav>
     <div class="nav-actions">
@@ -70,7 +73,7 @@
       </div>
 
       <!-- بحث سريع فوق قائمة مضغوطة قابلة للتمرير، بدل قائمة طويلة تاخذ مساحة الصفحة كلها -->
-      <input type="search" id="termSearch" placeholder="🔍 ابحث عن مصطلح (إنجليزي أو عربي)..." style="width:100%;padding:12px 16px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--text);font-family:inherit;font-size:14px;margin-bottom:10px">
+      <input type="search" id="termSearch" data-ph-ar="🔍 ابحث عن مصطلح (إنجليزي أو عربي)..." data-ph-en="🔍 Search a term (English or Arabic)..." placeholder="🔍 ابحث عن مصطلح (إنجليزي أو عربي)..." style="width:100%;padding:12px 16px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--text);font-family:inherit;font-size:14px;margin-bottom:10px">
       <div style="font-size:12.5px;color:var(--text-soft);margin-bottom:12px" id="termCount"></div>
 
       <div class="term-scroll" id="termScroll"><div class="term-compact-grid" id="termList"></div></div>
@@ -123,7 +126,7 @@
       <div class="info-card">
         <h3 style="margin:0 0 10px;color:var(--purple);font-size:16px">🎯 جرّب على هذا السؤال</h3>
         <p style="margin:0 0 12px;font-size:14px" id="essayPrompt"></p>
-        <textarea rows="6" id="essayBox" placeholder="اكتب إجابتك هنا وطبّق طريقة الهمبورجر..."></textarea>
+        <textarea rows="6" id="essayBox" data-ph-m="اكتب إجابتك هنا وطبّق طريقة الهمبورجر..." data-ph-f="اكتبي إجابتك هنا وطبّقي طريقة الهمبورجر..." data-ph-en="Write your answer here using the burger method..." placeholder="اكتب إجابتك هنا وطبّق طريقة الهمبورجر..."></textarea>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
           <button class="btn btn-primary" id="essayCheck" style="padding:9px 18px;font-size:13.5px">قيّم إجابتي</button>
           <button class="btn btn-outline" id="essayNewPrompt" style="padding:9px 18px;font-size:13.5px">سؤال ثاني</button>
@@ -436,6 +439,7 @@
     document.getElementById('gqFinalScore').textContent = 'نتيجتك: ' + gqScore + ' من ' + GQ_TOTAL;
     if (window.medrakSound) window.medrakSound.play('achievement');
     if (window.medrakConfetti) window.medrakConfetti();
+    if (window.medrakRecordAchievement) medrakRecordAchievement('اختبار المصطلحات: ' + gqScore + ' من ' + GQ_TOTAL);
   }
 
   function gqStart(){

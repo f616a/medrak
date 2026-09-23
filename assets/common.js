@@ -23,6 +23,45 @@
     muted: LS('medrak_muted', true),
   };
 
+  /* ===== تتبع آخر صفحة تمت زيارتها (لزر "أكمل من حيث توقفت") ===== */
+  safe(function trackLastVisited(){
+    if (!window.MedrakStore) return;
+    const pageLabels = {
+      'index.html': 'الرئيسية', 'study-plan.html': 'الخطة الدراسية', 'education.html': 'التعليم',
+      'articles.html': 'المقالات', 'decision-lab.html': 'مختبر القرار', 'world-institutions.html': 'العالم والمؤسسات',
+      'media-literacy.html': 'الوعي المعلوماتي', 'career.html': 'مستقبلك المهني', 'alumni.html': 'خريجو مِدراك',
+      'profile.html': 'ملفي في مِدراك',
+    };
+    let page = location.pathname.split('/').pop() || 'index.html';
+    if (!pageLabels[page]) page = 'index.html';
+    if (page === 'index.html') return; /* ما نسجل الرئيسية نفسها كـ"آخر صفحة" */
+    MedrakStore.set('lastVisited', { page, label: pageLabels[page], at: new Date().toISOString() });
+  }, 'trackLastVisited');
+
+  /** يسجّل آخر إنجاز لعرضه ببطاقة الترحيب بالرئيسية — تستدعيه أي صفحة عند لحظة إنجاز حقيقية */
+  window.medrakRecordAchievement = function(text){
+    if (!window.MedrakStore) return;
+    MedrakStore.set('lastAchievement', { text, at: new Date().toISOString() });
+  };
+
+  /** ينظّف الاسم المستعار: يمنع HTML/أكواد، يقص المسافات الزائدة، يحدد الطول */
+  window.medrakSanitizeName = function(raw){
+    if (!raw) return '';
+    let s = String(raw).replace(/<[^>]*>/g, '').replace(/[<>]/g, '');
+    s = s.replace(/\s+/g, ' ').trim();
+    return s.slice(0, 30);
+  };
+
+  /** نسبة تقدم تقريبية: كم من الميزات القابلة للتتبع جرّبها المستخدم فعليًا */
+  window.medrakComputeProgress = function(){
+    if (!window.MedrakStore) return 0;
+    const keys = ['crisisLab','policySim','nationBuilder','mediaLiteracy','careerQuiz'];
+    let done = keys.filter(k => !!MedrakStore.get(k)).length;
+    if ((MedrakStore.get('studyPlanProgress', {completedCodes:[]}).completedCodes||[]).length > 0) done++;
+    if ((MedrakStore.get('semesterTasks', [])||[]).length > 0) done++;
+    return Math.round((done / (keys.length + 2)) * 100);
+  };
+
   /* ===== طلاب/طالبات + عربي/إنجليزي + نصوص ثنائية اللغة ===== */
   safe(function initToggles(){
     const genderMale = document.getElementById('genderMale');
@@ -30,12 +69,19 @@
     const langToggleBtn = document.getElementById('langToggle');
     const genderTextEls = document.querySelectorAll('[data-m][data-f]');
     const langOnlyEls = document.querySelectorAll('[data-ar][data-en]:not([data-m])');
+    const placeholderEls = document.querySelectorAll('[data-ph-m], [data-ph-ar]');
 
     function applyAllText(){
       langOnlyEls.forEach(el => { el.textContent = window.medrakState.lang === 'en' ? el.dataset.en : el.dataset.ar; });
       genderTextEls.forEach(el => {
         if (window.medrakState.lang === 'en' && el.dataset.en) { el.textContent = el.dataset.en; }
         else { el.textContent = window.medrakState.isFemale ? el.dataset.f : el.dataset.m; }
+      });
+      placeholderEls.forEach(el => {
+        const d = el.dataset;
+        if (window.medrakState.lang === 'en' && d.phEn) { el.placeholder = d.phEn; }
+        else if (d.phM && d.phF) { el.placeholder = window.medrakState.isFemale ? d.phF : d.phM; }
+        else if (d.phAr) { el.placeholder = d.phAr; }
       });
     }
     window.medrakApplyText = applyAllText;
@@ -277,6 +323,7 @@
             '<li>خلاص! تقدمك وخطتك ومهامك تظهر بنفس الجهاز الجديد فورًا.</li>' +
           '</ol>' +
         '</div>' +
+        '<label style="display:flex;align-items:center;gap:8px;font-size:12.5px;margin-bottom:10px"><input type="checkbox" id="settingsIncludePhoto" style="width:auto"> تضمين صورتي الشخصية بالنسخة (يكبّر حجم الملف)</label>' +
         '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px">' +
           '<button class="btn btn-primary" id="settingsExportBtn">⬇️ تصدير بياناتي</button>' +
           '<button class="btn btn-outline" id="settingsImportBtn">⬆️ استيراد بيانات</button>' +
@@ -295,8 +342,10 @@
     modal.addEventListener('click', function(e){ if (e.target === modal) modal.classList.remove('show'); });
 
     document.getElementById('settingsExportBtn').addEventListener('click', function(){
-      MedrakStore.exportJSON();
-      showMsg('تم تنزيل ملف بياناتك ✅ — انقله للجهاز الثاني وبعدين استورده من هناك.');
+      const includePhoto = document.getElementById('settingsIncludePhoto').checked;
+      MedrakStore.exportJSON(includePhoto, function(){
+        showMsg('تم تنزيل ملف بياناتك ✅ — انقله للجهاز الثاني وبعدين استورده من هناك.');
+      });
     });
     document.getElementById('settingsImportBtn').addEventListener('click', function(){
       document.getElementById('settingsImportFile').click();

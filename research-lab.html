@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مختبر البحث والتحليل | مِدراك</title>
+<meta name="description" content="مختبر مناهج البحث، مختبر الاستطلاعات، مختبر قراءة الوثائق، وتحليل الخطاب — أدوات تعليمية لطالب العلوم السياسية.">
+<script>
+(function(){
+  try {
+    var theme = JSON.parse(localStorage.getItem('medrak_theme')) || 'light';
+    var gender = JSON.parse(localStorage.getItem('medrak_gender')) || false;
+    var lang = JSON.parse(localStorage.getItem('medrak_lang')) || 'ar';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-gender', gender ? 'female' : 'male');
+    document.documentElement.setAttribute('lang', lang);
+  } catch(e){}
+})();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body style="margin:0">
+<div id="particle-field"></div>
+<div id="scroll-progress"></div>
+<div id="medrak-root">
+<a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>
+
+<header class="site">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand" style="text-decoration:none">مِدراك <small>Medrak</small></a>
+    <nav class="links">
+      <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+      <a href="index.html#kau" data-ar="القسم" data-en="Department">القسم</a>
+      <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+      <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+      <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="communication.html" data-ar="التواصل والتفاوض" data-en="Communication &amp; Negotiation">التواصل والتفاوض</a>
+      <a href="research-lab.html" data-ar="البحث والتحليل" data-en="Research &amp; Analysis">البحث والتحليل</a>
+      <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
+      <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
+      <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="alumni.html" data-ar="خريجو مِدراك" data-en="Medrak Alumni">خريجو مِدراك</a>
+      <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false">☰</button>
+      <div class="gender-toggle" role="group" aria-label="اختر طلاب أو طالبات">
+        <button class="gender-btn active" id="genderMale" aria-pressed="true">طلاب</button>
+        <button class="gender-btn" id="genderFemale" aria-pressed="false">طالبات</button>
+      </div>
+      <button class="icon-btn" id="langToggle" aria-label="Switch language" style="width:auto;padding:0 10px;font-size:13px;font-weight:700">EN</button>
+      <button class="icon-btn" id="darkToggle" aria-label="تبديل الوضع الداكن">🌙</button>
+      <button class="icon-btn" id="muteToggle" aria-label="كتم/تفعيل الأصوات">🔇</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section>
+    <div class="wrap">
+      <h2 class="section-title" data-ar="مختبر البحث والتحليل 🔬" data-en="Research &amp; Analysis Lab 🔬">مختبر البحث والتحليل 🔬</h2>
+      <p class="section-sub" data-ar="أربع أدوات تعليمية تساعدك تبني خطة بحث، تصمم استطلاعًا محايدًا، تقرأ وثيقة بعين ناقدة، وتحلل خطابًا — كلها تعليمية وما تكتب البحث بدالك." data-en="Four learning tools to help you build a research plan, design a neutral survey, critically read a document, and analyze a speech — all educational; they never write the research for you.">أربع أدوات تعليمية تساعدك تبني خطة بحث، تصمم استطلاعًا محايدًا، تقرأ وثيقة بعين ناقدة، وتحلل خطابًا — كلها تعليمية وما تكتب البحث بدالك.</p>
+
+      <div class="tabs" data-group="research">
+        <button class="tab-btn active" data-tab="methods" data-ar="مختبر مناهج البحث" data-en="Research Methods Lab">مختبر مناهج البحث</button>
+        <button class="tab-btn" data-tab="surveys" data-ar="مختبر الاستطلاعات" data-en="Survey Lab">مختبر الاستطلاعات</button>
+        <button class="tab-btn" data-tab="documents" data-ar="مختبر قراءة الوثائق" data-en="Document Reading Lab">مختبر قراءة الوثائق</button>
+        <button class="tab-btn" data-tab="speech" data-ar="حلل خطابًا" data-en="Analyze a Speech">حلل خطابًا</button>
+      </div>
+
+      <!-- ===== 1) مختبر مناهج البحث ===== -->
+      <div class="tab-panel active" data-group="research" data-panel="methods">
+        <div id="rmWizard">
+          <p style="margin:0 0 6px;font-size:12px;color:var(--text-soft)">الخطوة <span id="rmStepNum">1</span> من <span id="rmStepTotal"></span></p>
+          <div class="quiz-box" style="max-width:100%"><div id="rmStepBody"></div></div>
+        </div>
+        <div id="rmResult" style="display:none" class="info-card">
+          <h3 style="margin:0 0 14px;color:var(--purple)">خطة بحثك الأولية 📝</h3>
+          <div id="rmResultBody" style="font-size:13.5px;line-height:1.9;margin-bottom:16px"></div>
+          <div id="rmConsistencyBox" style="margin-bottom:16px"></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-outline" id="rmPrintBtn">🖨️ طباعة الخطة</button>
+            <button class="btn btn-outline" id="rmRestartBtn">🔁 خطة جديدة</button>
+          </div>
+        </div>
+
+        <div class="info-card" style="margin-top:22px">
+          <h3 style="margin:0 0 10px;color:var(--purple);font-size:15px">📚 تعرّف على المناهج البحثية</h3>
+          <div id="methodsGlossary" style="font-size:13px;color:var(--text-soft);line-height:2"></div>
+        </div>
+      </div>
+
+      <!-- ===== 2) مختبر الاستطلاعات ===== -->
+      <div class="tab-panel" data-group="research" data-panel="surveys">
+        <div class="info-card" style="margin-bottom:16px">
+          <label class="field-label">هدف الاستطلاع</label>
+          <input type="text" id="svGoal" data-ph-ar="مثلاً: قياس رضا الطلاب عن خدمة معينة" data-ph-en="e.g. Measuring student satisfaction with a service" placeholder="مثلاً: قياس رضا الطلاب عن خدمة معينة">
+          <label class="field-label">الفئة المستهدفة</label>
+          <input type="text" id="svAudience" data-ph-ar="مثلاً: طلاب السنة الأولى" data-ph-en="e.g. First-year students" placeholder="مثلاً: طلاب السنة الأولى">
+        </div>
+
+        <div class="info-card" style="margin-bottom:16px">
+          <h3 style="margin:0 0 12px;color:var(--purple);font-size:15px">➕ أضف سؤالًا</h3>
+          <select id="svQType" class="form-select">
+            <option value="mcq">اختيار من متعدد</option>
+            <option value="scale">مقياس تقييم (1-5)</option>
+            <option value="open">سؤال مفتوح</option>
+          </select>
+          <input type="text" id="svQText" data-ph-ar="نص السؤال" data-ph-en="Question text" placeholder="نص السؤال" style="margin-top:10px">
+          <div id="svOptionsBox" style="margin-top:10px"></div>
+          <button class="btn btn-outline" id="svAddOptionBtn" style="margin-bottom:10px;font-size:12.5px" data-m="+ أضف خيارًا" data-f="+ أضيفي خيارًا" data-en="+ Add an Option">+ أضف خيارًا</button>
+          <br>
+          <button class="btn btn-primary" id="svAddQBtn" data-m="أضف السؤال للاستطلاع" data-f="أضيفي السؤال للاستطلاع" data-en="Add Question to Survey">أضف السؤال للاستطلاع</button>
+        </div>
+
+        <div class="info-card" style="margin-bottom:16px">
+          <h3 style="margin:0 0 12px;color:var(--purple);font-size:15px">👁️ معاينة الاستطلاع</h3>
+          <div id="svPreview"><p style="color:var(--text-faint);font-size:13px">لسا ما أضفت أي سؤال.</p></div>
+        </div>
+
+        <div id="svFeedback" class="info-card"></div>
+      </div>
+
+      <!-- ===== 3) مختبر قراءة الوثائق ===== -->
+      <div class="tab-panel" data-group="research" data-panel="documents">
+        <div class="info-card" style="margin-bottom:16px;border-color:var(--wrong-text)">
+          <p style="margin:0;font-size:12.5px;color:var(--wrong-text);font-weight:700">⚠️ وثيقة تدريبية خيالية وليست صادرة عن أي جهة حقيقية.</p>
+        </div>
+        <div class="info-card" style="margin-bottom:20px">
+          <h3 style="margin:0 0 10px;color:var(--purple)">مذكرة تفاهم بين "معهد التنمية الإقليمي" و"مؤسسة الابتكار الحضري" (خيالية)</h3>
+          <div style="background:var(--surface-2);padding:14px;border-radius:var(--radius-sm);font-size:13.5px;line-height:1.9" id="docText">
+            تتفق الجهتان المذكورتان أعلاه على التعاون لمدة ثلاث سنوات قابلة للتجديد، بهدف تبادل الخبرات في مجال التخطيط الحضري المستدام. يلتزم "معهد التنمية الإقليمي" بتوفير التدريب الفني لفريق "مؤسسة الابتكار الحضري"، بينما تلتزم المؤسسة بإتاحة بياناتها البحثية غير السرية للمعهد. يجوز لأي من الطرفين إنهاء المذكرة بإشعار مسبق مدته 90 يومًا. تخضع أي نزاعات محتملة للتحكيم الودي أولاً قبل أي إجراء آخر. من المتوقع البدء الفعلي بالتنفيذ خلال الربع الأول من تاريخ التوقيع.
+          </div>
+        </div>
+        <div class="quiz-box" style="max-width:100%">
+          <p style="margin:0 0 6px;font-size:12px;color:var(--text-soft)">مهمة <span id="docTaskNum">1</span> من <span id="docTaskTotal"></span></p>
+          <h3 id="docTaskQ" style="margin:0 0 16px;color:var(--purple);font-size:15.5px"></h3>
+          <div class="quiz-opts" id="docTaskOpts"></div>
+          <div id="docExplainBox" style="display:none;margin-top:16px;padding-top:14px;border-top:1px dashed var(--line)">
+            <p id="docExplainText" style="margin:0 0 12px;font-size:13.5px;color:var(--text-soft)"></p>
+            <button class="btn btn-primary" id="docNextBtn">التالي</button>
+          </div>
+        </div>
+        <div id="docDone" style="display:none" class="info-card">
+          <h3 style="margin:0 0 10px;color:var(--purple)">أنهيت تحليل الوثيقة! 🎉</h3>
+          <p id="docFinalScore"></p>
+          <button class="btn btn-outline" id="docRestartBtn" data-m="أعد التحليل" data-f="أعيدي التحليل" data-en="Redo Analysis">أعد التحليل</button>
+        </div>
+      </div>
+
+      <!-- ===== 4) حلل خطابًا ===== -->
+      <div class="tab-panel" data-group="research" data-panel="speech">
+        <div class="info-card" style="margin-bottom:16px;border-color:var(--wrong-text)">
+          <p style="margin:0;font-size:12.5px;color:var(--wrong-text);font-weight:700">⚠️ خطاب تدريبي خيالي، كُتب خصيصًا لمِدراك، وليس لأي شخصية أو دولة حقيقية.</p>
+        </div>
+        <div class="info-card" style="margin-bottom:20px">
+          <h3 style="margin:0 0 10px;color:var(--purple)">خطاب افتتاح "منتدى المستقبل الحضري" (خيالي)</h3>
+          <div style="background:var(--surface-2);padding:14px;border-radius:var(--radius-sm);font-size:13.5px;line-height:1.9">
+            أصدقائي الكرام، نجتمع اليوم في لحظة فارقة لمدننا. لقد شهدنا خلال العقد الماضي نموًا سكانيًا غير مسبوق، وهو نمو يحمل في طياته فرصًا هائلة وتحديات حقيقية. إن التقارير التي بين أيدينا تشير إلى أن الاستثمار في النقل المستدام يمكن أن يخفض الازدحام بنسبة ملموسة خلال خمس سنوات. لكن الأرقام وحدها لا تكفي — نحتاج إرادة جماعية حقيقية. أدعوكم اليوم لتبني رؤية جريئة، رؤية تضع الإنسان في قلب كل قرار تخطيطي. معًا، نستطيع أن نبني مدنًا تليق بطموحات أبنائنا.
+          </div>
+        </div>
+        <div class="quiz-box" style="max-width:100%">
+          <p style="margin:0 0 6px;font-size:12px;color:var(--text-soft)">سؤال تحليل <span id="spNum">1</span> من <span id="spTotal"></span></p>
+          <h3 id="spQ" style="margin:0 0 16px;color:var(--purple);font-size:15.5px"></h3>
+          <div class="quiz-opts" id="spOpts"></div>
+          <div id="spExplainBox" style="display:none;margin-top:16px;padding-top:14px;border-top:1px dashed var(--line)">
+            <p id="spExplainText" style="margin:0 0 12px;font-size:13.5px;color:var(--text-soft)"></p>
+            <button class="btn btn-primary" id="spNextBtn">التالي</button>
+          </div>
+        </div>
+        <div id="spDone" style="display:none" class="info-card">
+          <h3 style="margin:0 0 10px;color:var(--purple)">أنهيت تحليل الخطاب! 🎉</h3>
+          <p id="spFinalScore"></p>
+          <button class="btn btn-outline" id="spRestartBtn" data-m="أعد التحليل" data-f="أعيدي التحليل" data-en="Redo Analysis">أعد التحليل</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-notice" data-ar="مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز." data-en="Medrak is an independent student platform and not an official King Abdulaziz University website.">مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز.</div>
+    <div class="foot-grid">
+      <div>
+        <h5>مِدراك | Medrak</h5>
+        <p style="max-width:32ch" data-ar="دليلك الطلابي لتخصص العلوم السياسية." data-en="Your student guide to the Political Science major.">دليلك الطلابي لتخصص العلوم السياسية.</p>
+      </div>
+      <div>
+        <h5 data-ar="الأقسام" data-en="Sections">الأقسام</h5>
+        <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+        <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+        <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+        <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      </div>
+      <div>
+        <h5 data-ar="روابط أخرى" data-en="Other Links">روابط أخرى</h5>
+        <a href="index.html#sources" data-ar="المصادر" data-en="Sources">المصادر</a>
+        <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      </div>
+    </div>
+    <div class="foot-bottom" data-ar="© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر." data-en="© Medrak — All rights reserved to their respective official owners where noted.">© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر.</div>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="عودة للأعلى">↑</button>
+
+<script src="assets/store.js"></script>
+<script src="assets/common.js"></script>
+<script>
+(function(){
+  /* ============================================================
+     1) مختبر مناهج البحث
+     ============================================================ */
+  const rmSteps = [
+    { key:'field', title:'اختر مجالًا عامًا', type:'select', options:['السياسة العامة','العلاقات الدولية','النظم السياسية المقارنة','الاقتصاد السياسي'] },
+    { key:'narrow', title:'ضيّق الموضوع (اكتب موضوعًا فرعيًا ضمن المجال)', type:'text', placeholder:'مثلاً: أثر التحول الرقمي على الخدمات الحكومية المحلية' },
+    { key:'problem', title:'اصغ مشكلة البحث بجملة واحدة', type:'text', placeholder:'ما الفجوة أو التساؤل الذي يستحق البحث؟' },
+    { key:'question', title:'سؤال البحث الرئيسي', type:'text', placeholder:'صياغة على شكل سؤال بحثي واضح' },
+    { key:'goal', title:'هدف البحث', type:'text', placeholder:'ماذا تريد أن تحقق هذا البحث؟' },
+    { key:'method', title:'اختر المنهج المناسب', type:'select', options:['المنهج الوصفي','المنهج المقارن','دراسة الحالة','تحليل المحتوى','المنهج التاريخي','المنهج الكمي','المنهج النوعي','المنهج المختلط'] },
+    { key:'population', title:'مجتمع الدراسة', type:'text', placeholder:'من أو ماذا تدرس؟' },
+    { key:'sample', title:'العينة (إن وجدت)', type:'text', placeholder:'كيف ستختار عينتك؟ (اتركه فارغًا لو دراسة شاملة)' },
+    { key:'tool', title:'أداة جمع البيانات', type:'select', options:['استبانة','مقابلة','تحليل وثائق','ملاحظة','مصادر ثانوية فقط'] },
+    { key:'limits', title:'حدود البحث', type:'text', placeholder:'الحدود الزمنية والمكانية والموضوعية' },
+  ];
+  let rmData = {}, rmStep = 0;
+  document.getElementById('rmStepTotal').textContent = rmSteps.length;
+  function rmRender(){
+    const s = rmSteps[rmStep];
+    document.getElementById('rmStepNum').textContent = rmStep + 1;
+    const body = document.getElementById('rmStepBody');
+    let html = '<p style="font-weight:700;margin:0 0 14px;color:var(--purple)">' + s.title + '</p>';
+    if (s.type === 'select') {
+      html += '<div class="quiz-opts" id="rmOptsBox"></div>';
+    } else {
+      html += '<input type="text" id="rmTextInput" placeholder="' + (s.placeholder||'') + '" value="' + (rmData[s.key]||'') + '">' +
+        '<button class="btn btn-primary" id="rmNextBtn" style="margin-top:10px">التالي</button>';
+    }
+    body.innerHTML = html;
+    if (s.type === 'select') {
+      const box = document.getElementById('rmOptsBox');
+      s.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-opt';
+        btn.textContent = opt;
+        btn.addEventListener('click', function(){ rmData[s.key] = opt; rmAdvance(); });
+        box.appendChild(btn);
+      });
+    } else {
+      document.getElementById('rmNextBtn').addEventListener('click', function(){
+        rmData[s.key] = document.getElementById('rmTextInput').value.trim();
+        rmAdvance();
+      });
+    }
+  }
+  function rmAdvance(){
+    rmStep++;
+    if (rmStep >= rmSteps.length) rmFinish(); else rmRender();
+  }
+  function rmFinish(){
+    document.getElementById('rmWizard').style.display = 'none';
+    document.getElementById('rmResult').style.display = 'block';
+    document.getElementById('rmResultBody').innerHTML = rmSteps.map(s =>
+      '<p style="margin:0 0 8px"><b>' + s.title.replace(/\(.*\)/,'').trim() + ':</b> ' + (rmData[s.key] || '<span style="color:var(--text-faint)">لم يُحدد</span>') + '</p>').join('');
+    const warnings = [];
+    if (rmData.question && !rmData.goal) warnings.push('لاحظنا سؤال بحث بدون هدف مرتبط به بوضوح — راجع الاتساق بينهما.');
+    if (rmData.method === 'المنهج الكمي' && rmData.tool === 'مقابلة') warnings.push('المنهج الكمي عادة يستخدم أدوات مثل الاستبانة أكثر من المقابلة — تأكد من اتساق اختيارك.');
+    if (rmData.method === 'المنهج النوعي' && rmData.sample && /\d{3,}/.test(rmData.sample)) warnings.push('عينات كبيرة جدًا أقل شيوعًا بالمنهج النوعي الذي يميل للعمق بدل الاتساع.');
+    document.getElementById('rmConsistencyBox').innerHTML = warnings.length
+      ? warnings.map(w => '<p style="margin:0 0 8px;font-size:13px;color:var(--wrong-text)">⚠️ ' + w + '</p>').join('')
+      : '<p style="font-size:13px;color:var(--correct-text)">✅ ما لقينا تعارضات واضحة بين عناصر خطتك.</p>';
+    if (window.MedrakStore) MedrakStore.set('researchMethodsPlan', rmData);
+    if (window.medrakRecordAchievement) medrakRecordAchievement('بنيت خطة بحث أولية حول: ' + (rmData.narrow || 'موضوع بحثي'));
+    if (window.medrakSound) window.medrakSound.play('achievement');
+  }
+  document.getElementById('rmPrintBtn').addEventListener('click', function(){ window.print(); });
+  document.getElementById('rmRestartBtn').addEventListener('click', function(){
+    rmData = {}; rmStep = 0;
+    document.getElementById('rmResult').style.display = 'none';
+    document.getElementById('rmWizard').style.display = 'block';
+    rmRender();
+  });
+  rmRender();
+
+  const methodsInfo = [
+    ['المنهج الوصفي','يصف ظاهرة سياسية كما هي دون تدخل، مفيد لفهم الوضع الراهن.'],
+    ['المنهج المقارن','يقارن بين حالتين أو أكثر (دول، أنظمة، سياسات) لاستخلاص أوجه الشبه والاختلاف.'],
+    ['دراسة الحالة','تعمّق بحالة واحدة محددة لفهمها بعمق، لا للتعميم الواسع.'],
+    ['تحليل المحتوى','يحلل نصوصًا أو خطابات أو وثائق بشكل منهجي لاستخراج أنماط أو معانٍ.'],
+    ['المنهج التاريخي','يدرس تطور ظاهرة سياسية عبر الزمن لفهم جذورها وتحولاتها.'],
+    ['المنهج الكمي','يعتمد على أرقام وإحصاءات وقياسات رقمية قابلة للتحليل الإحصائي.'],
+    ['المنهج النوعي','يعتمد على فهم عميق للمعاني والدوافع عبر مقابلات أو ملاحظات، لا أرقامًا بالضرورة.'],
+    ['المنهج المختلط','يجمع بين أدوات كمية ونوعية بنفس الدراسة لتعزيز شمولية النتائج.'],
+  ];
+  document.getElementById('methodsGlossary').innerHTML = methodsInfo.map(m => '<p style="margin:0 0 8px"><b>'+m[0]+':</b> '+m[1]+'</p>').join('');
+
+  /* ============================================================
+     2) مختبر الاستطلاعات
+     ============================================================ */
+  let svQuestions = [];
+  function svRenderOptionsBox(){
+    const type = document.getElementById('svQType').value;
+    const box = document.getElementById('svOptionsBox');
+    document.getElementById('svAddOptionBtn').style.display = type === 'mcq' ? 'inline-flex' : 'none';
+    if (type !== 'mcq') { box.innerHTML = ''; return; }
+    if (box.children.length === 0) { svAddOption(); svAddOption(); }
+  }
+  function svAddOption(){
+    const box = document.getElementById('svOptionsBox');
+    const input = document.createElement('input');
+    input.type = 'text'; input.className = 'sv-option'; input.placeholder = 'نص الخيار'; input.style.marginBottom = '6px';
+    box.appendChild(input);
+  }
+  document.getElementById('svQType').addEventListener('change', svRenderOptionsBox);
+  document.getElementById('svAddOptionBtn').addEventListener('click', svAddOption);
+  svRenderOptionsBox();
+
+  document.getElementById('svAddQBtn').addEventListener('click', function(){
+    const text = document.getElementById('svQText').value.trim();
+    const type = document.getElementById('svQType').value;
+    if (!text) { alert('اكتب نص السؤال أول.'); return; }
+    const options = type === 'mcq' ? [...document.querySelectorAll('.sv-option')].map(i => i.value.trim()).filter(Boolean) : [];
+    if (type === 'mcq' && options.length < 2) { alert('أضف خيارين على الأقل.'); return; }
+    svQuestions.push({ text, type, options });
+    document.getElementById('svQText').value = '';
+    document.querySelectorAll('.sv-option').forEach(i => i.value = '');
+    svRenderPreview();
+    svRunQualityCheck();
+  });
+
+  function svRenderPreview(){
+    const box = document.getElementById('svPreview');
+    if (svQuestions.length === 0) { box.innerHTML = '<p style="color:var(--text-faint);font-size:13px">لسا ما أضفت أي سؤال.</p>'; return; }
+    box.innerHTML = svQuestions.map((q,i) => {
+      let inner = '<p style="margin:0 0 8px"><b>'+(i+1)+'. '+q.text+'</b></p>';
+      if (q.type === 'mcq') inner += q.options.map(o => '<div style="font-size:13px;color:var(--text-soft)">○ '+o+'</div>').join('');
+      else if (q.type === 'scale') inner += '<div style="font-size:13px;color:var(--text-soft)">١ ⚬ ٢ ⚬ ٣ ⚬ ٤ ⚬ ٥</div>';
+      else inner += '<div style="font-size:13px;color:var(--text-faint)">[إجابة مفتوحة]</div>';
+      return '<div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px dashed var(--line)">'+inner+'</div>';
+    }).join('');
+  }
+
+  const leadingWords = ['ألا توافق','أليس صحيحًا','بالتأكيد تعتقد'];
+  function svRunQualityCheck(){
+    const issues = [];
+    svQuestions.forEach((q, i) => {
+      if (leadingWords.some(w => q.text.includes(w))) issues.push('السؤال '+(i+1)+' يبدو موجّهًا (Leading Question) — صياغته تدفع لإجابة معينة.');
+      if (q.text.includes(' و') && q.text.split(' و').length > 1 && /\?$/.test(q.text) === false && (q.text.match(/\?/g)||[]).length === 0 && q.text.includes('؟') === false) {}
+      if ((q.text.match(/و/g)||[]).length >= 3) issues.push('السؤال '+(i+1)+' طويل ومعقد — قد يحتوي فكرتين بسؤال واحد (Double-Barreled).');
+      if (q.type === 'mcq' && q.options.length === 2 && q.options.some(o => o.includes('ممتاز')) && !q.options.some(o => o.includes('سيء'))) issues.push('خيارات السؤال '+(i+1)+' قد تكون غير متوازنة (كلها إيجابية مثلًا).');
+    });
+    const fb = document.getElementById('svFeedback');
+    fb.innerHTML = '<h4 style="margin:0 0 10px;color:var(--purple);font-size:14px">🔍 فحص جودة الصياغة</h4>' +
+      (issues.length ? issues.map(i => '<p style="margin:0 0 8px;font-size:13px;color:var(--wrong-text)">⚠️ '+i+'</p>').join('') : '<p style="font-size:13px;color:var(--correct-text)">✅ ما لقينا مشاكل واضحة بصياغة الأسئلة الحالية.</p>') +
+      '<p style="margin-top:12px;font-size:12.5px;color:var(--text-soft)">💡 العينة العشوائية تعطي كل فرد بنفس المجتمع فرصة متساوية للاختيار، بعكس عينة الملاءمة (Convenience Sample) اللي تعتمد على أقرب أفراد متاحين وأقل تمثيلًا للمجتمع ككل.</p>';
+  }
+  if (window.medrakRecordAchievement && svQuestions.length) medrakRecordAchievement('صممت استطلاعًا تجريبيًا');
+
+  /* ============================================================
+     3) مختبر قراءة الوثائق
+     ============================================================ */
+  const docTasks = [
+    { q:'ما هدف هذي الوثيقة بشكل رئيسي؟', opts:['فرض عقوبات على أحد الطرفين','تنظيم تعاون فني وبحثي بين الطرفين','حل نزاع قائم بين الطرفين'], correct:1,
+      explain:'الوثيقة مذكرة تفاهم لتبادل الخبرات والتدريب، مو عقوبة ولا حل نزاع.' },
+    { q:'كم مدة المذكرة؟', opts:['سنة واحدة','ثلاث سنوات قابلة للتجديد','غير محددة'], correct:1,
+      explain:'النص يذكر صراحة "مدة ثلاث سنوات قابلة للتجديد".' },
+    { q:'أي عبارة بالنص تُعتبر "ملزمة" أكثر من غيرها؟', opts:['"يُتوقع البدء الفعلي"','"يلتزم... بتوفير التدريب الفني"','"من المتوقع"'], correct:1,
+      explain:'كلمة "يلتزم" تدل على التزام تعاقدي واضح، بعكس "يُتوقع" التي تحمل درجة أقل من الإلزام.' },
+    { q:'وش النقطة الأكثر غموضًا بالنص؟', opts:['مدة الإشعار المسبق للإنهاء','تعريف "البيانات البحثية غير السرية" بدقة','آلية التحكيم الودي'], correct:1,
+      explain:'النص ما يحدد بدقة أي بيانات تُعتبر "غير سرية"، وهذا مجال غموض قد يسبب خلافًا لاحقًا.' },
+  ];
+  let docIndex = 0, docScore = 0;
+  document.getElementById('docTaskTotal').textContent = docTasks.length;
+  function docRender(){
+    const t = docTasks[docIndex];
+    document.getElementById('docTaskNum').textContent = docIndex + 1;
+    document.getElementById('docTaskQ').textContent = t.q;
+    document.getElementById('docExplainBox').style.display = 'none';
+    const box = document.getElementById('docTaskOpts');
+    box.innerHTML = '';
+    t.opts.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt';
+      btn.textContent = opt;
+      btn.addEventListener('click', function(){
+        const ok = i === t.correct;
+        if (ok) docScore++;
+        box.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+        this.style.borderColor = ok ? 'var(--correct-text)' : 'var(--wrong-text)';
+        document.getElementById('docExplainText').textContent = '💡 ' + t.explain;
+        document.getElementById('docExplainBox').style.display = 'block';
+        if (window.medrakSound) window.medrakSound.play(ok ? 'success' : 'error');
+      });
+      box.appendChild(btn);
+    });
+  }
+  document.getElementById('docNextBtn').addEventListener('click', function(){
+    docIndex++;
+    if (docIndex >= docTasks.length) docFinish(); else docRender();
+  });
+  function docFinish(){
+    document.querySelector('[data-panel="documents"] .quiz-box').style.display = 'none';
+    document.getElementById('docDone').style.display = 'block';
+    document.getElementById('docFinalScore').textContent = 'نتيجتك: ' + docScore + ' من ' + docTasks.length;
+    if (window.medrakSound) window.medrakSound.play('achievement');
+    if (window.medrakRecordAchievement) medrakRecordAchievement('مختبر قراءة الوثائق: ' + docScore + ' من ' + docTasks.length);
+  }
+  document.getElementById('docRestartBtn').addEventListener('click', function(){
+    docIndex = 0; docScore = 0;
+    document.getElementById('docDone').style.display = 'none';
+    document.querySelector('[data-panel="documents"] .quiz-box').style.display = 'block';
+    docRender();
+  });
+  docRender();
+
+  /* ============================================================
+     4) حلل خطابًا
+     ============================================================ */
+  const spTasks = [
+    { q:'من الجمهور المستهدف بهذا الخطاب؟', opts:['عامة المواطنين عبر التلفزيون','مشاركون متخصصون بمنتدى تخطيط حضري','طلاب مدارس'], correct:1, explain:'السياق ("أصدقائي الكرام... منتدى المستقبل الحضري") يشير لجمهور متخصص بالحضور.' },
+    { q:'ما الرسالة المحورية؟', opts:['التحذير من مخاطر النمو السكاني', 'الدعوة لرؤية جريئة بالاستثمار بالنقل المستدام', 'الإعلان عن ميزانية جديدة'], correct:1, explain:'الخطاب يختم بدعوة صريحة لتبني رؤية جريئة تركز على النقل المستدام والإنسان.' },
+    { q:'أي جملة بالخطاب "معلومة" أقرب منها لكونها "رأي"؟', opts:['"الاستثمار... يمكن أن يخفض الازدحام بنسبة ملموسة"', '"نحتاج إرادة جماعية حقيقية"', 'كلاهما معلومة بنفس الدرجة'], correct:1, explain:'"نحتاج إرادة جماعية" حكم قيمي/رأي، بينما جملة خفض الازدحام تستند لتقارير (معلومة مدعومة، وإن كانت تقديرية).' },
+    { q:'هل يستخدم الخطاب أسلوب التكرار لتعزيز فكرة معينة؟', opts:['نعم، تكرار كلمة "معًا/جماعية" لتعزيز فكرة العمل المشترك', 'لا يوجد أي تكرار بالخطاب', 'التكرار موجود لكن بلا هدف واضح'], correct:0, explain:'التكرار حول "الإرادة الجماعية" و"معًا" يعزز فكرة العمل المشترك كحل مقترح.' },
+  ];
+  let spIndex = 0, spScore = 0;
+  document.getElementById('spTotal').textContent = spTasks.length;
+  function spRender(){
+    const t = spTasks[spIndex];
+    document.getElementById('spNum').textContent = spIndex + 1;
+    document.getElementById('spQ').textContent = t.q;
+    document.getElementById('spExplainBox').style.display = 'none';
+    const box = document.getElementById('spOpts');
+    box.innerHTML = '';
+    t.opts.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt';
+      btn.textContent = opt;
+      btn.addEventListener('click', function(){
+        const ok = i === t.correct;
+        if (ok) spScore++;
+        box.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+        this.style.borderColor = ok ? 'var(--correct-text)' : 'var(--wrong-text)';
+        document.getElementById('spExplainText').textContent = '💡 ' + t.explain;
+        document.getElementById('spExplainBox').style.display = 'block';
+        if (window.medrakSound) window.medrakSound.play(ok ? 'success' : 'error');
+      });
+      box.appendChild(btn);
+    });
+  }
+  document.getElementById('spNextBtn').addEventListener('click', function(){
+    spIndex++;
+    if (spIndex >= spTasks.length) spFinish(); else spRender();
+  });
+  function spFinish(){
+    document.querySelector('[data-panel="speech"] .quiz-box').style.display = 'none';
+    document.getElementById('spDone').style.display = 'block';
+    document.getElementById('spFinalScore').textContent = 'نتيجتك: ' + spScore + ' من ' + spTasks.length;
+    if (window.medrakSound) window.medrakSound.play('achievement');
+    if (window.medrakConfetti) window.medrakConfetti();
+    if (window.medrakRecordAchievement) medrakRecordAchievement('حللت خطابًا تدريبيًا: ' + spScore + ' من ' + spTasks.length);
+  }
+  document.getElementById('spRestartBtn').addEventListener('click', function(){
+    spIndex = 0; spScore = 0;
+    document.getElementById('spDone').style.display = 'none';
+    document.querySelector('[data-panel="speech"] .quiz-box').style.display = 'block';
+    spRender();
+  });
+  spRender();
+
+})();
+</script>
+</div>
+</body>
+</html>

@@ -37,9 +37,12 @@
       <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
       <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
       <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="communication.html" data-ar="التواصل والتفاوض" data-en="Communication &amp; Negotiation">التواصل والتفاوض</a>
+      <a href="research-lab.html" data-ar="البحث والتحليل" data-en="Research &amp; Analysis">البحث والتحليل</a>
       <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
       <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
       <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="alumni.html" data-ar="خريجو مِدراك" data-en="Medrak Alumni">خريجو مِدراك</a>
       <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
     </nav>
     <div class="nav-actions">
@@ -59,8 +62,8 @@
 
   <section>
     <div class="wrap">
-      <h2 class="section-title">الوعي المعلوماتي 🔍</h2>
-      <p class="section-sub">مختبر التحقق من المعلومات — كل المنشورات والأخبار هنا <b>افتراضية من كتابتنا</b>، لا تشير لأي حدث أو جهة حقيقية.</p>
+      <h2 class="section-title" data-ar="الوعي المعلوماتي 🔍" data-en="Media Literacy 🔍">الوعي المعلوماتي 🔍</h2>
+      <p class="section-sub" data-ar="مختبر التحقق من المعلومات — كل المنشورات والأخبار هنا افتراضية من كتابتنا، لا تشير لأي حدث أو جهة حقيقية." data-en="A media literacy lab — every post and headline here is hypothetical and written by us, referring to no real event or entity.">مختبر التحقق من المعلومات — كل المنشورات والأخبار هنا افتراضية من كتابتنا، لا تشير لأي حدث أو جهة حقيقية.</p>
 
       <div class="quiz-box" style="max-width:100%;margin-bottom:26px">
         <p style="margin:0 0 6px;font-size:12px;color:var(--text-soft)">التدريب <span id="mlNum">1</span> من <span id="mlTotal"></span> — نقاطك: <b id="mlScore" style="color:var(--teal-deep)">0</b></p>
@@ -79,7 +82,7 @@
       <div id="mlDoneBox" style="display:none" class="info-card">
         <h3 style="margin:0 0 10px;color:var(--purple)">أنهيت كل التدريبات! 🎉</h3>
         <p id="mlFinalScore" style="margin:0 0 14px"></p>
-        <button class="btn btn-outline" id="mlRestartBtn">أعد التدريبات</button>
+        <button class="btn btn-outline" id="mlRestartBtn" data-m="أعد التدريبات" data-f="أعيدي التدريبات" data-en="Retake Trainings">أعد التدريبات</button>
       </div>
 
       <div class="info-card">
@@ -221,6 +224,7 @@
     if (window.medrakSound) window.medrakSound.play('achievement');
     if (window.medrakConfetti) window.medrakConfetti();
     if (window.MedrakStore) MedrakStore.set('mediaLiteracy', { bestScore: mlScore, total: mlTrainings.length, completedAt: new Date().toISOString() });
+    if (window.medrakRecordAchievement) medrakRecordAchievement('مختبر التحقق من المعلومات: ' + mlScore + ' من ' + mlTrainings.length);
   }
   document.getElementById('mlRestartBtn').addEventListener('click', function(){
     mlIndex = 0; mlScore = 0;

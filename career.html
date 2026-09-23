@@ -37,9 +37,12 @@
       <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
       <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
       <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="communication.html" data-ar="التواصل والتفاوض" data-en="Communication &amp; Negotiation">التواصل والتفاوض</a>
+      <a href="research-lab.html" data-ar="البحث والتحليل" data-en="Research &amp; Analysis">البحث والتحليل</a>
       <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
       <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
       <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="alumni.html" data-ar="خريجو مِدراك" data-en="Medrak Alumni">خريجو مِدراك</a>
       <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
     </nav>
     <div class="nav-actions">
@@ -59,9 +62,16 @@
 
   <section>
     <div class="wrap">
-      <h2 class="section-title">مستقبلك المهني 💼</h2>
-      <p class="section-sub">10 مسارات مهنية مرتبطة بتخصص العلوم السياسية — وصف محايد لكل مسار، ثم اختبار ميول قصير لمساعدتك تستكشف اهتماماتك.</p>
+      <h2 class="section-title" data-ar="مستقبلك المهني 💼" data-en="Your Career 💼">مستقبلك المهني 💼</h2>
+      <p class="section-sub" data-ar="10 مسارات مهنية مرتبطة بتخصص العلوم السياسية — وصف محايد لكل مسار، ثم اختبار ميول قصير لمساعدتك تستكشف اهتماماتك." data-en="10 career paths linked to the Political Science major — a neutral description of each, plus a short interest quiz to help you explore.">10 مسارات مهنية مرتبطة بتخصص العلوم السياسية — وصف محايد لكل مسار، ثم اختبار ميول قصير لمساعدتك تستكشف اهتماماتك.</p>
 
+      <div class="tabs" data-group="career">
+        <button class="tab-btn active" data-tab="paths" data-ar="المسارات المهنية" data-en="Career Paths">المسارات المهنية</button>
+        <button class="tab-btn" data-tab="interview" data-ar="مقابلة وظيفية تجريبية" data-en="Mock Job Interview">مقابلة وظيفية تجريبية</button>
+        <button class="tab-btn" data-tab="resume" data-ar="منشئ السيرة الذاتية (ATS)" data-en="Resume Builder (ATS)">منشئ السيرة الذاتية (ATS)</button>
+      </div>
+
+      <div class="tab-panel active" data-group="career" data-panel="paths">
       <div class="grid-cards" id="careerCards" style="margin-bottom:30px"></div>
 
       <div class="info-card">
@@ -71,6 +81,123 @@
           <div id="careerQuizBody"></div>
         </div>
       </div>
+      </div>
+
+      <!-- ===== مقابلة وظيفية تجريبية ===== -->
+      <div class="tab-panel" data-group="career" data-panel="interview">
+        <div id="ivSetup" class="info-card">
+          <h3 style="margin:0 0 14px;color:var(--purple)">جهّز مقابلتك التجريبية</h3>
+          <label class="field-label">المسار المهني</label>
+          <select id="ivTrack" class="form-select">
+            <option value="research">البحث والتحليل</option><option value="policy">السياسات العامة</option>
+            <option value="ir">العلاقات الدولية</option><option value="comm">الاتصال المؤسسي</option>
+            <option value="pm">إدارة المشاريع</option><option value="consulting">الدراسات والاستشارات</option>
+            <option value="academic">العمل الأكاديمي</option><option value="intl-orgs">المنظمات الدولية</option>
+          </select>
+          <label class="field-label">مستواك</label>
+          <select id="ivLevel" class="form-select"><option value="student">طالب/ة حاليًا</option><option value="fresh">خريج/ة حديثًا</option></select>
+          <div class="info-card" style="background:var(--surface-2);margin:14px 0">
+            <p style="margin:0 0 6px;font-weight:700;font-size:13px;color:var(--purple)">⭐ طريقة STAR لبناء إجابتك</p>
+            <p style="margin:0;font-size:12.5px;color:var(--text-soft)"><b>Situation</b> الموقف — <b>Task</b> المهمة — <b>Action</b> الإجراء اللي سويته — <b>Result</b> النتيجة</p>
+          </div>
+          <button class="btn btn-primary" id="ivStartBtn" data-m="ابدأ المقابلة" data-f="ابدئي المقابلة" data-en="Start the Interview">ابدأ المقابلة</button>
+        </div>
+
+        <div id="ivGame" style="display:none">
+          <div class="quiz-box" style="max-width:100%">
+            <p style="margin:0 0 6px;font-size:12px;color:var(--text-soft)">سؤال <span id="ivQNum">1</span> من <span id="ivQTotal"></span> — <span id="ivQType"></span></p>
+            <h3 id="ivQuestion" style="margin:0 0 14px;color:var(--purple);font-size:16px"></h3>
+            <textarea id="ivAnswerBox" rows="5" data-ph-m="اكتب إجابتك هنا (تُحفظ محليًا فقط)..." data-ph-f="اكتبي إجابتك هنا (تُحفظ محليًا فقط)..." data-ph-en="Write your answer here (saved locally only)..." placeholder="اكتب إجابتك هنا (تُحفظ محليًا فقط)..."></textarea>
+            <button class="btn btn-outline" id="ivHintBtn" style="margin-top:8px;font-size:12.5px">💡 تلميح STAR</button>
+            <p id="ivHintText" style="display:none;font-size:12.5px;color:var(--text-soft);margin-top:8px"></p>
+            <div style="margin-top:14px">
+              <button class="btn btn-primary" id="ivCheckBtn">تقييم ذاتي لإجابتي</button>
+              <button class="btn btn-outline" id="ivNextBtn" style="display:none;margin-inline-start:8px">السؤال التالي</button>
+            </div>
+            <div id="ivSelfCheck" style="display:none;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);font-size:13px"></div>
+          </div>
+        </div>
+
+        <div id="ivFinal" style="display:none" class="info-card">
+          <h3 style="margin:0 0 14px;color:var(--purple)">ملخص مقابلتك 📋</h3>
+          <div id="ivFinalBody" style="font-size:13.5px;line-height:1.9;margin-bottom:16px"></div>
+          <button class="btn btn-outline" id="ivRestartBtn">مقابلة جديدة 🔁</button>
+        </div>
+      </div>
+
+      <!-- ===== منشئ السيرة الذاتية ATS ===== -->
+      <div class="tab-panel" data-group="career" data-panel="resume">
+        <div class="info-card" style="margin-bottom:16px">
+          <p style="margin:0;font-size:12.5px;color:var(--text-soft)">⚠️ توافق أنظمة ATS يختلف من جهة لأخرى، ولا يوجد قالب يضمن اجتياز جميع الأنظمة. سيرتك تبقى على جهازك فقط.</p>
+        </div>
+
+        <div class="plan-controls">
+          <label class="field-label" style="margin-bottom:0">لغة السيرة:</label>
+          <select id="cvLang" class="form-select"><option value="ar">العربية (RTL)</option><option value="en">English (LTR)</option></select>
+          <label class="field-label" style="margin-bottom:0">مسار للكلمات المفتاحية المقترحة:</label>
+          <select id="cvTrackKeywords" class="form-select">
+            <option value="research">البحث والتحليل</option><option value="policy">السياسات العامة</option>
+            <option value="ir">العلاقات الدولية</option><option value="intl-orgs">المنظمات الدولية</option>
+            <option value="comm">الاتصال المؤسسي</option><option value="consulting">الدراسات والاستشارات</option>
+            <option value="academic">العمل الأكاديمي</option><option value="pm">إدارة المشاريع</option>
+            <option value="data">تحليل البيانات</option><option value="grad">الدراسات العليا</option>
+          </select>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div id="cvFormSide">
+            <div class="info-card" style="margin-bottom:14px">
+              <label class="field-label">الاسم</label><input type="text" id="cv_name">
+              <label class="field-label">المسمى المهني المستهدف</label><input type="text" id="cv_title">
+              <label class="field-label">معلومات التواصل (بريد، مدينة — بدون رقم هوية)</label><input type="text" id="cv_contact">
+              <label class="field-label">نبذة مهنية</label><textarea id="cv_summary" rows="3" maxlength="500"></textarea>
+            </div>
+            <div class="info-card" style="margin-bottom:14px">
+              <label class="field-label">التعليم (سنة — المؤهل — الجهة، سطر لكل واحد)</label><textarea id="cv_education" rows="2"></textarea>
+              <label class="field-label">الخبرات (سنوات — المسمى — الجهة — إنجاز، سطر لكل خبرة)</label><textarea id="cv_experience" rows="3"></textarea>
+              <label class="field-label">التدريب التعاوني</label><textarea id="cv_coop" rows="2"></textarea>
+              <label class="field-label">مشاريع جامعية</label><textarea id="cv_projects" rows="2"></textarea>
+              <label class="field-label">أبحاث</label><textarea id="cv_research" rows="2"></textarea>
+              <label class="field-label">عمل تطوعي</label><textarea id="cv_volunteer" rows="2"></textarea>
+            </div>
+            <div class="info-card">
+              <label class="field-label">دورات</label><textarea id="cv_courses" rows="2"></textarea>
+              <label class="field-label">شهادات</label><textarea id="cv_certs" rows="2"></textarea>
+              <label class="field-label">مهارات (افصل بفواصل)</label><input type="text" id="cv_skills">
+              <label class="field-label">برامج وأدوات (افصل بفواصل)</label><input type="text" id="cv_tools">
+              <label class="field-label">لغات</label><input type="text" id="cv_languages">
+              <label class="field-label">إنجازات</label><textarea id="cv_achievements" rows="2"></textarea>
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px"><input type="checkbox" id="cv_refs" style="width:auto"> إضافة "المراجع عند الطلب"</label>
+            </div>
+          </div>
+
+          <div id="cvPreviewSide">
+            <div class="info-card" style="margin-bottom:14px">
+              <h4 style="margin:0 0 10px;color:var(--purple);font-size:14px">🔑 كلمات مفتاحية مقترحة لمسارك</h4>
+              <p id="cvKeywords" style="font-size:12.5px;color:var(--text-soft);margin:0"></p>
+              <p style="font-size:11px;color:var(--text-faint);margin-top:8px">لا تضف مهارة ما تمتلكها فعليًا.</p>
+            </div>
+            <div class="info-card" style="margin-bottom:14px">
+              <h4 style="margin:0 0 10px;color:var(--purple);font-size:14px">🔍 مراجع السيرة المحلي</h4>
+              <button class="btn btn-primary" id="cvReviewBtn" style="margin-bottom:12px" data-m="راجع سيرتي" data-f="راجعي سيرتي" data-en="Review My Resume">راجع سيرتي</button>
+              <div id="cvReviewBody" style="font-size:12.5px;line-height:1.8"></div>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn btn-outline" id="cvPrintBtn">🖨️ طباعة / PDF</button>
+              <button class="btn btn-outline" id="cvDownloadBtn">⬇️ تنزيل نصي</button>
+              <button class="btn btn-outline" id="cvExportBtn">💾 تصدير JSON</button>
+              <button class="btn btn-outline" id="cvImportBtn">📂 استيراد JSON</button>
+              <input type="file" id="cvImportFile" accept=".json" style="display:none">
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card" id="cvPreviewBox" style="margin-top:20px;background:var(--surface)">
+          <h4 style="margin:0 0 12px;color:var(--purple)">معاينة السيرة (قالب ATS آمن — عمود واحد)</h4>
+          <div id="cvPreviewContent" style="font-size:13.5px;line-height:1.85"></div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -254,12 +381,208 @@
       '<div style="text-align:center"><div style="font-size:36px">'+match.emoji+'</div>'+
       '<h3 style="color:var(--purple);margin:8px 0">أقرب مسار لاهتماماتك: '+match.title+'</h3>'+
       '<p style="font-size:13px;color:var(--text-soft);margin-bottom:14px">تذكّر: هذي نتيجة استرشادية تعليمية بس، مو قرارًا مهنيًا نهائيًا — استكشف أكثر واستشر مرشدك الأكاديمي.</p>'+
-      '<button class="btn btn-outline" id="cqRestartBtn">أعد الاختبار</button></div>';
+      '<button class="btn btn-outline" id="cqRestartBtn" data-m="أعد الاختبار" data-f="أعيدي الاختبار" data-en="Retake Quiz">أعد الاختبار</button></div>';
     document.getElementById('cqRestartBtn').addEventListener('click', function(){ cqIndex = 0; cqScores = {}; cqRender(); });
     if (window.medrakSound) window.medrakSound.play('achievement');
     if (window.MedrakStore) MedrakStore.set('careerQuiz', { lastResult: match.id, completedAt: new Date().toISOString() });
+    if (window.medrakRecordAchievement) medrakRecordAchievement('اكتشفت أقرب مسار مهني لك: ' + match.title);
   }
   cqRender();
+
+  /* ============================================================
+     مقابلة وظيفية تجريبية — أسئلة مفتوحة يكتبها الطالب، وتقييم ذاتي محلي (بدون AI)
+     ============================================================ */
+  const ivQuestionBank = {
+    general: ["حدّثني عن نفسك باختصار.", "ليش تبي تشتغل بهذا المجال بالذات؟", "وش نقاط قوتك الرئيسية؟"],
+    behavioral: ["اذكر موقفًا واجهت فيه ضغط وقت شديد — كيف تعاملت معه؟", "اذكر موقفًا اختلفت فيه مع زميل بالفريق — كيف حليته؟"],
+    skills: ["وش المهارة اللي طوّرتها أكثر خلال دراستك، وكيف طبّقتها؟"],
+    situational: ["لو عطوك مهمة بموعد تسليم ضيق جدًا ومعلومات ناقصة، وش تسوي؟"],
+  };
+  const ivTypeLabels = { general: 'سؤال عام', behavioral: 'سؤال سلوكي', skills: 'سؤال عن المهارات', situational: 'موقف افتراضي' };
+  let ivState = null;
+  document.getElementById('ivStartBtn').addEventListener('click', function(){
+    const pool = [];
+    Object.keys(ivQuestionBank).forEach(type => { ivQuestionBank[type].forEach(q => pool.push({type, q})); });
+    ivState = { index:0, pool, track: document.getElementById('ivTrack').value, level: document.getElementById('ivLevel').value, answers: [] };
+    document.getElementById('ivSetup').style.display = 'none';
+    document.getElementById('ivGame').style.display = 'block';
+    document.getElementById('ivQTotal').textContent = pool.length;
+    ivRender();
+  });
+  function ivRender(){
+    const item = ivState.pool[ivState.index];
+    document.getElementById('ivQNum').textContent = ivState.index + 1;
+    document.getElementById('ivQType').textContent = ivTypeLabels[item.type];
+    document.getElementById('ivQuestion').textContent = item.q;
+    document.getElementById('ivAnswerBox').value = '';
+    document.getElementById('ivHintText').style.display = 'none';
+    document.getElementById('ivSelfCheck').style.display = 'none';
+    document.getElementById('ivCheckBtn').style.display = 'inline-flex';
+    document.getElementById('ivNextBtn').style.display = 'none';
+  }
+  document.getElementById('ivHintBtn').addEventListener('click', function(){
+    document.getElementById('ivHintText').textContent = '💡 حاول تبني إجابتك على: الموقف، المهمة، الإجراء اللي سويته، والنتيجة (STAR).';
+    document.getElementById('ivHintText').style.display = 'block';
+  });
+  document.getElementById('ivCheckBtn').addEventListener('click', function(){
+    const text = document.getElementById('ivAnswerBox').value.trim();
+    if (!text) { alert('اكتب إجابة أول.'); return; }
+    const wordCount = text.split(/\s+/).filter(Boolean).length;
+    const hasNumber = /\d/.test(text);
+    const starWords = ['موقف','مهمة','قررت','سويت','نتيجة','تحقق','نجحت'];
+    const starHits = starWords.filter(w => text.includes(w)).length;
+    const notes = [];
+    notes.push(wordCount < 25 ? '📏 إجابتك قصيرة — حاول تفصّل أكثر.' : wordCount > 200 ? '📏 إجابتك طويلة جدًا — حاول تختصر لأهم النقاط.' : '📏 طول الإجابة مناسب 👍');
+    notes.push(hasNumber ? '📊 استخدمت رقمًا/نتيجة قابلة للقياس — ممتاز!' : '📊 حاول تضيف نتيجة قابلة للقياس لو تقدر (نسبة، عدد، مدة).');
+    notes.push(starHits >= 2 ? '⭐ إجابتك تحمل ملامح واضحة من أسلوب STAR.' : '⭐ حاول تربط إجابتك أكثر بخطوات STAR (الموقف، المهمة، الإجراء، النتيجة).');
+    ivState.answers.push({ q: ivState.pool[ivState.index].q, text, wordCount });
+    document.getElementById('ivSelfCheck').innerHTML = notes.map(n => '<p style="margin:0 0 8px">'+n+'</p>').join('');
+    document.getElementById('ivSelfCheck').style.display = 'block';
+    document.getElementById('ivCheckBtn').style.display = 'none';
+    document.getElementById('ivNextBtn').style.display = 'inline-flex';
+    if (window.MedrakStore) {
+      const saved = MedrakStore.get('interviewAnswers', []);
+      saved.push({ q: ivState.pool[ivState.index].q, text, at: new Date().toISOString() });
+      MedrakStore.set('interviewAnswers', saved.slice(-20));
+    }
+  });
+  document.getElementById('ivNextBtn').addEventListener('click', function(){
+    ivState.index++;
+    if (ivState.index >= ivState.pool.length) ivFinish(); else ivRender();
+  });
+  function ivFinish(){
+    document.getElementById('ivGame').style.display = 'none';
+    document.getElementById('ivFinal').style.display = 'block';
+    const shortAnswers = ivState.answers.filter(a => a.wordCount < 25).length;
+    document.getElementById('ivFinalBody').innerHTML =
+      '<p>أجبت على ' + ivState.answers.length + ' أسئلة لمسار "' + document.getElementById('ivTrack').selectedOptions[0].textContent + '".</p>' +
+      '<p><b>نقطة تحتاج تحسين:</b> ' + (shortAnswers > 1 ? 'حاول تفصّل إجاباتك أكثر (' + shortAnswers + ' إجابات كانت قصيرة).' : 'إجاباتك كانت بطول مناسب بشكل عام — استمر على نفس المنهج.') + '</p>' +
+      '<p style="font-size:12px;color:var(--text-faint)">هذا تدريب تعليمي وما يضمن قبولك بأي وظيفة فعلية.</p>';
+    if (window.medrakSound) window.medrakSound.play('achievement');
+    if (window.medrakConfetti) window.medrakConfetti();
+    if (window.medrakRecordAchievement) medrakRecordAchievement('أكملت مقابلة وظيفية تجريبية (' + document.getElementById('ivTrack').selectedOptions[0].textContent + ')');
+  }
+  document.getElementById('ivRestartBtn').addEventListener('click', function(){
+    document.getElementById('ivFinal').style.display = 'none';
+    document.getElementById('ivSetup').style.display = 'block';
+  });
+
+  /* ============================================================
+     منشئ السيرة الذاتية ATS
+     ============================================================ */
+  const cvKeywordBank = {
+    research:['التحليل الكمي','التحليل النوعي','كتابة تقارير بحثية','منهجية البحث'],
+    policy:['تحليل السياسات العامة','تقييم الأثر','صياغة توصيات'],
+    ir:['العلاقات الثنائية','التفاوض','المنظمات الدولية'],
+    'intl-orgs':['التنسيق متعدد الثقافات','إدارة المشاريع الدولية'],
+    comm:['الاتصال المؤسسي','إدارة الأزمات الإعلامية','الكتابة التنفيذية'],
+    consulting:['إعداد التقارير الاستشارية','حل المشكلات','العرض أمام صناع القرار'],
+    academic:['البحث العلمي','التدريس','النشر الأكاديمي'],
+    pm:['التخطيط الزمني','إدارة الموارد','متابعة المؤشرات'],
+    data:['تحليل البيانات','تصور البيانات','الإحصاء التطبيقي'],
+    grad:['الكتابة الأكاديمية','اللغة الإنجليزية الأكاديمية'],
+  };
+  function cvRenderKeywords(){
+    document.getElementById('cvKeywords').textContent = cvKeywordBank[document.getElementById('cvTrackKeywords').value].join(' • ');
+  }
+  document.getElementById('cvTrackKeywords').addEventListener('change', cvRenderKeywords);
+  cvRenderKeywords();
+
+  const cvFieldIds = ['cv_name','cv_title','cv_contact','cv_summary','cv_education','cv_experience','cv_coop','cv_projects','cv_research','cv_volunteer','cv_courses','cv_certs','cv_skills','cv_tools','cv_languages','cv_achievements'];
+  function cvGetData(){
+    const d = {}; cvFieldIds.forEach(id => d[id] = document.getElementById(id).value);
+    d.cv_refs = document.getElementById('cv_refs').checked;
+    d.cv_lang = document.getElementById('cvLang').value;
+    return d;
+  }
+  function cvSetData(d){
+    cvFieldIds.forEach(id => { if (id in d) document.getElementById(id).value = d[id]; });
+    if ('cv_refs' in d) document.getElementById('cv_refs').checked = d.cv_refs;
+    if ('cv_lang' in d) document.getElementById('cvLang').value = d.cv_lang;
+  }
+  const cvSectionLabels = {
+    ar: { title:'المسمى المستهدف', summary:'نبذة مهنية', education:'التعليم', experience:'الخبرات', coop:'التدريب التعاوني', projects:'مشاريع', research:'أبحاث', volunteer:'عمل تطوعي', courses:'دورات', certs:'شهادات', skills:'المهارات', tools:'برامج وأدوات', languages:'اللغات', achievements:'إنجازات', refs:'المراجع عند الطلب' },
+    en: { title:'Target Title', summary:'Professional Summary', education:'Education', experience:'Experience', coop:'Co-op Training', projects:'Projects', research:'Research', volunteer:'Volunteer Work', courses:'Courses', certs:'Certificates', skills:'Skills', tools:'Tools', languages:'Languages', achievements:'Achievements', refs:'References available upon request' },
+  };
+  function cvRenderPreview(){
+    const d = cvGetData();
+    const L = cvSectionLabels[d.cv_lang];
+    const box = document.getElementById('cvPreviewContent');
+    box.style.direction = d.cv_lang === 'en' ? 'ltr' : 'rtl';
+    box.style.textAlign = d.cv_lang === 'en' ? 'left' : 'right';
+    let html = '<h2 style="margin:0 0 4px;color:var(--purple)">' + (d.cv_name||'—') + '</h2>';
+    html += '<p style="margin:0 0 4px;color:var(--text-soft)">' + (d.cv_title||'') + '</p>';
+    html += '<p style="margin:0 0 16px;font-size:12.5px;color:var(--text-faint)">' + (d.cv_contact||'') + '</p>';
+    const sections = [
+      ['summary', d.cv_summary], ['education', d.cv_education], ['experience', d.cv_experience],
+      ['coop', d.cv_coop], ['projects', d.cv_projects], ['research', d.cv_research], ['volunteer', d.cv_volunteer],
+      ['courses', d.cv_courses], ['certs', d.cv_certs], ['skills', d.cv_skills], ['tools', d.cv_tools],
+      ['languages', d.cv_languages], ['achievements', d.cv_achievements],
+    ];
+    sections.forEach(([key, val]) => {
+      if (!val) return;
+      html += '<h4 style="margin:14px 0 6px;color:var(--purple);font-size:13.5px">' + L[key] + '</h4>';
+      html += '<p style="margin:0;white-space:pre-line;font-size:13px">' + val + '</p>';
+    });
+    if (d.cv_refs) html += '<h4 style="margin:14px 0 6px;color:var(--purple);font-size:13.5px">' + L.refs + '</h4>';
+    box.innerHTML = html;
+  }
+  cvFieldIds.concat(['cvLang']).forEach(id => document.getElementById(id).addEventListener('input', cvRenderPreview));
+  document.getElementById('cv_refs').addEventListener('change', cvRenderPreview);
+  cvRenderPreview();
+
+  const genericPhrases = ['شخص طموح','أعمل بجد','لدي مهارات تواصل ممتازة','أحب العمل ضمن فريق'];
+  const actionVerbs = ['نفّذت','طوّرت','قدت','حللت','أعددت','صممت','نظّمت','حسّنت','أدرت','حققت'];
+  document.getElementById('cvReviewBtn').addEventListener('click', function(){
+    const d = cvGetData();
+    const issues = [];
+    if (!d.cv_name) issues.push('⚠️ الاسم غير مكتمل.');
+    if (!d.cv_title) issues.push('⚠️ المسمى المهني المستهدف غير واضح.');
+    if (!d.cv_summary) issues.push('⚠️ ما فيه نبذة مهنية.');
+    else if (d.cv_summary.split(/\s+/).length > 80) issues.push('⚠️ النبذة طويلة (يُفضّل أقل من 80 كلمة).');
+    if (!d.cv_experience && !d.cv_coop) issues.push('⚠️ ما فيه أي خبرة أو تدريب مذكور.');
+    const fullText = Object.values(d).join(' ');
+    const foundGeneric = genericPhrases.filter(p => fullText.includes(p));
+    if (foundGeneric.length) issues.push('⚠️ عبارات عامة جدًا: "' + foundGeneric.join('، ') + '" — استبدلها بأمثلة محددة.');
+    const hasActionVerb = actionVerbs.some(v => (d.cv_experience||'').includes(v));
+    if (d.cv_experience && !hasActionVerb) issues.push('💡 حاول تبدأ وصف خبراتك بأفعال قوية مثل: ' + actionVerbs.slice(0,4).join('، ') + '.');
+    if (d.cv_experience && !/\d/.test(d.cv_experience)) issues.push('💡 حاول تضيف نتائج قابلة للقياس (أرقام أو نسب) بوصف خبراتك.');
+    const totalWords = fullText.split(/\s+/).filter(Boolean).length;
+    issues.push('📏 الطول التقريبي للسيرة: ' + totalWords + ' كلمة' + (totalWords > 600 ? ' (طويلة، فكّر تختصر لصفحة أو صفحتين)' : ''));
+    document.getElementById('cvReviewBody').innerHTML = issues.map(i => '<p style="margin:0 0 8px">'+i+'</p>').join('');
+    if (window.medrakRecordAchievement) medrakRecordAchievement('راجعت سيرتك الذاتية عبر منشئ ATS');
+  });
+
+  document.getElementById('cvPrintBtn').addEventListener('click', function(){ window.print(); });
+  document.getElementById('cvDownloadBtn').addEventListener('click', function(){
+    const d = cvGetData();
+    const L = cvSectionLabels[d.cv_lang];
+    let text = (d.cv_name||'') + '\n' + (d.cv_title||'') + '\n' + (d.cv_contact||'') + '\n\n';
+    [['summary',d.cv_summary],['education',d.cv_education],['experience',d.cv_experience],['coop',d.cv_coop],['projects',d.cv_projects],['research',d.cv_research],['volunteer',d.cv_volunteer],['courses',d.cv_courses],['certs',d.cv_certs],['skills',d.cv_skills],['tools',d.cv_tools],['languages',d.cv_languages],['achievements',d.cv_achievements]].forEach(([k,v]) => { if (v) text += L[k].toUpperCase() + '\n' + v + '\n\n'; });
+    const blob = new Blob([text], {type:'text/plain'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'resume-' + (d.cv_name||'medrak') + '.txt';
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+  document.getElementById('cvExportBtn').addEventListener('click', function(){
+    const blob = new Blob([JSON.stringify(cvGetData(), null, 2)], {type:'application/json'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'medrak-resume.json';
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+  document.getElementById('cvImportBtn').addEventListener('click', function(){ document.getElementById('cvImportFile').click(); });
+  document.getElementById('cvImportFile').addEventListener('change', function(e){
+    const file = e.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev){
+      try {
+        const data = JSON.parse(ev.target.result);
+        if (typeof data !== 'object' || Array.isArray(data)) throw new Error('bad');
+        cvSetData(data); cvRenderPreview();
+      } catch(err){ alert('ملف غير صالح.'); }
+    };
+    reader.readAsText(file);
+    this.value = '';
+  });
+
 })();
 </script>
 

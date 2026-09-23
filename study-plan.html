@@ -37,9 +37,12 @@
       <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
       <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
       <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="communication.html" data-ar="التواصل والتفاوض" data-en="Communication &amp; Negotiation">التواصل والتفاوض</a>
+      <a href="research-lab.html" data-ar="البحث والتحليل" data-en="Research &amp; Analysis">البحث والتحليل</a>
       <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
       <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
       <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="alumni.html" data-ar="خريجو مِدراك" data-en="Medrak Alumni">خريجو مِدراك</a>
       <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
     </nav>
     <div class="nav-actions">
@@ -81,7 +84,7 @@
           <option value="ipe">الاقتصاد السياسي العالمي (IPE)</option>
           <option value="ppd">السياسة العامة والتنمية (PP&D)</option>
         </select>
-        <input type="search" id="courseSearch" placeholder="🔍 ابحث عن مقرر بالاسم أو الرمز...">
+        <input type="search" id="courseSearch" data-ph-ar="🔍 ابحث عن مقرر بالاسم أو الرمز..." data-ph-en="🔍 Search a course by name or code..." placeholder="🔍 ابحث عن مقرر بالاسم أو الرمز...">
       </div>
 
       <div class="info-card" id="progressSummary" style="margin-bottom:20px">
@@ -108,7 +111,7 @@
         <div class="info-card" style="margin-bottom:20px">
           <h3 style="margin:0 0 12px;color:var(--purple);font-size:15px">➕ أضف مهمة (محاضرة / تكليف / اختبار)</h3>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-            <input type="text" id="taskTitle" placeholder="العنوان (مثلاً: واجب مادة السياسة العامة)">
+            <input type="text" id="taskTitle" data-ph-ar="العنوان (مثلاً: واجب مادة السياسة العامة)" data-ph-en="Title (e.g. Public Policy assignment)" placeholder="العنوان (مثلاً: واجب مادة السياسة العامة)">
             <select id="taskType" class="form-select">
               <option value="lecture">محاضرة</option>
               <option value="assignment">تكليف</option>
@@ -122,7 +125,7 @@
             <select id="taskPriority" class="form-select">
               <option value="high">أولوية عالية</option><option value="mid">أولوية متوسطة</option><option value="low">أولوية منخفضة</option>
             </select>
-            <input type="text" id="taskNote" placeholder="ملاحظة (اختياري)">
+            <input type="text" id="taskNote" data-ph-ar="ملاحظة (اختياري)" data-ph-en="Note (optional)" placeholder="ملاحظة (اختياري)">
           </div>
           <button class="btn btn-primary" id="addTaskBtn" style="margin-top:14px">أضف المهمة</button>
         </div>
@@ -534,6 +537,7 @@
         clearInterval(timerInterval); timerInterval = null;
         if (window.medrakSound) window.medrakSound.play('achievement');
         if (window.medrakConfetti) window.medrakConfetti();
+        if (window.medrakRecordAchievement) medrakRecordAchievement('كملت جلسة مذاكرة كاملة (25 دقيقة) 🍅');
         alert('خلصت جلسة المذاكرة! خذ استراحة قصيرة 🎉');
         timerSeconds = 25*60; updateTimerDisplay();
       }
@@ -597,6 +601,7 @@
       : 'تميل لتحليل صنع القرار وأثره على المجتمع — هذا مجال تركيزك المقترح.';
     if (window.medrakSound) window.medrakSound.play('achievement');
     if (window.medrakConfetti) window.medrakConfetti();
+    if (window.medrakRecordAchievement) medrakRecordAchievement('اكتشفت مسارك المقترح: ' + (track === 'ipe' ? 'الاقتصاد السياسي العالمي' : 'السياسة العامة والتنمية'));
   }
   window.restartQuiz = function(){ quizIndex = 0; scores = {ipe:0, ppd:0}; renderQuiz(); };
   renderQuiz();

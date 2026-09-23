@@ -37,9 +37,12 @@
       <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
       <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
       <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="communication.html" data-ar="التواصل والتفاوض" data-en="Communication &amp; Negotiation">التواصل والتفاوض</a>
+      <a href="research-lab.html" data-ar="البحث والتحليل" data-en="Research &amp; Analysis">البحث والتحليل</a>
       <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
       <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
       <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="alumni.html" data-ar="خريجو مِدراك" data-en="Medrak Alumni">خريجو مِدراك</a>
       <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
     </nav>
     <div class="nav-actions">
@@ -59,20 +62,20 @@
 
   <section>
     <div class="wrap">
-      <h2 class="section-title">العالم والمؤسسات 🌍</h2>
-      <p class="section-sub">خريطة سياسية تفاعلية وأطلس للمنظمات الدولية — معلومات وصفية محايدة من مصادر رسمية فقط، بدون أي تقييم أو مقارنة سياسية.</p>
+      <h2 class="section-title" data-ar="العالم والمؤسسات 🌍" data-en="World & Institutions 🌍">العالم والمؤسسات 🌍</h2>
+      <p class="section-sub" data-ar="خريطة سياسية تفاعلية وأطلس للمنظمات الدولية — معلومات وصفية محايدة من مصادر رسمية فقط، بدون أي تقييم أو مقارنة سياسية." data-en="An interactive country atlas and international organizations directory — neutral descriptive facts from official sources only, with no political rankings or comparisons.">خريطة سياسية تفاعلية وأطلس للمنظمات الدولية — معلومات وصفية محايدة من مصادر رسمية فقط، بدون أي تقييم أو مقارنة سياسية.</p>
       <div class="tabs" data-group="world">
-        <button class="tab-btn active" data-tab="map">الخريطة السياسية التفاعلية</button>
-        <button class="tab-btn" data-tab="orgs">أطلس المنظمات الدولية</button>
+        <button class="tab-btn active" data-tab="map" data-ar="أطلس الدول التفاعلي" data-en="Interactive Country Atlas">أطلس الدول التفاعلي</button>
+        <button class="tab-btn" data-tab="orgs" data-ar="أطلس المنظمات الدولية" data-en="International Organizations Atlas">أطلس المنظمات الدولية</button>
       </div>
 
-      <!-- ===== الخريطة ===== -->
+      <!-- ===== أطلس الدول (بطاقات حسب القارة، بدل خريطة رسومية) ===== -->
       <div class="tab-panel active" data-group="world" data-panel="map">
         <div class="info-card" style="margin-bottom:16px">
-          <p style="margin:0;font-size:12.5px;color:var(--text-soft)">📌 هذي خريطة <b>تخطيطية مبسّطة</b> (مواقع الدول تقريبية حسب قارتها، مو إحداثيات جغرافية دقيقة) — رسمناها محليًا بـ SVG بدون أي خدمة خرائط خارجية. القائمة الحالية تضم 20 دولة، وسيتم توسيعها تدريجيًا.</p>
+          <p style="margin:0;font-size:12.5px;color:var(--text-soft)">📌 بدل خريطة رسومية (يصعب رسمها بدقة محليًا بدون خدمة خرائط خارجية)، اخترنا أطلس بطاقات مرتب حسب القارة — أوضح وأدق. القائمة الحالية تضم 20 دولة، وسيتم توسيعها تدريجيًا.</p>
         </div>
         <div class="plan-controls">
-          <input type="search" id="mapSearch" placeholder="🔍 ابحث باسم الدولة (عربي أو إنجليزي)...">
+          <input type="search" id="mapSearch" data-ph-ar="🔍 ابحث باسم الدولة (عربي أو إنجليزي)..." data-ph-en="🔍 Search by country name (Arabic or English)..." placeholder="🔍 ابحث باسم الدولة (عربي أو إنجليزي)...">
           <select id="continentFilter">
             <option value="all">كل القارات</option>
             <option value="asia">آسيا</option>
@@ -81,20 +84,15 @@
             <option value="americas">الأمريكتين</option>
             <option value="oceania">أوقيانوسيا</option>
           </select>
-          <button class="icon-btn" id="mapZoomIn" aria-label="تكبير" style="width:auto;padding:0 12px">➕</button>
-          <button class="icon-btn" id="mapZoomOut" aria-label="تصغير" style="width:auto;padding:0 12px">➖</button>
-          <button class="icon-btn" id="mapReset" aria-label="إعادة ضبط" style="width:auto;padding:0 12px">⟳</button>
         </div>
-        <div id="mapViewport" style="overflow:hidden;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface);touch-action:none;cursor:grab">
-          <svg id="worldMapSvg" viewBox="0 0 800 420" style="width:100%;display:block"></svg>
-        </div>
+        <div id="countryAtlas"></div>
         <div id="mapNoResults" style="display:none;text-align:center;padding:20px;color:var(--text-soft);font-size:13px">لا توجد دولة مطابقة ضمن قائمتنا الحالية.</div>
       </div>
 
       <!-- ===== أطلس المنظمات ===== -->
       <div class="tab-panel" data-group="world" data-panel="orgs">
         <div class="plan-controls">
-          <input type="search" id="orgSearch" placeholder="🔍 ابحث باسم منظمة...">
+          <input type="search" id="orgSearch" data-ph-ar="🔍 ابحث باسم منظمة..." data-ph-en="🔍 Search by organization name..." placeholder="🔍 ابحث باسم منظمة...">
           <select id="orgCategoryFilter">
             <option value="all">كل الفئات</option>
             <option value="global">منظمات عالمية</option>
@@ -190,48 +188,44 @@
     { id:'au', name_ar:'أستراليا', name_en:'Australia', continent:'oceania', x:700, y:335, official:'كومنولث أستراليا', capital:'كانبرا', lang:'الإنجليزية', currency:'الدولار الأسترالي', un:'1 نوفمبر 1945', legislature:'البرلمان الفيدرالي (مجلسان)', orgs:'الأمم المتحدة، مجموعة العشرين' },
   ];
 
-  const continentZones = [
-    { id:'americas', label:'الأمريكتان', x:40, y:40, w:220, h:340 },
-    { id:'europe', label:'أوروبا', x:300, y:60, w:150, h:130 },
-    { id:'africa', label:'أفريقيا', x:300, y:205, w:170, h:170 },
-    { id:'asia', label:'آسيا', x:460, y:60, w:300, h:290 },
-    { id:'oceania', label:'أوقيانوسيا', x:640, y:300, w:150, h:100 },
-  ];
+  const continentLabels = { asia:'آسيا', africa:'أفريقيا', europe:'أوروبا', americas:'الأمريكتان', oceania:'أوقيانوسيا' };
 
-  const svg = document.getElementById('worldMapSvg');
-  let mapZoom = 1, mapPanX = 0, mapPanY = 0;
-
-  function renderMap(filterText, filterContinent){
-    const g = [];
-    g.push('<g id="mapContentGroup" transform="translate('+mapPanX+','+mapPanY+') scale('+mapZoom+')">');
-    continentZones.forEach(z => {
-      g.push('<rect x="'+z.x+'" y="'+z.y+'" width="'+z.w+'" height="'+z.h+'" rx="24" fill="var(--purple)" opacity="0.06"/>');
-      g.push('<text x="'+(z.x+10)+'" y="'+(z.y+20)+'" font-size="11" fill="var(--text-faint)">'+z.label+'</text>');
-    });
+  function renderAtlas(filterText, filterContinent){
+    const atlas = document.getElementById('countryAtlas');
+    atlas.innerHTML = '';
     const f = (filterText||'').trim().toLowerCase();
+    const groups = {};
     let shown = 0;
     countries.forEach(c => {
       const matchesText = !f || c.name_ar.includes(f) || c.name_en.toLowerCase().includes(f);
       const matchesContinent = !filterContinent || filterContinent === 'all' || c.continent === filterContinent;
       if (!matchesText || !matchesContinent) return;
       shown++;
-      g.push('<g class="map-pin" data-id="'+c.id+'" style="cursor:pointer">' +
-        '<circle cx="'+c.x+'" cy="'+c.y+'" r="7" fill="var(--purple)" stroke="var(--surface)" stroke-width="2"/>' +
-        '<text x="'+c.x+'" y="'+(c.y-11)+'" font-size="10" text-anchor="middle" fill="var(--text)" font-weight="700">'+c.name_ar+'</text>' +
-        '</g>');
+      (groups[c.continent] = groups[c.continent] || []).push(c);
     });
-    g.push('</g>');
-    svg.innerHTML = g.join('');
+    Object.keys(groups).forEach(cont => {
+      const block = document.createElement('div');
+      block.style.marginBottom = '22px';
+      block.innerHTML = '<h3 style="font-size:15px;color:var(--purple);margin:0 0 10px">' + continentLabels[cont] + '</h3>';
+      const grid = document.createElement('div');
+      grid.className = 'grid-cards';
+      groups[cont].forEach(c => {
+        const card = document.createElement('div');
+        card.className = 'field-card';
+        card.style.cursor = 'pointer';
+        card.innerHTML = '<div class="emoji">🌐</div><h3>'+c.name_ar+'</h3><p>'+c.capital+' — '+c.name_en+'</p>';
+        card.addEventListener('click', function(){ openCountryModal(c.id); });
+        grid.appendChild(card);
+      });
+      block.appendChild(grid);
+      atlas.appendChild(block);
+    });
     document.getElementById('mapNoResults').style.display = shown === 0 ? 'block' : 'none';
-    svg.querySelectorAll('.map-pin').forEach(pin => {
-      pin.addEventListener('click', function(){ openCountryModal(this.dataset.id); });
-    });
   }
 
   function openCountryModal(id){
     const c = countries.find(x => x.id === id);
     if (!c) return;
-    const continentLabels = { asia:'آسيا', africa:'أفريقيا', europe:'أوروبا', americas:'الأمريكتان', oceania:'أوقيانوسيا' };
     document.getElementById('countryModalContinent').textContent = continentLabels[c.continent];
     document.getElementById('countryModalName').textContent = c.official;
     document.getElementById('countryModalMeta').innerHTML =
@@ -247,29 +241,13 @@
   }
 
   document.getElementById('mapSearch').addEventListener('input', function(){
-    renderMap(this.value, document.getElementById('continentFilter').value);
+    renderAtlas(this.value, document.getElementById('continentFilter').value);
   });
   document.getElementById('continentFilter').addEventListener('change', function(){
-    renderMap(document.getElementById('mapSearch').value, this.value);
+    renderAtlas(document.getElementById('mapSearch').value, this.value);
   });
-  document.getElementById('mapZoomIn').addEventListener('click', function(){ mapZoom = Math.min(2.5, mapZoom + 0.25); renderMap(document.getElementById('mapSearch').value, document.getElementById('continentFilter').value); });
-  document.getElementById('mapZoomOut').addEventListener('click', function(){ mapZoom = Math.max(0.6, mapZoom - 0.25); renderMap(document.getElementById('mapSearch').value, document.getElementById('continentFilter').value); });
-  document.getElementById('mapReset').addEventListener('click', function(){ mapZoom = 1; mapPanX = 0; mapPanY = 0; document.getElementById('mapSearch').value=''; document.getElementById('continentFilter').value='all'; renderMap('','all'); });
 
-  /* سحب بسيط للتحريك (Pan) بالماوس أو باللمس */
-  const viewport = document.getElementById('mapViewport');
-  let dragging = false, lastX = 0, lastY = 0;
-  function startDrag(x,y){ dragging = true; lastX = x; lastY = y; viewport.style.cursor='grabbing'; }
-  function moveDrag(x,y){ if (!dragging) return; mapPanX += (x-lastX)/mapZoom; mapPanY += (y-lastY)/mapZoom; lastX=x; lastY=y; renderMap(document.getElementById('mapSearch').value, document.getElementById('continentFilter').value); }
-  function endDrag(){ dragging=false; viewport.style.cursor='grab'; }
-  viewport.addEventListener('mousedown', e => startDrag(e.clientX,e.clientY));
-  window.addEventListener('mousemove', e => moveDrag(e.clientX,e.clientY));
-  window.addEventListener('mouseup', endDrag);
-  viewport.addEventListener('touchstart', e => { const t=e.touches[0]; startDrag(t.clientX,t.clientY); }, {passive:true});
-  viewport.addEventListener('touchmove', e => { const t=e.touches[0]; moveDrag(t.clientX,t.clientY); }, {passive:true});
-  viewport.addEventListener('touchend', endDrag);
-
-  renderMap('', 'all');
+  renderAtlas('', 'all');
 
   /* ============================================================
      أطلس المنظمات الدولية — حقائق أساسية موثقة من مواقعها الرسمية

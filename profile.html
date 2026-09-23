@@ -37,9 +37,12 @@
       <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
       <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
       <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="communication.html" data-ar="التواصل والتفاوض" data-en="Communication &amp; Negotiation">التواصل والتفاوض</a>
+      <a href="research-lab.html" data-ar="البحث والتحليل" data-en="Research &amp; Analysis">البحث والتحليل</a>
       <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
       <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
       <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="alumni.html" data-ar="خريجو مِدراك" data-en="Medrak Alumni">خريجو مِدراك</a>
       <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
     </nav>
     <div class="nav-actions">
@@ -59,18 +62,77 @@
 
   <section>
     <div class="wrap">
-      <h2 class="section-title">ملفي في مِدراك 🪪</h2>
-      <p class="section-sub">لوحتك الشخصية — كل شي هنا محفوظ <b>على جهازك فقط</b>، ما يوصل لأي خادم أو جهة خارجية. ما نطلب اسمك الحقيقي ولا بريدك ولا رقم جوالك.</p>
+      <h2 class="section-title" data-ar="ملفي في مِدراك 🪪" data-en="My Medrak Profile 🪪">ملفي في مِدراك 🪪</h2>
+      <p class="section-sub" data-ar="لوحتك الشخصية — كل شي هنا محفوظ على جهازك فقط، ما يوصل لأي خادم أو جهة خارجية. ما نطلب اسمك الحقيقي ولا بريدك ولا رقم جوالك." data-en="Your personal dashboard — everything here is saved on your device only, and never reaches any server. We never ask for your real name, email, or phone number.">لوحتك الشخصية — كل شي هنا محفوظ على جهازك فقط، ما يوصل لأي خادم أو جهة خارجية. ما نطلب اسمك الحقيقي ولا بريدك ولا رقم جوالك.</p>
 
       <!-- بطاقة الهوية -->
-      <div class="info-card" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:22px">
-        <div id="avatarDisplay" style="font-size:48px;width:70px;height:70px;border-radius:50%;background:var(--surface-2);display:flex;align-items:center;justify-content:center;flex:none">🎓</div>
-        <div style="flex:1;min-width:220px">
-          <label class="field-label">اسمك المستعار (اختياري، يبقى بجهازك بس)</label>
-          <input type="text" id="nicknameInput" placeholder="مثلاً: طالب مِدراك" style="max-width:320px">
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px" id="avatarPicker"></div>
+      <div class="info-card" style="margin-bottom:22px">
+        <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:16px">
+          <div id="avatarDisplay" style="font-size:48px;width:70px;height:70px;border-radius:50%;background:var(--surface-2);display:flex;align-items:center;justify-content:center;flex:none;overflow:hidden">🎓</div>
+          <div style="flex:1;min-width:220px">
+            <label class="field-label">اسمك المستعار</label>
+            <input type="text" id="nicknameInput" data-ph-ar="مثلاً: طالب مِدراك" data-ph-en="e.g. Medrak Student" placeholder="مثلاً: طالب مِدراك" maxlength="30" style="max-width:320px">
+            <p style="margin:0 0 8px;font-size:11px;color:var(--text-faint)">لا نطلب اسمك الحقيقي — اكتب أي اسم تحب تظهر فيه، ويبقى بجهازك فقط.</p>
+          </div>
         </div>
+
+        <label class="field-label">اختر صورة رمزية جاهزة</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px" id="avatarPicker"></div>
+
+        <label class="field-label">أو ارفع صورة شخصية (اختياري — تُحفظ على جهازك فقط)</label>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px">
+          <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp" style="max-width:260px">
+          <label style="display:flex;align-items:center;gap:6px;font-size:12.5px"><input type="checkbox" id="photoRoundToggle" checked style="width:auto"> عرض دائري</label>
+          <button class="btn btn-outline" id="photoDeleteBtn" style="padding:6px 12px;font-size:12px;border-color:var(--wrong-text);color:var(--wrong-text)">حذف الصورة</button>
+        </div>
+        <p id="photoMsg" style="display:none;font-size:12px;color:var(--wrong-text);margin:0 0 14px"></p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div>
+            <label class="field-label">صفتك</label>
+            <select id="roleSelect" class="form-select">
+              <option value="student_m">طالب</option>
+              <option value="student_f">طالبة</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-label">مجال التركيز</label>
+            <select id="trackSelectProfile" class="form-select">
+              <option value="">لسا ما اخترت</option>
+              <option value="ipe">الاقتصاد السياسي العالمي</option>
+              <option value="ppd">السياسة العامة والتنمية</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-label">السنة الدراسية</label>
+            <select id="yearSelect" class="form-select">
+              <option value="">غير محدد</option>
+              <option value="1">السنة الأولى</option><option value="2">السنة الثانية</option>
+              <option value="3">السنة الثالثة</option><option value="4">السنة الرابعة</option>
+              <option value="grad">خريج/ة</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-label">هدف شخصي (اختياري)</label>
+            <input type="text" id="goalInput" maxlength="100" data-ph-ar="مثلاً: أحسّن معدلي هذا الفصل" data-ph-en="e.g. Improve my GPA this term" placeholder="مثلاً: أحسّن معدلي هذا الفصل">
+          </div>
+        </div>
+
+        <label style="display:flex;align-items:center;gap:8px;font-size:13px;margin:10px 0">
+          <input type="checkbox" id="sharedDeviceToggle" style="width:auto"> هذا جهاز مشترك — لا تعرض اسمي وصورتي عند فتح الموقع
+        </label>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">
+          <button class="btn btn-primary" id="saveProfileBtn">💾 حفظ ملفي</button>
+          <button class="btn btn-outline" id="logoutBtn">🚪 تسجيل خروج محلي (يخفي ملفك بدون حذفه)</button>
+          <button class="btn btn-outline" id="deleteProfileBtn" style="border-color:var(--wrong-text);color:var(--wrong-text)">🗑️ حذف ملفي الشخصي فقط</button>
+        </div>
+        <p id="profileMsg" style="display:none;margin-top:10px;font-size:13px;color:var(--teal-deep)"></p>
       </div>
+
+      <!-- كانفاس مخفي لتصغير الصورة -->
+      <canvas id="photoCanvas" width="240" height="240" style="display:none"></canvas>
+
 
       <!-- ملخص التقدم -->
       <div class="grid-cards" id="progressCards" style="margin-bottom:26px"></div>
@@ -79,6 +141,9 @@
       <div class="info-card">
         <h3 style="margin:0 0 12px;color:var(--purple);font-size:16px">إدارة بياناتي</h3>
         <p style="margin:0 0 14px;font-size:13px;color:var(--text-soft)">تقدر تصدّر كل بياناتك كملف JSON واحد (نسخة احتياطية)، تستوردها لاحقًا على أي جهاز، أو تطبع ملخصًا، أو تمسح كل شي.</p>
+        <label style="display:flex;align-items:center;gap:8px;font-size:12.5px;margin-bottom:10px">
+          <input type="checkbox" id="exportIncludePhoto" style="width:auto"> تضمين صورتي الشخصية بالنسخة الاحتياطية (يكبّر حجم الملف)
+        </label>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
           <button class="btn btn-primary" id="exportBtn">⬇️ تصدير بياناتي</button>
           <button class="btn btn-outline" id="importBtn">⬆️ استيراد نسخة سابقة</button>
@@ -86,6 +151,7 @@
           <button class="btn btn-outline" id="printBtn">🖨️ طباعة الملخص</button>
           <button class="btn btn-outline" id="clearBtn" style="border-color:var(--wrong-text);color:var(--wrong-text)">🗑️ حذف كل بياناتي</button>
         </div>
+        <p style="margin:10px 0 0;font-size:11.5px;color:var(--text-faint)">⚠️ الحذف الكامل نهائي — ما راح تقدر تسترجع بياناتك إلا لو صدّرت نسخة احتياطية قبل كذا.</p>
         <p id="dataMsg" style="display:none;margin-top:12px;font-size:13px;color:var(--teal-deep)"></p>
       </div>
     </div>
@@ -129,20 +195,138 @@
   const avatarDisplay = document.getElementById('avatarDisplay');
   const nicknameInput = document.getElementById('nicknameInput');
 
+  function getProfile(){ return MedrakStore.get('profile', {}); }
+  function setProfile(patch){ MedrakStore.set('profile', Object.assign({}, getProfile(), patch)); }
+
+  function refreshAvatarDisplay(){
+    const p = getProfile();
+    if (p.avatarType === 'photo') {
+      MedrakStore.getPhoto().then(blob => {
+        if (blob) {
+          avatarDisplay.innerHTML = '<img src="' + URL.createObjectURL(blob) + '" style="width:100%;height:100%;object-fit:cover">';
+          avatarDisplay.style.borderRadius = p.photoRound === false ? '10px' : '50%';
+        } else { avatarDisplay.textContent = p.avatarEmoji || '🎓'; }
+      });
+    } else {
+      avatarDisplay.innerHTML = '';
+      avatarDisplay.textContent = p.avatarEmoji || '🎓';
+      avatarDisplay.style.borderRadius = '50%';
+    }
+  }
+
   avatars.forEach(emoji => {
     const btn = document.createElement('button');
     btn.className = 'icon-btn';
     btn.textContent = emoji;
     btn.addEventListener('click', function(){
-      MedrakStore.set('avatar', emoji);
-      avatarDisplay.textContent = emoji;
+      setProfile({ avatarType: 'emoji', avatarEmoji: emoji });
+      refreshAvatarDisplay();
     });
     avatarPicker.appendChild(btn);
   });
 
-  avatarDisplay.textContent = MedrakStore.get('avatar', '🎓');
-  nicknameInput.value = MedrakStore.get('nickname', '');
-  nicknameInput.addEventListener('input', function(){ MedrakStore.set('nickname', this.value); });
+  /* تحميل القيم المحفوظة */
+  const p0 = getProfile();
+  nicknameInput.value = p0.nickname || '';
+  document.getElementById('roleSelect').value = p0.role || 'student_m';
+  document.getElementById('trackSelectProfile').value = p0.track || '';
+  document.getElementById('yearSelect').value = p0.year || '';
+  document.getElementById('goalInput').value = p0.goal || '';
+  document.getElementById('sharedDeviceToggle').checked = !!p0.sharedDevice;
+  document.getElementById('photoRoundToggle').checked = p0.photoRound !== false;
+  refreshAvatarDisplay();
+
+  /* ===== رفع صورة شخصية (تصغير + ضغط محليًا، حفظ في IndexedDB) ===== */
+  document.getElementById('photoInput').addEventListener('change', function(e){
+    const file = e.target.files[0];
+    const msg = document.getElementById('photoMsg');
+    msg.style.display = 'none';
+    if (!file) return;
+    const allowed = ['image/jpeg','image/png','image/webp'];
+    if (!allowed.includes(file.type)) { msg.textContent = '⚠️ الصيغ المسموحة: JPG أو PNG أو WEBP فقط.'; msg.style.display='block'; return; }
+    if (file.size > 5*1024*1024) { msg.textContent = '⚠️ حجم الصورة كبير جدًا (الحد 5 ميجا).'; msg.style.display='block'; return; }
+
+    (window.createImageBitmap ? createImageBitmap(file) : Promise.reject())
+      .catch(() => new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = URL.createObjectURL(file);
+      }))
+      .then(imgSource => {
+        const canvas = document.getElementById('photoCanvas');
+        const ctx = canvas.getContext('2d');
+        const size = 240;
+        canvas.width = size; canvas.height = size;
+        const srcW = imgSource.width, srcH = imgSource.height;
+        const scale = Math.max(size/srcW, size/srcH);
+        const dw = srcW*scale, dh = srcH*scale;
+        ctx.clearRect(0,0,size,size);
+        ctx.drawImage(imgSource, (size-dw)/2, (size-dh)/2, dw, dh);
+        canvas.toBlob(blob => {
+          if (!blob) { msg.textContent = '⚠️ ما قدرنا نعالج الصورة، جرّب صورة ثانية.'; msg.style.display='block'; return; }
+          MedrakStore.savePhoto(blob).then(ok => {
+            if (ok) { setProfile({ avatarType: 'photo' }); refreshAvatarDisplay(); }
+            else { msg.textContent = '⚠️ ما قدرنا نحفظ الصورة على جهازك، بنستخدم الصورة الرمزية بدالها.'; msg.style.display='block'; }
+          });
+        }, 'image/jpeg', 0.8);
+      })
+      .catch(() => { msg.textContent = '⚠️ ما قدرنا نقرأ هذي الصورة، جرّب صورة ثانية.'; msg.style.display='block'; });
+  });
+  document.getElementById('photoRoundToggle').addEventListener('change', function(){
+    setProfile({ photoRound: this.checked });
+    refreshAvatarDisplay();
+  });
+  document.getElementById('photoDeleteBtn').addEventListener('click', function(){
+    MedrakStore.deletePhoto().then(() => {
+      setProfile({ avatarType: 'emoji' });
+      refreshAvatarDisplay();
+      document.getElementById('photoInput').value = '';
+    });
+  });
+
+  /* ===== حفظ الملف ===== */
+  document.getElementById('saveProfileBtn').addEventListener('click', function(){
+    const cleanName = window.medrakSanitizeName(nicknameInput.value);
+    if (!cleanName) { alert('اكتب اسمًا مستعارًا أول (بدون رموز HTML).'); return; }
+    nicknameInput.value = cleanName;
+    setProfile({
+      nickname: cleanName,
+      role: document.getElementById('roleSelect').value,
+      track: document.getElementById('trackSelectProfile').value,
+      year: document.getElementById('yearSelect').value,
+      goal: window.medrakSanitizeName(document.getElementById('goalInput').value).slice(0,100),
+      sharedDevice: document.getElementById('sharedDeviceToggle').checked,
+      hidden: false,
+    });
+    /* مزامنة صفة طالب/طالبة مع تبديل الموقع العام */
+    const isFemale = document.getElementById('roleSelect').value === 'student_f';
+    if (window.medrakSetGender) medrakSetGender(isFemale);
+
+    const msg = document.getElementById('profileMsg');
+    msg.textContent = '✅ تم حفظ ملفك بنجاح.'; msg.style.display = 'block';
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', function(){
+    setProfile({ hidden: true });
+    const msg = document.getElementById('profileMsg');
+    msg.textContent = '🚪 تم تسجيل الخروج محليًا — ملفك محفوظ وبيظهر لك بس مو للزوار الثانين على نفس الجهاز.'; msg.style.display = 'block';
+  });
+
+  document.getElementById('deleteProfileBtn').addEventListener('click', function(){
+    if (!confirm('متأكد تبي تحذف ملفك الشخصي (الاسم والصورة والتفضيلات)؟ تقدمك بالميزات ما بيتأثر. هذا الإجراء ما يترجع إلا لو صدّرت نسخة احتياطية.')) return;
+    MedrakStore.set('profile', {});
+    MedrakStore.deletePhoto();
+    nicknameInput.value = '';
+    document.getElementById('roleSelect').value = 'student_m';
+    document.getElementById('trackSelectProfile').value = '';
+    document.getElementById('yearSelect').value = '';
+    document.getElementById('goalInput').value = '';
+    document.getElementById('sharedDeviceToggle').checked = false;
+    refreshAvatarDisplay();
+    const msg = document.getElementById('profileMsg');
+    msg.textContent = '🗑️ تم حذف ملفك الشخصي.'; msg.style.display = 'block';
+  });
 
   /* ===== ملخص التقدم عبر كل ميزات مِدراك ===== */
   function renderProgress(){
@@ -157,6 +341,16 @@
       { emoji: '🏛️', title: 'ابنِ دولتك',
         body: MedrakStore.get('nationBuilder') ? ('دول بنيتها: ' + MedrakStore.get('nationBuilder').nations.join('، ')) : 'ما جربته بعد — زور مختبر القرار!' },
       { emoji: '🗺️', title: 'الخريطة السياسية وأطلس المنظمات', body: 'استكشف 20 دولة و10 منظمات دولية — بدون تتبع تقدم لأنه استكشاف حر.' },
+      { emoji: '🎤', title: 'محاكي المؤتمر الصحفي',
+        body: MedrakStore.get('pressConference') ? ('أفضل نتيجة: ' + MedrakStore.get('pressConference').bestPct + '%') : 'ما جربته بعد — زور التواصل والتفاوض!' },
+      { emoji: '🤝', title: 'غرفة المفاوضات',
+        body: MedrakStore.get('negotiationRoom') ? ('مرات الإكمال: ' + MedrakStore.get('negotiationRoom').completions) : 'ما جربتها بعد — زور التواصل والتفاوض!' },
+      { emoji: '🗣️', title: 'لغة الدبلوماسيين',
+        body: MedrakStore.get('diplomaticLanguage') ? ('أفضل نتيجة: ' + MedrakStore.get('diplomaticLanguage').bestScore + ' من ' + MedrakStore.get('diplomaticLanguage').total) : 'ما جربته بعد — زور التواصل والتفاوض!' },
+      { emoji: '📝', title: 'مختبر مناهج البحث',
+        body: MedrakStore.get('researchMethodsPlan') ? 'بنيت خطة بحث أولية ✅' : 'ما جربته بعد — زور مختبر البحث والتحليل!' },
+      { emoji: '🎙️', title: 'مقابلة وظيفية تجريبية',
+        body: MedrakStore.get('interviewAnswers', []).length > 0 ? ('أجبت على ' + MedrakStore.get('interviewAnswers', []).length + ' سؤال محفوظ') : 'ما جربتها بعد — زور مستقبلك المهني!' },
       { emoji: '🧪', title: 'مختبر التحقق من المعلومات',
         body: MedrakStore.get('mediaLiteracy') ? ('أفضل نتيجة: ' + MedrakStore.get('mediaLiteracy').bestScore + ' من ' + MedrakStore.get('mediaLiteracy').total) : 'ما جربته بعد — زور الوعي المعلوماتي!' },
       { emoji: '💼', title: 'رحلتك المهنية',
@@ -180,8 +374,8 @@
   function showMsg(text){ dataMsg.textContent = text; dataMsg.style.display = 'block'; }
 
   document.getElementById('exportBtn').addEventListener('click', function(){
-    MedrakStore.exportJSON();
-    showMsg('تم تنزيل ملف بياناتك ✅');
+    const includePhoto = document.getElementById('exportIncludePhoto').checked;
+    MedrakStore.exportJSON(includePhoto, function(){ showMsg('تم تنزيل ملف بياناتك ✅'); });
   });
 
   document.getElementById('importBtn').addEventListener('click', function(){
@@ -192,8 +386,14 @@
     if (!file) return;
     MedrakStore.importJSON(file, function(){
       showMsg('تم استيراد بياناتك بنجاح ✅');
-      avatarDisplay.textContent = MedrakStore.get('avatar', '🎓');
-      nicknameInput.value = MedrakStore.get('nickname', '');
+      const p = getProfile();
+      nicknameInput.value = p.nickname || '';
+      document.getElementById('roleSelect').value = p.role || 'student_m';
+      document.getElementById('trackSelectProfile').value = p.track || '';
+      document.getElementById('yearSelect').value = p.year || '';
+      document.getElementById('goalInput').value = p.goal || '';
+      document.getElementById('sharedDeviceToggle').checked = !!p.sharedDevice;
+      refreshAvatarDisplay();
       renderProgress();
     }, function(){
       showMsg('⚠️ الملف غير صالح، تأكد إنه نفس الملف اللي صدّرته من مِدراك.');
@@ -204,11 +404,17 @@
   document.getElementById('printBtn').addEventListener('click', function(){ window.print(); });
 
   document.getElementById('clearBtn').addEventListener('click', function(){
-    if (confirm('متأكد تبي تحذف كل بياناتك المحفوظة في مِدراك؟ هذا الإجراء ما يترجع.')) {
+    if (confirm('متأكد تبي تحذف كل بياناتك المحفوظة في مِدراك (تقدمك، ملفك، كل شي)؟ هذا الإجراء ما يترجع إلا لو صدّرت نسخة احتياطية قبل كذا.')) {
       MedrakStore.clearAll();
+      MedrakStore.deletePhoto();
       showMsg('تم حذف كل بياناتك 🗑️');
-      avatarDisplay.textContent = '🎓';
       nicknameInput.value = '';
+      document.getElementById('roleSelect').value = 'student_m';
+      document.getElementById('trackSelectProfile').value = '';
+      document.getElementById('yearSelect').value = '';
+      document.getElementById('goalInput').value = '';
+      document.getElementById('sharedDeviceToggle').checked = false;
+      refreshAvatarDisplay();
       renderProgress();
     }
   });

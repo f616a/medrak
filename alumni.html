@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خريجو مِدراك | Medrak Alumni</title>
+<meta name="description" content="مسارات خريجي وخريجات العلوم السياسية بعد التخرج، وشارك تجربتك مع طلاب مِدراك.">
+<script>
+(function(){
+  try {
+    var theme = JSON.parse(localStorage.getItem('medrak_theme')) || 'light';
+    var gender = JSON.parse(localStorage.getItem('medrak_gender')) || false;
+    var lang = JSON.parse(localStorage.getItem('medrak_lang')) || 'ar';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-gender', gender ? 'female' : 'male');
+    document.documentElement.setAttribute('lang', lang);
+  } catch(e){}
+})();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body style="margin:0">
+<div id="particle-field"></div>
+<div id="scroll-progress"></div>
+<div id="medrak-root">
+<a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>
+
+<header class="site">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand" style="text-decoration:none">مِدراك <small>Medrak</small></a>
+    <nav class="links">
+      <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+      <a href="index.html#kau" data-ar="القسم" data-en="Department">القسم</a>
+      <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+      <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+      <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
+      <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="communication.html" data-ar="التواصل والتفاوض" data-en="Communication &amp; Negotiation">التواصل والتفاوض</a>
+      <a href="research-lab.html" data-ar="البحث والتحليل" data-en="Research &amp; Analysis">البحث والتحليل</a>
+      <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
+      <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
+      <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="alumni.html" data-ar="خريجو مِدراك" data-en="Medrak Alumni">خريجو مِدراك</a>
+      <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false">☰</button>
+      <div class="gender-toggle" role="group" aria-label="اختر طلاب أو طالبات">
+        <button class="gender-btn active" id="genderMale" aria-pressed="true">طلاب</button>
+        <button class="gender-btn" id="genderFemale" aria-pressed="false">طالبات</button>
+      </div>
+      <button class="icon-btn" id="langToggle" aria-label="Switch language" style="width:auto;padding:0 10px;font-size:13px;font-weight:700">EN</button>
+      <button class="icon-btn" id="darkToggle" aria-label="تبديل الوضع الداكن">🌙</button>
+      <button class="icon-btn" id="muteToggle" aria-label="كتم/تفعيل الأصوات">🔇</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===== وين وصلوا خريجونا ===== -->
+  <section>
+    <div class="wrap">
+      <h2 class="section-title" data-ar="خريجو مِدراك 🎓" data-en="Medrak Alumni 🎓">خريجو مِدراك 🎓</h2>
+      <p class="section-sub" data-ar="مسارات خريجي وخريجات العلوم السياسية بعد التخرج — تجاربهم ونصائحهم الحقيقية، بعد مراجعة كل مشاركة يدويًا." data-en="Where Political Science graduates ended up after graduation — their real experiences and advice, after each submission is manually reviewed.">مسارات خريجي وخريجات العلوم السياسية بعد التخرج — تجاربهم ونصائحهم الحقيقية، بعد مراجعة كل مشاركة يدويًا.</p>
+
+      <div id="alumniAdviceCard" class="info-card" style="display:none;margin-bottom:20px;border-color:var(--teal)">
+        <p style="margin:0 0 6px;font-size:12px;color:var(--teal-deep);font-weight:700">💡 نصيحة عشوائية من أحد الخريجين</p>
+        <p id="alumniAdviceText" style="margin:0;font-size:14px"></p>
+      </div>
+
+      <div class="plan-controls">
+        <input type="search" id="alumniSearch" data-ph-ar="🔍 ابحث بالمسمى الوظيفي أو القطاع..." data-ph-en="🔍 Search by job title or sector..." placeholder="🔍 ابحث بالمسمى الوظيفي أو القطاع...">
+        <select id="alumniYearFilter"><option value="all">كل سنوات التخرج</option></select>
+        <select id="alumniTrackFilter">
+          <option value="all">كل مجالات التركيز</option>
+          <option value="ipe">الاقتصاد السياسي العالمي</option>
+          <option value="ppd">السياسة العامة والتنمية</option>
+          <option value="other">عام / غير محدد</option>
+        </select>
+        <select id="alumniSectorFilter"><option value="all">كل القطاعات</option></select>
+      </div>
+
+      <p style="font-size:12.5px;color:var(--text-soft);margin-bottom:16px" id="alumniCount"></p>
+
+      <div class="grid-cards" id="alumniCards"></div>
+      <div id="alumniEmpty" style="display:none;text-align:center;padding:40px 20px" class="info-card">
+        <div style="font-size:34px;margin-bottom:10px">🌱</div>
+        <h3 style="margin:0 0 8px;color:var(--purple)">ما فيه تجارب منشورة بعد</h3>
+        <p style="margin:0 0 16px;color:var(--text-soft);font-size:14px">كن أول من يشارك رحلته بعد التخرج مع طلاب مِدراك!</p>
+        <a href="#alumniForm" class="btn btn-primary" data-m="شارك تجربتك" data-f="شاركي تجربتك" data-en="Share Your Experience">شارك تجربتك</a>
+      </div>
+
+      <p style="font-size:11.5px;color:var(--text-faint);margin-top:20px">⚠️ التجارب المنشورة شخصية وتمثل أصحابها، ولا تضمن الحصول على وظيفة أو نتيجة مهنية محددة.</p>
+    </div>
+  </section>
+
+  <!-- ===== نموذج المشاركة ===== -->
+  <section id="alumniForm" class="alt">
+    <div class="wrap">
+      <h2 class="section-title" data-ar="شاركنا رحلتك بعد التخرج ✍️" data-en="Share Your Journey After Graduation ✍️">شاركنا رحلتك بعد التخرج ✍️</h2>
+      <p class="section-sub" data-ar="عبّي النموذج، وراجع معاينتك قبل الإرسال. مشاركتك ما تُنشر تلقائيًا — تراجع أول وتُنشر يدويًا بعد موافقتك." data-en="Fill in the form and review your preview before sending. Your submission is not published automatically — it is reviewed first and published manually after your approval.">عبّي النموذج، وراجع معاينتك قبل الإرسال. مشاركتك ما تُنشر تلقائيًا — تراجع أول وتُنشر يدويًا بعد موافقتك.</p>
+
+      <div class="info-card" style="margin-bottom:20px">
+        <p style="margin:0;font-size:12.5px;color:var(--text-soft)">🔒 بريدك ورقم أي تواصل خاص لا يظهر بالموقع أبدًا — يُستخدم فقط للمراجعة والتواصل معك عند الحاجة.</p>
+      </div>
+
+      <div id="alumniFormView">
+        <form id="alumniFormEl" class="native-form">
+          <div class="two-col">
+            <div>
+              <label class="field-label">الاسم اللي تبي يظهر <span style="color:var(--wrong-text)">*</span></label>
+              <input type="text" id="af_name" maxlength="60" required>
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:14px">
+                <input type="checkbox" id="af_anonymous" style="width:auto"> أفضّل عدم إظهار اسمي (يظهر "خريج/خريجة من مِدراك")
+              </label>
+
+              <label class="field-label">خريج أم خريجة؟ <span style="color:var(--wrong-text)">*</span></label>
+              <select id="af_gender" class="form-select" required>
+                <option value="">اختر...</option><option value="grad_m">خريج</option><option value="grad_f">خريجة</option>
+              </select>
+
+              <label class="field-label">سنة التخرج <span style="color:var(--wrong-text)">*</span></label>
+              <input type="number" id="af_year" min="2000" max="2026" required>
+
+              <label class="field-label">مجال التركيز <span style="color:var(--wrong-text)">*</span></label>
+              <select id="af_track" class="form-select" required>
+                <option value="">اختر...</option>
+                <option value="ipe">الاقتصاد السياسي العالمي</option>
+                <option value="ppd">السياسة العامة والتنمية</option>
+                <option value="other">عام / تخرجت قبل تحديد المسارات</option>
+              </select>
+
+              <label class="field-label">المسمى الوظيفي الحالي <span style="color:var(--wrong-text)">*</span></label>
+              <input type="text" id="af_title" maxlength="80" required>
+
+              <label class="field-label">القطاع <span style="color:var(--wrong-text)">*</span></label>
+              <select id="af_sector" class="form-select" required>
+                <option value="">اختر...</option>
+                <option value="government">حكومي</option><option value="private">خاص</option>
+                <option value="nonprofit">غير ربحي</option><option value="academic">أكاديمي</option>
+                <option value="grad">دراسات عليا</option><option value="other">أخرى</option>
+              </select>
+
+              <label class="field-label">جهة العمل (اختياري)</label>
+              <input type="text" id="af_employer" maxlength="80">
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:14px">
+                <input type="checkbox" id="af_employer_show" style="width:auto"> أوافق على إظهار اسم جهة العمل
+              </label>
+
+              <label class="field-label">المدينة أو الدولة (اختياري)</label>
+              <input type="text" id="af_location" maxlength="60">
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:14px">
+                <input type="checkbox" id="af_location_show" style="width:auto"> أوافق على إظهار المدينة/الدولة
+              </label>
+            </div>
+
+            <div>
+              <label class="field-label">مدة الحصول على أول فرصة بعد التخرج <span style="color:var(--wrong-text)">*</span></label>
+              <select id="af_duration" class="form-select" required>
+                <option value="">اختر...</option>
+                <option value="lt1">أقل من شهر</option><option value="1-3">1 إلى 3 أشهر</option>
+                <option value="3-6">3 إلى 6 أشهر</option><option value="6-12">6 إلى 12 شهر</option>
+                <option value="gt12">أكثر من سنة</option>
+              </select>
+
+              <label class="field-label">كيف حصلت على أول فرصة؟ <span style="color:var(--wrong-text)">*</span></label>
+              <textarea id="af_how" rows="2" maxlength="300" required></textarea>
+
+              <label class="field-label">المهارات اللي ساعدتك بعد التخرج</label>
+              <textarea id="af_skills" rows="2" maxlength="300"></textarea>
+
+              <label class="field-label">مقررات استفدت منها</label>
+              <textarea id="af_courses" rows="2" maxlength="300"></textarea>
+
+              <label class="field-label">دورات أو شهادات تنصح فيها</label>
+              <textarea id="af_certs" rows="2" maxlength="300"></textarea>
+
+              <label class="field-label">نصيحتك للطلاب والطالبات <span style="color:var(--wrong-text)">*</span> <span id="af_advice_count" style="color:var(--text-faint);font-weight:400"></span></label>
+              <textarea id="af_advice" rows="3" maxlength="400" required></textarea>
+
+              <label class="field-label">شيء تتمنى لو عرفته قبل التخرج <span id="af_wish_count" style="color:var(--text-faint);font-weight:400"></span></label>
+              <textarea id="af_wish" rows="3" maxlength="400"></textarea>
+
+              <label class="field-label">رابط LinkedIn (اختياري)</label>
+              <input type="url" id="af_linkedin" placeholder="https://linkedin.com/in/...">
+              <label style="display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:14px">
+                <input type="checkbox" id="af_linkedin_show" style="width:auto"> أوافق على إظهار رابط LinkedIn
+              </label>
+
+              <label class="field-label">بريدك (خاص، للمراجعة فقط) <span style="color:var(--wrong-text)">*</span></label>
+              <input type="email" id="af_email" required>
+            </div>
+          </div>
+
+          <div class="privacy-note" style="margin-bottom:16px">🔒 بياناتك تُرسل عبر خدمة Formspree لغرض المراجعة والتواصل فقط، ولا تُستخدم لأي غرض آخر ولا تظهر بالموقع مباشرة.</div>
+
+          <label style="display:flex;align-items:start;gap:8px;font-size:13px;margin-bottom:16px">
+            <input type="checkbox" id="af_consent" style="width:auto;margin-top:3px" required>
+            <span>أوافق على مراجعة مِدراك لمشاركتي، وعلى نشر الأجزاء اللي حددت إظهارها فقط بعد الموافقة. <span style="color:var(--wrong-text)">*</span></span>
+          </label>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button type="button" class="btn btn-primary" id="af_previewBtn">معاينة مشاركتي</button>
+            <button type="button" class="btn btn-outline" id="af_saveDraftBtn">💾 حفظ كمسودة</button>
+            <button type="button" class="btn btn-outline" id="af_deleteDraftBtn" style="border-color:var(--wrong-text);color:var(--wrong-text)">🗑️ حذف المسودة</button>
+          </div>
+          <p id="af_draftMsg" style="display:none;font-size:12.5px;color:var(--teal-deep);margin-top:10px"></p>
+        </form>
+      </div>
+
+      <!-- ===== المعاينة ===== -->
+      <div id="alumniPreviewView" style="display:none">
+        <div class="info-card" style="margin-bottom:16px">
+          <h3 style="margin:0 0 12px;color:var(--purple)">معاينة مشاركتك</h3>
+          <div id="alumniPreviewBody" style="font-size:13.5px;line-height:1.9"></div>
+        </div>
+        <p style="font-size:12.5px;color:var(--text-soft);margin-bottom:14px">📌 لن تظهر مشاركتك في الموقع تلقائيًا — سيتم إرسالها للمراجعة، ولن يُنشر منها إلا ما وافقت على عرضه.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-outline" id="af_backToEditBtn">⬅️ رجوع للتعديل</button>
+          <button class="btn btn-primary" id="af_submitBtn">إرسال المشاركة للمراجعة</button>
+          <button class="btn btn-outline" id="af_copyBtn">📋 نسخ المشاركة (بديل احتياطي)</button>
+        </div>
+        <p id="af_statusMsg" style="display:none;margin-top:14px;font-size:13.5px"></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-notice" data-ar="مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز." data-en="Medrak is an independent student platform and not an official King Abdulaziz University website.">مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز.</div>
+    <div class="foot-grid">
+      <div>
+        <h5>مِدراك | Medrak</h5>
+        <p style="max-width:32ch" data-ar="دليلك الطلابي لتخصص العلوم السياسية." data-en="Your student guide to the Political Science major.">دليلك الطلابي لتخصص العلوم السياسية.</p>
+      </div>
+      <div>
+        <h5 data-ar="الأقسام" data-en="Sections">الأقسام</h5>
+        <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+        <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+        <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+        <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      </div>
+      <div>
+        <h5 data-ar="روابط أخرى" data-en="Other Links">روابط أخرى</h5>
+        <a href="index.html#sources" data-ar="المصادر" data-en="Sources">المصادر</a>
+        <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      </div>
+    </div>
+    <div class="foot-bottom" data-ar="© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر." data-en="© Medrak — All rights reserved to their respective official owners where noted.">© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر.</div>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="عودة للأعلى">↑</button>
+
+<script src="assets/store.js"></script>
+<script src="assets/common.js"></script>
+<script>
+(function(){
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mljdrjly'; /* نفس رابط نموذجي التقييم والتواصل الموجودين مسبقًا */
+
+  /* ============================================================
+     عرض تجارب الخريجين المعتمدة (من data/alumni.json)
+     ============================================================ */
+  let alumniList = [];
+  fetch('data/alumni.json').then(r => r.json()).then(data => {
+    alumniList = data || [];
+    populateFilters();
+    renderAlumniCards();
+    showRandomAdvice();
+  }).catch(() => { alumniList = []; renderAlumniCards(); });
+
+  const sectorLabels = { government:'حكومي', private:'خاص', nonprofit:'غير ربحي', academic:'أكاديمي', grad:'دراسات عليا', other:'أخرى' };
+  const trackLabels = { ipe:'الاقتصاد السياسي العالمي', ppd:'السياسة العامة والتنمية', other:'عام' };
+
+  function populateFilters(){
+    const years = [...new Set(alumniList.map(a => a.year))].sort((a,b) => b-a);
+    const yearSel = document.getElementById('alumniYearFilter');
+    years.forEach(y => { const opt = document.createElement('option'); opt.value = y; opt.textContent = y; yearSel.appendChild(opt); });
+    const sectors = [...new Set(alumniList.map(a => a.sector))];
+    const sectorSel = document.getElementById('alumniSectorFilter');
+    sectors.forEach(s => { const opt = document.createElement('option'); opt.value = s; opt.textContent = sectorLabels[s] || s; sectorSel.appendChild(opt); });
+  }
+
+  function renderAlumniCards(){
+    const f = document.getElementById('alumniSearch').value.trim().toLowerCase();
+    const yearF = document.getElementById('alumniYearFilter').value;
+    const trackF = document.getElementById('alumniTrackFilter').value;
+    const sectorF = document.getElementById('alumniSectorFilter').value;
+    const filtered = alumniList.filter(a =>
+      (!f || (a.title||'').toLowerCase().includes(f) || (a.sector_label||'').toLowerCase().includes(f)) &&
+      (yearF === 'all' || String(a.year) === yearF) &&
+      (trackF === 'all' || a.track === trackF) &&
+      (sectorF === 'all' || a.sector === sectorF)
+    ).sort((a,b) => b.year - a.year);
+
+    document.getElementById('alumniCount').textContent = 'عدد التجارب المنشورة: ' + alumniList.length + ' (يظهر ' + filtered.length + ')';
+    const cardsBox = document.getElementById('alumniCards');
+    cardsBox.innerHTML = '';
+    document.getElementById('alumniEmpty').style.display = alumniList.length === 0 ? 'block' : 'none';
+    if (alumniList.length === 0) return;
+
+    filtered.forEach(a => {
+      const card = document.createElement('div');
+      card.className = 'field-card';
+      card.innerHTML =
+        '<div class="emoji">🎓</div><h3>' + (a.display_name || 'خريج/ة من مِدراك') + '</h3>' +
+        '<p><b>' + a.title + '</b> — ' + (sectorLabels[a.sector]||a.sector) + '</p>' +
+        '<p style="font-size:12px;color:var(--text-faint)">تخرج ' + a.year + ' — ' + (trackLabels[a.track]||a.track) + (a.location ? ' — ' + a.location : '') + '</p>' +
+        (a.advice ? '<p style="font-size:12.5px;margin-top:8px">💡 ' + a.advice + '</p>' : '') +
+        (a.linkedin ? '<a class="source-link" href="'+a.linkedin+'" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px">LinkedIn ↗</a>' : '');
+      cardsBox.appendChild(card);
+    });
+  }
+  function showRandomAdvice(){
+    const withAdvice = alumniList.filter(a => a.advice);
+    if (withAdvice.length === 0) return;
+    const pick = withAdvice[Math.floor(Math.random()*withAdvice.length)];
+    document.getElementById('alumniAdviceText').textContent = pick.advice;
+    document.getElementById('alumniAdviceCard').style.display = 'block';
+  }
+  ['alumniSearch','alumniYearFilter','alumniTrackFilter','alumniSectorFilter'].forEach(id => {
+    document.getElementById(id).addEventListener('input', renderAlumniCards);
+    document.getElementById(id).addEventListener('change', renderAlumniCards);
+  });
+
+  /* ============================================================
+     نموذج المشاركة — معاينة قبل الإرسال، حفظ مسودة، إرسال عبر Formspree
+     ============================================================ */
+  const DRAFT_KEY = 'alumniDraft';
+  const fields = ['af_name','af_anonymous','af_gender','af_year','af_track','af_title','af_sector','af_employer','af_employer_show','af_location','af_location_show','af_duration','af_how','af_skills','af_courses','af_certs','af_advice','af_wish','af_linkedin','af_linkedin_show','af_email','af_consent'];
+
+  function getFormData(){
+    const data = {};
+    fields.forEach(id => {
+      const el = document.getElementById(id);
+      data[id] = el.type === 'checkbox' ? el.checked : el.value;
+    });
+    return data;
+  }
+  function setFormData(data){
+    fields.forEach(id => {
+      const el = document.getElementById(id);
+      if (!(id in data)) return;
+      if (el.type === 'checkbox') el.checked = data[id]; else el.value = data[id];
+    });
+  }
+
+  ['af_advice','af_wish'].forEach(id => {
+    const el = document.getElementById(id);
+    const counter = document.getElementById(id + '_count');
+    function update(){ counter.textContent = el.value.length + ' / ' + el.maxLength; }
+    el.addEventListener('input', update); update();
+  });
+
+  document.getElementById('af_saveDraftBtn').addEventListener('click', function(){
+    MedrakStore.set(DRAFT_KEY, getFormData());
+    const msg = document.getElementById('af_draftMsg');
+    msg.textContent = '💾 تم حفظ مسودتك محليًا.'; msg.style.display = 'block';
+  });
+  document.getElementById('af_deleteDraftBtn').addEventListener('click', function(){
+    MedrakStore.set(DRAFT_KEY, null);
+    const msg = document.getElementById('af_draftMsg');
+    msg.textContent = '🗑️ تم حذف المسودة.'; msg.style.display = 'block';
+  });
+  const savedDraft = MedrakStore.get(DRAFT_KEY, null);
+  if (savedDraft) setFormData(savedDraft);
+
+  function validateEmail(email){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+  function validateUrl(url){ return !url || /^https?:\/\/.+/.test(url); }
+
+  document.getElementById('af_previewBtn').addEventListener('click', function(){
+    const d = getFormData();
+    const required = ['af_name','af_gender','af_year','af_track','af_title','af_sector','af_duration','af_how','af_advice','af_email'];
+    const missing = required.filter(id => !d[id]);
+    if (missing.length > 0) { alert('في حقول مطلوبة ناقصة — راجع الحقول المعلّمة بـ *'); return; }
+    if (!validateEmail(d.af_email)) { alert('تأكد إن بريدك الإلكتروني صحيح.'); return; }
+    if (!validateUrl(d.af_linkedin)) { alert('رابط LinkedIn لازم يبدأ بـ https://'); return; }
+    if (!d.af_consent) { alert('لازم توافق على سياسة المراجعة والنشر أول.'); return; }
+
+    const displayName = d.af_anonymous ? (d.af_gender === 'grad_f' ? 'خريجة من مِدراك' : 'خريج من مِدراك') : d.af_name;
+    const body =
+      '<p><b>الاسم المعروض:</b> ' + displayName + '</p>' +
+      '<p><b>سنة التخرج:</b> ' + d.af_year + ' — <b>مجال التركيز:</b> ' + (trackLabels[d.af_track]||d.af_track) + '</p>' +
+      '<p><b>المسمى الوظيفي:</b> ' + d.af_title + ' — <b>القطاع:</b> ' + (sectorLabels[d.af_sector]||d.af_sector) + '</p>' +
+      (d.af_employer_show && d.af_employer ? '<p><b>جهة العمل:</b> ' + d.af_employer + '</p>' : '') +
+      (d.af_location_show && d.af_location ? '<p><b>الموقع:</b> ' + d.af_location + '</p>' : '') +
+      '<p><b>مدة الحصول على أول فرصة:</b> ' + d.af_duration + '</p>' +
+      '<p><b>كيف حصل عليها:</b> ' + d.af_how + '</p>' +
+      (d.af_skills ? '<p><b>مهارات مفيدة:</b> ' + d.af_skills + '</p>' : '') +
+      (d.af_courses ? '<p><b>مقررات مفيدة:</b> ' + d.af_courses + '</p>' : '') +
+      (d.af_certs ? '<p><b>دورات موصى بها:</b> ' + d.af_certs + '</p>' : '') +
+      '<p><b>النصيحة:</b> ' + d.af_advice + '</p>' +
+      (d.af_wish ? '<p><b>تمنى لو عرف قبل التخرج:</b> ' + d.af_wish + '</p>' : '') +
+      (d.af_linkedin_show && d.af_linkedin ? '<p><b>LinkedIn:</b> ' + d.af_linkedin + '</p>' : '') +
+      '<p style="color:var(--text-faint);font-size:12px">🔒 البريد وأي معلومة خاصة ما راح تظهر بالموقع.</p>';
+    document.getElementById('alumniPreviewBody').innerHTML = body;
+    document.getElementById('alumniFormView').style.display = 'none';
+    document.getElementById('alumniPreviewView').style.display = 'block';
+    window.scrollTo({top: document.getElementById('alumniPreviewView').offsetTop - 80, behavior: 'smooth'});
+  });
+
+  document.getElementById('af_backToEditBtn').addEventListener('click', function(){
+    document.getElementById('alumniPreviewView').style.display = 'none';
+    document.getElementById('alumniFormView').style.display = 'block';
+  });
+
+  let submitting = false;
+  document.getElementById('af_submitBtn').addEventListener('click', function(){
+    if (submitting) return;
+    submitting = true;
+    const btn = this;
+    btn.disabled = true; btn.textContent = 'جاري الإرسال...';
+    const statusMsg = document.getElementById('af_statusMsg');
+    statusMsg.style.display = 'none';
+
+    const d = getFormData();
+    const payload = new FormData();
+    payload.append('form_type', 'alumni_submission');
+    payload.append('لغة_النموذج', window.medrakState.lang === 'en' ? 'English' : 'عربي');
+    payload.append('وضع_طلاب_طالبات', window.medrakState.isFemale ? 'طالبات' : 'طلاب');
+    payload.append('تاريخ_الإرسال', new Date().toISOString());
+    payload.append('الاسم_المعروض', d.af_anonymous ? '(مجهول)' : d.af_name);
+    payload.append('خريج_أم_خريجة', d.af_gender === 'grad_f' ? 'خريجة' : 'خريج');
+    payload.append('سنة_التخرج', d.af_year);
+    payload.append('مجال_التركيز', trackLabels[d.af_track]||d.af_track);
+    payload.append('المسمى_الوظيفي', d.af_title);
+    payload.append('القطاع', sectorLabels[d.af_sector]||d.af_sector);
+    if (d.af_employer) payload.append('جهة_العمل', d.af_employer + (d.af_employer_show ? ' (موافق على النشر)' : ' (لا يُنشر)'));
+    if (d.af_location) payload.append('الموقع', d.af_location + (d.af_location_show ? ' (موافق على النشر)' : ' (لا يُنشر)'));
+    payload.append('مدة_أول_فرصة', d.af_duration);
+    payload.append('كيف_حصل_عليها', d.af_how);
+    if (d.af_skills) payload.append('مهارات_مفيدة', d.af_skills);
+    if (d.af_courses) payload.append('مقررات_مفيدة', d.af_courses);
+    if (d.af_certs) payload.append('دورات_موصى_بها', d.af_certs);
+    payload.append('النصيحة', d.af_advice);
+    if (d.af_wish) payload.append('تمنى_لو_عرف', d.af_wish);
+    if (d.af_linkedin) payload.append('LinkedIn', d.af_linkedin + (d.af_linkedin_show ? ' (موافق على النشر)' : ' (لا يُنشر)'));
+    payload.append('البريد_للمراجعة', d.af_email);
+    payload.append('_subject', 'مشاركة خريج جديد في مِدراك');
+
+    fetch(FORMSPREE_ENDPOINT, { method:'POST', body: payload, headers: {'Accept':'application/json'} })
+      .then(res => {
+        submitting = false; btn.disabled = false; btn.textContent = 'إرسال المشاركة للمراجعة';
+        if (res.ok) {
+          statusMsg.style.color = 'var(--correct-text)';
+          statusMsg.textContent = 'تم استلام مشاركتك بنجاح وستتم مراجعتها قبل عرضها في الموقع، شكرًا لمشاركة تجربتك مع طلاب وطالبات مِدراك 🌟';
+          statusMsg.style.display = 'block';
+          MedrakStore.set(DRAFT_KEY, null);
+          if (window.medrakSound) window.medrakSound.play('achievement');
+          if (window.medrakConfetti) window.medrakConfetti();
+        } else {
+          statusMsg.style.color = 'var(--wrong-text)';
+          statusMsg.textContent = '⚠️ صار خطأ أثناء الإرسال. إجاباتك محفوظة، جرّب تضغط إرسال مرة ثانية.';
+          statusMsg.style.display = 'block';
+        }
+      })
+      .catch(() => {
+        submitting = false; btn.disabled = false; btn.textContent = 'إرسال المشاركة للمراجعة';
+        statusMsg.style.color = 'var(--wrong-text)';
+        statusMsg.textContent = '⚠️ تحقق من اتصالك بالإنترنت وحاول مرة ثانية. إجاباتك محفوظة ومحد يمسحها.';
+        statusMsg.style.display = 'block';
+      });
+  });
+
+  document.getElementById('af_copyBtn').addEventListener('click', function(){
+    const text = document.getElementById('alumniPreviewBody').innerText;
+    navigator.clipboard.writeText(text).then(() => alert('تم نسخ مشاركتك — تقدر تلصقها وترسلها يدويًا لو حاب.'));
+  });
+
+})();
+</script>
+</div>
+</body>
+</html>

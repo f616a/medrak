@@ -37,9 +37,12 @@
       <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
       <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
       <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="communication.html" data-ar="التواصل والتفاوض" data-en="Communication &amp; Negotiation">التواصل والتفاوض</a>
+      <a href="research-lab.html" data-ar="البحث والتحليل" data-en="Research &amp; Analysis">البحث والتحليل</a>
       <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
       <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
       <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="alumni.html" data-ar="خريجو مِدراك" data-en="Medrak Alumni">خريجو مِدراك</a>
       <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
     </nav>
     <div class="nav-actions">
@@ -59,13 +62,13 @@
 
   <section>
     <div class="wrap">
-      <h2 class="section-title">مختبر القرار 🧭</h2>
-      <p class="section-sub">ثلاث تجارب تفاعلية بسيناريوهات <b>خيالية بالكامل</b> — لا تمثل أي دولة حقيقية — تدرّبك على التفكير السياسي والتفاوض واتخاذ القرار.</p>
+      <h2 class="section-title" data-ar="مختبر القرار 🧭" data-en="Decision Lab 🧭">مختبر القرار 🧭</h2>
+      <p class="section-sub" data-ar="ثلاث تجارب تفاعلية بسيناريوهات خيالية بالكامل — لا تمثل أي دولة حقيقية — تدرّبك على التفكير السياسي والتفاوض واتخاذ القرار." data-en="Three interactive experiences with entirely fictional scenarios — representing no real country — training you in political thinking, negotiation, and decision-making.">ثلاث تجارب تفاعلية بسيناريوهات خيالية بالكامل — لا تمثل أي دولة حقيقية — تدرّبك على التفكير السياسي والتفاوض واتخاذ القرار.</p>
 
       <div class="tabs" data-group="declab">
-        <button class="tab-btn active" data-tab="crisis">غرفة الأزمات السياسية</button>
-        <button class="tab-btn" data-tab="policy">محاكي صنع السياسات</button>
-        <button class="tab-btn" data-tab="nation">ابنِ دولتك</button>
+        <button class="tab-btn active" data-tab="crisis" data-ar="غرفة الأزمات السياسية" data-en="Crisis Room">غرفة الأزمات السياسية</button>
+        <button class="tab-btn" data-tab="policy" data-ar="محاكي صنع السياسات" data-en="Policy Simulator">محاكي صنع السياسات</button>
+        <button class="tab-btn" data-tab="nation" data-ar="ابنِ دولتك" data-en="Build Your Nation">ابنِ دولتك</button>
       </div>
 
       <!-- ===== غرفة الأزمات السياسية ===== -->
@@ -82,7 +85,7 @@
             <div class="field-card"><div class="emoji">🌾</div><h3 style="font-size:14px">أدلة متاحة</h3><p>40% من مزارعي كالدوسيا يعتمدون بشكل مباشر على النهر لموسمهم الزراعي.</p></div>
             <div class="field-card"><div class="emoji">📜</div><h3 style="font-size:14px">سياق تاريخي</h3><p>اتفاق مائي أولي بين الدولتين عام 1998 (خيالي) لم يُستكمل تفعيله بالكامل.</p></div>
           </div>
-          <button class="btn btn-primary" id="crisisStartBtn">ابدأ الأزمة</button>
+          <button class="btn btn-primary" id="crisisStartBtn" data-m="ابدأ الأزمة" data-f="ابدئي الأزمة" data-en="Start the Crisis">ابدأ الأزمة</button>
         </div>
 
         <div id="crisisGame" style="display:none">
@@ -108,7 +111,7 @@
             <h3 id="crisisBadgeText" style="margin:6px 0;color:var(--purple)"></h3>
           </div>
           <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-            <button class="btn btn-outline" id="crisisRetryBtn">جرّب مسارًا مختلفًا 🔁</button>
+            <button class="btn btn-outline" id="crisisRetryBtn" data-m="جرّب مسارًا مختلفًا 🔁" data-f="جربي مسارًا مختلفًا 🔁" data-en="Try a Different Path 🔁">جرّب مسارًا مختلفًا 🔁</button>
           </div>
         </div>
       </div>
@@ -163,7 +166,7 @@
           </div>
           <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
             <button class="btn btn-outline" id="nationPrintBtn">🖨️ طباعة بطاقة الدولة</button>
-            <button class="btn btn-outline" id="nationRestartBtn">🔁 ابنِ دولة جديدة</button>
+            <button class="btn btn-outline" id="nationRestartBtn" data-m="🔁 ابنِ دولة جديدة" data-f="🔁 ابني دولة جديدة" data-en="🔁 Build a New Nation">🔁 ابنِ دولة جديدة</button>
           </div>
         </div>
       </div>
@@ -349,6 +352,7 @@
     }
     if (window.medrakSound) window.medrakSound.play('achievement');
     if (window.medrakConfetti) window.medrakConfetti();
+    if (window.medrakRecordAchievement) medrakRecordAchievement('أنهيت غرفة الأزمات السياسية بنتيجة: ' + badgeText);
   }
 
   document.getElementById('crisisStartBtn').addEventListener('click', crisisStart);
@@ -617,6 +621,7 @@
 
     if (window.medrakSound) window.medrakSound.play('achievement');
     if (window.medrakConfetti) window.medrakConfetti();
+    if (window.medrakRecordAchievement) medrakRecordAchievement('بنيت دولتك الخيالية: جمهورية ' + nation.name);
     if (window.MedrakStore) {
       const prev = MedrakStore.get('nationBuilder', { completions: 0, nations: [] });
       prev.completions = (prev.completions||0) + 1;

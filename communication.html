@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مهارات التواصل والتفاوض | مِدراك</title>
+<meta name="description" content="محاكي مؤتمر صحفي، غرفة مفاوضات، محرر بيان رسمي، ولغة الدبلوماسيين — تجارب تفاعلية خيالية بالكامل لطالب العلوم السياسية.">
+<script>
+(function(){
+  try {
+    var theme = JSON.parse(localStorage.getItem('medrak_theme')) || 'light';
+    var gender = JSON.parse(localStorage.getItem('medrak_gender')) || false;
+    var lang = JSON.parse(localStorage.getItem('medrak_lang')) || 'ar';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-gender', gender ? 'female' : 'male');
+    document.documentElement.setAttribute('lang', lang);
+  } catch(e){}
+})();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body style="margin:0">
+<div id="particle-field"></div>
+<div id="scroll-progress"></div>
+<div id="medrak-root">
+<a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>
+
+<header class="site">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand" style="text-decoration:none">مِدراك <small>Medrak</small></a>
+    <nav class="links">
+      <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+      <a href="index.html#kau" data-ar="القسم" data-en="Department">القسم</a>
+      <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+      <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+      <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="communication.html" data-ar="التواصل والتفاوض" data-en="Communication &amp; Negotiation">التواصل والتفاوض</a>
+      <a href="research-lab.html" data-ar="البحث والتحليل" data-en="Research &amp; Analysis">البحث والتحليل</a>
+      <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
+      <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
+      <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="alumni.html" data-ar="خريجو مِدراك" data-en="Medrak Alumni">خريجو مِدراك</a>
+      <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false">☰</button>
+      <div class="gender-toggle" role="group" aria-label="اختر طلاب أو طالبات">
+        <button class="gender-btn active" id="genderMale" aria-pressed="true">طلاب</button>
+        <button class="gender-btn" id="genderFemale" aria-pressed="false">طالبات</button>
+      </div>
+      <button class="icon-btn" id="langToggle" aria-label="Switch language" style="width:auto;padding:0 10px;font-size:13px;font-weight:700">EN</button>
+      <button class="icon-btn" id="darkToggle" aria-label="تبديل الوضع الداكن">🌙</button>
+      <button class="icon-btn" id="muteToggle" aria-label="كتم/تفعيل الأصوات">🔇</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section>
+    <div class="wrap">
+      <h2 class="section-title" data-ar="مهارات التواصل والتفاوض 🗣️" data-en="Communication &amp; Negotiation Skills 🗣️">مهارات التواصل والتفاوض 🗣️</h2>
+      <p class="section-sub" data-ar="أربع تجارب تفاعلية بمواقف خيالية بالكامل، تدرّبك على التواصل الرسمي والتفاوض ولغة الدبلوماسية." data-en="Four interactive experiences with entirely fictional situations, training you in official communication, negotiation, and diplomatic language.">أربع تجارب تفاعلية بمواقف خيالية بالكامل، تدرّبك على التواصل الرسمي والتفاوض ولغة الدبلوماسية.</p>
+
+      <div class="tabs" data-group="comm">
+        <button class="tab-btn active" data-tab="presser" data-ar="محاكي المؤتمر الصحفي" data-en="Press Conference Simulator">محاكي المؤتمر الصحفي</button>
+        <button class="tab-btn" data-tab="negotiate" data-ar="غرفة المفاوضات" data-en="Negotiation Room">غرفة المفاوضات</button>
+        <button class="tab-btn" data-tab="statement" data-ar="محرر البيان الرسمي" data-en="Official Statement Editor">محرر البيان الرسمي</button>
+        <button class="tab-btn" data-tab="diplomatic" data-ar="لغة الدبلوماسيين" data-en="Diplomatic Language">لغة الدبلوماسيين</button>
+      </div>
+
+      <!-- ===== 1) محاكي المؤتمر الصحفي ===== -->
+      <div class="tab-panel active" data-group="comm" data-panel="presser">
+        <div class="info-card" style="margin-bottom:16px">
+          <p style="margin:0;font-size:12.5px;color:var(--text-soft)">📌 الجهة والصحفيون والأسئلة كلها <b>خيالية بالكامل</b>، ولا تشير لأي دولة أو مؤسسة حقيقية.</p>
+        </div>
+
+        <div id="pcIntro" class="info-card">
+          <h3 style="margin:0 0 10px;color:var(--purple)">مؤتمر صحفي: إطلاق مبادرة "مدن بلا ازدحام" 🏙️</h3>
+          <p style="margin:0 0 14px;font-size:14.5px">أنت المتحدث الرسمي باسم "هيئة النقل" في مدينة خيالية. أطلقت الهيئة مبادرة لتخفيف الازدحام المروري، وصحفيون افتراضيون بانتظارك بقاعة المؤتمرات.</p>
+          <div class="grid-cards" style="margin-bottom:14px">
+            <div class="field-card"><div class="emoji">📋</div><h3 style="font-size:14px">معلومات مسموح بذكرها</h3><p>المبادرة تشمل حارات ذكية وتوسعة حافلات، تبدأ التجربة خلال 3 أشهر.</p></div>
+            <div class="field-card"><div class="emoji">🔒</div><h3 style="font-size:14px">معلومات غير مصرح بنشرها</h3><p>التفاصيل المالية الدقيقة للعقود لسا قيد المراجعة الداخلية.</p></div>
+          </div>
+          <div class="plan-controls" style="margin-bottom:14px">
+            <label class="field-label" style="margin-bottom:0">الوضع:</label>
+            <select id="pcMode" class="form-select">
+              <option value="training">تدريب (بدون نقاط)</option>
+              <option value="challenge">تحدي (بنقاط)</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" id="pcStartBtn" data-m="ابدأ المؤتمر" data-f="ابدئي المؤتمر" data-en="Start the Conference">ابدأ المؤتمر</button>
+        </div>
+
+        <div id="pcGame" style="display:none">
+          <div class="quiz-box" style="max-width:100%">
+            <p style="margin:0 0 6px;font-size:12px;color:var(--text-soft)">السؤال <span id="pcQNum">1</span> من 5 — صحفي/ة يسأل:</p>
+            <h3 id="pcQuestion" style="margin:0 0 16px;color:var(--purple);font-size:16px"></h3>
+            <div class="quiz-opts" id="pcChoices"></div>
+            <button class="btn btn-outline" id="pcHintBtn" style="margin-top:12px;font-size:12.5px">💡 تلميح</button>
+            <p id="pcHintText" style="display:none;font-size:12.5px;color:var(--text-soft);margin-top:8px"></p>
+            <div id="pcResultBox" style="display:none;margin-top:16px;padding-top:14px;border-top:1px dashed var(--line)">
+              <p id="pcResultText" style="margin:0 0 12px;font-size:13.5px;color:var(--text-soft)"></p>
+              <button class="btn btn-primary" id="pcNextBtn">السؤال التالي</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="pcFinal" style="display:none" class="info-card">
+          <h3 style="margin:0 0 14px;color:var(--purple)">ملخص أدائك بالمؤتمر 📊</h3>
+          <div id="pcScoresBox" style="display:grid;gap:10px;margin-bottom:18px"></div>
+          <div style="text-align:center">
+            <div style="font-size:34px" id="pcBadgeEmoji"></div>
+            <h3 id="pcBadgeText" style="margin:6px 0;color:var(--purple)"></h3>
+            <button class="btn btn-outline" id="pcRetryBtn" data-m="أعد المحاولة 🔁" data-f="أعيدي المحاولة 🔁" data-en="Try Again 🔁">أعد المحاولة 🔁</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== 2) غرفة المفاوضات ===== -->
+      <div class="tab-panel" data-group="comm" data-panel="negotiate">
+        <div class="info-card" style="margin-bottom:16px">
+          <p style="margin:0;font-size:12.5px;color:var(--text-soft)">📌 الطرفان خياليان بالكامل — "روفينيا" و"كالدوسيا" (نفس دولتَي غرفة الأزمات، بموقف مختلف).</p>
+        </div>
+
+        <div id="negSetup" class="info-card">
+          <h3 style="margin:0 0 14px;color:var(--purple)">مفاوضات صفقة تصدير الطاقة 🔋</h3>
+          <p style="margin:0 0 16px;font-size:14px">روفينيا تبيع فائض كهرباء لكالدوسيا. أنت مفاوض روفينيا — حدد أولوياتك قبل الجلسة.</p>
+          <label class="field-label">هدفك الرئيسي</label>
+          <select id="negGoal" class="form-select">
+            <option value="price">أعلى سعر ممكن للكيلوواط</option>
+            <option value="longterm">عقد طويل المدى مستقر</option>
+            <option value="relation">علاقة اقتصادية متينة طويلة الأمد</option>
+          </select>
+          <label class="field-label">أسلوب تفاوضك</label>
+          <select id="negStyle" class="form-select">
+            <option value="firm">حازم — أقل تنازلات ممكنة</option>
+            <option value="balanced">متوازن — تبادل تنازلات محسوب</option>
+            <option value="flexible">مرن — أولوية لإتمام الاتفاق</option>
+          </select>
+          <label class="field-label">خط أحمر لا يمكن تجاوزه</label>
+          <select id="negRedline" class="form-select">
+            <option value="minprice">السعر لا يقل عن حد أدنى معيّن</option>
+            <option value="duration">مدة العقد لا تتجاوز 5 سنوات</option>
+            <option value="exclusivity">عدم منح حصرية توريد لكالدوسيا</option>
+          </select>
+          <button class="btn btn-primary" id="negStartBtn" style="margin-top:10px" data-m="ابدأ الجلسة" data-f="ابدئي الجلسة" data-en="Start the Session">ابدأ الجلسة</button>
+        </div>
+
+        <div id="negGame" style="display:none">
+          <div class="grid-cards" style="margin-bottom:16px">
+            <div class="field-card"><h3 style="font-size:13px">⏱️ الوقت</h3><div id="negTimeBar" style="background:var(--surface-2);border-radius:999px;height:8px;overflow:hidden"><div style="width:100%;height:100%;background:var(--orange)" id="negTimeFill"></div></div></div>
+            <div class="field-card"><h3 style="font-size:13px">🤝 الثقة</h3><div style="background:var(--surface-2);border-radius:999px;height:8px;overflow:hidden"><div style="width:50%;height:100%;background:var(--teal)" id="negTrustFill"></div></div></div>
+            <div class="field-card"><h3 style="font-size:13px">📈 التقدم نحو الاتفاق</h3><div style="background:var(--surface-2);border-radius:999px;height:8px;overflow:hidden"><div style="width:0%;height:100%;background:var(--purple)" id="negProgressFill"></div></div></div>
+          </div>
+          <div class="quiz-box" style="max-width:100%">
+            <p style="margin:0 0 10px;font-size:12px;color:var(--text-soft)">الجولة <span id="negRoundNum">1</span> من 3</p>
+            <p id="negOffer" style="margin:0 0 16px;font-size:14.5px;background:var(--surface-2);padding:12px;border-radius:var(--radius-sm)"></p>
+            <div class="quiz-opts" id="negChoices"></div>
+            <button class="btn btn-outline" id="negHintBtn" style="margin-top:12px;font-size:12.5px">💡 تلميح</button>
+            <p id="negHintText" style="display:none;font-size:12.5px;color:var(--text-soft);margin-top:8px"></p>
+          </div>
+          <div class="info-card" style="margin-top:16px">
+            <h4 style="margin:0 0 8px;font-size:13px;color:var(--purple)">📜 سجل العروض</h4>
+            <div id="negLog" style="font-size:12.5px;color:var(--text-soft)"></div>
+          </div>
+        </div>
+
+        <div id="negFinal" style="display:none" class="info-card">
+          <h3 style="margin:0 0 14px;color:var(--purple)">نص الاتفاق النهائي 📄</h3>
+          <div id="negFinalBody" style="font-size:13.5px;line-height:1.9;margin-bottom:16px"></div>
+          <button class="btn btn-outline" id="negRetryBtn" data-m="جرّب مسارًا مختلفًا 🔁" data-f="جربي مسارًا مختلفًا 🔁" data-en="Try a Different Path 🔁">جرّب مسارًا مختلفًا 🔁</button>
+        </div>
+      </div>
+
+      <!-- ===== 3) محرر البيان الرسمي ===== -->
+      <div class="tab-panel" data-group="comm" data-panel="statement">
+        <div class="info-card" style="margin-bottom:16px">
+          <p style="margin:0;font-size:12.5px;color:var(--text-soft)">📌 كل الجهات والوقائع بالنماذج <b>خيالية</b>. تعرّف الفرق بين البيان الرسمي والخبر والتصريح والإحاطة والإعلان بالأسفل.</p>
+        </div>
+        <label class="field-label">نوع البيان</label>
+        <select id="stType" class="form-select">
+          <option value="event">إعلان فعالية</option>
+          <option value="clarify">توضيح معلومة</option>
+          <option value="initiative">إعلان مبادرة</option>
+          <option value="cooperation">بيان تعاون بين جهتين خياليتين</option>
+          <option value="update">تحديث مشروع خيالي</option>
+          <option value="apology">اعتذار إداري (غير سياسي)</option>
+        </select>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div>
+            <label class="field-label">العنوان</label>
+            <input type="text" id="stTitle" maxlength="80" data-ph-ar="مثلاً: هيئة النقل تعلن..." data-ph-en="e.g. Transport Authority announces..." placeholder="مثلاً: هيئة النقل تعلن...">
+            <label class="field-label">الافتتاحية</label>
+            <textarea id="stOpening" rows="2" maxlength="200" data-ph-ar="جملة افتتاحية مهنية..." data-ph-en="A professional opening sentence..." placeholder="جملة افتتاحية مهنية..."></textarea>
+            <label class="field-label">المعلومة الرئيسية</label>
+            <textarea id="stMain" rows="3" maxlength="400"></textarea>
+          </div>
+          <div>
+            <label class="field-label">مستوى التفاصيل</label>
+            <select id="stDetail" class="form-select"><option value="brief">مختصر</option><option value="detailed">تفصيلي</option></select>
+            <label class="field-label">الخاتمة</label>
+            <textarea id="stClosing" rows="2" maxlength="200" data-ph-ar="جملة ختامية..." data-ph-en="A closing sentence..." placeholder="جملة ختامية..."></textarea>
+          </div>
+        </div>
+        <button class="btn btn-primary" id="stPreviewBtn" data-m="🔍 راجع النبرة وعاين البيان" data-f="🔍 راجعي النبرة وعايني البيان" data-en="🔍 Review Tone &amp; Preview Statement">🔍 راجع النبرة وعاين البيان</button>
+
+        <div id="stFeedback" style="display:none" class="info-card" style="margin-top:16px">
+          <h4 style="margin:0 0 10px;font-size:14px;color:var(--purple)">ملاحظات المراجعة</h4>
+          <div id="stFeedbackBody" style="font-size:13px;color:var(--text-soft)"></div>
+        </div>
+
+        <div id="stPreview" style="display:none" class="info-card" style="margin-top:16px;background:var(--surface)">
+          <h4 style="margin:0 0 12px;color:var(--purple)">معاينة البيان</h4>
+          <div id="stPreviewBody" style="font-size:14px;line-height:1.9"></div>
+          <button class="btn btn-outline" id="stPrintBtn" style="margin-top:14px">🖨️ طباعة / تنزيل</button>
+        </div>
+
+        <div class="info-card" style="margin-top:20px">
+          <h4 style="margin:0 0 10px;color:var(--purple);font-size:14px">📚 الفرق بين أنواع الاتصال الرسمي</h4>
+          <div id="stDefinitions" style="font-size:13px;color:var(--text-soft);line-height:2"></div>
+        </div>
+      </div>
+
+      <!-- ===== 4) لغة الدبلوماسيين ===== -->
+      <div class="tab-panel" data-group="comm" data-panel="diplomatic">
+        <div class="quiz-box" style="max-width:100%">
+          <p style="margin:0 0 6px;font-size:12px;color:var(--text-soft)">الموقف <span id="dpNum">1</span> من <span id="dpTotal"></span></p>
+          <p id="dpSkillLabel" style="margin:0 0 8px;font-size:11px;color:var(--teal-deep);font-weight:700"></p>
+          <h3 id="dpSituation" style="margin:0 0 16px;color:var(--purple);font-size:15.5px"></h3>
+          <div class="quiz-opts" id="dpChoices"></div>
+          <div id="dpExplainBox" style="display:none;margin-top:16px;padding-top:14px;border-top:1px dashed var(--line)">
+            <p id="dpExplainText" style="margin:0 0 12px;font-size:13.5px;color:var(--text-soft)"></p>
+            <button class="btn btn-primary" id="dpNextBtn">التالي</button>
+          </div>
+        </div>
+        <div id="dpDone" style="display:none" class="info-card">
+          <h3 style="margin:0 0 10px;color:var(--purple)">أنهيت تدريب لغة الدبلوماسيين! 🎉</h3>
+          <p id="dpFinalScore" style="margin:0 0 14px"></p>
+          <button class="btn btn-outline" id="dpRestartBtn" data-m="أعد التدريب" data-f="أعيدي التدريب" data-en="Restart Training">أعد التدريب</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-notice" data-ar="مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز." data-en="Medrak is an independent student platform and not an official King Abdulaziz University website.">مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز.</div>
+    <div class="foot-grid">
+      <div>
+        <h5>مِدراك | Medrak</h5>
+        <p style="max-width:32ch" data-ar="دليلك الطلابي لتخصص العلوم السياسية." data-en="Your student guide to the Political Science major.">دليلك الطلابي لتخصص العلوم السياسية.</p>
+      </div>
+      <div>
+        <h5 data-ar="الأقسام" data-en="Sections">الأقسام</h5>
+        <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+        <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+        <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+        <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      </div>
+      <div>
+        <h5 data-ar="روابط أخرى" data-en="Other Links">روابط أخرى</h5>
+        <a href="index.html#sources" data-ar="المصادر" data-en="Sources">المصادر</a>
+        <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      </div>
+    </div>
+    <div class="foot-bottom" data-ar="© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر." data-en="© Medrak — All rights reserved to their respective official owners where noted.">© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر.</div>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="عودة للأعلى">↑</button>
+
+<script src="assets/store.js"></script>
+<script src="assets/common.js"></script>
+<script>
+(function(){
+  /* ============================================================
+     1) محاكي المؤتمر الصحفي
+     ============================================================ */
+  const pcQuestions = [
+    { q:"وش الهدف الحقيقي من هذي المبادرة؟ هل فيه أزمة نقل ما تبونا نعرفها؟",
+      opts:[
+        {t:"الهدف تطوير استباقي لتحسين جودة الحياة، مو رد فعل على أزمة.", score:3, fb:"إجابة واضحة، مهنية، وما فتحت باب تخمين."},
+        {t:"في تحديات، بس ما أقدر أفصح عن كل التفاصيل الآن.", score:1, fb:"صياغة غامضة قد تزيد الشكوك بدل ما تبددها."},
+        {t:"لا تعليق على هذا السؤال.", score:0, fb:"رفض الإجابة كليًا يبدو دفاعيًا وغير مهني بمؤتمر صحفي."},
+      ]},
+    { q:"كم تكلفة المشروع بالضبط؟ الأرقام اللي تسربت مختلفة عن بعضها.",
+      opts:[
+        {t:"الأرقام النهائية قيد المراجعة الداخلية، وبنعلن التفاصيل المالية فور اعتمادها رسميًا.", score:3, fb:"احترام حدود المعلومة المصرح بها، مع وعد واضح بالمتابعة."},
+        {t:"الرقم تقريبًا كذا وكذا، بس ما أنا متأكد بالضبط.", score:1, fb:"التخمين أمام الإعلام قد يتحول لالتزام رسمي غير مقصود."},
+        {t:"مين قال لكم هذا الرقم؟ هذا كلام غير دقيق.", score:1, fb:"مهاجمة مصدر السؤال بدل الإجابة عليه يبدو دفاعيًا."},
+      ]},
+    { q:"سمعنا إن المبادرة السابقة فشلت. ليش نثق بهذي المرة؟",
+      opts:[
+        {t:"نتعلم من كل تجربة سابقة، وهذي المبادرة صُممت بمعايير تقييم مختلفة.", score:3, fb:"إجابة تعترف بالتعلم بدون إنكار أو دفاعية زايدة، وتحوّل النقد لفرصة."},
+        {t:"المبادرة السابقة ما فشلت، الإعلام بالغ بالتغطية.", score:1, fb:"إنكار مباشر أمام الصحافة يقلل المصداقية إذا كان فيه سجل موثق."},
+        {t:"هذا سؤال ما له علاقة بالموضوع اليوم.", score:0, fb:"تجاهل سؤال مشروع يبدو كتهرّب واضح."},
+      ]},
+    { q:"هل راح تتأثر الحافلات الحالية بالتغييرات الجديدة؟",
+      opts:[
+        {t:"الخدمة الحالية تستمر بدون انقطاع، والتوسعة تُضاف تدريجيًا فوقها.", score:3, fb:"إجابة مباشرة وواضحة تريح الجمهور المستهدف بالسؤال."},
+        {t:"ما أقدر أجزم بهذا التفصيل الآن.", score:1, fb:"سؤال تشغيلي بسيط كان من المفترض الإجابة عليه بثقة أكبر."},
+        {t:"هذا سؤال تقني، اسأل الفريق الفني.", score:1, fb:"كمتحدث رسمي، تحويل سؤال بسيط بالكامل يبدو كنقص استعداد."},
+      ]},
+    { q:"ختامًا، وش أهم رسالة تبي توصلها للمواطنين اليوم؟",
+      opts:[
+        {t:"المبادرة استثمار طويل المدى براحتكم اليومية، وبنشارككم كل تحديث بشفافية.", score:3, fb:"ختام إيجابي واضح يلخّص الرسالة بثقة ومهنية."},
+        {t:"نتمنى إن الكل يتفهم إنها بداية وبس، وممكن تصير أخطاء.", score:1, fb:"ختام يحمل شكًا ذاتيًا قد يقلل ثقة الجمهور بالمبادرة."},
+        {t:"شكرًا، ما فيه وقت لمزيد من الأسئلة.", score:0, fb:"إنهاء مفاجئ بدون رسالة ختامية يفوّت فرصة تعزيز الثقة."},
+      ]},
+  ];
+  let pcState = null;
+  document.getElementById('pcStartBtn').addEventListener('click', function(){
+    pcState = { index: 0, total: 0, mode: document.getElementById('pcMode').value };
+    document.getElementById('pcIntro').style.display = 'none';
+    document.getElementById('pcGame').style.display = 'block';
+    pcRender();
+  });
+  function pcRender(){
+    const item = pcQuestions[pcState.index];
+    document.getElementById('pcQNum').textContent = pcState.index + 1;
+    document.getElementById('pcQuestion').textContent = item.q;
+    document.getElementById('pcHintText').style.display = 'none';
+    document.getElementById('pcResultBox').style.display = 'none';
+    const box = document.getElementById('pcChoices');
+    box.innerHTML = '';
+    item.opts.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt';
+      btn.textContent = opt.t;
+      btn.addEventListener('click', function(){
+        pcState.total += opt.score;
+        box.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+        this.style.borderColor = opt.score >= 3 ? 'var(--correct-text)' : (opt.score >= 1 ? 'var(--yellow)' : 'var(--wrong-text)');
+        document.getElementById('pcResultText').textContent = '📌 ' + opt.fb;
+        document.getElementById('pcResultBox').style.display = 'block';
+        if (window.medrakSound) window.medrakSound.play(opt.score >= 3 ? 'success' : 'error');
+      });
+      box.appendChild(btn);
+    });
+  }
+  document.getElementById('pcHintBtn').addEventListener('click', function(){
+    document.getElementById('pcHintText').textContent = '💡 فكّر: وش أهم مبدأ هنا — الوضوح، عدم التناقض، أو الالتزام بالمعلومة المتاحة؟';
+    document.getElementById('pcHintText').style.display = 'block';
+  });
+  document.getElementById('pcNextBtn').addEventListener('click', function(){
+    pcState.index++;
+    if (pcState.index >= pcQuestions.length) pcFinish(); else pcRender();
+  });
+  function pcFinish(){
+    document.getElementById('pcGame').style.display = 'none';
+    document.getElementById('pcFinal').style.display = 'block';
+    const max = pcQuestions.length * 3;
+    const pct = Math.round((pcState.total/max)*100);
+    document.getElementById('pcScoresBox').innerHTML =
+      '<div style="display:flex;justify-content:space-between;font-size:13px"><span>نتيجتك الإجمالية</span><b>'+pcState.total+' من '+max+' ('+pct+'%)</b></div>'+
+      '<div style="background:var(--surface-2);border-radius:999px;height:8px;overflow:hidden"><div style="width:'+pct+'%;height:100%;background:linear-gradient(90deg,var(--purple),var(--teal))"></div></div>';
+    let badge = pct >= 80 ? ['🏅','متحدث رسمي محترف'] : pct >= 55 ? ['🎖️','متحدث واعد'] : ['📘','قيد التعلم — جرّب مرة ثانية'];
+    document.getElementById('pcBadgeEmoji').textContent = badge[0];
+    document.getElementById('pcBadgeText').textContent = badge[1];
+    if (window.medrakSound) window.medrakSound.play('achievement');
+    if (window.medrakConfetti) window.medrakConfetti();
+    if (window.medrakRecordAchievement) medrakRecordAchievement('محاكي المؤتمر الصحفي: ' + pct + '%');
+    if (window.MedrakStore && pcState.mode === 'challenge') {
+      const prev = MedrakStore.get('pressConference', {attempts:0, bestPct:0});
+      prev.attempts++; prev.bestPct = Math.max(prev.bestPct, pct);
+      MedrakStore.set('pressConference', prev);
+    }
+  }
+  document.getElementById('pcRetryBtn').addEventListener('click', function(){
+    document.getElementById('pcFinal').style.display = 'none';
+    document.getElementById('pcIntro').style.display = 'block';
+  });
+
+  /* ============================================================
+     2) غرفة المفاوضات
+     ============================================================ */
+  let neg = null;
+  const negRounds = [
+    { offerText: "كالدوسيا تعرض: سعر منخفض للكيلوواط، بس بعقد 10 سنوات وحصرية توريد كاملة.",
+      opts: [
+        { t:"أرفض الحصرية، وأطلب سعر أعلى مقابل مرونة أكبر لكالدوسيا بالكميات.", trust:8, progress:15, log:"رفضتَ الحصرية واقترحتَ بديلاً مرنًا." },
+        { t:"أقبل العرض كما هو لإنهاء المفاوضات بسرعة.", trust:-5, progress:40, log:"قبلتَ العرض الأول كاملاً." },
+        { t:"أقدّم عرضًا مقابلًا: سعر أعلى، مدة أقصر، بدون حصرية.", trust:12, progress:20, log:"قدّمتَ عرضًا مقابلاً متوازنًا." },
+      ]},
+    { offerText: "كالدوسيا توافق على تقليل مدة العقد لـ 7 سنوات، لكن تصر على حصرية جزئية بمنطقة واحدة.",
+      opts: [
+        { t:"أقبل الحصرية الجزئية مقابل تثبيت السعر المرتفع لكامل المدة.", trust:10, progress:30, log:"وافقتَ على حصرية جزئية مقابل تثبيت السعر." },
+        { t:"أرفض أي حصرية جزئية وأطالب بمرونة كاملة.", trust:-6, progress:10, log:"تمسّكتَ بالرفض الكامل للحصرية." },
+        { t:"أطلب معلومات إضافية عن سبب إصرارهم على تلك المنطقة تحديدًا.", trust:14, progress:18, log:"طلبتَ توضيحًا إضافيًا قبل القرار." },
+      ]},
+    { offerText: "كالدوسيا تقترح: عقد 5 سنوات، حصرية جزئية محدودة، مع بند مراجعة سعرية كل سنتين.",
+      opts: [
+        { t:"أوافق — هذا يحقق توازنًا جيدًا بين أهدافي وخطوطي الحمراء.", trust:15, progress:40, log:"وافقتَ على الصيغة النهائية المتوازنة." },
+        { t:"أطلب تمديد بند المراجعة السعرية إلى كل سنة بدل سنتين.", trust:10, progress:25, log:"طلبتَ تعديلاً أخيرًا على آلية المراجعة." },
+        { t:"أرفض وأطلب إيقاف المفاوضات مؤقتًا للتشاور الداخلي.", trust:-3, progress:5, log:"طلبتَ وقفًا مؤقتًا للتفاوض." },
+      ]},
+  ];
+  document.getElementById('negStartBtn').addEventListener('click', function(){
+    neg = { round:0, trust:50, progress:0, goal: document.getElementById('negGoal').value, style: document.getElementById('negStyle').value, redline: document.getElementById('negRedline').value, log: [] };
+    document.getElementById('negSetup').style.display = 'none';
+    document.getElementById('negGame').style.display = 'block';
+    negRender();
+  });
+  function negUpdateBars(){
+    document.getElementById('negTrustFill').style.width = Math.max(0,Math.min(100,neg.trust)) + '%';
+    document.getElementById('negProgressFill').style.width = Math.max(0,Math.min(100,neg.progress)) + '%';
+    document.getElementById('negTimeFill').style.width = (100 - (neg.round/negRounds.length)*100) + '%';
+  }
+  function negRender(){
+    negUpdateBars();
+    document.getElementById('negRoundNum').textContent = neg.round + 1;
+    const round = negRounds[neg.round];
+    document.getElementById('negOffer').textContent = round.offerText;
+    document.getElementById('negHintText').style.display = 'none';
+    const box = document.getElementById('negChoices');
+    box.innerHTML = '';
+    round.opts.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt';
+      btn.textContent = opt.t;
+      btn.addEventListener('click', function(){
+        neg.trust += opt.trust; neg.progress += opt.progress;
+        neg.log.push(opt.log);
+        renderLog();
+        box.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+        if (window.medrakSound) window.medrakSound.play('click');
+        setTimeout(() => {
+          neg.round++;
+          if (neg.round >= negRounds.length || neg.progress >= 100) negFinish();
+          else negRender();
+        }, 700);
+      });
+      box.appendChild(btn);
+    });
+  }
+  function renderLog(){
+    document.getElementById('negLog').innerHTML = neg.log.map((l,i) => '<div style="margin-bottom:4px">'+(i+1)+'. '+l+'</div>').join('');
+  }
+  document.getElementById('negHintBtn').addEventListener('click', function(){
+    document.getElementById('negHintText').textContent = '💡 راجع خطك الأحمر ('+document.getElementById('negRedline').selectedOptions[0].textContent+') قبل ما تقرر.';
+    document.getElementById('negHintText').style.display = 'block';
+  });
+  function negFinish(){
+    document.getElementById('negGame').style.display = 'none';
+    document.getElementById('negFinal').style.display = 'block';
+    const sustainable = neg.trust >= 60;
+    document.getElementById('negFinalBody').innerHTML =
+      '<p><b>الأهداف المتحققة:</b> توصلتَ لاتفاق بنسبة تقدم ' + Math.min(100,Math.round(neg.progress)) + '%.</p>' +
+      '<p><b>مستوى الثقة النهائي:</b> ' + Math.max(0,Math.round(neg.trust)) + '%</p>' +
+      '<p><b>مدى الاستدامة المتوقعة:</b> ' + (sustainable ? 'عالية — بُني الاتفاق على ثقة متبادلة جيدة.' : 'متوسطة — الاتفاق تم لكن الثقة المتبادلة كانت محدودة.') + '</p>' +
+      '<p><b>نقاط القوة:</b> حافظتَ على أسلوب "' + document.getElementById('negStyle').selectedOptions[0].textContent + '" طوال الجلسة.</p>';
+    if (window.medrakSound) window.medrakSound.play('achievement');
+    if (window.medrakConfetti) window.medrakConfetti();
+    if (window.medrakRecordAchievement) medrakRecordAchievement('أتممت مفاوضات صفقة الطاقة بثقة ' + Math.round(neg.trust) + '%');
+    if (window.MedrakStore) MedrakStore.set('negotiationRoom', { completions: (MedrakStore.get('negotiationRoom',{completions:0}).completions||0)+1, lastTrust: Math.round(neg.trust) });
+  }
+  document.getElementById('negRetryBtn').addEventListener('click', function(){
+    document.getElementById('negFinal').style.display = 'none';
+    document.getElementById('negSetup').style.display = 'block';
+  });
+
+  /* ============================================================
+     3) محرر البيان الرسمي
+     ============================================================ */
+  const emotionalWords = ['فضيحة','كارثة','مؤامرة','خيانة','مروّع','صادم','!!','!!!'];
+  document.getElementById('stPreviewBtn').addEventListener('click', function(){
+    const title = document.getElementById('stTitle').value.trim();
+    const opening = document.getElementById('stOpening').value.trim();
+    const main = document.getElementById('stMain').value.trim();
+    const closing = document.getElementById('stClosing').value.trim();
+    if (!title || !opening || !main) { alert('عبّي العنوان والافتتاحية والمعلومة الرئيسية على الأقل.'); return; }
+
+    const fullText = title + ' ' + opening + ' ' + main + ' ' + closing;
+    const foundEmotional = emotionalWords.filter(w => fullText.includes(w));
+    const hasAllCaps = /[A-Z]{5,}/.test(fullText);
+    const feedback = [];
+    if (foundEmotional.length) feedback.push('⚠️ لقينا عبارات عاطفية/غير مهنية: ' + foundEmotional.join('، ') + ' — البيان الرسمي يفضّل لغة محايدة.');
+    if (hasAllCaps) feedback.push('⚠️ تجنب الأحرف الكبيرة المتواصلة، تعطي انطباع "صراخ" بالنص.');
+    if (fullText.length < 60) feedback.push('⚠️ البيان قصير جدًا، قد يبدو غير مكتمل.');
+    if (feedback.length === 0) feedback.push('✅ النبرة تبدو مهنية ومتزنة — ما لقينا ملاحظات واضحة.');
+    document.getElementById('stFeedbackBody').innerHTML = feedback.map(f => '<p style="margin:0 0 8px">'+f+'</p>').join('');
+    document.getElementById('stFeedback').style.display = 'block';
+
+    document.getElementById('stPreviewBody').innerHTML =
+      '<h3 style="color:var(--purple);margin:0 0 10px">' + title + '</h3>' +
+      '<p>' + opening + '</p><p>' + main + '</p>' + (closing ? '<p>' + closing + '</p>' : '') +
+      '<p style="font-size:11px;color:var(--text-faint);margin-top:14px">بيان تدريبي خيالي وليس صادرًا عن أي جهة حقيقية.</p>';
+    document.getElementById('stPreview').style.display = 'block';
+    if (window.medrakRecordAchievement) medrakRecordAchievement('كتبت بيانًا رسميًا تدريبيًا: ' + title);
+  });
+  document.getElementById('stPrintBtn').addEventListener('click', function(){ window.print(); });
+
+  const definitions = [
+    ['البيان الرسمي','نص مكتوب ومعتمد يصدر باسم جهة، يوضح موقفها من قضية محددة بشكل رسمي.'],
+    ['الخبر','سرد وقائعي لحدث وقع فعلًا، غالبًا يكتبه طرف ثالث (إعلامي) لا الجهة نفسها.'],
+    ['التصريح','كلام يقوله مسؤول شفهيًا أو كتابيًا، وقد يكون أقل رسمية من البيان المعتمد.'],
+    ['الإحاطة','عرض تفصيلي لجهة معينة (غالبًا مغلق) يشرح وضعًا أو مستجدات لجمهور محدد.'],
+    ['الإعلان','نص قصير يهدف لتبليغ معلومة أو قرار للجمهور العام، دون تفاصيل معمّقة غالبًا.'],
+  ];
+  document.getElementById('stDefinitions').innerHTML = definitions.map(d => '<p style="margin:0 0 8px"><b>'+d[0]+':</b> '+d[1]+'</p>').join('');
+
+  /* ============================================================
+     4) لغة الدبلوماسيين
+     ============================================================ */
+  const dpItems = [
+    { skill:'رفض مقترح بأدب', situation:'زميلك اقترح فكرة ما تشوفها عملية. وش أفضل رد؟',
+      opts:[
+        {t:'"فكرة غير عملية إطلاقًا."', ok:false},
+        {t:'"أقدّر الفكرة، بس عندي بعض التحفظات على قابليتها للتنفيذ — نقدر نناقشها أكثر؟"', ok:true},
+        {t:'"لا، ما راح تنجح."', ok:false},
+      ], explain:'الرفض الدبلوماسي يبدأ بتقدير الفكرة، ثم يوضح التحفظ بدقة، ويفتح باب النقاش بدل الإغلاق الكامل.' },
+    { skill:'طلب توضيح', situation:'ما فهمت مقترح الطرف الآخر بالكامل. وش أفضل صياغة؟',
+      opts:[
+        {t:'"كلامك مو واضح."', ok:false},
+        {t:'"ممكن توضح لي أكثر النقطة الخاصة بـ...؟ أبي أتأكد إني فهمتها صح."', ok:true},
+        {t:'"ما فهمت شي مما قلته."', ok:false},
+      ], explain:'طلب التوضيح الجيد يحدد بالضبط أي جزء غير واضح، ويحمّل المتحدث نفسه مسؤولية "التأكد" بدل إلقاء اللوم على الطرف الآخر.' },
+    { skill:'التعبير عن الاختلاف باحترام', situation:'تختلف مع رأي زميل بالفريق حول قرار مهم.',
+      opts:[
+        {t:'"هذا كلام غير منطقي."', ok:false},
+        {t:'"أشوف الموضوع من زاوية مختلفة شوي — خلني أشارك وجهة نظري."', ok:true},
+        {t:'"انت غلطان بهذا."', ok:false},
+      ], explain:'التعبير عن الاختلاف باحترام يركّز على "وجهة النظر" لا "الشخص"، ويستخدم صيغة تدعو للحوار لا للمواجهة.' },
+    { skill:'تقديم بديل', situation:'رفضت مقترحًا، والطرف الآخر ينتظر منك حلًا بديلًا.',
+      opts:[
+        {t:'"مو مشكلتي إيجاد حل ثاني."', ok:false},
+        {t:'"بدل هذا، وش رأيك نجرب هذا النهج؟ أشوفه يحقق نفس الهدف بمخاطر أقل."', ok:true},
+        {t:'"فكر انت بحل ثاني."', ok:false},
+      ], explain:'تقديم البديل يُظهر مسؤولية مشتركة تجاه حل المشكلة، لا مجرد رفض بدون مساهمة إيجابية.' },
+    { skill:'تلخيص نقاط الاتفاق', situation:'وصلتوا لشبه اتفاق بنهاية اجتماع طويل.',
+      opts:[
+        {t:'"خلاص متفقين، نشوف بعدين."', ok:false},
+        {t:'"إذن، اتفقنا على النقطتين الأولى والثانية، وبنراجع الثالثة الأسبوع الجاي — صح؟"', ok:true},
+        {t:'"ما أذكر بالضبط وش اتفقنا عليه."', ok:false},
+      ], explain:'التلخيص الجيد يعيد ذكر النقاط المتفق عليها بوضوح، ويحدد المتبقي بدقة، عشان يمنع أي لبس لاحق.' },
+  ];
+  let dpIndex = 0, dpScore = 0;
+  document.getElementById('dpTotal').textContent = dpItems.length;
+  function dpRender(){
+    const item = dpItems[dpIndex];
+    document.getElementById('dpNum').textContent = dpIndex + 1;
+    document.getElementById('dpSkillLabel').textContent = '🎯 ' + item.skill;
+    document.getElementById('dpSituation').textContent = item.situation;
+    document.getElementById('dpExplainBox').style.display = 'none';
+    const box = document.getElementById('dpChoices');
+    box.innerHTML = '';
+    item.opts.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt';
+      btn.textContent = opt.t;
+      btn.addEventListener('click', function(){
+        if (opt.ok) dpScore++;
+        box.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+        this.style.borderColor = opt.ok ? 'var(--correct-text)' : 'var(--wrong-text)';
+        this.style.background = opt.ok ? 'var(--correct-bg)' : 'var(--wrong-bg)';
+        document.getElementById('dpExplainText').textContent = '💡 ' + item.explain;
+        document.getElementById('dpExplainBox').style.display = 'block';
+        if (window.medrakSound) window.medrakSound.play(opt.ok ? 'success' : 'error');
+      });
+      box.appendChild(btn);
+    });
+  }
+  document.getElementById('dpNextBtn').addEventListener('click', function(){
+    dpIndex++;
+    if (dpIndex >= dpItems.length) dpFinish(); else dpRender();
+  });
+  function dpFinish(){
+    const qb = document.querySelector('[data-panel="diplomatic"] .quiz-box');
+    if (qb) qb.style.display = 'none';
+    document.getElementById('dpDone').style.display = 'block';
+    document.getElementById('dpFinalScore').textContent = 'نتيجتك: ' + dpScore + ' من ' + dpItems.length;
+    if (window.medrakSound) window.medrakSound.play('achievement');
+    if (window.medrakConfetti) window.medrakConfetti();
+    if (window.medrakRecordAchievement) medrakRecordAchievement('تدريب لغة الدبلوماسيين: ' + dpScore + ' من ' + dpItems.length);
+    if (window.MedrakStore) MedrakStore.set('diplomaticLanguage', { bestScore: dpScore, total: dpItems.length });
+  }
+  document.getElementById('dpRestartBtn').addEventListener('click', function(){
+    dpIndex = 0; dpScore = 0;
+    document.getElementById('dpDone').style.display = 'none';
+    const qb = document.querySelector('[data-panel="diplomatic"] .quiz-box');
+    if (qb) qb.style.display = 'block';
+    dpRender();
+  });
+  dpRender();
+
+})();
+</script>
+</div>
+</body>
+</html>

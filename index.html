@@ -37,9 +37,12 @@
       <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
       <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
       <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="communication.html" data-ar="التواصل والتفاوض" data-en="Communication &amp; Negotiation">التواصل والتفاوض</a>
+      <a href="research-lab.html" data-ar="البحث والتحليل" data-en="Research &amp; Analysis">البحث والتحليل</a>
       <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
       <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
       <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="alumni.html" data-ar="خريجو مِدراك" data-en="Medrak Alumni">خريجو مِدراك</a>
       <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
     </nav>
     <div class="nav-actions">
@@ -56,6 +59,23 @@
 </header>
 
 <main id="main">
+
+  <!-- ===== بطاقة الترحيب الشخصية (تظهر فقط لو عندك ملف شخصي محفوظ) ===== -->
+  <div class="wrap" style="padding-top:16px">
+    <div class="info-card" id="welcomeCard" style="display:none;margin-bottom:0;display:flex;gap:16px;align-items:center;flex-wrap:wrap;position:relative">
+      <button id="welcomeCloseBtn" aria-label="إغلاق" style="position:absolute;top:10px;inset-inline-start:12px;background:none;border:none;cursor:pointer;font-size:16px;color:var(--text-faint)">✕</button>
+      <div id="welcomeAvatar" style="width:56px;height:56px;border-radius:50%;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:28px;flex:none;overflow:hidden"></div>
+      <div style="flex:1;min-width:200px">
+        <p id="welcomeGreeting" style="margin:0 0 4px;font-weight:800;font-size:16px;color:var(--purple)"></p>
+        <p id="welcomeProgress" style="margin:0 0 4px;font-size:12.5px;color:var(--text-soft)"></p>
+        <p id="welcomeAchievement" style="margin:0;font-size:12px;color:var(--teal-deep)"></p>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a href="#" id="welcomeContinueBtn" class="btn btn-primary" style="display:none;padding:9px 16px;font-size:12.5px"></a>
+        <a href="profile.html" class="btn btn-outline" style="padding:9px 16px;font-size:12.5px">فتح ملفي</a>
+      </div>
+    </div>
+  </div>
 
 <section class="hero">
     <div class="wrap hero-grid">
@@ -208,9 +228,9 @@
           </div>
           <input type="hidden" name="التقييم_بالنجوم" id="starValue" value="0">
           <label class="field-label">إيش أكثر شيء عجبك في مِدراك؟</label>
-          <textarea rows="2" name="أكثر_شيء_عجبك" placeholder="اكتب هنا..."></textarea>
+          <textarea rows="2" name="أكثر_شيء_عجبك" data-ph-m="اكتب هنا..." data-ph-f="اكتبي هنا..." data-ph-en="Write here..." placeholder="اكتب هنا..."></textarea>
           <label class="field-label">إيش ودك نضيف؟ (اختياري)</label>
-          <textarea rows="2" name="اقتراحك" placeholder="اكتب هنا..."></textarea>
+          <textarea rows="2" name="اقتراحك" data-ph-m="اكتب هنا..." data-ph-f="اكتبي هنا..." data-ph-en="Write here..." placeholder="اكتب هنا..."></textarea>
           <button type="submit" class="btn btn-primary" data-m="أرسل تقييمك" data-f="أرسلي تقييمك" data-en="Submit Rating">أرسل تقييمك</button>
         </form>
       </div>
@@ -221,13 +241,13 @@
         <!-- مربوط بنفس فورم Formspree (mljdrjly) -->
         <form id="contactForm" class="native-form" action="https://formspree.io/f/mljdrjly" method="POST">
           <label class="field-label">الاسم</label>
-          <input type="text" name="الاسم" placeholder="اسمك">
+          <input type="text" name="الاسم" data-ph-ar="اسمك" data-ph-en="Your name" placeholder="اسمك">
           <label class="field-label">وسيلة التواصل</label>
           <select class="form-select" name="وسيلة_التواصل">
             <option>البريد الإلكتروني</option>
             <option>رقم الجوال</option>
           </select>
-          <input type="text" name="بيانات_التواصل" placeholder="اكتب بريدك أو رقم جوالك">
+          <input type="text" name="بيانات_التواصل" data-ph-m="اكتب بريدك أو رقم جوالك" data-ph-f="اكتبي بريدك أو رقم جوالك" data-ph-en="Enter your email or phone number" placeholder="اكتب بريدك أو رقم جوالك">
           <label class="field-label">سبب التواصل</label>
           <select class="form-select" name="سبب_التواصل">
             <option>عندي سؤال عن التخصص</option>
@@ -238,7 +258,7 @@
             <option>شيء ثاني</option>
           </select>
           <label class="field-label">اكتب لنا وش تحتاج</label>
-          <textarea rows="3" name="الرسالة" placeholder="رسالتك..."></textarea>
+          <textarea rows="3" name="الرسالة" data-ph-ar="رسالتك..." data-ph-en="Your message..." placeholder="رسالتك..."></textarea>
           <div class="privacy-note">🔒 بياناتك تُستخدم فقط للرد عليك، وما نشاركها مع أي جهة ثالثة.</div>
           <button type="submit" class="btn btn-primary" style="margin-top:14px" data-m="أرسلها لمِدراك" data-f="أرسليها لمِدراك" data-en="Send to Medrak">أرسلها لمِدراك</button>
         </form>
@@ -473,6 +493,69 @@
     });
   });
 
+
+  /* ============================================================
+     بطاقة الترحيب الشخصية — تعتمد على ملف "ملفي في مِدراك" إن وُجد
+     ============================================================ */
+  safe_index(function initWelcomeCard(){
+    if (!window.MedrakStore) return;
+    const profile = MedrakStore.get('profile', null);
+    if (!profile || !profile.nickname || profile.hidden) return; /* ما فيه ملف، أو المستخدم سجّل خروج محلي */
+    if (profile.hideWelcomeCard) return; /* المستخدم اختار إخفاءها بشكل دائم من الإعدادات */
+    if (sessionStorage.getItem('medrak_welcome_dismissed')) return; /* أغلقها هذي الزيارة */
+
+    const card = document.getElementById('welcomeCard');
+    const hour = new Date().getHours();
+    let greetingWord = 'أهلًا بعودتك';
+    if (hour >= 5 && hour < 12) greetingWord = 'صباح الخير';
+    else if (hour >= 12 && hour < 18) greetingWord = 'مساء الخير';
+
+    if (profile.sharedDevice) {
+      /* جهاز مشترك: ما نعرض الاسم ولا الصورة */
+      document.getElementById('welcomeAvatar').textContent = '👋';
+      document.getElementById('welcomeGreeting').textContent = greetingWord + '! هذا جهاز مشترك — افتح ملفك للمتابعة.';
+      document.getElementById('welcomeProgress').textContent = '';
+      document.getElementById('welcomeAchievement').textContent = '';
+      card.style.display = 'flex';
+      return;
+    }
+
+    const isFemale = window.medrakState.isFemale;
+    const readySuffix = isFemale ? 'جاهزة تكملي رحلتك في مِدراك' : 'جاهز تكمل رحلتك في مِدراك';
+    document.getElementById('welcomeGreeting').textContent = greetingWord + ' يا ' + profile.nickname + '، ' + readySuffix;
+
+    const pct = medrakComputeProgress();
+    document.getElementById('welcomeProgress').textContent = 'تقدمك العام: ' + pct + '%';
+
+    const achievement = MedrakStore.get('lastAchievement', null);
+    document.getElementById('welcomeAchievement').textContent = achievement ? ('🏆 ' + achievement.text) : '';
+
+    const lastVisited = MedrakStore.get('lastVisited', null);
+    const continueBtn = document.getElementById('welcomeContinueBtn');
+    if (lastVisited) {
+      continueBtn.href = lastVisited.page;
+      continueBtn.textContent = 'أكمل من ' + lastVisited.label;
+      continueBtn.style.display = 'inline-flex';
+    }
+
+    /* الصورة (IndexedDB) أو الإيموجي الرمزي */
+    const avatarEl = document.getElementById('welcomeAvatar');
+    if (profile.avatarType === 'photo') {
+      MedrakStore.getPhoto().then(blob => {
+        if (blob) { avatarEl.innerHTML = '<img src="' + URL.createObjectURL(blob) + '" style="width:100%;height:100%;object-fit:cover">'; }
+        else { avatarEl.textContent = profile.avatarEmoji || '🎓'; }
+      });
+    } else {
+      avatarEl.textContent = profile.avatarEmoji || '🎓';
+    }
+
+    card.style.display = 'flex';
+    document.getElementById('welcomeCloseBtn').addEventListener('click', function(){
+      sessionStorage.setItem('medrak_welcome_dismissed', '1');
+      card.style.display = 'none';
+    });
+  });
+  function safe_index(fn){ try { fn(); } catch(e){ console.error('welcome card error:', e); } }
 
 })();
 </script>
