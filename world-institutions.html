@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>العالم والمؤسسات | مِدراك</title>
+<meta name="description" content="خريطة سياسية تفاعلية وأطلس للمنظمات الدولية والإقليمية.">
+<script>
+(function(){
+  try {
+    var theme = JSON.parse(localStorage.getItem('medrak_theme')) || 'light';
+    var gender = JSON.parse(localStorage.getItem('medrak_gender')) || false;
+    var lang = JSON.parse(localStorage.getItem('medrak_lang')) || 'ar';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-gender', gender ? 'female' : 'male');
+    document.documentElement.setAttribute('lang', lang);
+  } catch(e){}
+})();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body style="margin:0">
+<div id="particle-field"></div>
+<div id="scroll-progress"></div>
+<div id="medrak-root">
+<a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>
+
+<header class="site">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand" style="text-decoration:none">مِدراك <small>Medrak</small></a>
+    <nav class="links">
+      <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+      <a href="index.html#kau" data-ar="القسم" data-en="Department">القسم</a>
+      <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+      <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+      <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
+      <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
+      <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
+      <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false">☰</button>
+      <div class="gender-toggle" role="group" aria-label="اختر طلاب أو طالبات">
+        <button class="gender-btn active" id="genderMale" aria-pressed="true">طلاب</button>
+        <button class="gender-btn" id="genderFemale" aria-pressed="false">طالبات</button>
+      </div>
+      <button class="icon-btn" id="langToggle" aria-label="Switch language" style="width:auto;padding:0 10px;font-size:13px;font-weight:700">EN</button>
+      <button class="icon-btn" id="darkToggle" aria-label="تبديل الوضع الداكن">🌙</button>
+      <button class="icon-btn" id="muteToggle" aria-label="كتم/تفعيل الأصوات">🔇</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section>
+    <div class="wrap">
+      <h2 class="section-title">العالم والمؤسسات 🌍</h2>
+      <p class="section-sub">خريطة سياسية تفاعلية وأطلس للمنظمات الدولية — معلومات وصفية محايدة من مصادر رسمية فقط، بدون أي تقييم أو مقارنة سياسية.</p>
+      <div class="tabs" data-group="world">
+        <button class="tab-btn active" data-tab="map">الخريطة السياسية التفاعلية</button>
+        <button class="tab-btn" data-tab="orgs">أطلس المنظمات الدولية</button>
+      </div>
+
+      <!-- ===== الخريطة ===== -->
+      <div class="tab-panel active" data-group="world" data-panel="map">
+        <div class="info-card" style="margin-bottom:16px">
+          <p style="margin:0;font-size:12.5px;color:var(--text-soft)">📌 هذي خريطة <b>تخطيطية مبسّطة</b> (مواقع الدول تقريبية حسب قارتها، مو إحداثيات جغرافية دقيقة) — رسمناها محليًا بـ SVG بدون أي خدمة خرائط خارجية. القائمة الحالية تضم 20 دولة، وسيتم توسيعها تدريجيًا.</p>
+        </div>
+        <div class="plan-controls">
+          <input type="search" id="mapSearch" placeholder="🔍 ابحث باسم الدولة (عربي أو إنجليزي)...">
+          <select id="continentFilter">
+            <option value="all">كل القارات</option>
+            <option value="asia">آسيا</option>
+            <option value="africa">أفريقيا</option>
+            <option value="europe">أوروبا</option>
+            <option value="americas">الأمريكتين</option>
+            <option value="oceania">أوقيانوسيا</option>
+          </select>
+          <button class="icon-btn" id="mapZoomIn" aria-label="تكبير" style="width:auto;padding:0 12px">➕</button>
+          <button class="icon-btn" id="mapZoomOut" aria-label="تصغير" style="width:auto;padding:0 12px">➖</button>
+          <button class="icon-btn" id="mapReset" aria-label="إعادة ضبط" style="width:auto;padding:0 12px">⟳</button>
+        </div>
+        <div id="mapViewport" style="overflow:hidden;border:1px solid var(--line);border-radius:var(--radius-md);background:var(--surface);touch-action:none;cursor:grab">
+          <svg id="worldMapSvg" viewBox="0 0 800 420" style="width:100%;display:block"></svg>
+        </div>
+        <div id="mapNoResults" style="display:none;text-align:center;padding:20px;color:var(--text-soft);font-size:13px">لا توجد دولة مطابقة ضمن قائمتنا الحالية.</div>
+      </div>
+
+      <!-- ===== أطلس المنظمات ===== -->
+      <div class="tab-panel" data-group="world" data-panel="orgs">
+        <div class="plan-controls">
+          <input type="search" id="orgSearch" placeholder="🔍 ابحث باسم منظمة...">
+          <select id="orgCategoryFilter">
+            <option value="all">كل الفئات</option>
+            <option value="global">منظمات عالمية</option>
+            <option value="regional">منظمات إقليمية</option>
+            <option value="economic">منظمات اقتصادية</option>
+          </select>
+        </div>
+        <div class="grid-cards" id="orgCards"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="modal-overlay" id="countryModal">
+  <div class="modal-box" style="max-width:420px">
+    <span class="code-tag" id="countryModalContinent"></span>
+    <h3 id="countryModalName"></h3>
+    <div class="modal-meta" id="countryModalMeta"></div>
+    <p style="font-size:11.5px;color:var(--text-faint)" id="countryModalMeta2"></p>
+    <a href="#" target="_blank" rel="noopener" class="source-link" id="countryModalSource">المصدر الرسمي ↗</a>
+    <div style="margin-top:14px"><button class="btn btn-outline modal-close" onclick="document.getElementById('countryModal').classList.remove('show')">إغلاق</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="orgModal">
+  <div class="modal-box" style="max-width:460px">
+    <h3 id="orgModalName"></h3>
+    <div id="orgModalBody" style="font-size:13.5px;line-height:1.9;margin-top:8px"></div>
+    <div style="margin-top:14px"><button class="btn btn-outline modal-close" onclick="document.getElementById('orgModal').classList.remove('show')">إغلاق</button></div>
+  </div>
+</div>
+
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-notice" data-ar="مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز." data-en="Medrak is an independent student platform and not an official King Abdulaziz University website.">مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز.</div>
+    <div class="foot-grid">
+      <div>
+        <h5>مِدراك | Medrak</h5>
+        <p style="max-width:32ch" data-ar="دليلك الطلابي لتخصص العلوم السياسية." data-en="Your student guide to the Political Science major.">دليلك الطلابي لتخصص العلوم السياسية.</p>
+      </div>
+      <div>
+        <h5 data-ar="الأقسام" data-en="Sections">الأقسام</h5>
+        <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+        <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+        <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+        <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      </div>
+      <div>
+        <h5 data-ar="روابط أخرى" data-en="Other Links">روابط أخرى</h5>
+        <a href="index.html#sources" data-ar="المصادر" data-en="Sources">المصادر</a>
+        <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      </div>
+    </div>
+    <div class="foot-bottom" data-ar="© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر." data-en="© Medrak — All rights reserved to their respective official owners where noted.">© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر.</div>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="عودة للأعلى">↑</button>
+
+<script src="assets/store.js"></script>
+<script src="assets/common.js"></script>
+<script>
+(function(){
+  const ACCESS_DATE = '23 سبتمبر 2026';
+  const UN_SOURCE = 'https://www.un.org/en/about-us/member-states';
+
+  /* ============================================================
+     بيانات الدول — معلومات وصفية محايدة فقط، مصدرها موقع الأمم المتحدة الرسمي
+     الإحداثيات (x,y) تقريبية تخطيطية على خريطة مبسّطة مرسومة محليًا، وليست إسقاطًا جغرافيًا دقيقًا
+     ============================================================ */
+  const countries = [
+    { id:'sa', name_ar:'السعودية', name_en:'Saudi Arabia', continent:'asia', x:470, y:235, official:'المملكة العربية السعودية', capital:'الرياض', lang:'العربية', currency:'الريال السعودي', un:'24 أكتوبر 1945', legislature:'مجلس الشورى', orgs:'الأمم المتحدة، جامعة الدول العربية، منظمة التعاون الإسلامي، مجلس التعاون الخليجي، مجموعة العشرين' },
+    { id:'ae', name_ar:'الإمارات', name_en:'United Arab Emirates', continent:'asia', x:495, y:245, official:'دولة الإمارات العربية المتحدة', capital:'أبوظبي', lang:'العربية', currency:'الدرهم الإماراتي', un:'9 ديسمبر 1971', legislature:'المجلس الوطني الاتحادي', orgs:'الأمم المتحدة، جامعة الدول العربية، مجلس التعاون الخليجي' },
+    { id:'kw', name_ar:'الكويت', name_en:'Kuwait', continent:'asia', x:465, y:210, official:'دولة الكويت', capital:'مدينة الكويت', lang:'العربية', currency:'الدينار الكويتي', un:'14 مايو 1963', legislature:'مجلس الأمة', orgs:'الأمم المتحدة، جامعة الدول العربية، مجلس التعاون الخليجي' },
+    { id:'jo', name_ar:'الأردن', name_en:'Jordan', continent:'asia', x:450, y:195, official:'المملكة الأردنية الهاشمية', capital:'عمّان', lang:'العربية', currency:'الدينار الأردني', un:'14 ديسمبر 1955', legislature:'مجلس الأمة (مجلسان)', orgs:'الأمم المتحدة، جامعة الدول العربية' },
+    { id:'eg', name_ar:'مصر', name_en:'Egypt', continent:'africa', x:400, y:225, official:'جمهورية مصر العربية', capital:'القاهرة', lang:'العربية', currency:'الجنيه المصري', un:'24 أكتوبر 1945', legislature:'مجلس النواب', orgs:'الأمم المتحدة، جامعة الدول العربية، الاتحاد الأفريقي' },
+    { id:'tr', name_ar:'تركيا', name_en:'Türkiye', continent:'asia', x:440, y:165, official:'جمهورية تركيا', capital:'أنقرة', lang:'التركية', currency:'الليرة التركية', un:'24 أكتوبر 1945', legislature:'الجمعية الوطنية الكبرى', orgs:'الأمم المتحدة، مجموعة العشرين' },
+    { id:'ng', name_ar:'نيجيريا', name_en:'Nigeria', continent:'africa', x:340, y:260, official:'جمهورية نيجيريا الاتحادية', capital:'أبوجا', lang:'الإنجليزية', currency:'النايرا', un:'7 أكتوبر 1960', legislature:'الجمعية الوطنية (مجلسان)', orgs:'الأمم المتحدة، الاتحاد الأفريقي' },
+    { id:'in', name_ar:'الهند', name_en:'India', continent:'asia', x:565, y:235, official:'جمهورية الهند', capital:'نيودلهي', lang:'الهندية والإنجليزية', currency:'الروبية الهندية', un:'30 أكتوبر 1945', legislature:'البرلمان (مجلسان)', orgs:'الأمم المتحدة، مجموعة العشرين' },
+    { id:'cn', name_ar:'الصين', name_en:'China', continent:'asia', x:630, y:180, official:'جمهورية الصين الشعبية', capital:'بكين', lang:'الصينية', currency:'اليوان', un:'24 أكتوبر 1945', legislature:'المؤتمر الشعبي الوطني', orgs:'الأمم المتحدة (عضو دائم بمجلس الأمن)، مجموعة العشرين' },
+    { id:'jp', name_ar:'اليابان', name_en:'Japan', continent:'asia', x:705, y:175, official:'اليابان', capital:'طوكيو', lang:'اليابانية', currency:'الين الياباني', un:'18 ديسمبر 1956', legislature:'البرلمان (الدايت الوطني)', orgs:'الأمم المتحدة، مجموعة العشرين' },
+    { id:'kr', name_ar:'كوريا الجنوبية', name_en:'South Korea', continent:'asia', x:685, y:182, official:'جمهورية كوريا', capital:'سيول', lang:'الكورية', currency:'الوون الكوري', un:'17 سبتمبر 1991', legislature:'الجمعية الوطنية', orgs:'الأمم المتحدة، مجموعة العشرين' },
+    { id:'id', name_ar:'إندونيسيا', name_en:'Indonesia', continent:'asia', x:640, y:285, official:'جمهورية إندونيسيا', capital:'جاكرتا', lang:'الإندونيسية', currency:'الروبية الإندونيسية', un:'28 سبتمبر 1950', legislature:'مجلس الشورى الشعبي', orgs:'الأمم المتحدة، مجموعة العشرين' },
+    { id:'de', name_ar:'ألمانيا', name_en:'Germany', continent:'europe', x:395, y:135, official:'جمهورية ألمانيا الاتحادية', capital:'برلين', lang:'الألمانية', currency:'اليورو', un:'18 سبتمبر 1973', legislature:'البوندستاغ والبوندسرات', orgs:'الأمم المتحدة، الاتحاد الأوروبي، مجموعة العشرين' },
+    { id:'fr', name_ar:'فرنسا', name_en:'France', continent:'europe', x:365, y:145, official:'الجمهورية الفرنسية', capital:'باريس', lang:'الفرنسية', currency:'اليورو', un:'24 أكتوبر 1945', legislature:'البرلمان (مجلسان)', orgs:'الأمم المتحدة (عضو دائم بمجلس الأمن)، الاتحاد الأوروبي، مجموعة العشرين' },
+    { id:'uk', name_ar:'المملكة المتحدة', name_en:'United Kingdom', continent:'europe', x:345, y:120, official:'المملكة المتحدة لبريطانيا العظمى وأيرلندا الشمالية', capital:'لندن', lang:'الإنجليزية', currency:'الجنيه الإسترليني', un:'24 أكتوبر 1945', legislature:'البرلمان (مجلسان)', orgs:'الأمم المتحدة (عضو دائم بمجلس الأمن)، مجموعة العشرين' },
+    { id:'us', name_ar:'الولايات المتحدة', name_en:'United States', continent:'americas', x:130, y:150, official:'الولايات المتحدة الأمريكية', capital:'واشنطن العاصمة', lang:'الإنجليزية (بلا لغة رسمية اتحادية منصوص عليها)', currency:'الدولار الأمريكي', un:'24 أكتوبر 1945', legislature:'الكونغرس (مجلسان)', orgs:'الأمم المتحدة (عضو دائم بمجلس الأمن)، مجموعة العشرين' },
+    { id:'ca', name_ar:'كندا', name_en:'Canada', continent:'americas', x:135, y:85, official:'كندا', capital:'أوتاوا', lang:'الإنجليزية والفرنسية', currency:'الدولار الكندي', un:'9 نوفمبر 1945', legislature:'البرلمان (مجلسان)', orgs:'الأمم المتحدة، مجموعة العشرين' },
+    { id:'mx', name_ar:'المكسيك', name_en:'Mexico', continent:'americas', x:110, y:195, official:'الولايات المتحدة المكسيكية', capital:'مكسيكو سيتي', lang:'الإسبانية', currency:'البيزو المكسيكي', un:'24 أكتوبر 1945', legislature:'الكونغرس الاتحادي (مجلسان)', orgs:'الأمم المتحدة، مجموعة العشرين' },
+    { id:'br', name_ar:'البرازيل', name_en:'Brazil', continent:'americas', x:205, y:295, official:'جمهورية البرازيل الاتحادية', capital:'برازيليا', lang:'البرتغالية', currency:'الريال البرازيلي', un:'24 أكتوبر 1945', legislature:'الكونغرس الوطني (مجلسان)', orgs:'الأمم المتحدة، مجموعة العشرين' },
+    { id:'au', name_ar:'أستراليا', name_en:'Australia', continent:'oceania', x:700, y:335, official:'كومنولث أستراليا', capital:'كانبرا', lang:'الإنجليزية', currency:'الدولار الأسترالي', un:'1 نوفمبر 1945', legislature:'البرلمان الفيدرالي (مجلسان)', orgs:'الأمم المتحدة، مجموعة العشرين' },
+  ];
+
+  const continentZones = [
+    { id:'americas', label:'الأمريكتان', x:40, y:40, w:220, h:340 },
+    { id:'europe', label:'أوروبا', x:300, y:60, w:150, h:130 },
+    { id:'africa', label:'أفريقيا', x:300, y:205, w:170, h:170 },
+    { id:'asia', label:'آسيا', x:460, y:60, w:300, h:290 },
+    { id:'oceania', label:'أوقيانوسيا', x:640, y:300, w:150, h:100 },
+  ];
+
+  const svg = document.getElementById('worldMapSvg');
+  let mapZoom = 1, mapPanX = 0, mapPanY = 0;
+
+  function renderMap(filterText, filterContinent){
+    const g = [];
+    g.push('<g id="mapContentGroup" transform="translate('+mapPanX+','+mapPanY+') scale('+mapZoom+')">');
+    continentZones.forEach(z => {
+      g.push('<rect x="'+z.x+'" y="'+z.y+'" width="'+z.w+'" height="'+z.h+'" rx="24" fill="var(--purple)" opacity="0.06"/>');
+      g.push('<text x="'+(z.x+10)+'" y="'+(z.y+20)+'" font-size="11" fill="var(--text-faint)">'+z.label+'</text>');
+    });
+    const f = (filterText||'').trim().toLowerCase();
+    let shown = 0;
+    countries.forEach(c => {
+      const matchesText = !f || c.name_ar.includes(f) || c.name_en.toLowerCase().includes(f);
+      const matchesContinent = !filterContinent || filterContinent === 'all' || c.continent === filterContinent;
+      if (!matchesText || !matchesContinent) return;
+      shown++;
+      g.push('<g class="map-pin" data-id="'+c.id+'" style="cursor:pointer">' +
+        '<circle cx="'+c.x+'" cy="'+c.y+'" r="7" fill="var(--purple)" stroke="var(--surface)" stroke-width="2"/>' +
+        '<text x="'+c.x+'" y="'+(c.y-11)+'" font-size="10" text-anchor="middle" fill="var(--text)" font-weight="700">'+c.name_ar+'</text>' +
+        '</g>');
+    });
+    g.push('</g>');
+    svg.innerHTML = g.join('');
+    document.getElementById('mapNoResults').style.display = shown === 0 ? 'block' : 'none';
+    svg.querySelectorAll('.map-pin').forEach(pin => {
+      pin.addEventListener('click', function(){ openCountryModal(this.dataset.id); });
+    });
+  }
+
+  function openCountryModal(id){
+    const c = countries.find(x => x.id === id);
+    if (!c) return;
+    const continentLabels = { asia:'آسيا', africa:'أفريقيا', europe:'أوروبا', americas:'الأمريكتان', oceania:'أوقيانوسيا' };
+    document.getElementById('countryModalContinent').textContent = continentLabels[c.continent];
+    document.getElementById('countryModalName').textContent = c.official;
+    document.getElementById('countryModalMeta').innerHTML =
+      '<div><b>العاصمة:</b> ' + c.capital + '</div>' +
+      '<div><b>اللغة الرسمية:</b> ' + c.lang + '</div>' +
+      '<div><b>العملة:</b> ' + c.currency + '</div>' +
+      '<div><b>تاريخ الانضمام للأمم المتحدة:</b> ' + c.un + '</div>' +
+      '<div><b>السلطة التشريعية:</b> ' + c.legislature + '</div>' +
+      '<div><b>عضوية منظمات دولية (جزئي):</b> ' + c.orgs + '</div>';
+    document.getElementById('countryModalMeta2').textContent = '📅 آخر تحديث للمعلومة: ' + ACCESS_DATE + ' — المعلومات الرسمية قابلة للتغير بمرور الوقت.';
+    document.getElementById('countryModalSource').href = UN_SOURCE;
+    document.getElementById('countryModal').classList.add('show');
+  }
+
+  document.getElementById('mapSearch').addEventListener('input', function(){
+    renderMap(this.value, document.getElementById('continentFilter').value);
+  });
+  document.getElementById('continentFilter').addEventListener('change', function(){
+    renderMap(document.getElementById('mapSearch').value, this.value);
+  });
+  document.getElementById('mapZoomIn').addEventListener('click', function(){ mapZoom = Math.min(2.5, mapZoom + 0.25); renderMap(document.getElementById('mapSearch').value, document.getElementById('continentFilter').value); });
+  document.getElementById('mapZoomOut').addEventListener('click', function(){ mapZoom = Math.max(0.6, mapZoom - 0.25); renderMap(document.getElementById('mapSearch').value, document.getElementById('continentFilter').value); });
+  document.getElementById('mapReset').addEventListener('click', function(){ mapZoom = 1; mapPanX = 0; mapPanY = 0; document.getElementById('mapSearch').value=''; document.getElementById('continentFilter').value='all'; renderMap('','all'); });
+
+  /* سحب بسيط للتحريك (Pan) بالماوس أو باللمس */
+  const viewport = document.getElementById('mapViewport');
+  let dragging = false, lastX = 0, lastY = 0;
+  function startDrag(x,y){ dragging = true; lastX = x; lastY = y; viewport.style.cursor='grabbing'; }
+  function moveDrag(x,y){ if (!dragging) return; mapPanX += (x-lastX)/mapZoom; mapPanY += (y-lastY)/mapZoom; lastX=x; lastY=y; renderMap(document.getElementById('mapSearch').value, document.getElementById('continentFilter').value); }
+  function endDrag(){ dragging=false; viewport.style.cursor='grab'; }
+  viewport.addEventListener('mousedown', e => startDrag(e.clientX,e.clientY));
+  window.addEventListener('mousemove', e => moveDrag(e.clientX,e.clientY));
+  window.addEventListener('mouseup', endDrag);
+  viewport.addEventListener('touchstart', e => { const t=e.touches[0]; startDrag(t.clientX,t.clientY); }, {passive:true});
+  viewport.addEventListener('touchmove', e => { const t=e.touches[0]; moveDrag(t.clientX,t.clientY); }, {passive:true});
+  viewport.addEventListener('touchend', endDrag);
+
+  renderMap('', 'all');
+
+  /* ============================================================
+     أطلس المنظمات الدولية — حقائق أساسية موثقة من مواقعها الرسمية
+     ============================================================ */
+  const orgs = [
+    { name:'الأمم المتحدة', abbr:'UN', category:'global', founded:'1945', hq:'نيويورك', goal:'الحفاظ على السلم والأمن الدوليين وتعزيز التعاون بين الدول', site:'https://www.un.org' },
+    { name:'اليونسكو', abbr:'UNESCO', category:'global', founded:'1945', hq:'باريس', goal:'تعزيز التعاون الدولي في التربية والعلم والثقافة', site:'https://www.unesco.org' },
+    { name:'صندوق النقد الدولي', abbr:'IMF', category:'economic', founded:'1945', hq:'واشنطن', goal:'تعزيز الاستقرار المالي والنقدي الدولي', site:'https://www.imf.org' },
+    { name:'البنك الدولي', abbr:'World Bank', category:'economic', founded:'1944', hq:'واشنطن', goal:'تمويل مشاريع التنمية حول العالم', site:'https://www.worldbank.org' },
+    { name:'منظمة التجارة العالمية', abbr:'WTO', category:'economic', founded:'1995', hq:'جنيف', goal:'وضع القواعد المنظمة للتجارة الدولية بين الدول', site:'https://www.wto.org' },
+    { name:'جامعة الدول العربية', abbr:'الجامعة العربية', category:'regional', founded:'1945', hq:'القاهرة', goal:'تعزيز التعاون والتنسيق بين الدول العربية', site:'https://www.lasportal.org' },
+    { name:'منظمة التعاون الإسلامي', abbr:'OIC', category:'regional', founded:'1969', hq:'جدة', goal:'تعزيز التضامن والتعاون بين الدول الإسلامية الأعضاء', site:'https://www.oic-oci.org' },
+    { name:'مجلس التعاون لدول الخليج العربية', abbr:'GCC', category:'regional', founded:'1981', hq:'الرياض', goal:'تحقيق التكامل والتنسيق بين دول الخليج العربية', site:'https://www.gcc-sg.org' },
+    { name:'الاتحاد الأوروبي', abbr:'EU', category:'regional', founded:'1993', hq:'بروكسل', goal:'التكامل الاقتصادي والسياسي بين الدول الأعضاء', site:'https://european-union.europa.eu' },
+    { name:'الاتحاد الأفريقي', abbr:'AU', category:'regional', founded:'2002', hq:'أديس أبابا', goal:'تعزيز الوحدة والتنمية والتعاون بين الدول الأفريقية', site:'https://au.int' },
+  ];
+  const orgCardsBox = document.getElementById('orgCards');
+  function renderOrgs(filterText, filterCat){
+    orgCardsBox.innerHTML = '';
+    const f = (filterText||'').trim().toLowerCase();
+    orgs.filter(o => (!f || o.name.toLowerCase().includes(f) || o.abbr.toLowerCase().includes(f)) && (!filterCat || filterCat==='all' || o.category===filterCat))
+      .forEach(o => {
+        const card = document.createElement('div');
+        card.className = 'field-card';
+        card.style.cursor = 'pointer';
+        card.innerHTML = '<div class="emoji">🏢</div><h3>'+o.name+' ('+o.abbr+')</h3><p>تأسست '+o.founded+' — المقر: '+o.hq+'</p>';
+        card.addEventListener('click', function(){
+          document.getElementById('orgModalName').textContent = o.name + ' (' + o.abbr + ')';
+          document.getElementById('orgModalBody').innerHTML =
+            '<p><b>سنة التأسيس:</b> ' + o.founded + '</p>' +
+            '<p><b>المقر الرئيسي:</b> ' + o.hq + '</p>' +
+            '<p><b>الهدف العام:</b> ' + o.goal + '</p>' +
+            '<p><a class="source-link" href="'+o.site+'" target="_blank" rel="noopener">الموقع الرسمي ↗</a></p>' +
+            '<p style="font-size:11px;color:var(--text-faint)">آخر تحديث: ' + ACCESS_DATE + '</p>';
+          document.getElementById('orgModal').classList.add('show');
+        });
+        orgCardsBox.appendChild(card);
+      });
+  }
+  document.getElementById('orgSearch').addEventListener('input', function(){ renderOrgs(this.value, document.getElementById('orgCategoryFilter').value); });
+  document.getElementById('orgCategoryFilter').addEventListener('change', function(){ renderOrgs(document.getElementById('orgSearch').value, this.value); });
+  renderOrgs('', 'all');
+})();
+</script>
+
+</div>
+</body>
+</html>

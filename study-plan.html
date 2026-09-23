@@ -17,8 +17,6 @@
   } catch(e){}
 })();
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body style="margin:0">
@@ -38,6 +36,11 @@
       <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
       <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
       <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
+      <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
+      <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
     </nav>
     <div class="nav-actions">
       <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false">☰</button>
@@ -59,6 +62,12 @@
       <h2 class="section-title" data-ar="الخطة الدراسية 🗺️" data-en="Study Plan 🗺️">الخطة الدراسية 🗺️</h2>
       <p class="section-sub" data-ar="اختر مجال تركيزك عشان تشوف كيف تتوزع موادك بالسنتين الثالثة والرابعة. اضغط على أي مادة عشان تشوف تفاصيلها." data-en="Choose your concentration to see how your courses are distributed in years 3 and 4. Click any course to see its details.">اختر مجال تركيزك عشان تشوف كيف تتوزع موادك بالسنتين الثالثة والرابعة. اضغط على أي مادة عشان تشوف تفاصيلها.</p>
 
+      <div class="tabs" data-group="acad">
+        <button class="tab-btn active" data-tab="map">خريطة المقررات</button>
+        <button class="tab-btn" data-tab="planner">مخطط الفصل الدراسي</button>
+      </div>
+
+      <div class="tab-panel active" data-group="acad" data-panel="map">
       <div class="plan-summary">
         <div class="summary-chip"><b>35</b>متطلبات جامعة وكلية</div>
         <div class="summary-chip"><b>58</b>مقررات القسم الإجبارية</div>
@@ -72,10 +81,75 @@
           <option value="ipe">الاقتصاد السياسي العالمي (IPE)</option>
           <option value="ppd">السياسة العامة والتنمية (PP&D)</option>
         </select>
+        <input type="search" id="courseSearch" placeholder="🔍 ابحث عن مقرر بالاسم أو الرمز...">
+      </div>
+
+      <div class="info-card" id="progressSummary" style="margin-bottom:20px">
+        <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px">
+          <span>وحداتك المكتملة (حسب تعليمك الشخصي)</span>
+          <b id="progressText">0 من 128</b>
+        </div>
+        <div style="background:var(--surface-2);border-radius:999px;height:10px;overflow:hidden">
+          <div id="progressBarFill" style="width:0%;height:100%;background:linear-gradient(90deg,var(--purple),var(--teal));transition:width .3s"></div>
+        </div>
+        <p style="margin:8px 0 0;font-size:11.5px;color:var(--text-soft)">✔️ حدد المقررات اللي أنهيتها فعليًا، ونحسب لك تلقائيًا وش تبقى. البيانات محفوظة على جهازك فقط.</p>
       </div>
 
       <div id="planContainer"></div>
-      <p style="font-size:12.5px;color:var(--ink-soft);margin-top:6px">* السنتان الأولى والثانية (بعد السنة التحضيرية) متطابقتان في المسارين. الفروقات تبدأ من الفصل السابع. <a class="source-link" href="https://political-science.kau.edu.sa/Files/120006/Files/157420_Study-plan-ps-ar.pdf" target="_blank" rel="noopener">المصدر الرسمي ↗</a></p>
+      <p style="font-size:12.5px;color:var(--text-soft);margin-top:6px">* السنتان الأولى والثانية (بعد السنة التحضيرية) متطابقتان في المسارين. الفروقات تبدأ من الفصل السابع. <a class="source-link" href="https://political-science.kau.edu.sa/Files/120006/Files/157420_Study-plan-ps-ar.pdf" target="_blank" rel="noopener">المصدر الرسمي ↗</a></p>
+      </div>
+
+      <!-- ===== مخطط الفصل الدراسي ===== -->
+      <div class="tab-panel" data-group="acad" data-panel="planner">
+        <div class="info-card" style="margin-bottom:20px">
+          <p style="margin:0;font-size:12.5px;color:var(--text-soft)">📌 كل بياناتك هنا محفوظة على جهازك فقط، وتقدر تصدّرها من صفحة "ملفي في مِدراك".</p>
+        </div>
+
+        <div class="info-card" style="margin-bottom:20px">
+          <h3 style="margin:0 0 12px;color:var(--purple);font-size:15px">➕ أضف مهمة (محاضرة / تكليف / اختبار)</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <input type="text" id="taskTitle" placeholder="العنوان (مثلاً: واجب مادة السياسة العامة)">
+            <select id="taskType" class="form-select">
+              <option value="lecture">محاضرة</option>
+              <option value="assignment">تكليف</option>
+              <option value="exam">اختبار</option>
+            </select>
+            <select id="taskDay" class="form-select">
+              <option value="SU">الأحد</option><option value="MO">الاثنين</option><option value="TU">الثلاثاء</option>
+              <option value="WE">الأربعاء</option><option value="TH">الخميس</option><option value="FR">الجمعة</option><option value="SA">السبت</option>
+            </select>
+            <input type="time" id="taskTime">
+            <select id="taskPriority" class="form-select">
+              <option value="high">أولوية عالية</option><option value="mid">أولوية متوسطة</option><option value="low">أولوية منخفضة</option>
+            </select>
+            <input type="text" id="taskNote" placeholder="ملاحظة (اختياري)">
+          </div>
+          <button class="btn btn-primary" id="addTaskBtn" style="margin-top:14px">أضف المهمة</button>
+        </div>
+
+        <div class="info-card" style="margin-bottom:20px">
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px">
+            <span>نسبة إنجاز مهام الفصل</span><b id="taskProgressText">0%</b>
+          </div>
+          <div style="background:var(--surface-2);border-radius:999px;height:10px;overflow:hidden">
+            <div id="taskProgressFill" style="width:0%;height:100%;background:linear-gradient(90deg,var(--purple),var(--teal));transition:width .3s"></div>
+          </div>
+        </div>
+
+        <div id="weekView" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:20px"></div>
+
+        <div class="info-card" style="margin-bottom:20px;text-align:center">
+          <h3 style="margin:0 0 10px;color:var(--purple);font-size:15px">⏱️ مؤقت مذاكرة (25 دقيقة)</h3>
+          <div id="timerDisplay" style="font-size:36px;font-weight:800;color:var(--purple);margin-bottom:12px">25:00</div>
+          <div style="display:flex;gap:10px;justify-content:center">
+            <button class="btn btn-primary" id="timerStart">ابدأ</button>
+            <button class="btn btn-outline" id="timerPause">إيقاف مؤقت</button>
+            <button class="btn btn-outline" id="timerReset">إعادة ضبط</button>
+          </div>
+        </div>
+
+        <button class="btn btn-outline" id="printScheduleBtn">🖨️ طباعة الجدول</button>
+      </div>
     </div>
   </section>
 <div class="modal-overlay" id="courseModal">
@@ -86,7 +160,7 @@
         <div id="modalHours"></div>
         <div id="modalPrereq"></div>
       </div>
-      <p style="font-size:13px;color:var(--ink-soft)">لا يتوفر وصف أكاديمي رسمي منشور لهذا المقرر ضمن مصادرنا الحالية — راجع دليل القسم للتفاصيل الكاملة.</p>
+      <p style="font-size:13px;color:var(--text-soft)">لا يتوفر وصف أكاديمي رسمي منشور لهذا المقرر ضمن مصادرنا الحالية — راجع دليل القسم للتفاصيل الكاملة.</p>
       <button class="btn btn-outline modal-close" onclick="document.getElementById('courseModal').classList.remove('show')">إغلاق</button>
     </div>
   </div>
@@ -99,8 +173,8 @@
         <div class="quiz-result" id="quizResult">
           <div class="badge" id="quizBadge">🎯</div>
           <h3 id="quizResultTitle"></h3>
-          <p id="quizResultDesc" style="color:var(--ink-soft)"></p>
-          <p style="font-size:12.5px;color:var(--ink-soft);border-top:1px dashed var(--line);padding-top:10px;margin-top:10px">لسا متردد؟ ولا يهمك — ممكن تسأل مرشدك الأكاديمي يساعدك تتأكد من قرارك 🙌</p>
+          <p id="quizResultDesc" style="color:var(--text-soft)"></p>
+          <p style="font-size:12.5px;color:var(--text-soft);border-top:1px dashed var(--line);padding-top:10px;margin-top:10px">لسا متردد؟ ولا يهمك — ممكن تسأل مرشدك الأكاديمي يساعدك تتأكد من قرارك 🙌</p>
           <button class="btn btn-outline" onclick="restartQuiz()" data-m="أعد الاختبار" data-f="أعيدي الاختبار" data-en="Retake Quiz">أعد الاختبار</button>
         </div>
       </div>
@@ -178,6 +252,7 @@
 
 </div>
 
+<script src="assets/store.js"></script>
 <script src="assets/common.js"></script>
 <script>
 (function(){
@@ -279,7 +354,9 @@
         let rows = '<h4>'+sem.name+'</h4>';
         sem.courses.forEach(c => {
           rows += '<div class="course-row" data-code="'+c.code+'" data-name="'+c.name+'" data-hours="'+c.hours+'" data-prereq="'+c.prereq+'">'+
-                  '<span>'+c.name+'</span><span class="code">'+c.code+' · '+c.hours+' س</span></div>';
+                  '<span style="display:flex;align-items:center;gap:8px;flex:1">'+
+                  '<input type="checkbox" class="course-check" data-code="'+c.code+'" data-hours="'+c.hours+'" style="width:auto;margin:0" onclick="event.stopPropagation()">'+
+                  '<span>'+c.name+'</span></span><span class="code">'+c.code+' · '+c.hours+' س</span></div>';
         });
         rows += '<div class="sem-total">إجمالي الفصل: '+sem.total+' وحدة</div>';
         card.innerHTML = rows;
@@ -288,7 +365,7 @@
       yearDiv.appendChild(grid);
       container.appendChild(yearDiv);
     });
-    // wire modal
+    // wire modal (يفتح فقط عند الضغط على اسم المقرر، مو على مربع الاختيار)
     container.querySelectorAll('.course-row').forEach(row => {
       row.addEventListener('click', function(){
         document.getElementById('modalCode').textContent = this.dataset.code;
@@ -298,8 +375,172 @@
         document.getElementById('courseModal').classList.add('show');
       });
     });
+    // تحميل حالة الإنجاز المحفوظة + ربط التغيير
+    const progress = MedrakStore.get('studyPlanProgress', { completedCodes: [] });
+    container.querySelectorAll('.course-check').forEach(chk => {
+      chk.checked = progress.completedCodes.includes(chk.dataset.code);
+      chk.addEventListener('change', function(){
+        const code = this.dataset.code;
+        const idx = progress.completedCodes.indexOf(code);
+        if (this.checked && idx === -1) progress.completedCodes.push(code);
+        else if (!this.checked && idx !== -1) progress.completedCodes.splice(idx, 1);
+        MedrakStore.set('studyPlanProgress', progress);
+        updateProgressSummary();
+        checkPrereqWarning(this);
+      });
+    });
+    updateProgressSummary();
+    if (document.getElementById('courseSearch').value) filterCourses(document.getElementById('courseSearch').value);
   }
+
+  function updateProgressSummary(){
+    const progress = MedrakStore.get('studyPlanProgress', { completedCodes: [] });
+    let totalHours = 0;
+    document.querySelectorAll('.course-check').forEach(chk => {
+      if (progress.completedCodes.includes(chk.dataset.code)) totalHours += parseInt(chk.dataset.hours) || 0;
+    });
+    document.getElementById('progressText').textContent = totalHours + ' من 128';
+    document.getElementById('progressBarFill').style.width = Math.min(100, (totalHours/128)*100) + '%';
+  }
+
+  function checkPrereqWarning(checkbox){
+    if (!checkbox.checked) return;
+    const row = checkbox.closest('.course-row');
+    const prereq = row.dataset.prereq;
+    if (!prereq || prereq === '—') return;
+    const progress = MedrakStore.get('studyPlanProgress', { completedCodes: [] });
+    const prereqCodes = prereq.split(/[،,]/).map(s => s.trim()).filter(s => s && s !== '—');
+    const missing = prereqCodes.filter(code => !progress.completedCodes.some(c => code.includes(c) || c.includes(code)));
+    let warnEl = row.querySelector('.prereq-warn');
+    if (missing.length > 0) {
+      if (!warnEl) {
+        warnEl = document.createElement('div');
+        warnEl.className = 'prereq-warn';
+        warnEl.style.cssText = 'font-size:11px;color:var(--wrong-text);width:100%;margin-top:4px';
+        row.appendChild(warnEl);
+      }
+      warnEl.textContent = '⚠️ لاحظ إنك حددت هذي كمكتملة، لكن متطلبها السابق ('+missing.join('، ')+') مو محدد كمكتمل عندك.';
+    } else if (warnEl) { warnEl.remove(); }
+  }
+
+  function filterCourses(term){
+    const t = term.trim().toLowerCase();
+    document.querySelectorAll('.year-block').forEach(yearBlock => {
+      let yearHasMatch = false;
+      yearBlock.querySelectorAll('.sem-card').forEach(sem => {
+        let semHasMatch = false;
+        sem.querySelectorAll('.course-row').forEach(row => {
+          const match = !t || row.dataset.name.toLowerCase().includes(t) || row.dataset.code.toLowerCase().includes(t);
+          row.style.display = match ? '' : 'none';
+          if (match) semHasMatch = true;
+        });
+        sem.style.display = semHasMatch ? '' : 'none';
+        if (semHasMatch) yearHasMatch = true;
+      });
+      yearBlock.style.display = yearHasMatch ? '' : 'none';
+    });
+  }
+  document.getElementById('courseSearch').addEventListener('input', function(){ filterCourses(this.value); });
+
   document.getElementById('trackSelect').addEventListener('change', function(){ renderPlan(this.value); });
+
+  /* ============================================================
+     مخطط الفصل الدراسي — يعمل بالكامل محليًا (بدون خادم)
+     ============================================================ */
+  const dayLabels = { SU:'الأحد', MO:'الاثنين', TU:'الثلاثاء', WE:'الأربعاء', TH:'الخميس', FR:'الجمعة', SA:'السبت' };
+  const typeEmoji = { lecture:'📖', assignment:'📝', exam:'🧪' };
+  const priorityColor = { high:'var(--wrong-text)', mid:'var(--yellow)', low:'var(--teal-deep)' };
+
+  function getTasks(){ return MedrakStore.get('semesterTasks', []); }
+  function saveTasks(tasks){ MedrakStore.set('semesterTasks', tasks); }
+
+  function renderWeekView(){
+    const tasks = getTasks();
+    const weekView = document.getElementById('weekView');
+    weekView.innerHTML = '';
+    Object.keys(dayLabels).forEach(dayKey => {
+      const col = document.createElement('div');
+      col.className = 'info-card';
+      const dayTasks = tasks.filter(t => t.day === dayKey).sort((a,b) => (a.time||'').localeCompare(b.time||''));
+      let html = '<h4 style="margin:0 0 10px;font-size:13px;color:var(--purple)">'+dayLabels[dayKey]+'</h4>';
+      if (dayTasks.length === 0) html += '<p style="font-size:11.5px;color:var(--text-faint);margin:0">لا مهام</p>';
+      dayTasks.forEach(t => {
+        html += '<div style="padding:8px;margin-bottom:6px;background:var(--surface-2);border-radius:8px;border-inline-start:3px solid '+priorityColor[t.priority]+'">' +
+          '<label style="display:flex;align-items:start;gap:6px;font-size:12px;cursor:pointer">' +
+          '<input type="checkbox" class="task-done" data-id="'+t.id+'" '+(t.done?'checked':'')+' style="width:auto;margin-top:2px">' +
+          '<span style="'+(t.done?'text-decoration:line-through;color:var(--text-faint)':'')+'">'+typeEmoji[t.type]+' '+t.title+(t.time?' — '+t.time:'')+(t.note?'<br><span style="color:var(--text-faint);font-size:10.5px">'+t.note+'</span>':'')+'</span>' +
+          '<button class="task-del" data-id="'+t.id+'" style="margin-inline-start:auto;background:none;border:none;cursor:pointer;color:var(--wrong-text);font-size:12px">✕</button>' +
+          '</label></div>';
+      });
+      col.innerHTML = html;
+      weekView.appendChild(col);
+    });
+    weekView.querySelectorAll('.task-done').forEach(chk => {
+      chk.addEventListener('change', function(){
+        const tasks = getTasks();
+        const task = tasks.find(t => t.id === this.dataset.id);
+        if (task) { task.done = this.checked; saveTasks(tasks); renderWeekView(); updateTaskProgress(); }
+      });
+    });
+    weekView.querySelectorAll('.task-del').forEach(btn => {
+      btn.addEventListener('click', function(){
+        saveTasks(getTasks().filter(t => t.id !== this.dataset.id));
+        renderWeekView(); updateTaskProgress();
+      });
+    });
+  }
+
+  function updateTaskProgress(){
+    const tasks = getTasks();
+    const pct = tasks.length ? Math.round((tasks.filter(t=>t.done).length / tasks.length) * 100) : 0;
+    document.getElementById('taskProgressText').textContent = pct + '%';
+    document.getElementById('taskProgressFill').style.width = pct + '%';
+  }
+
+  document.getElementById('addTaskBtn').addEventListener('click', function(){
+    const title = document.getElementById('taskTitle').value.trim();
+    if (!title) { alert('اكتب عنوان المهمة أول.'); return; }
+    const tasks = getTasks();
+    tasks.push({
+      id: 't' + Date.now(),
+      title, type: document.getElementById('taskType').value,
+      day: document.getElementById('taskDay').value,
+      time: document.getElementById('taskTime').value,
+      priority: document.getElementById('taskPriority').value,
+      note: document.getElementById('taskNote').value.trim(),
+      done: false,
+    });
+    saveTasks(tasks);
+    document.getElementById('taskTitle').value = ''; document.getElementById('taskNote').value = ''; document.getElementById('taskTime').value = '';
+    renderWeekView(); updateTaskProgress();
+    if (window.medrakSound) window.medrakSound.play('success');
+  });
+
+  renderWeekView(); updateTaskProgress();
+  document.getElementById('printScheduleBtn').addEventListener('click', function(){ window.print(); });
+
+  /* ===== مؤقت مذاكرة (25 دقيقة) ===== */
+  let timerSeconds = 25*60, timerInterval = null;
+  function updateTimerDisplay(){
+    const m = Math.floor(timerSeconds/60), s = timerSeconds%60;
+    document.getElementById('timerDisplay').textContent = (m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  }
+  document.getElementById('timerStart').addEventListener('click', function(){
+    if (timerInterval) return;
+    timerInterval = setInterval(function(){
+      timerSeconds--;
+      updateTimerDisplay();
+      if (timerSeconds <= 0) {
+        clearInterval(timerInterval); timerInterval = null;
+        if (window.medrakSound) window.medrakSound.play('achievement');
+        if (window.medrakConfetti) window.medrakConfetti();
+        alert('خلصت جلسة المذاكرة! خذ استراحة قصيرة 🎉');
+        timerSeconds = 25*60; updateTimerDisplay();
+      }
+    }, 1000);
+  });
+  document.getElementById('timerPause').addEventListener('click', function(){ clearInterval(timerInterval); timerInterval = null; });
+  document.getElementById('timerReset').addEventListener('click', function(){ clearInterval(timerInterval); timerInterval = null; timerSeconds = 25*60; updateTimerDisplay(); });
 
   /* ===== Quiz ===== */
   const quizData = [

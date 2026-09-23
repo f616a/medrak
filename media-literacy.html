@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الوعي المعلوماتي | مِدراك</title>
+<meta name="description" content="مختبر تفاعلي للتحقق من المعلومات وتمييز المحتوى المضلل.">
+<script>
+(function(){
+  try {
+    var theme = JSON.parse(localStorage.getItem('medrak_theme')) || 'light';
+    var gender = JSON.parse(localStorage.getItem('medrak_gender')) || false;
+    var lang = JSON.parse(localStorage.getItem('medrak_lang')) || 'ar';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-gender', gender ? 'female' : 'male');
+    document.documentElement.setAttribute('lang', lang);
+  } catch(e){}
+})();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body style="margin:0">
+<div id="particle-field"></div>
+<div id="scroll-progress"></div>
+<div id="medrak-root">
+<a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>
+
+<header class="site">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand" style="text-decoration:none">مِدراك <small>Medrak</small></a>
+    <nav class="links">
+      <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+      <a href="index.html#kau" data-ar="القسم" data-en="Department">القسم</a>
+      <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+      <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+      <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
+      <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
+      <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
+      <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false">☰</button>
+      <div class="gender-toggle" role="group" aria-label="اختر طلاب أو طالبات">
+        <button class="gender-btn active" id="genderMale" aria-pressed="true">طلاب</button>
+        <button class="gender-btn" id="genderFemale" aria-pressed="false">طالبات</button>
+      </div>
+      <button class="icon-btn" id="langToggle" aria-label="Switch language" style="width:auto;padding:0 10px;font-size:13px;font-weight:700">EN</button>
+      <button class="icon-btn" id="darkToggle" aria-label="تبديل الوضع الداكن">🌙</button>
+      <button class="icon-btn" id="muteToggle" aria-label="كتم/تفعيل الأصوات">🔇</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section>
+    <div class="wrap">
+      <h2 class="section-title">الوعي المعلوماتي 🔍</h2>
+      <p class="section-sub">مختبر التحقق من المعلومات — كل المنشورات والأخبار هنا <b>افتراضية من كتابتنا</b>، لا تشير لأي حدث أو جهة حقيقية.</p>
+
+      <div class="quiz-box" style="max-width:100%;margin-bottom:26px">
+        <p style="margin:0 0 6px;font-size:12px;color:var(--text-soft)">التدريب <span id="mlNum">1</span> من <span id="mlTotal"></span> — نقاطك: <b id="mlScore" style="color:var(--teal-deep)">0</b></p>
+        <p style="margin:0 0 4px;font-size:11px;color:var(--text-faint)" id="mlDifficulty"></p>
+        <h3 id="mlTitle" style="margin:0 0 10px;color:var(--purple);font-size:16px"></h3>
+        <p id="mlScenario" style="margin:0 0 16px;font-size:14px;background:var(--surface-2);padding:12px;border-radius:var(--radius-sm)"></p>
+        <div class="quiz-opts" id="mlOpts"></div>
+        <button class="btn btn-outline" id="mlHintBtn" style="margin-top:12px;font-size:12.5px">💡 تلميح</button>
+        <p id="mlHintText" style="display:none;font-size:12.5px;color:var(--text-soft);margin-top:8px"></p>
+        <div id="mlExplainBox" style="display:none;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)">
+          <p id="mlExplainText" style="margin:0 0 12px;font-size:13.5px;color:var(--text-soft)"></p>
+          <button class="btn btn-primary" id="mlNextBtn">التالي</button>
+        </div>
+      </div>
+
+      <div id="mlDoneBox" style="display:none" class="info-card">
+        <h3 style="margin:0 0 10px;color:var(--purple)">أنهيت كل التدريبات! 🎉</h3>
+        <p id="mlFinalScore" style="margin:0 0 14px"></p>
+        <button class="btn btn-outline" id="mlRestartBtn">أعد التدريبات</button>
+      </div>
+
+      <div class="info-card">
+        <h3 style="margin:0 0 12px;color:var(--purple);font-size:16px">✅ قائمة فحص سريعة — طبّقها على أي محتوى تقرأه</h3>
+        <ul id="mlChecklist" style="margin:0;padding-inline-start:20px;font-size:14px;color:var(--text-soft);line-height:2"></ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-notice" data-ar="مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز." data-en="Medrak is an independent student platform and not an official King Abdulaziz University website.">مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز.</div>
+    <div class="foot-grid">
+      <div>
+        <h5>مِدراك | Medrak</h5>
+        <p style="max-width:32ch" data-ar="دليلك الطلابي لتخصص العلوم السياسية." data-en="Your student guide to the Political Science major.">دليلك الطلابي لتخصص العلوم السياسية.</p>
+      </div>
+      <div>
+        <h5 data-ar="الأقسام" data-en="Sections">الأقسام</h5>
+        <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+        <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+        <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+        <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      </div>
+      <div>
+        <h5 data-ar="روابط أخرى" data-en="Other Links">روابط أخرى</h5>
+        <a href="index.html#sources" data-ar="المصادر" data-en="Sources">المصادر</a>
+        <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      </div>
+    </div>
+    <div class="foot-bottom" data-ar="© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر." data-en="© Medrak — All rights reserved to their respective official owners where noted.">© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر.</div>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="عودة للأعلى">↑</button>
+
+<script src="assets/store.js"></script>
+<script src="assets/common.js"></script>
+<script>
+(function(){
+  /* ============================================================
+     مختبر التحقق من المعلومات — كل السيناريوهات افتراضية من كتابة مِدراك
+     ============================================================ */
+  const mlTrainings = [
+    { title:'خبر أم رأي؟', difficulty:'سهل',
+      scenario:'"أصدرت بلدية المدينة الافتراضية قرارًا بإغلاق الشارع الرئيسي لمدة أسبوع لأعمال الصيانة."',
+      opts:['خبر (واقعة يمكن التحقق منها)', 'رأي (وجهة نظر شخصية)'], correct:0,
+      hint:'هل الجملة تنقل واقعة محددة، أو تعبّر عن تقييم شخصي؟',
+      explain:'هذه جملة خبرية تنقل قرارًا رسميًا يمكن التحقق منه، بعكس الرأي الذي يحمل تقييمًا شخصيًا.' },
+    { title:'العنوان مقابل المحتوى', difficulty:'متوسط',
+      scenario:'عنوان: "كارثة كاملة تضرب قطاع التعليم!" — لكن نص المقال يذكر فقط "تأخر بسيط في تسليم بعض الكتب المدرسية لأسبوع."',
+      opts:['العنوان يعكس المحتوى بدقة', 'العنوان مبالغ فيه مقارنة بالمحتوى الفعلي'], correct:1,
+      hint:'قارن حجم الكلمات المستخدمة بالعنوان مع تفاصيل الخبر الفعلية.',
+      explain:'هذا مثال كلاسيكي على "العنوان المضلّل" (Clickbait) — يضخّم الحدث لجذب القراءة، بينما التفاصيل الفعلية أبسط بكثير.' },
+    { title:'تاريخ النشر', difficulty:'متوسط',
+      scenario:'منشور يتم تداوله بكثرة يقول "عاجل: افتتاح الجسر الجديد اليوم!" — لكن عند البحث تبيّن أن تاريخ الخبر الأصلي يعود لثلاث سنوات.',
+      opts:['أتجاهل تاريخ النشر وأشارك الخبر لأنه مهم', 'أتحقق من تاريخ النشر الأصلي قبل المشاركة'], correct:1,
+      hint:'كلمة "عاجل" لا تعني بالضرورة أن الحدث وقع الآن.',
+      explain:'إعادة تداول أخبار قديمة بصياغة "عاجل" من أكثر أساليب التضليل شيوعًا — التحقق من التاريخ خطوة أساسية دائمًا.' },
+    { title:'سياق الصورة', difficulty:'صعب',
+      scenario:'صورة حقيقية لتجمّع كبير من الناس، يُدّعى أنها من فعالية محلية الأسبوع الماضي — لكن البحث العكسي عن الصورة يُظهر أنها من مناسبة مختلفة تمامًا في بلد آخر قبل سنوات.',
+      opts:['الصورة حقيقية إذن الادعاء صحيح', 'الصورة حقيقية لكن استُخدمت خارج سياقها الصحيح'], correct:1,
+      hint:'كون الصورة "حقيقية" لا يعني أن السياق المرفق معها صحيح.',
+      explain:'هذا نوع شائع من التضليل يسمى "خطأ السياق" (False Context) — محتوى حقيقي يُعاد استخدامه بسياق أو تاريخ خاطئ.' },
+    { title:'الادعاء مقابل الدليل', difficulty:'متوسط',
+      scenario:'منشور يقول "المنتج الفلاني يحسّن التركيز بنسبة 90%!" بدون ذكر أي مصدر أو دراسة.',
+      opts:['أثق بالرقم لأنه محدد وواضح', 'أطلب مصدر الدراسة قبل تصديق الرقم'], correct:1,
+      hint:'الأرقام المحددة تبدو مقنعة، لكن هل ذُكر مصدرها؟',
+      explain:'الأرقام الدقيقة تزيد المصداقية الظاهرية حتى بدون دليل — لهذا التحقق من مصدر أي إحصائية خطوة ضرورية دائمًا.' },
+    { title:'إحصائية قديمة', difficulty:'صعب',
+      scenario:'مقال يستشهد بدراسة تقول "40% من السكان يفضلون العمل عن بعد" دون ذكر سنة الدراسة، وعند البحث تبيّن أنها أُجريت قبل 8 سنوات.',
+      opts:['الرقم لا يزال صالحًا للاستخدام كما هو', 'يجب التحقق هل تغيّر الوضع منذ ذلك الحين'], correct:1,
+      hint:'هل الظواهر الاجتماعية والاقتصادية تتغير بمرور الوقت؟',
+      explain:'استخدام بيانات قديمة كأنها حالية قد يعطي صورة غير دقيقة — الإحصائيات الاجتماعية والاقتصادية غالبًا تحتاج تحديثًا دوريًا.' },
+    { title:'الاقتباس المبتور', difficulty:'صعب',
+      scenario:'مسؤول قال: "لن نقبل بهذا الاقتراح إلا إذا توفرت شروط السلامة الكاملة." نُشر الاقتباس مبتورًا كـ: "لن نقبل بهذا الاقتراح."',
+      opts:['الاقتباس المبتور ينقل المعنى الأصلي بدقة', 'الاقتباس المبتور غيّر المعنى الأصلي للكلام'], correct:1,
+      hint:'قارن الجملة الكاملة بالجزء المقتطع منها.',
+      explain:'حذف جزء الشرط ("إلا إذا...") غيّر المعنى بالكامل من رفض مشروط إلى رفض قاطع — هذا مثال على الاقتباس المبتور المضلّل.' },
+    { title:'الارتباط أم السببية؟', difficulty:'صعب',
+      scenario:'"ارتفعت مبيعات المكتبة بنسبة 20% في نفس الشهر الذي أُطلقت فيه حملة إعلانية." هل هذا يثبت أن الحملة هي السبب الوحيد؟',
+      opts:['نعم، الحملة سبّبت الارتفاع بالتأكيد', 'ليس بالضرورة — قد توجد عوامل أخرى ساهمت بالتزامن'], correct:1,
+      hint:'تزامن حدثين لا يعني دائمًا أن أحدهما تسبب بالآخر.',
+      explain:'هذا مبدأ أساسي بالتفكير النقدي: "الارتباط لا يعني السببية" — قد تتزامن حملة إعلانية مع موسم مبيعات مرتفع لأسباب أخرى.' },
+    { title:'تقييم قوة المصدر', difficulty:'سهل',
+      scenario:'مقارنة بين مصدرين لنفس الخبر: الأول جهة رسمية معروفة تنشر بيانًا موقّعًا، والثاني حساب مجهول الهوية بدون أي توثيق.',
+      opts:['المصدران متساويان بالموثوقية', 'المصدر الرسمي الموثّق أقوى وأولى بالثقة'], correct:1,
+      hint:'من الأسهل مساءلته إذا كانت المعلومة خاطئة؟',
+      explain:'قوة المصدر تُقاس بإمكانية التحقق منه ومساءلته — الجهات الرسمية الموثقة أقوى من الحسابات المجهولة عادةً.' },
+  ];
+
+  let mlIndex = 0, mlScore = 0;
+  document.getElementById('mlTotal').textContent = mlTrainings.length;
+
+  function mlRender(){
+    const item = mlTrainings[mlIndex];
+    document.getElementById('mlNum').textContent = mlIndex + 1;
+    document.getElementById('mlScore').textContent = mlScore;
+    document.getElementById('mlDifficulty').textContent = 'المستوى: ' + item.difficulty;
+    document.getElementById('mlTitle').textContent = item.title;
+    document.getElementById('mlScenario').textContent = item.scenario;
+    document.getElementById('mlHintText').style.display = 'none';
+    document.getElementById('mlExplainBox').style.display = 'none';
+    const opts = document.getElementById('mlOpts');
+    opts.innerHTML = '';
+    item.opts.forEach((optText, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt';
+      btn.textContent = optText;
+      btn.addEventListener('click', function(){
+        const isCorrect = i === item.correct;
+        if (isCorrect) mlScore++;
+        opts.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+        this.style.borderColor = isCorrect ? 'var(--correct-text)' : 'var(--wrong-text)';
+        this.style.background = isCorrect ? 'var(--correct-bg)' : 'var(--wrong-bg)';
+        document.getElementById('mlScore').textContent = mlScore;
+        document.getElementById('mlExplainText').textContent = (isCorrect ? '✅ صح! ' : '❌ مو تمامًا. ') + item.explain;
+        document.getElementById('mlExplainBox').style.display = 'block';
+        if (window.medrakSound) window.medrakSound.play(isCorrect ? 'success' : 'error');
+      });
+      opts.appendChild(btn);
+    });
+  }
+  document.getElementById('mlHintBtn').addEventListener('click', function(){
+    document.getElementById('mlHintText').textContent = '💡 ' + mlTrainings[mlIndex].hint;
+    document.getElementById('mlHintText').style.display = 'block';
+  });
+  document.getElementById('mlNextBtn').addEventListener('click', function(){
+    mlIndex++;
+    if (mlIndex >= mlTrainings.length) mlFinish();
+    else mlRender();
+  });
+  function mlFinish(){
+    document.querySelector('.quiz-box').style.display = 'none';
+    document.getElementById('mlDoneBox').style.display = 'block';
+    document.getElementById('mlFinalScore').textContent = 'نتيجتك: ' + mlScore + ' من ' + mlTrainings.length;
+    if (window.medrakSound) window.medrakSound.play('achievement');
+    if (window.medrakConfetti) window.medrakConfetti();
+    if (window.MedrakStore) MedrakStore.set('mediaLiteracy', { bestScore: mlScore, total: mlTrainings.length, completedAt: new Date().toISOString() });
+  }
+  document.getElementById('mlRestartBtn').addEventListener('click', function(){
+    mlIndex = 0; mlScore = 0;
+    document.querySelector('.quiz-box').style.display = 'block';
+    document.getElementById('mlDoneBox').style.display = 'none';
+    mlRender();
+  });
+  mlRender();
+
+  /* ===== قائمة فحص سريعة ===== */
+  const checklist = [
+    'هل المصدر معروف ويمكن التحقق منه؟',
+    'هل العنوان يعكس محتوى الخبر فعليًا؟',
+    'هل تاريخ النشر حديث ومناسب للسياق؟',
+    'هل الصورة أو الفيديو المرفق من نفس الحدث المذكور؟',
+    'هل الادعاء مدعوم برقم أو دراسة موثقة؟',
+    'هل الإحصائية المذكورة حديثة أم قديمة؟',
+    'هل الاقتباس منقول كاملًا بدون بتر؟',
+    'هل الرابط بين حدثين "سببية" فعلية أم مجرد تزامن؟',
+  ];
+  const ul = document.getElementById('mlChecklist');
+  checklist.forEach(item => { const li = document.createElement('li'); li.textContent = item; ul.appendChild(li); });
+})();
+</script>
+
+</div>
+</body>
+</html>

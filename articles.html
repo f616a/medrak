@@ -17,8 +17,6 @@
   } catch(e){}
 })();
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body style="margin:0">
@@ -38,6 +36,11 @@
       <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
       <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
       <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
+      <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
+      <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
     </nav>
     <div class="nav-actions">
       <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false">☰</button>
@@ -69,34 +72,34 @@
         <div class="info-card" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:22px">
           <img src="assets/haytham-linjawi.jpg" alt="د. هيثم لنجاوي" style="width:84px;height:84px;border-radius:50%;object-fit:cover;flex:none">
           <div style="flex:1;min-width:220px">
-            <h3 style="margin:0 0 4px;color:var(--navy);font-size:17px">د. هيثم حسن لنجاوي</h3>
-            <p style="margin:0 0 8px;font-size:13.5px;color:var(--ink-soft)">دكتور في العلوم السياسية من جامعة هوارد الأمريكية، متخصص في النظرية السياسية والمناهج البحثية والسياسات المقارنة والاقتصاد السياسي العالمي، وشغل عدة مناصب أكاديمية بجامعة الملك عبدالعزيز منها رئاسة قسم العلوم السياسية.</p>
+            <h3 style="margin:0 0 4px;color:var(--purple);font-size:17px">د. هيثم حسن لنجاوي</h3>
+            <p style="margin:0 0 8px;font-size:13.5px;color:var(--text-soft)">دكتور في العلوم السياسية من جامعة هوارد الأمريكية، متخصص في النظرية السياسية والمناهج البحثية والسياسات المقارنة والاقتصاد السياسي العالمي، وشغل عدة مناصب أكاديمية بجامعة الملك عبدالعزيز منها رئاسة قسم العلوم السياسية.</p>
             <a href="https://www.tiktok.com/@haythamlinjawi" target="_blank" rel="noopener" class="btn btn-outline" style="padding:8px 16px;font-size:13px">تابعه على تيك توك ↗</a>
-            <p style="margin:8px 0 0;font-size:11.5px;color:var(--ink-soft)">👀 حساب شخصي مستقل للدكتور، غير تابع رسميًا لـ مِدراك أو القسم.</p>
+            <p style="margin:8px 0 0;font-size:11.5px;color:var(--text-soft)">👀 حساب شخصي مستقل للدكتور، غير تابع رسميًا لـ مِدراك أو القسم.</p>
           </div>
         </div>
 
         <!-- مقالة اليوم (تدور يوميًا) -->
-        <div class="info-card" id="articleCard" style="border-color:var(--gold)">
-          <p style="margin:0 0 6px;font-size:11.5px;color:var(--gold);font-weight:700">⭐ مقالة اليوم</p>
-          <h3 id="articleTitle" style="margin:0 0 10px;color:var(--navy);font-size:18px"></h3>
-          <p id="articlePreview" style="margin:0 0 12px;font-size:14px;color:var(--ink)"></p>
+        <div class="info-card" id="articleCard" style="border-color:var(--teal-deep)">
+          <p style="margin:0 0 6px;font-size:11.5px;color:var(--teal-deep);font-weight:700">⭐ مقالة اليوم</p>
+          <h3 id="articleTitle" style="margin:0 0 10px;color:var(--purple);font-size:18px"></h3>
+          <p id="articlePreview" style="margin:0 0 12px;font-size:14px;color:var(--text)"></p>
           <button class="btn btn-outline" id="readFullArticle" style="padding:9px 18px;font-size:13.5px">اقرأ المقال كامل</button>
         </div>
 
         <!-- كل مقالات الدكتور -->
-        <h3 style="font-size:15px;color:var(--navy);margin:22px 0 12px">كل مقالات د. هيثم</h3>
+        <h3 style="font-size:15px;color:var(--purple);margin:22px 0 12px">كل مقالات د. هيثم</h3>
         <div class="term-list" id="allArticlesList"></div>
 
-        <p style="font-size:11.5px;color:var(--ink-soft);margin-top:14px">© جميع حقوق هذه المقالات محفوظة للكاتب د. هيثم لنجاوي، ولا يجوز إعادة نشرها دون إذن.</p>
+        <p style="font-size:11.5px;color:var(--text-soft);margin-top:14px">© جميع حقوق هذه المقالات محفوظة للكاتب د. هيثم لنجاوي، ولا يجوز إعادة نشرها دون إذن.</p>
       </div>
 
       <!-- مصادر ومقالات خارجية ذات صلة (خارج تصنيف الدكاترة) -->
       <div style="margin-top:30px">
-        <h3 style="font-size:15px;color:var(--navy);margin:0 0 10px">مصادر ومقالات خارجية ذات صلة</h3>
+        <h3 style="font-size:15px;color:var(--purple);margin:0 0 10px">مصادر ومقالات خارجية ذات صلة</h3>
         <div class="info-card" style="margin-bottom:10px">
           <p style="margin:0 0 6px;font-size:14px"><b>العدالة الاجتماعية.. قبل «العولمة»..!</b> — بقلم صدقة يحيى فاضل</p>
-          <p style="margin:0 0 8px;font-size:13px;color:var(--ink-soft)">مقالة رأي تناقش حدود تدخل الحكومات في النشاط الاقتصادي والاجتماعي، وموازنة ذلك مع متطلبات العولمة وتحقيق العدالة الاجتماعية.</p>
+          <p style="margin:0 0 8px;font-size:13px;color:var(--text-soft)">مقالة رأي تناقش حدود تدخل الحكومات في النشاط الاقتصادي والاجتماعي، وموازنة ذلك مع متطلبات العولمة وتحقيق العدالة الاجتماعية.</p>
           <a class="source-link" href="https://www.okaz.com.sa/ampArticle/2176081" target="_blank" rel="noopener">قراءة المقالة كاملة في صحيفة عكاظ ↗</a>
         </div>
         <div class="info-card">
@@ -110,8 +113,8 @@
 
 <div class="modal-overlay" id="articleModal">
     <div class="modal-box" style="max-width:640px;max-height:80vh;overflow-y:auto">
-      <h3 id="modalArticleTitle" style="color:var(--navy);margin:0 0 4px"></h3>
-      <p style="font-size:12px;color:var(--gold);margin:0 0 14px">بقلم د. هيثم لنجاوي</p>
+      <h3 id="modalArticleTitle" style="color:var(--purple);margin:0 0 4px"></h3>
+      <p style="font-size:12px;color:var(--teal-deep);margin:0 0 14px">بقلم د. هيثم لنجاوي</p>
       <div id="modalArticleBody" style="font-size:14px;line-height:1.9"></div>
       <button class="btn btn-outline modal-close" style="margin-top:16px" onclick="document.getElementById('articleModal').classList.remove('show')">إغلاق</button>
     </div>
@@ -147,6 +150,7 @@
 
 </div>
 
+<script src="assets/store.js"></script>
 <script src="assets/common.js"></script>
 <script>
 (function(){

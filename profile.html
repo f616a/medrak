@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ملفي في مِدراك</title>
+<meta name="description" content="لوحتك الشخصية المحلية في مِدراك — تقدمك، شاراتك، وبياناتك، كلها محفوظة على جهازك فقط.">
+<script>
+(function(){
+  try {
+    var theme = JSON.parse(localStorage.getItem('medrak_theme')) || 'light';
+    var gender = JSON.parse(localStorage.getItem('medrak_gender')) || false;
+    var lang = JSON.parse(localStorage.getItem('medrak_lang')) || 'ar';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-gender', gender ? 'female' : 'male');
+    document.documentElement.setAttribute('lang', lang);
+  } catch(e){}
+})();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body style="margin:0">
+<div id="particle-field"></div>
+<div id="scroll-progress"></div>
+<div id="medrak-root">
+<a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>
+
+<header class="site">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand" style="text-decoration:none">مِدراك <small>Medrak</small></a>
+    <nav class="links">
+      <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+      <a href="index.html#kau" data-ar="القسم" data-en="Department">القسم</a>
+      <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+      <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+      <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
+      <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
+      <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
+      <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false">☰</button>
+      <div class="gender-toggle" role="group" aria-label="اختر طلاب أو طالبات">
+        <button class="gender-btn active" id="genderMale" aria-pressed="true">طلاب</button>
+        <button class="gender-btn" id="genderFemale" aria-pressed="false">طالبات</button>
+      </div>
+      <button class="icon-btn" id="langToggle" aria-label="Switch language" style="width:auto;padding:0 10px;font-size:13px;font-weight:700">EN</button>
+      <button class="icon-btn" id="darkToggle" aria-label="تبديل الوضع الداكن">🌙</button>
+      <button class="icon-btn" id="muteToggle" aria-label="كتم/تفعيل الأصوات">🔇</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section>
+    <div class="wrap">
+      <h2 class="section-title">ملفي في مِدراك 🪪</h2>
+      <p class="section-sub">لوحتك الشخصية — كل شي هنا محفوظ <b>على جهازك فقط</b>، ما يوصل لأي خادم أو جهة خارجية. ما نطلب اسمك الحقيقي ولا بريدك ولا رقم جوالك.</p>
+
+      <!-- بطاقة الهوية -->
+      <div class="info-card" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:22px">
+        <div id="avatarDisplay" style="font-size:48px;width:70px;height:70px;border-radius:50%;background:var(--surface-2);display:flex;align-items:center;justify-content:center;flex:none">🎓</div>
+        <div style="flex:1;min-width:220px">
+          <label class="field-label">اسمك المستعار (اختياري، يبقى بجهازك بس)</label>
+          <input type="text" id="nicknameInput" placeholder="مثلاً: طالب مِدراك" style="max-width:320px">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px" id="avatarPicker"></div>
+        </div>
+      </div>
+
+      <!-- ملخص التقدم -->
+      <div class="grid-cards" id="progressCards" style="margin-bottom:26px"></div>
+
+      <!-- إدارة البيانات -->
+      <div class="info-card">
+        <h3 style="margin:0 0 12px;color:var(--purple);font-size:16px">إدارة بياناتي</h3>
+        <p style="margin:0 0 14px;font-size:13px;color:var(--text-soft)">تقدر تصدّر كل بياناتك كملف JSON واحد (نسخة احتياطية)، تستوردها لاحقًا على أي جهاز، أو تطبع ملخصًا، أو تمسح كل شي.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-primary" id="exportBtn">⬇️ تصدير بياناتي</button>
+          <button class="btn btn-outline" id="importBtn">⬆️ استيراد نسخة سابقة</button>
+          <input type="file" id="importFile" accept=".json" style="display:none">
+          <button class="btn btn-outline" id="printBtn">🖨️ طباعة الملخص</button>
+          <button class="btn btn-outline" id="clearBtn" style="border-color:var(--wrong-text);color:var(--wrong-text)">🗑️ حذف كل بياناتي</button>
+        </div>
+        <p id="dataMsg" style="display:none;margin-top:12px;font-size:13px;color:var(--teal-deep)"></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-notice" data-ar="مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز." data-en="Medrak is an independent student platform and not an official King Abdulaziz University website.">مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز.</div>
+    <div class="foot-grid">
+      <div>
+        <h5>مِدراك | Medrak</h5>
+        <p style="max-width:32ch" data-ar="دليلك الطلابي لتخصص العلوم السياسية." data-en="Your student guide to the Political Science major.">دليلك الطلابي لتخصص العلوم السياسية.</p>
+      </div>
+      <div>
+        <h5 data-ar="الأقسام" data-en="Sections">الأقسام</h5>
+        <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+        <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+        <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+        <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      </div>
+      <div>
+        <h5 data-ar="روابط أخرى" data-en="Other Links">روابط أخرى</h5>
+        <a href="index.html#sources" data-ar="المصادر" data-en="Sources">المصادر</a>
+        <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      </div>
+    </div>
+    <div class="foot-bottom" data-ar="© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر." data-en="© Medrak — All rights reserved to their respective official owners where noted.">© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر.</div>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="عودة للأعلى">↑</button>
+
+<script src="assets/store.js"></script>
+<script src="assets/common.js"></script>
+<script>
+(function(){
+  const avatars = ['🎓','🦉','🧭','📚','🏛️','🌍','⚖️','🕊️'];
+  const avatarPicker = document.getElementById('avatarPicker');
+  const avatarDisplay = document.getElementById('avatarDisplay');
+  const nicknameInput = document.getElementById('nicknameInput');
+
+  avatars.forEach(emoji => {
+    const btn = document.createElement('button');
+    btn.className = 'icon-btn';
+    btn.textContent = emoji;
+    btn.addEventListener('click', function(){
+      MedrakStore.set('avatar', emoji);
+      avatarDisplay.textContent = emoji;
+    });
+    avatarPicker.appendChild(btn);
+  });
+
+  avatarDisplay.textContent = MedrakStore.get('avatar', '🎓');
+  nicknameInput.value = MedrakStore.get('nickname', '');
+  nicknameInput.addEventListener('input', function(){ MedrakStore.set('nickname', this.value); });
+
+  /* ===== ملخص التقدم عبر كل ميزات مِدراك ===== */
+  function renderProgress(){
+    const cards = document.getElementById('progressCards');
+    cards.innerHTML = '';
+    const crisis = MedrakStore.get('crisisLab', null);
+    const items = [
+      { emoji: '🧭', title: 'غرفة الأزمات السياسية',
+        body: crisis ? ('مرات الإكمال: ' + crisis.completions + ' — أفضل نتيجة: ' + crisis.bestAvg + '% — الشارات: ' + crisis.badges.join('، ')) : 'ما جربتها بعد — زور مختبر القرار!' },
+      { emoji: '🏗️', title: 'محاكي صنع السياسات',
+        body: MedrakStore.get('policySim') ? ('مرات الإكمال: ' + MedrakStore.get('policySim').completions) : 'ما جربته بعد — زور مختبر القرار!' },
+      { emoji: '🏛️', title: 'ابنِ دولتك',
+        body: MedrakStore.get('nationBuilder') ? ('دول بنيتها: ' + MedrakStore.get('nationBuilder').nations.join('، ')) : 'ما جربته بعد — زور مختبر القرار!' },
+      { emoji: '🗺️', title: 'الخريطة السياسية وأطلس المنظمات', body: 'استكشف 20 دولة و10 منظمات دولية — بدون تتبع تقدم لأنه استكشاف حر.' },
+      { emoji: '🧪', title: 'مختبر التحقق من المعلومات',
+        body: MedrakStore.get('mediaLiteracy') ? ('أفضل نتيجة: ' + MedrakStore.get('mediaLiteracy').bestScore + ' من ' + MedrakStore.get('mediaLiteracy').total) : 'ما جربته بعد — زور الوعي المعلوماتي!' },
+      { emoji: '💼', title: 'رحلتك المهنية',
+        body: MedrakStore.get('careerQuiz') ? 'أكملت اختبار الميول المهني ✅' : 'ما جربته بعد — زور صفحة مستقبلك المهني!' },
+      { emoji: '🗓️', title: 'مخطط الفصل الدراسي',
+        body: 'مهام مضافة: ' + MedrakStore.get('semesterTasks', []).length },
+      { emoji: '✔️', title: 'مقررات محددة كمكتملة',
+        body: MedrakStore.get('studyPlanProgress', {completedCodes:[]}).completedCodes.length + ' مقرر' },
+    ];
+    items.forEach(item => {
+      const el = document.createElement('div');
+      el.className = 'field-card';
+      el.innerHTML = '<div class="emoji">'+item.emoji+'</div><h3>'+item.title+'</h3><p>'+item.body+'</p>';
+      cards.appendChild(el);
+    });
+  }
+  renderProgress();
+
+  /* ===== تصدير / استيراد / حذف ===== */
+  const dataMsg = document.getElementById('dataMsg');
+  function showMsg(text){ dataMsg.textContent = text; dataMsg.style.display = 'block'; }
+
+  document.getElementById('exportBtn').addEventListener('click', function(){
+    MedrakStore.exportJSON();
+    showMsg('تم تنزيل ملف بياناتك ✅');
+  });
+
+  document.getElementById('importBtn').addEventListener('click', function(){
+    document.getElementById('importFile').click();
+  });
+  document.getElementById('importFile').addEventListener('change', function(e){
+    const file = e.target.files[0];
+    if (!file) return;
+    MedrakStore.importJSON(file, function(){
+      showMsg('تم استيراد بياناتك بنجاح ✅');
+      avatarDisplay.textContent = MedrakStore.get('avatar', '🎓');
+      nicknameInput.value = MedrakStore.get('nickname', '');
+      renderProgress();
+    }, function(){
+      showMsg('⚠️ الملف غير صالح، تأكد إنه نفس الملف اللي صدّرته من مِدراك.');
+    });
+    this.value = '';
+  });
+
+  document.getElementById('printBtn').addEventListener('click', function(){ window.print(); });
+
+  document.getElementById('clearBtn').addEventListener('click', function(){
+    if (confirm('متأكد تبي تحذف كل بياناتك المحفوظة في مِدراك؟ هذا الإجراء ما يترجع.')) {
+      MedrakStore.clearAll();
+      showMsg('تم حذف كل بياناتك 🗑️');
+      avatarDisplay.textContent = '🎓';
+      nicknameInput.value = '';
+      renderProgress();
+    }
+  });
+})();
+</script>
+</div>
+</body>
+</html>

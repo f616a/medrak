@@ -247,6 +247,73 @@
   }, 'initSound');
 
   /* ============================================================
+     زر الإعدادات العام (⚙️) — يظهر بكل صفحات الموقع تلقائيًا،
+     ويحتوي على تصدير/استيراد بيانات الطالب لنقلها بين الأجهزة.
+     ============================================================ */
+  safe(function initSettings(){
+    const navActions = document.querySelector('.nav-actions');
+    if (!navActions || !window.MedrakStore) return;
+
+    const btn = document.createElement('button');
+    btn.className = 'icon-btn';
+    btn.id = 'settingsToggle';
+    btn.setAttribute('aria-label', 'الإعدادات');
+    btn.textContent = '⚙️';
+    navActions.appendChild(btn);
+
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.id = 'settingsModal';
+    modal.innerHTML =
+      '<div class="modal-box" style="max-width:440px;max-height:85vh;overflow-y:auto">' +
+        '<h3 style="color:var(--purple);margin:0 0 10px">⚙️ الإعدادات</h3>' +
+        '<p style="font-size:13px;color:var(--text-soft);margin:0 0 16px">كل بياناتك (تقدمك بالاختبارات، خطتك الدراسية، مهامك، ملاحظاتك) محفوظة على هذا الجهاز فقط، وما توصل لأي خادم.</p>' +
+        '<div style="background:var(--surface-2);border-radius:var(--radius-sm);padding:14px;margin-bottom:16px">' +
+          '<h4 style="margin:0 0 8px;font-size:13.5px;color:var(--purple)">📱 كيف أنقل بياناتي لجهاز ثاني؟</h4>' +
+          '<ol style="margin:0;padding-inline-start:18px;font-size:12.5px;color:var(--text-soft);line-height:1.9">' +
+            '<li>اضغط "تصدير بياناتي" هنا — بينزّل ملف صغير (JSON) على جهازك الحالي.</li>' +
+            '<li>انقل الملف للجهاز الثاني بأي طريقة تناسبك (إيميل لنفسك، واتساب، تخزين سحابي، أو USB).</li>' +
+            '<li>افتح مِدراك بالجهاز الثاني، اضغط ⚙️ الإعدادات ← "استيراد بيانات" ← اختر نفس الملف.</li>' +
+            '<li>خلاص! تقدمك وخطتك ومهامك تظهر بنفس الجهاز الجديد فورًا.</li>' +
+          '</ol>' +
+        '</div>' +
+        '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px">' +
+          '<button class="btn btn-primary" id="settingsExportBtn">⬇️ تصدير بياناتي</button>' +
+          '<button class="btn btn-outline" id="settingsImportBtn">⬆️ استيراد بيانات</button>' +
+          '<input type="file" id="settingsImportFile" accept=".json" style="display:none">' +
+        '</div>' +
+        '<p id="settingsMsg" style="display:none;font-size:12.5px;color:var(--teal-deep);margin:0 0 12px"></p>' +
+        '<a href="profile.html" class="source-link">فتح لوحة "ملفي في مِدراك" الكاملة ↗</a>' +
+        '<div style="margin-top:16px"><button class="btn btn-outline modal-close" id="settingsCloseBtn">إغلاق</button></div>' +
+      '</div>';
+    root.appendChild(modal);
+
+    function showMsg(text){ const m = document.getElementById('settingsMsg'); m.textContent = text; m.style.display = 'block'; }
+
+    btn.addEventListener('click', function(){ modal.classList.add('show'); });
+    document.getElementById('settingsCloseBtn').addEventListener('click', function(){ modal.classList.remove('show'); });
+    modal.addEventListener('click', function(e){ if (e.target === modal) modal.classList.remove('show'); });
+
+    document.getElementById('settingsExportBtn').addEventListener('click', function(){
+      MedrakStore.exportJSON();
+      showMsg('تم تنزيل ملف بياناتك ✅ — انقله للجهاز الثاني وبعدين استورده من هناك.');
+    });
+    document.getElementById('settingsImportBtn').addEventListener('click', function(){
+      document.getElementById('settingsImportFile').click();
+    });
+    document.getElementById('settingsImportFile').addEventListener('change', function(e){
+      const file = e.target.files[0];
+      if (!file) return;
+      MedrakStore.importJSON(file, function(){
+        showMsg('تم استيراد بياناتك بنجاح ✅ — حدّث الصفحة عشان تشوف كل شي منعكس.');
+      }, function(){
+        showMsg('⚠️ الملف غير صالح، تأكد إنه نفس الملف اللي صدّرته من مِدراك.');
+      });
+      this.value = '';
+    });
+  }, 'initSettings');
+
+  /* ============================================================
      الاحتفال (Confetti) — يُستدعى عند إنجاز حقيقي (إكمال اختبار مثلاً)
      ============================================================ */
   window.medrakConfetti = function(){

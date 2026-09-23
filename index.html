@@ -17,8 +17,6 @@
   } catch(e){}
 })();
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body style="margin:0">
@@ -38,6 +36,11 @@
       <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
       <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
       <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
+      <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
+      <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
     </nav>
     <div class="nav-actions">
       <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false">☰</button>
@@ -141,19 +144,19 @@
     <div class="wrap">
       <h2 class="section-title" data-ar="نفتخر فيهم 🇸🇦" data-en="We're Proud of Them 🇸🇦">نفتخر فيهم 🇸🇦</h2>
       <p class="section-sub" data-ar="شخصية سياسية سعودية بارزة نتعرف عليها كل يوم — تختلف القائمة حسب اختيارك طلاب/طالبات بالأعلى." data-en="A notable Saudi political figure featured daily — the list differs based on the student/female-student toggle above.">شخصية سياسية سعودية بارزة نتعرف عليها كل يوم — تختلف القائمة حسب اختيارك طلاب/طالبات بالأعلى.</p>
-      <div id="genderConfirmBadge" style="display:none;background:var(--gold);color:#fff;border-radius:999px;padding:6px 14px;font-size:12.5px;font-weight:700;margin-bottom:14px">💕 محتوى مخصص للطالبات الآن</div>
+      <div id="genderConfirmBadge" style="display:none;background:var(--teal-deep);color:#fff;border-radius:999px;padding:6px 14px;font-size:12.5px;font-weight:700;margin-bottom:14px">💕 محتوى مخصص للطالبات الآن</div>
       <div class="info-card" id="figureCard">
         <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:10px">
           <div style="font-size:40px">🇸🇦</div>
           <div>
-            <h3 style="margin:0 0 4px;color:var(--navy);font-size:18px" id="figureName"></h3>
-            <p style="margin:0;color:var(--ink-soft);font-size:14px" id="figureTitle"></p>
+            <h3 style="margin:0 0 4px;color:var(--purple);font-size:18px" id="figureName"></h3>
+            <p style="margin:0;color:var(--text-soft);font-size:14px" id="figureTitle"></p>
           </div>
         </div>
-        <p style="margin:0 0 8px;font-size:13.5px;color:var(--ink)" id="figureBio"></p>
-        <p style="margin:0;font-size:13px;color:var(--gold);font-style:italic;display:none" id="figureQuote"></p>
+        <p style="margin:0 0 8px;font-size:13.5px;color:var(--text)" id="figureBio"></p>
+        <p style="margin:0;font-size:13px;color:var(--teal-deep);font-style:italic;display:none" id="figureQuote"></p>
       </div>
-      <p style="font-size:12px;color:var(--ink-soft);margin-top:10px">النبذ مبنية على مصادر إخبارية ورسمية عامة، والقول المأثور (إن وُجد) منقول حرفيًا من تصريح صحفي موثّق. المناصب والمعلومات قابلة للتغيير بمرور الوقت.</p>
+      <p style="font-size:12px;color:var(--text-soft);margin-top:10px">النبذ مبنية على مصادر إخبارية ورسمية عامة، والقول المأثور (إن وُجد) منقول حرفيًا من تصريح صحفي موثّق. المناصب والمعلومات قابلة للتغيير بمرور الوقت.</p>
     </div>
   </section>
   <!-- ===== سؤال سريع (يتغير كل يومين) — أسئلة منوعة اختيارات وصح/غلط ===== -->
@@ -162,9 +165,9 @@
       <h2 class="section-title" data-ar="سؤال سريع ⚡" data-en="Quick Question ⚡">سؤال سريع ⚡</h2>
       <p class="section-sub">سؤال سياسي قصير (اختيارات أو صح/غلط). ⏱️ هذا السؤال يتغير كل يومين.</p>
       <div class="quiz-box" id="quickQCard">
-        <p id="quickQText" style="margin:0 0 14px;font-weight:700;color:var(--navy)"></p>
+        <p id="quickQText" style="margin:0 0 14px;font-weight:700;color:var(--purple)"></p>
         <div class="quiz-opts" id="quickQOpts"></div>
-        <p id="quickQExplain" style="display:none;margin:12px 0 0;font-size:13px;color:var(--ink-soft);border-top:1px dashed var(--line);padding-top:10px"></p>
+        <p id="quickQExplain" style="display:none;margin:12px 0 0;font-size:13px;color:var(--text-soft);border-top:1px dashed var(--line);padding-top:10px"></p>
       </div>
     </div>
   </section>
@@ -180,7 +183,7 @@
     <div class="wrap">
       <h2 class="section-title" data-ar="المصادر 📎" data-en="Sources 📎">المصادر 📎</h2>
       <p class="section-sub">كل المعلومات الأكاديمية والرسمية في هذا الموقع مأخوذة من المصادر التالية (تاريخ الاطلاع: 3 سبتمبر 2026):</p>
-      <ul style="padding-inline-start:20px; color:var(--ink-soft); font-size:14.5px">
+      <ul style="padding-inline-start:20px; color:var(--text-soft); font-size:14.5px">
         <li>صفحة قسم العلوم السياسية — <a class="source-link" href="https://kau.edu.sa/faculty/ar/economics-administration/page/political-science-department" target="_blank" rel="noopener">kau.edu.sa</a></li>
         <li>دليل متطلبات درجة بكالوريوس العلوم السياسية (خطة دراسية رسمية، PDF) — <a class="source-link" href="https://political-science.kau.edu.sa/Files/120006/Files/157420_Study-plan-ps-ar.pdf" target="_blank" rel="noopener">political-science.kau.edu.sa</a></li>
       </ul>
@@ -273,6 +276,7 @@
 
 </div>
 
+<script src="assets/store.js"></script>
 <script src="assets/common.js"></script>
 <script>
 (function(){
@@ -426,7 +430,7 @@
     const div = document.createElement('div');
     div.className = 'accordion-item';
     div.innerHTML = '<button class="accordion-head"><span>'+item.q+'</span><span class="plus">+</span></button>'+
-      '<div class="accordion-body"><div>'+item.a+(item.official ? '' : ' <br><small style="color:var(--gold)">⚠️ هذه إجابة توجيهية من مِدراك، وليست معلومة رسمية من الجامعة.</small>')+'</div></div>';
+      '<div class="accordion-body"><div>'+item.a+(item.official ? '' : ' <br><small style="color:var(--teal-deep)">⚠️ هذه إجابة توجيهية من مِدراك، وليست معلومة رسمية من الجامعة.</small>')+'</div></div>';
     faqBox.appendChild(div);
   });
   window.medrakWireAccordion(faqBox);

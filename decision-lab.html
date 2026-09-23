@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مختبر القرار | مِدراك</title>
+<meta name="description" content="غرفة الأزمات السياسية، محاكي صنع السياسات، وابنِ دولتك — سيناريوهات تعليمية خيالية بالكامل لطالب العلوم السياسية.">
+<script>
+(function(){
+  try {
+    var theme = JSON.parse(localStorage.getItem('medrak_theme')) || 'light';
+    var gender = JSON.parse(localStorage.getItem('medrak_gender')) || false;
+    var lang = JSON.parse(localStorage.getItem('medrak_lang')) || 'ar';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-gender', gender ? 'female' : 'male');
+    document.documentElement.setAttribute('lang', lang);
+  } catch(e){}
+})();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body style="margin:0">
+<div id="particle-field"></div>
+<div id="scroll-progress"></div>
+<div id="medrak-root">
+<a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>
+
+<header class="site">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand" style="text-decoration:none">مِدراك <small>Medrak</small></a>
+    <nav class="links">
+      <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+      <a href="index.html#kau" data-ar="القسم" data-en="Department">القسم</a>
+      <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+      <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+      <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
+      <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
+      <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
+      <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false">☰</button>
+      <div class="gender-toggle" role="group" aria-label="اختر طلاب أو طالبات">
+        <button class="gender-btn active" id="genderMale" aria-pressed="true">طلاب</button>
+        <button class="gender-btn" id="genderFemale" aria-pressed="false">طالبات</button>
+      </div>
+      <button class="icon-btn" id="langToggle" aria-label="Switch language" style="width:auto;padding:0 10px;font-size:13px;font-weight:700">EN</button>
+      <button class="icon-btn" id="darkToggle" aria-label="تبديل الوضع الداكن">🌙</button>
+      <button class="icon-btn" id="muteToggle" aria-label="كتم/تفعيل الأصوات">🔇</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section>
+    <div class="wrap">
+      <h2 class="section-title">مختبر القرار 🧭</h2>
+      <p class="section-sub">ثلاث تجارب تفاعلية بسيناريوهات <b>خيالية بالكامل</b> — لا تمثل أي دولة حقيقية — تدرّبك على التفكير السياسي والتفاوض واتخاذ القرار.</p>
+
+      <div class="tabs" data-group="declab">
+        <button class="tab-btn active" data-tab="crisis">غرفة الأزمات السياسية</button>
+        <button class="tab-btn" data-tab="policy">محاكي صنع السياسات</button>
+        <button class="tab-btn" data-tab="nation">ابنِ دولتك</button>
+      </div>
+
+      <!-- ===== غرفة الأزمات السياسية ===== -->
+      <div class="tab-panel active" data-group="declab" data-panel="crisis">
+        <div class="info-card" style="margin-bottom:20px">
+          <p style="margin:0;font-size:13px;color:var(--text-soft)">📌 كل الدول والأسماء بهذا السيناريو <b>خيالية بالكامل</b>، وأي تشابه مع أي دولة حقيقية غير مقصود. الهدف تعليمي بحت.</p>
+        </div>
+
+        <div id="crisisIntro" class="info-card">
+          <h3 style="margin:0 0 10px;color:var(--purple)">أزمة نهر الأمل 🌊</h3>
+          <p style="margin:0 0 14px;font-size:14.5px">أنت مستشار سياسي في دولة <b>روفينيا</b>. نهر "الأمل" يغذي الزراعة في روفينيا ودولة الجوار <b>كالدوسيا</b> معًا. بعد أن أنشأت روفينيا سدًا جديدًا لتوليد الطاقة، انخفض تدفق المياه إلى كالدوسيا، والتوتر بين الدولتين يتصاعد.</p>
+          <div class="grid-cards" style="margin-bottom:14px">
+            <div class="field-card"><div class="emoji">📊</div><h3 style="font-size:14px">أدلة متاحة</h3><p>تقرير هيدرولوجي: انخفاض 30% بتدفق المياه لكالدوسيا خلال 6 أشهر.</p></div>
+            <div class="field-card"><div class="emoji">🌾</div><h3 style="font-size:14px">أدلة متاحة</h3><p>40% من مزارعي كالدوسيا يعتمدون بشكل مباشر على النهر لموسمهم الزراعي.</p></div>
+            <div class="field-card"><div class="emoji">📜</div><h3 style="font-size:14px">سياق تاريخي</h3><p>اتفاق مائي أولي بين الدولتين عام 1998 (خيالي) لم يُستكمل تفعيله بالكامل.</p></div>
+          </div>
+          <button class="btn btn-primary" id="crisisStartBtn">ابدأ الأزمة</button>
+        </div>
+
+        <div id="crisisGame" style="display:none">
+          <div class="quiz-box" style="max-width:100%">
+            <p style="margin:0 0 6px;font-size:12px;color:var(--text-soft)">المرحلة <span id="crisisStageNum">1</span> من 3</p>
+            <h3 id="crisisStageTitle" style="margin:0 0 10px;color:var(--purple)"></h3>
+            <p id="crisisStageDesc" style="margin:0 0 16px;font-size:14.5px"></p>
+            <div class="quiz-opts" id="crisisChoices"></div>
+            <div id="crisisResultBox" style="display:none;margin-top:16px;padding-top:14px;border-top:1px dashed var(--line)">
+              <p id="crisisResultText" style="margin:0 0 8px;font-weight:700;color:var(--teal-deep)"></p>
+              <p id="crisisResultExplain" style="margin:0 0 14px;font-size:13.5px;color:var(--text-soft)"></p>
+              <button class="btn btn-primary" id="crisisNextBtn">المرحلة التالية</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="crisisFinal" style="display:none" class="info-card">
+          <h3 style="margin:0 0 14px;color:var(--purple)">ملخص القرارات 📋</h3>
+          <div id="crisisIndicators" style="display:grid;gap:10px;margin-bottom:18px"></div>
+          <div id="crisisChoicesSummary" style="font-size:13.5px;color:var(--text-soft);margin-bottom:16px"></div>
+          <div style="text-align:center;margin-bottom:14px">
+            <div style="font-size:34px" id="crisisBadgeEmoji"></div>
+            <h3 id="crisisBadgeText" style="margin:6px 0;color:var(--purple)"></h3>
+          </div>
+          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+            <button class="btn btn-outline" id="crisisRetryBtn">جرّب مسارًا مختلفًا 🔁</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== محاكي صنع السياسات ===== -->
+      <div class="tab-panel" data-group="declab" data-panel="policy">
+        <div class="info-card" style="margin-bottom:20px">
+          <p style="margin:0;font-size:13px;color:var(--text-soft)">📌 المشكلة وكل الجهات المذكورة هنا <b>خيالية تعليمية</b>، والنتائج استرشادية تعليمية وليست تنبؤات حقيقية.</p>
+        </div>
+
+        <div id="policyWizard">
+          <p style="margin:0 0 6px;font-size:12px;color:var(--text-soft)">الخطوة <span id="policyStepNum">1</span> من 5</p>
+          <div class="quiz-box" style="max-width:100%">
+            <div id="policyStepBody"></div>
+          </div>
+        </div>
+
+        <div id="policyResult" style="display:none" class="info-card">
+          <h3 style="margin:0 0 14px;color:var(--purple)">لوحة تقييم السياسة 📊</h3>
+          <div id="policyIndicators" style="display:grid;gap:10px;margin-bottom:18px"></div>
+          <div id="policySummaryText" style="font-size:13.5px;color:var(--text-soft);margin-bottom:16px"></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+            <button class="btn btn-outline" id="policyPrintBtn">🖨️ طباعة ملخص السياسة</button>
+            <button class="btn btn-outline" id="policyRestartBtn">🔁 سياسة جديدة</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== ابنِ دولتك ===== -->
+      <div class="tab-panel" data-group="declab" data-panel="nation">
+        <div class="info-card" style="margin-bottom:20px">
+          <p style="margin:0;font-size:13px;color:var(--text-soft)">📌 كل الأسماء والأعلام والأشكال هنا <b>خيالية تعليمية بالكامل</b> ولا تمثل أي دولة حقيقية.</p>
+        </div>
+
+        <div id="nationWizard">
+          <p style="margin:0 0 6px;font-size:12px;color:var(--text-soft)">الخطوة <span id="nationStepNum">1</span> من 8</p>
+          <div class="quiz-box" style="max-width:100%">
+            <div id="nationStepBody"></div>
+          </div>
+        </div>
+
+        <div id="nationResult" style="display:none" class="info-card">
+          <div style="text-align:center;margin-bottom:18px">
+            <svg id="nationEmblem" width="90" height="90" viewBox="0 0 100 100"></svg>
+            <h3 id="nationCardName" style="margin:10px 0 4px;color:var(--purple)"></h3>
+            <p id="nationCardTag" style="margin:0;font-size:13px;color:var(--text-soft)"></p>
+          </div>
+          <div id="nationSummary" style="font-size:13.5px;margin-bottom:16px"></div>
+          <div style="background:var(--surface-2);border-radius:var(--radius-sm);padding:14px;margin-bottom:16px">
+            <p style="margin:0 0 8px;font-weight:700;font-size:13px">🧩 تحديات إدارية افتراضية للتفكير فيها</p>
+            <p id="nationChallenges" style="margin:0;font-size:13px;color:var(--text-soft)"></p>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+            <button class="btn btn-outline" id="nationPrintBtn">🖨️ طباعة بطاقة الدولة</button>
+            <button class="btn btn-outline" id="nationRestartBtn">🔁 ابنِ دولة جديدة</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-notice" data-ar="مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز." data-en="Medrak is an independent student platform and not an official King Abdulaziz University website.">مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز.</div>
+    <div class="foot-grid">
+      <div>
+        <h5>مِدراك | Medrak</h5>
+        <p style="max-width:32ch" data-ar="دليلك الطلابي لتخصص العلوم السياسية." data-en="Your student guide to the Political Science major.">دليلك الطلابي لتخصص العلوم السياسية.</p>
+      </div>
+      <div>
+        <h5 data-ar="الأقسام" data-en="Sections">الأقسام</h5>
+        <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+        <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+        <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+        <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      </div>
+      <div>
+        <h5 data-ar="روابط أخرى" data-en="Other Links">روابط أخرى</h5>
+        <a href="index.html#sources" data-ar="المصادر" data-en="Sources">المصادر</a>
+        <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      </div>
+    </div>
+    <div class="foot-bottom" data-ar="© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر." data-en="© Medrak — All rights reserved to their respective official owners where noted.">© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر.</div>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="عودة للأعلى">↑</button>
+
+<script src="assets/store.js"></script>
+<script src="assets/common.js"></script>
+<script>
+(function(){
+  const root = document.getElementById('medrak-root');
+
+  /* ============================================================
+     غرفة الأزمات السياسية — سيناريو "أزمة نهر الأمل" (خيالي بالكامل)
+     ============================================================ */
+  const crisisScenario = {
+    id: 'river-of-hope',
+    indicators: { diplomacy: 50, stability: 50, trust: 50, sustainability: 50 },
+    stages: [
+      {
+        title: "المرحلة الأولى: كيف تتعامل مع الأزمة؟",
+        desc: "التوتر يتصاعد بين روفينيا وكالدوسيا حول تدفق مياه نهر الأمل. عليك اختيار النهج الأول للتعامل مع الموقف.",
+        choices: [
+          { text: "الدعوة لمفاوضات ثنائية مباشرة مع كالدوسيا",
+            result: "وافقت كالدوسيا على الجلوس للتفاوض المباشر، لكن الحل قد يأخذ وقتًا أطول.",
+            explain: "هذا يعكس مبدأ 'الدبلوماسية الثنائية' الذي يمنح الطرفين تحكمًا كاملًا بمسار الحل، لكنه يفتقر أحيانًا لضمانات خارجية للالتزام.",
+            delta: { diplomacy: 12, stability: 2, trust: 6, sustainability: 0 } },
+          { text: "طلب وساطة من منظمة إقليمية خيالية (اتحاد الأنهار المشترك)",
+            result: "قبلت كالدوسيا الوساطة، وبدأت المنظمة الإقليمية بجمع الأطراف لجلسة حوار محايدة.",
+            explain: "الوساطة الدولية تجسّد مفهوم 'الدبلوماسية الوقائية' — إشراك طرف ثالث محايد لتهدئة التصعيد قبل تفاقمه.",
+            delta: { diplomacy: 8, stability: 14, trust: -2, sustainability: 6 } },
+          { text: "تقليل الضخ من السد مؤقتًا كبادرة حسن نية أحادية",
+            result: "هدأ التوتر الشعبي بكالدوسيا مؤقتًا، لكن بعض الأصوات الداخلية بروفينيا انتقدت القرار كتنازل سابق لأوانه.",
+            explain: "الإجراءات الأحادية قد تخفّف التصعيد سريعًا، لكنها تفتقر لالتزام متبادل، وهذا ما تناقشه نظرية 'المعضلة الأمنية' في العلاقات الدولية.",
+            delta: { diplomacy: -4, stability: -6, trust: 10, sustainability: 4 } },
+        ]
+      },
+      {
+        title: "المرحلة الثانية: آلية تقاسم المياه",
+        desc: "بدأ الحوار الرسمي. المطلوب الآن الاتفاق على آلية تحدد كيف تُقسّم مياه النهر بين الدولتين.",
+        choices: [
+          { text: "حصص ثابتة سنويًا لكل دولة",
+            result: "توصل الطرفان لاتفاق واضح وسهل التطبيق إداريًا.",
+            explain: "الحصص الثابتة تسهّل التخطيط، لكنها تفترض ثبات كمية المياه سنويًا — وهذا افتراض قد لا يصمد أمام تغيّر المناخ.",
+            delta: { diplomacy: 6, stability: 8, trust: 4, sustainability: -6 } },
+          { text: "إدارة تكيّفية تُحدَّث سنويًا حسب مستوى المياه الفعلي",
+            result: "اتفق الطرفان على آلية مرنة تراجع الأرقام كل موسم بناءً على بيانات فعلية.",
+            explain: "هذا يطبّق مبدأ 'الإدارة التكيّفية للموارد المشتركة'، وهو نهج معاصر في حوكمة المياه العابرة للحدود يوازن بين العدالة والاستدامة.",
+            delta: { diplomacy: 4, stability: 4, trust: 6, sustainability: 14 } },
+          { text: "الاكتفاء ببيان نوايا عام دون تفاصيل فنية دقيقة",
+            result: "وقّع الطرفان بيانًا سريعًا، لكن الغموض بالتفاصيل ترك الباب مفتوحًا لخلافات لاحقة حول التفسير.",
+            explain: "الاتفاقات الغامضة تحقق نتائج إعلامية سريعة، لكن أدبيات التفاوض الدولي تحذّر من أنها غالبًا ما تؤجل الخلاف الحقيقي بدل حله.",
+            delta: { diplomacy: 8, stability: -8, trust: -6, sustainability: -2 } },
+        ]
+      },
+      {
+        title: "المرحلة الثالثة: ضمان الالتزام بالاتفاق",
+        desc: "الاتفاق شبه جاهز. تبقى مسألة أساسية: كيف تضمن الدولتان التزام الطرفين على المدى الطويل؟",
+        choices: [
+          { text: "إنشاء هيئة مراقبة مشتركة دائمة بين الدولتين",
+            result: "أُنشئت هيئة فنية مشتركة لمتابعة تنفيذ الاتفاق بشفافية.",
+            explain: "الآليات المؤسسية الدائمة تُعد من أقوى أدوات ضمان استمرار الاتفاقات الدولية، لأنها تحوّل الثقة السياسية المؤقتة إلى التزام مؤسسي.",
+            delta: { diplomacy: 10, stability: 10, trust: 10, sustainability: 6 } },
+          { text: "الاكتفاء بمراجعة دورية غير ملزمة كل عدة سنوات",
+            result: "الاتفاق سهل التنفيذ إداريًا، لكن غياب المتابعة المستمرة يترك مجالًا لتراجع الالتزام تدريجيًا.",
+            explain: "المراجعة غير الملزمة أقل تكلفة، لكنها تعتمد بالكامل على 'حسن النية' المتبادل، وهو أساس هش في العلاقات الدولية طويلة المدى.",
+            delta: { diplomacy: 2, stability: -4, trust: -2, sustainability: 0 } },
+          { text: "ربط الاتفاق بعقوبات تجارية تلقائية عند الإخلال",
+            result: "شعرت كالدوسيا أن هذا الشرط أقرب للتهديد، ما زاد الحساسية رغم توقيع الاتفاق.",
+            explain: "الربط بالعقوبات التلقائية يعزز الالتزام نظريًا، لكن أدبيات التفاوض تُظهر أنه قد يُنظر إليه كضغط يقوّض 'التفاوض التكاملي' القائم على المصالح المشتركة لا التهديد.",
+            delta: { diplomacy: -8, stability: 4, trust: -4, sustainability: 4 } },
+        ]
+      },
+    ]
+  };
+
+  let crisisState = null;
+
+  function crisisStart(){
+    crisisState = { stageIndex: 0, indicators: Object.assign({}, crisisScenario.indicators), log: [] };
+    document.getElementById('crisisIntro').style.display = 'none';
+    document.getElementById('crisisFinal').style.display = 'none';
+    document.getElementById('crisisGame').style.display = 'block';
+    crisisRenderStage();
+  }
+
+  function crisisRenderStage(){
+    const stage = crisisScenario.stages[crisisState.stageIndex];
+    document.getElementById('crisisStageNum').textContent = crisisState.stageIndex + 1;
+    document.getElementById('crisisStageTitle').textContent = stage.title;
+    document.getElementById('crisisStageDesc').textContent = stage.desc;
+    document.getElementById('crisisResultBox').style.display = 'none';
+    const choicesBox = document.getElementById('crisisChoices');
+    choicesBox.innerHTML = '';
+    stage.choices.forEach((choice, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt';
+      btn.textContent = choice.text;
+      btn.addEventListener('click', function(){
+        choicesBox.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+        Object.keys(choice.delta).forEach(k => {
+          crisisState.indicators[k] = Math.max(0, Math.min(100, crisisState.indicators[k] + choice.delta[k]));
+        });
+        crisisState.log.push({ stage: stage.title, choice: choice.text });
+        document.getElementById('crisisResultText').textContent = '📌 ' + choice.result;
+        document.getElementById('crisisResultExplain').textContent = '💡 ' + choice.explain;
+        document.getElementById('crisisResultBox').style.display = 'block';
+        if (window.medrakSound) window.medrakSound.play('success');
+      });
+      choicesBox.appendChild(btn);
+    });
+  }
+
+  document.getElementById('crisisNextBtn').addEventListener('click', function(){
+    crisisState.stageIndex++;
+    if (crisisState.stageIndex >= crisisScenario.stages.length) { crisisFinish(); }
+    else { crisisRenderStage(); }
+  });
+
+  const indicatorLabels = { diplomacy: 'العلاقات الدبلوماسية', stability: 'الاستقرار الإقليمي', trust: 'الثقة الشعبية', sustainability: 'الاستدامة البيئية' };
+
+  function crisisFinish(){
+    document.getElementById('crisisGame').style.display = 'none';
+    document.getElementById('crisisFinal').style.display = 'block';
+    const box = document.getElementById('crisisIndicators');
+    box.innerHTML = '';
+    let total = 0, count = 0;
+    Object.keys(crisisState.indicators).forEach(k => {
+      const val = crisisState.indicators[k];
+      total += val; count++;
+      const row = document.createElement('div');
+      row.innerHTML = '<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px"><span>'+indicatorLabels[k]+'</span><b>'+val+'%</b></div>'+
+        '<div style="background:var(--surface-2);border-radius:999px;height:8px;overflow:hidden"><div style="width:'+val+'%;height:100%;background:linear-gradient(90deg,var(--purple),var(--teal))"></div></div>';
+      box.appendChild(row);
+    });
+    document.getElementById('crisisChoicesSummary').innerHTML = crisisState.log.map((l,i) =>
+      '<div style="margin-bottom:6px"><b>'+(i+1)+'.</b> '+l.choice+'</div>').join('');
+    const avg = total / count;
+    let badgeEmoji, badgeText;
+    if (avg >= 70) { badgeEmoji = '🏅'; badgeText = 'دبلوماسي محترف'; }
+    else if (avg >= 50) { badgeEmoji = '🎖️'; badgeText = 'مفاوض واعد'; }
+    else { badgeEmoji = '📘'; badgeText = 'قيد التعلم — جرّب مسارًا آخر'; }
+    document.getElementById('crisisBadgeEmoji').textContent = badgeEmoji;
+    document.getElementById('crisisBadgeText').textContent = badgeText;
+
+    if (window.MedrakStore) {
+      const prev = window.MedrakStore.get('crisisLab', { completions: 0, bestAvg: 0, badges: [] });
+      prev.completions = (prev.completions || 0) + 1;
+      prev.bestAvg = Math.max(prev.bestAvg || 0, Math.round(avg));
+      if (!prev.badges.includes(badgeText)) prev.badges.push(badgeText);
+      prev.lastPlayed = new Date().toISOString();
+      window.MedrakStore.set('crisisLab', prev);
+    }
+    if (window.medrakSound) window.medrakSound.play('achievement');
+    if (window.medrakConfetti) window.medrakConfetti();
+  }
+
+  document.getElementById('crisisStartBtn').addEventListener('click', crisisStart);
+  document.getElementById('crisisRetryBtn').addEventListener('click', function(){
+    document.getElementById('crisisFinal').style.display = 'none';
+    document.getElementById('crisisIntro').style.display = 'block';
+  });
+
+  /* ============================================================
+     محاكي صنع السياسات — مشكلة عامة خيالية، وزارة/بلدية غير محددة الهوية
+     ============================================================ */
+  const policyProblems = [
+    { id:'transport', label:'تحسين النقل العام في مدينة خيالية' },
+    { id:'waste', label:'تقليل النفايات وتحسين إعادة التدوير' },
+    { id:'library', label:'تطوير مكتبة عامة وخدماتها' },
+    { id:'publicspace', label:'زيادة المساحات العامة والحدائق' },
+    { id:'digital', label:'دعم التعليم الرقمي للطلاب' },
+    { id:'water', label:'ترشيد استهلاك المياه في بيئة خيالية' },
+  ];
+  const policyGoals = [
+    { id:'high', label:'طموح عالٍ — تغيير جذري خلال فترة قصيرة',
+      note:'الأهداف الطموحة تزيد الأثر المحتمل، لكنها غالبًا ترفع المخاطر وتقلل قابلية التنفيذ الواقعية.',
+      delta:{impact:12, risk:10, feasibility:-8} },
+    { id:'mid', label:'هدف متوسط — تحسين ملموس تدريجي',
+      note:'الأهداف المتوسطة توازن غالبًا بين الطموح والواقعية، وهذا نهج شائع في السياسات العامة التجريبية.',
+      delta:{} },
+    { id:'low', label:'هدف تدريجي — خطوات صغيرة قابلة للتكرار',
+      note:'النهج التدريجي (Incrementalism) نظرية معروفة في تحليل السياسات، تقلل المخاطرة على حساب سرعة الأثر.',
+      delta:{risk:-8, sustainability:6, impact:-6} },
+  ];
+  const policyTools = [
+    { id:'law', label:'تشريع وتنظيم', delta:{feasibility:-5, impact:10, sustainability:8, cost:-5, risk:5} },
+    { id:'incentive', label:'حوافز مالية', delta:{cost:15, impact:8, satisfaction:10} },
+    { id:'awareness', label:'حملة توعية مجتمعية', delta:{cost:-10, impact:4, sustainability:6, satisfaction:6} },
+    { id:'infra', label:'تطوير بنية تحتية', delta:{cost:20, impact:14, sustainability:10, feasibility:-8} },
+    { id:'partnership', label:'شراكة مع القطاع الخاص', delta:{cost:-8, feasibility:8, impact:6, risk:6} },
+  ];
+  const policyBudget = [
+    { id:'exec', label:'التركيز على التنفيذ المباشر', delta:{impact:8, sustainability:-4} },
+    { id:'awareness2', label:'التركيز على التوعية المجتمعية', delta:{satisfaction:10, impact:-2} },
+    { id:'monitor', label:'التركيز على المتابعة والتقييم', delta:{sustainability:12, risk:-8} },
+  ];
+  const policyDurations = [
+    { id:'short', label:'قصيرة (٣ أشهر)', delta:{feasibility:10, sustainability:-10, impact:-4} },
+    { id:'mid', label:'متوسطة (سنة)', delta:{} },
+    { id:'long', label:'طويلة (٣ سنوات)', delta:{sustainability:10, feasibility:-6, risk:4} },
+  ];
+
+  let policy = { step:0, problem:null, goal:null, tools:[], budget:null, duration:null };
+  const policySteps = [
+    { key:'problem', title:'حدد المشكلة العامة', options: policyProblems, type:'single' },
+    { key:'goal', title:'ما مستوى طموح الهدف؟', options: policyGoals, type:'single' },
+    { key:'tools', title:'اختر الأدوات (من 1 إلى 3)', options: policyTools, type:'multi' },
+    { key:'budget', title:'أين يتركّز إنفاق الميزانية؟', options: policyBudget, type:'single' },
+    { key:'duration', title:'ما مدة تنفيذ السياسة؟', options: policyDurations, type:'single' },
+  ];
+
+  function policyRenderStep(){
+    const step = policySteps[policy.step];
+    document.getElementById('policyStepNum').textContent = policy.step + 1;
+    const body = document.getElementById('policyStepBody');
+    let html = '<p style="margin:0 0 14px;font-weight:700;color:var(--purple)">' + step.title + '</p><div class="quiz-opts" id="policyOptsBox"></div>';
+    if (step.type === 'multi') html += '<button class="btn btn-primary" id="policyNextBtn" style="margin-top:16px" disabled>التالي</button>';
+    body.innerHTML = html;
+    const optsBox = document.getElementById('policyOptsBox');
+    step.options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt';
+      btn.textContent = opt.label;
+      if (step.type === 'single') {
+        btn.addEventListener('click', function(){
+          policy[step.key] = opt;
+          if (opt.note) {
+            const note = document.createElement('p');
+            note.style.cssText = 'font-size:13px;color:var(--text-soft);margin:12px 0 0';
+            note.textContent = '💡 ' + opt.note;
+            body.appendChild(note);
+          }
+          setTimeout(policyAdvance, opt.note ? 900 : 300);
+        });
+      } else {
+        btn.addEventListener('click', function(){
+          const idx = policy.tools.findIndex(t => t.id === opt.id);
+          if (idx >= 0) { policy.tools.splice(idx,1); btn.style.borderColor = ''; btn.style.background=''; }
+          else {
+            if (policy.tools.length >= 3) return;
+            policy.tools.push(opt); btn.style.borderColor = 'var(--teal)'; btn.style.background = 'var(--surface-2)';
+          }
+          document.getElementById('policyNextBtn').disabled = policy.tools.length === 0;
+        });
+      }
+      optsBox.appendChild(btn);
+    });
+    if (step.type === 'multi') {
+      document.getElementById('policyNextBtn').addEventListener('click', policyAdvance);
+    }
+  }
+  function policyAdvance(){
+    policy.step++;
+    if (policy.step >= policySteps.length) policyFinish();
+    else policyRenderStep();
+  }
+  function policyFinish(){
+    document.getElementById('policyWizard').style.display = 'none';
+    document.getElementById('policyResult').style.display = 'block';
+    const indicators = { cost:50, feasibility:50, impact:50, sustainability:50, satisfaction:50, risk:50 };
+    const applyDelta = (delta) => { Object.keys(delta||{}).forEach(k => { indicators[k] = Math.max(0, Math.min(100, indicators[k] + delta[k])); }); };
+    applyDelta(policy.goal.delta);
+    policy.tools.forEach(t => applyDelta(t.delta));
+    applyDelta(policy.budget.delta);
+    applyDelta(policy.duration.delta);
+    const labels = { cost:'التكلفة', feasibility:'القابلية للتنفيذ', impact:'الأثر المتوقع', sustainability:'الاستدامة', satisfaction:'رضا الفئات المستفيدة', risk:'المخاطر المحتملة' };
+    const box = document.getElementById('policyIndicators');
+    box.innerHTML = '';
+    Object.keys(indicators).forEach(k => {
+      const row = document.createElement('div');
+      row.innerHTML = '<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px"><span>'+labels[k]+'</span><b>'+indicators[k]+'%</b></div>'+
+        '<div style="background:var(--surface-2);border-radius:999px;height:8px;overflow:hidden"><div style="width:'+indicators[k]+'%;height:100%;background:linear-gradient(90deg,var(--purple),var(--teal))"></div></div>';
+      box.appendChild(row);
+    });
+    document.getElementById('policySummaryText').innerHTML =
+      '<b>المشكلة:</b> ' + policy.problem.label + '<br>' +
+      '<b>الأدوات المختارة:</b> ' + policy.tools.map(t=>t.label).join('، ') + '<br>' +
+      '<b>ملاحظة:</b> هذي النتائج تعليمية استرشادية، وليست تنبؤًا حقيقيًا بنجاح أي سياسة فعلية.';
+    if (window.medrakSound) window.medrakSound.play('achievement');
+    if (window.MedrakStore) {
+      const prev = MedrakStore.get('policySim', { completions: 0 });
+      prev.completions = (prev.completions||0) + 1; prev.lastPlayed = new Date().toISOString();
+      MedrakStore.set('policySim', prev);
+    }
+  }
+  policyRenderStep();
+  document.getElementById('policyPrintBtn').addEventListener('click', function(){ window.print(); });
+  document.getElementById('policyRestartBtn').addEventListener('click', function(){
+    policy = { step:0, problem:null, goal:null, tools:[], budget:null, duration:null };
+    document.getElementById('policyResult').style.display = 'none';
+    document.getElementById('policyWizard').style.display = 'block';
+    policyRenderStep();
+  });
+
+  /* ============================================================
+     ابنِ دولتك — دولة خيالية بالكامل
+     ============================================================ */
+  const nationNames = ['أوريدال','فينتوريا','كالمارا','سيلفانوس','أندرين','نوفاتيرا','بريستوفيا','مارينوس'];
+  const nationSteps = [
+    { key:'geo', title:'اختر الشكل الجغرافي لدولتك',
+      options: [
+        {id:'coastal', label:'ساحلية', note:'الدول الساحلية غالبًا تعتمد اقتصاديًا على التجارة البحرية والصيد.', color:'#1D7A9C'},
+        {id:'mountain', label:'جبلية', note:'التضاريس الجبلية تؤثر على سهولة النقل الداخلي وتوزيع السكان.', color:'#4A6B4E'},
+        {id:'desert', label:'صحراوية', note:'الدول الصحراوية تواجه غالبًا تحديات في إدارة المياه والزراعة.', color:'#C98A3D'},
+        {id:'island', label:'جزرية', note:'الدول الجزرية تعتمد بشدة على الملاحة والعلاقات البحرية الدولية.', color:'#2A9D8F'},
+        {id:'plains', label:'سهلية', note:'السهول الواسعة تسهّل الزراعة والنقل البري عادةً.', color:'#7CA85B'},
+      ]},
+    { key:'population', title:'حجم عدد السكان الافتراضي',
+      options: [
+        {id:'small', label:'صغيرة (أقل من مليون)', note:'الدول الصغيرة سكانيًا قد تتمتع بسهولة إدارية أكبر لكن بموارد بشرية أقل.'},
+        {id:'mid', label:'متوسطة (1 إلى 10 ملايين)', note:'الحجم المتوسط يوازن غالبًا بين إمكانية الإدارة وتوفر الموارد البشرية.'},
+        {id:'large', label:'كبيرة (أكثر من 10 ملايين)', note:'الدول كبيرة السكان تحتاج غالبًا هياكل إدارية أكثر تعقيدًا لضمان الكفاءة.'},
+      ]},
+    { key:'admin', title:'الهيكل الإداري',
+      options: [
+        {id:'central', label:'مركزي', note:'النظام المركزي يسهّل تنسيق القرار لكنه قد يبطئ الاستجابة للاحتياجات المحلية.'},
+        {id:'federal', label:'فيدرالي', note:'النظام الفيدرالي يمنح الأقاليم صلاحيات واسعة، مناسب للدول متنوعة جغرافيًا أو سكانيًا.'},
+        {id:'decentral', label:'لامركزي', note:'اللامركزية الإدارية تمنح صلاحيات تنفيذية للمحليات مع بقاء السيادة مركزية.'},
+      ]},
+    { key:'legislature', title:'شكل السلطة التشريعية',
+      options: [
+        {id:'unicameral', label:'مجلس تشريعي واحد', note:'المجلس الواحد يسرّع سن التشريعات، وشائع بالدول الأصغر حجمًا.'},
+        {id:'bicameral', label:'مجلسان تشريعيان', note:'ازدواجية المجالس التشريعية تضيف طبقة مراجعة إضافية، وشائعة بالدول الفيدرالية.'},
+      ]},
+    { key:'electoral', title:'النظام الانتخابي',
+      options: [
+        {id:'proportional', label:'التمثيل النسبي', note:'يوزّع المقاعد حسب نسبة الأصوات، ويتيح تمثيلًا أوسع للأحزاب الصغيرة.'},
+        {id:'majority', label:'نظام الأغلبية', note:'يمنح المقعد لمن يحصل على أعلى الأصوات بالدائرة، ويميل لتشكيل حكومات أكثر استقرارًا عدديًا.'},
+        {id:'mixed', label:'نظام مختلط', note:'يجمع بين النسبي والأغلبية لموازنة التمثيل والاستقرار.'},
+      ]},
+    { key:'priority', title:'أولوية الميزانية الأولى',
+      options: [
+        {id:'education', label:'التعليم', note:'الاستثمار بالتعليم يُعد استثمارًا طويل المدى في رأس المال البشري.'},
+        {id:'health', label:'الصحة', note:'الإنفاق الصحي المرتفع يحسّن مؤشرات جودة الحياة على المدى المتوسط.'},
+        {id:'infra', label:'البنية التحتية', note:'البنية التحتية القوية تدعم النمو الاقتصادي وتسهّل باقي الخدمات.'},
+        {id:'defense', label:'الدفاع', note:'الإنفاق الدفاعي يرتفع عادة في الدول ذات الحدود المتعددة أو البيئة الإقليمية المتوترة.'},
+        {id:'environment', label:'البيئة', note:'إعطاء أولوية للبيئة يعكس نهج تنمية مستدامة طويل المدى.'},
+      ]},
+    { key:'foreign', title:'طبيعة العلاقات مع دول خيالية أخرى',
+      options: [
+        {id:'open', label:'منفتحة (تجارة وتحالفات واسعة)', note:'الانفتاح الخارجي يعزز التبادل الاقتصادي لكنه يزيد الاعتماد المتبادل.'},
+        {id:'balanced', label:'متوازنة (علاقات مدروسة انتقائيًا)', note:'النهج المتوازن يقلل التبعية لأي طرف واحد ويمنح مرونة أكبر بالسياسة الخارجية.'},
+        {id:'closed', label:'منغلقة نسبيًا (اكتفاء ذاتي)', note:'التركيز على الاكتفاء الذاتي يقلل الاعتماد الخارجي لكنه قد يبطئ النمو الاقتصادي.'},
+      ]},
+  ];
+
+  let nation = { step:0, name:null, choices:{} };
+
+  function nationRenderStep(){
+    if (nation.step === 0) { nationRenderNamePicker(); return; }
+    const step = nationSteps[nation.step - 1];
+    document.getElementById('nationStepNum').textContent = nation.step + 1;
+    const body = document.getElementById('nationStepBody');
+    body.innerHTML = '<p style="margin:0 0 14px;font-weight:700;color:var(--purple)">' + step.title + '</p><div class="quiz-opts" id="nationOptsBox"></div>';
+    const optsBox = document.getElementById('nationOptsBox');
+    step.options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt';
+      btn.textContent = opt.label;
+      btn.addEventListener('click', function(){
+        nation.choices[step.key] = opt;
+        const note = document.createElement('p');
+        note.style.cssText = 'font-size:13px;color:var(--text-soft);margin:12px 0 0';
+        note.textContent = '💡 ' + opt.note;
+        body.appendChild(note);
+        setTimeout(nationAdvance, 900);
+      });
+      optsBox.appendChild(btn);
+    });
+  }
+  function nationRenderNamePicker(){
+    document.getElementById('nationStepNum').textContent = 1;
+    const body = document.getElementById('nationStepBody');
+    body.innerHTML = '<p style="margin:0 0 14px;font-weight:700;color:var(--purple)">اختر اسمًا خياليًا لدولتك</p><div class="quiz-opts" id="nationOptsBox"></div>';
+    const optsBox = document.getElementById('nationOptsBox');
+    nationNames.forEach(name => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt';
+      btn.textContent = name;
+      btn.addEventListener('click', function(){ nation.name = name; nationAdvance(); });
+      optsBox.appendChild(btn);
+    });
+  }
+  function nationAdvance(){
+    nation.step++;
+    if (nation.step > nationSteps.length) nationFinish();
+    else nationRenderStep();
+  }
+  function nationFinish(){
+    document.getElementById('nationWizard').style.display = 'none';
+    document.getElementById('nationResult').style.display = 'block';
+    const geo = nation.choices.geo;
+    document.getElementById('nationCardName').textContent = 'جمهورية ' + nation.name;
+    document.getElementById('nationCardTag').textContent = 'دولة ' + geo.label + ' خيالية — عدد سكان ' + nation.choices.population.label;
+    const svg = document.getElementById('nationEmblem');
+    svg.innerHTML = '<circle cx="50" cy="50" r="46" fill="'+geo.color+'" opacity="0.18"/>' +
+      '<circle cx="50" cy="50" r="34" fill="'+geo.color+'" opacity="0.35"/>' +
+      '<circle cx="50" cy="50" r="20" fill="'+geo.color+'"/>';
+    const labels = { admin:'الهيكل الإداري', legislature:'السلطة التشريعية', electoral:'النظام الانتخابي', priority:'أولوية الميزانية', foreign:'العلاقات الخارجية' };
+    let summaryHtml = '';
+    ['admin','legislature','electoral','priority','foreign'].forEach(k => {
+      summaryHtml += '<div style="margin-bottom:6px"><b>'+labels[k]+':</b> ' + nation.choices[k].label + '</div>';
+    });
+    document.getElementById('nationSummary').innerHTML = summaryHtml;
+
+    const challengesMap = {
+      federal_decentral: 'تنسيق الصلاحيات بين الأقاليم قد يحتاج آليات وساطة إضافية.',
+      central_bicameral: 'ازدواجية المجلس التشريعي مع مركزية الإدارة قد تبطئ سرعة اتخاذ القرار.',
+      proportional_large: 'التمثيل النسبي بدولة كبيرة السكان قد ينتج تحالفات حزبية متعددة تحتاج إدارة دقيقة.',
+      defense_open: 'الانفتاح الخارجي مع أولوية دفاعية عالية يتطلب توازنًا دقيقًا بالسياسة الخارجية.',
+    };
+    let challengeText = 'كل مجموعة اختيارات تخلق توازنات فريدة — راجع مدى انسجام اختياراتك مع بعضها كتمرين تعليمي، ولا يوجد مزيج "صحيح" واحد.';
+    const comboKey1 = nation.choices.admin.id + '_' + nation.choices.legislature.id;
+    const comboKey2 = nation.choices.electoral.id + '_' + nation.choices.population.id;
+    const comboKey3 = nation.choices.priority.id + '_' + nation.choices.foreign.id;
+    if (challengesMap[comboKey1]) challengeText = challengesMap[comboKey1];
+    else if (challengesMap[comboKey2]) challengeText = challengesMap[comboKey2];
+    else if (challengesMap[comboKey3]) challengeText = challengesMap[comboKey3];
+    document.getElementById('nationChallenges').textContent = challengeText;
+
+    if (window.medrakSound) window.medrakSound.play('achievement');
+    if (window.medrakConfetti) window.medrakConfetti();
+    if (window.MedrakStore) {
+      const prev = MedrakStore.get('nationBuilder', { completions: 0, nations: [] });
+      prev.completions = (prev.completions||0) + 1;
+      prev.nations.push(nation.name); prev.lastPlayed = new Date().toISOString();
+      MedrakStore.set('nationBuilder', prev);
+    }
+  }
+  nationRenderStep();
+  document.getElementById('nationPrintBtn').addEventListener('click', function(){ window.print(); });
+  document.getElementById('nationRestartBtn').addEventListener('click', function(){
+    nation = { step:0, name:null, choices:{} };
+    document.getElementById('nationResult').style.display = 'none';
+    document.getElementById('nationWizard').style.display = 'block';
+    nationRenderStep();
+  });
+
+})();
+</script>
+</div>
+</body>
+</html>

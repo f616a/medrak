@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مستقبلك المهني | مِدراك</title>
+<meta name="description" content="خريطة المسارات المهنية المرتبطة بتخصص العلوم السياسية.">
+<script>
+(function(){
+  try {
+    var theme = JSON.parse(localStorage.getItem('medrak_theme')) || 'light';
+    var gender = JSON.parse(localStorage.getItem('medrak_gender')) || false;
+    var lang = JSON.parse(localStorage.getItem('medrak_lang')) || 'ar';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-gender', gender ? 'female' : 'male');
+    document.documentElement.setAttribute('lang', lang);
+  } catch(e){}
+})();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body style="margin:0">
+<div id="particle-field"></div>
+<div id="scroll-progress"></div>
+<div id="medrak-root">
+<a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>
+
+<header class="site">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand" style="text-decoration:none">مِدراك <small>Medrak</small></a>
+    <nav class="links">
+      <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+      <a href="index.html#kau" data-ar="القسم" data-en="Department">القسم</a>
+      <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+      <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+      <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
+      <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
+      <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
+      <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false">☰</button>
+      <div class="gender-toggle" role="group" aria-label="اختر طلاب أو طالبات">
+        <button class="gender-btn active" id="genderMale" aria-pressed="true">طلاب</button>
+        <button class="gender-btn" id="genderFemale" aria-pressed="false">طالبات</button>
+      </div>
+      <button class="icon-btn" id="langToggle" aria-label="Switch language" style="width:auto;padding:0 10px;font-size:13px;font-weight:700">EN</button>
+      <button class="icon-btn" id="darkToggle" aria-label="تبديل الوضع الداكن">🌙</button>
+      <button class="icon-btn" id="muteToggle" aria-label="كتم/تفعيل الأصوات">🔇</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section>
+    <div class="wrap">
+      <h2 class="section-title">مستقبلك المهني 💼</h2>
+      <p class="section-sub">10 مسارات مهنية مرتبطة بتخصص العلوم السياسية — وصف محايد لكل مسار، ثم اختبار ميول قصير لمساعدتك تستكشف اهتماماتك.</p>
+
+      <div class="grid-cards" id="careerCards" style="margin-bottom:30px"></div>
+
+      <div class="info-card">
+        <h3 style="margin:0 0 10px;color:var(--purple)">اختبار ميول مهني استرشادي 🧭</h3>
+        <p style="margin:0 0 14px;font-size:13px;color:var(--text-soft)">⚠️ النتيجة استرشادية تعليمية فقط، وليست توصية مهنية نهائية ولا وعدًا بوظيفة.</p>
+        <div class="quiz-box" style="max-width:100%">
+          <div id="careerQuizBody"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="modal-overlay" id="careerModal">
+  <div class="modal-box" style="max-width:520px;max-height:80vh;overflow-y:auto">
+    <h3 id="careerModalTitle"></h3>
+    <div id="careerModalBody" style="font-size:13.5px;line-height:1.9;margin-top:10px"></div>
+    <button class="btn btn-outline modal-close" style="margin-top:16px" onclick="document.getElementById('careerModal').classList.remove('show')">إغلاق</button>
+  </div>
+</div>
+
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-notice" data-ar="مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز." data-en="Medrak is an independent student platform and not an official King Abdulaziz University website.">مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز.</div>
+    <div class="foot-grid">
+      <div>
+        <h5>مِدراك | Medrak</h5>
+        <p style="max-width:32ch" data-ar="دليلك الطلابي لتخصص العلوم السياسية." data-en="Your student guide to the Political Science major.">دليلك الطلابي لتخصص العلوم السياسية.</p>
+      </div>
+      <div>
+        <h5 data-ar="الأقسام" data-en="Sections">الأقسام</h5>
+        <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+        <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
+        <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
+        <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
+      </div>
+      <div>
+        <h5 data-ar="روابط أخرى" data-en="Other Links">روابط أخرى</h5>
+        <a href="index.html#sources" data-ar="المصادر" data-en="Sources">المصادر</a>
+        <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      </div>
+    </div>
+    <div class="foot-bottom" data-ar="© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر." data-en="© Medrak — All rights reserved to their respective official owners where noted.">© مِدراك — جميع الحقوق محفوظة لأصحابها الرسميين حيثما ذُكر.</div>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="عودة للأعلى">↑</button>
+
+<script src="assets/store.js"></script>
+<script src="assets/common.js"></script>
+<script>
+(function(){
+  const careerPaths = [
+    { id:'policy', title:'السياسات العامة', emoji:'📋',
+      desc:'العمل على تصميم وتحليل وتقييم السياسات الحكومية في مجالات مختلفة كالتعليم والصحة والنقل.',
+      skills:['التحليل الكمي والنوعي','الكتابة التنفيذية','فهم الميزانيات العامة'],
+      courses:['السياسة العامة','سياسة عامة مقارنة','المالية العامة'],
+      tools:['برامج تحليل البيانات الأساسية','مهارات العرض والتلخيص'],
+      projects:['تحليل سياسة عامة محلية قائمة وتقديم توصيات'],
+      sources:['دليل القسم الرسمي'] },
+    { id:'ir', title:'العلاقات الدولية', emoji:'🌍',
+      desc:'العمل الدبلوماسي أو التحليلي المرتبط بالعلاقات بين الدول والمنظمات الدولية.',
+      skills:['التفاوض','اللغات الأجنبية','فهم القانون الدولي الأساسي'],
+      courses:['العلاقات الدولية','منظمات دولية','الدبلوماسية والمفاوضات'],
+      tools:['متابعة الأخبار الدولية بانتظام','مهارات الكتابة الدبلوماسية'],
+      projects:['محاكاة نموذج أممي (Model UN)'],
+      sources:['دليل القسم الرسمي'] },
+    { id:'research', title:'البحث والتحليل السياسي', emoji:'🔬',
+      desc:'إجراء أبحاث أكاديمية أو مؤسسية حول ظواهر سياسية باستخدام مناهج علمية.',
+      skills:['المنهجية البحثية','التحليل الإحصائي','الكتابة الأكاديمية'],
+      courses:['البحث الكمي وتطبيقاته في علم السياسة'],
+      tools:['أدوات تحليل البيانات','إدارة المراجع الأكاديمية'],
+      projects:['ورقة بحثية مصغّرة حول موضوع سياسي محلي'],
+      sources:['دليل القسم الرسمي'] },
+    { id:'intl-orgs', title:'المنظمات الدولية', emoji:'🏢',
+      desc:'العمل الإداري أو الفني داخل منظمات إقليمية أو دولية.',
+      skills:['العمل متعدد الثقافات','اللغة الإنجليزية القوية','التنسيق المؤسسي'],
+      courses:['منظمات دولية','منظمات إقليمية'],
+      tools:['شبكات التواصل المهني الدولية'],
+      projects:['التطوع أو التدريب مع منظمة غير ربحية'],
+      sources:['دليل القسم الرسمي'] },
+    { id:'comm', title:'الاتصال المؤسسي', emoji:'📢',
+      desc:'إدارة الاتصال والإعلام لجهات حكومية أو مؤسسية، وصياغة الرسائل العامة.',
+      skills:['الكتابة الإعلامية','إدارة الأزمات الإعلامية','التواصل الرقمي'],
+      courses:['مفاهيم سياسية باللغة الإنجليزية'],
+      tools:['أدوات إدارة وسائل التواصل'],
+      projects:['إعداد حملة توعوية افتراضية حول قضية عامة'],
+      sources:['دليل القسم الرسمي'] },
+    { id:'consulting', title:'الدراسات والاستشارات', emoji:'💡',
+      desc:'تقديم استشارات سياسية أو اقتصادية لجهات حكومية أو خاصة.',
+      skills:['حل المشكلات','إعداد التقارير','العرض أمام صناع القرار'],
+      courses:['السياسة العامة','الاقتصاد السياسي العالمي'],
+      tools:['برامج العروض التقديمية الاحترافية'],
+      projects:['إعداد تقرير استشاري مصغّر لمشكلة محلية خيالية'],
+      sources:['دليل القسم الرسمي'] },
+    { id:'academic', title:'العمل الأكاديمي', emoji:'🎓',
+      desc:'التدريس الجامعي أو البحث العلمي المستمر بعد استكمال الدراسات العليا.',
+      skills:['الصبر البحثي طويل المدى','التدريس والشرح','النشر العلمي'],
+      courses:['جميع مقررات التخصص كأساس معرفي'],
+      tools:['متابعة الدوريات العلمية المحكّمة'],
+      projects:['المشاركة في مؤتمر طلابي أو ورشة بحثية'],
+      sources:['دليل القسم الرسمي'] },
+    { id:'pm', title:'إدارة المشاريع والبرامج', emoji:'📊',
+      desc:'تخطيط وتنفيذ ومتابعة مشاريع أو برامج حكومية أو تنموية.',
+      skills:['التخطيط الزمني','إدارة الموارد','متابعة المؤشرات'],
+      courses:['الإدارة العامة'],
+      tools:['أدوات إدارة المشاريع (جداول Gantt وغيرها)'],
+      projects:['تخطيط مشروع تطوعي طلابي من الفكرة للتنفيذ'],
+      sources:['دليل القسم الرسمي'] },
+    { id:'data', title:'تحليل البيانات الاجتماعية', emoji:'📈',
+      desc:'تحليل بيانات استطلاعات الرأي والظواهر الاجتماعية والسياسية لدعم القرار.',
+      skills:['الإحصاء التطبيقي','تصور البيانات','التفكير النقدي'],
+      courses:['البحث الكمي وتطبيقاته في علم السياسة'],
+      tools:['برامج تحليل بيانات أساسية (Excel كبداية)'],
+      projects:['تحليل بيانات استطلاع رأي عام منشور'],
+      sources:['دليل القسم الرسمي'] },
+    { id:'grad', title:'الدراسات العليا', emoji:'📖',
+      desc:'إكمال درجة الماجستير أو الدكتوراة في العلوم السياسية أو تخصص ذي صلة.',
+      skills:['الكتابة الأكاديمية المتقدمة','اللغة الإنجليزية الأكاديمية','التخصص الدقيق'],
+      courses:['جميع مقررات مجال التركيز المختار'],
+      tools:['التحضير لاختبارات القبول اللغوية إن احتجت'],
+      projects:['التواصل المبكر مع أساتذة لفهم مسارات الدراسات العليا'],
+      sources:['دليل القسم الرسمي'] },
+  ];
+
+  const cardsBox = document.getElementById('careerCards');
+  careerPaths.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'field-card';
+    card.style.cursor = 'pointer';
+    card.innerHTML = '<div class="emoji">'+p.emoji+'</div><h3>'+p.title+'</h3><p>'+p.desc+'</p>';
+    card.addEventListener('click', function(){
+      document.getElementById('careerModalTitle').textContent = p.emoji + ' ' + p.title;
+      document.getElementById('careerModalBody').innerHTML =
+        '<p>'+p.desc+'</p>' +
+        '<p><b>المهارات المطلوبة:</b> ' + p.skills.join('، ') + '</p>' +
+        '<p><b>مقررات تساعد عليه:</b> ' + p.courses.join('، ') + '</p>' +
+        '<p><b>أدوات ينبغي تطويرها:</b> ' + p.tools.join('، ') + '</p>' +
+        '<p><b>مشروع تدريبي مقترح:</b> ' + p.projects.join('، ') + '</p>' +
+        '<p style="font-size:12px;color:var(--text-soft)"><b>المصدر:</b> ' + p.sources.join('، ') + '</p>';
+      document.getElementById('careerModal').classList.add('show');
+    });
+    cardsBox.appendChild(card);
+  });
+
+  /* ===== اختبار ميول مهني (استرشادي فقط) ===== */
+  const careerQuiz = [
+    { q:'وش يشدّك أكثر بوقت فراغك؟', opts:[
+      {t:'متابعة تحليلات سياسية معمّقة', path:'research'},
+      {t:'متابعة أخبار العلاقات بين الدول', path:'ir'},
+      {t:'قراءة عن مشاريع تطوير المدن والخدمات', path:'policy'},
+    ]},
+    { q:'أي نشاط جامعي تفضل؟', opts:[
+      {t:'المشاركة بمحاكاة نموذج أممي', path:'ir'},
+      {t:'كتابة تقرير بحثي', path:'research'},
+      {t:'تنظيم فعالية أو حملة طلابية', path:'comm'},
+    ]},
+    { q:'وش نوع المهام اللي تستمتع فيها؟', opts:[
+      {t:'تحليل أرقام وبيانات', path:'data'},
+      {t:'التخطيط لمشروع من الصفر', path:'pm'},
+      {t:'تقديم استشارة أو رأي لحل مشكلة', path:'consulting'},
+    ]},
+    { q:'أي بيئة عمل تتخيل نفسك فيها؟', opts:[
+      {t:'جامعة أو مركز بحثي', path:'academic'},
+      {t:'منظمة دولية أو إقليمية', path:'intl-orgs'},
+      {t:'جهة حكومية محلية', path:'policy'},
+    ]},
+  ];
+  let cqIndex = 0; let cqScores = {};
+  function cqRender(){
+    const body = document.getElementById('careerQuizBody');
+    if (cqIndex >= careerQuiz.length) { cqShowResult(); return; }
+    const q = careerQuiz[cqIndex];
+    body.innerHTML = '<p style="font-weight:700;margin:0 0 14px">سؤال '+(cqIndex+1)+' من '+careerQuiz.length+': '+q.q+'</p><div class="quiz-opts"></div>';
+    const opts = body.querySelector('.quiz-opts');
+    q.opts.forEach(o => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt';
+      btn.textContent = o.t;
+      btn.addEventListener('click', function(){ cqScores[o.path] = (cqScores[o.path]||0) + 1; cqIndex++; cqRender(); });
+      opts.appendChild(btn);
+    });
+  }
+  function cqShowResult(){
+    const topPath = Object.keys(cqScores).sort((a,b) => cqScores[b]-cqScores[a])[0];
+    const match = careerPaths.find(p => p.id === topPath) || careerPaths[0];
+    document.getElementById('careerQuizBody').innerHTML =
+      '<div style="text-align:center"><div style="font-size:36px">'+match.emoji+'</div>'+
+      '<h3 style="color:var(--purple);margin:8px 0">أقرب مسار لاهتماماتك: '+match.title+'</h3>'+
+      '<p style="font-size:13px;color:var(--text-soft);margin-bottom:14px">تذكّر: هذي نتيجة استرشادية تعليمية بس، مو قرارًا مهنيًا نهائيًا — استكشف أكثر واستشر مرشدك الأكاديمي.</p>'+
+      '<button class="btn btn-outline" id="cqRestartBtn">أعد الاختبار</button></div>';
+    document.getElementById('cqRestartBtn').addEventListener('click', function(){ cqIndex = 0; cqScores = {}; cqRender(); });
+    if (window.medrakSound) window.medrakSound.play('achievement');
+    if (window.MedrakStore) MedrakStore.set('careerQuiz', { lastResult: match.id, completedAt: new Date().toISOString() });
+  }
+  cqRender();
+})();
+</script>
+
+</div>
+</body>
+</html>

@@ -17,8 +17,6 @@
   } catch(e){}
 })();
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body style="margin:0">
@@ -38,6 +36,11 @@
       <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
       <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
       <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
+      <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
+      <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
+      <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
+      <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
     </nav>
     <div class="nav-actions">
       <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false">☰</button>
@@ -61,14 +64,14 @@
 
       <!-- تسجيل صوتي بنطق المصطلحات، من إعداد مِدراك (المصطلحات نفسها من إعداد د. صادق مالكي، لكن التسجيل الصوتي سواه فريق مِدراك) -->
       <div class="info-card" style="margin-bottom:20px">
-        <p style="margin:0 0 10px;font-size:13.5px;font-weight:700;color:var(--navy)">🎧 استمع لنطق المصطلحات</p>
+        <p style="margin:0 0 10px;font-size:13.5px;font-weight:700;color:var(--purple)">🎧 استمع لنطق المصطلحات</p>
         <audio controls preload="none" style="width:100%" src="assets/glossary-audio.mp3"></audio>
-        <p style="margin:8px 0 0;font-size:11.5px;color:var(--ink-soft)">تسجيل صوتي واحد يغطي المصطلحات، إعداد مِدراك.</p>
+        <p style="margin:8px 0 0;font-size:11.5px;color:var(--text-soft)">تسجيل صوتي واحد يغطي المصطلحات، إعداد مِدراك.</p>
       </div>
 
       <!-- بحث سريع فوق قائمة مضغوطة قابلة للتمرير، بدل قائمة طويلة تاخذ مساحة الصفحة كلها -->
-      <input type="search" id="termSearch" placeholder="🔍 ابحث عن مصطلح (إنجليزي أو عربي)..." style="width:100%;padding:12px 16px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font-family:inherit;font-size:14px;margin-bottom:10px">
-      <div style="font-size:12.5px;color:var(--ink-soft);margin-bottom:12px" id="termCount"></div>
+      <input type="search" id="termSearch" placeholder="🔍 ابحث عن مصطلح (إنجليزي أو عربي)..." style="width:100%;padding:12px 16px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--text);font-family:inherit;font-size:14px;margin-bottom:10px">
+      <div style="font-size:12.5px;color:var(--text-soft);margin-bottom:12px" id="termCount"></div>
 
       <div class="term-scroll" id="termScroll"><div class="term-compact-grid" id="termList"></div></div>
 
@@ -84,8 +87,8 @@
       <p class="section-sub">10 أسئلة صح/خطأ واختيارات، كل سؤال بنقطة، وبآخر الاختبار تقدر تتحدى زميلك يتخطى نتيجتك.</p>
       <div class="quiz-box" id="gqBox">
         <div id="gqLive">
-          <p style="margin:0 0 6px;font-size:12.5px;color:var(--ink-soft)">السؤال <span id="gqNum">1</span> من 10 — نقاطك: <b id="gqScore" style="color:var(--gold)">0</b></p>
-          <p id="gqQuestion" style="margin:0 0 14px;font-weight:700;color:var(--navy)"></p>
+          <p style="margin:0 0 6px;font-size:12.5px;color:var(--text-soft)">السؤال <span id="gqNum">1</span> من 10 — نقاطك: <b id="gqScore" style="color:var(--teal-deep)">0</b></p>
+          <p id="gqQuestion" style="margin:0 0 14px;font-weight:700;color:var(--purple)"></p>
           <div class="quiz-opts" id="gqOpts"></div>
         </div>
         <div id="gqResult" style="display:none;text-align:center">
@@ -107,7 +110,7 @@
       <p class="section-sub">أغلب اختبارات القسم مقالية — هذي طريقة بسيطة تساعدك ترتب إجابتك، مستوحاة من مقالة د. هيثم لنجاوي "سباجيتي أم همبورجر".</p>
 
       <div class="info-card" style="margin-bottom:20px">
-        <h3 style="margin:0 0 10px;color:var(--navy);font-size:16px">🍔 طريقة الهمبورجر بدل السباجيتي</h3>
+        <h3 style="margin:0 0 10px;color:var(--purple);font-size:16px">🍔 طريقة الهمبورجر بدل السباجيتي</h3>
         <p style="margin:0 0 10px;font-size:14px">بدل ما تكتب إجابتك بشكل عشوائي (سباجيتي تقدر تاكلها من أي جهة)، رتبها زي الهمبورجر:</p>
         <div class="grid-cards">
           <div class="field-card"><div class="emoji">🍞</div><h3>المقدمة</h3><p>عرّف المصطلح أو الفكرة الأساسية بجملتين بس.</p></div>
@@ -118,7 +121,7 @@
       </div>
 
       <div class="info-card">
-        <h3 style="margin:0 0 10px;color:var(--navy);font-size:16px">🎯 جرّب على هذا السؤال</h3>
+        <h3 style="margin:0 0 10px;color:var(--purple);font-size:16px">🎯 جرّب على هذا السؤال</h3>
         <p style="margin:0 0 12px;font-size:14px" id="essayPrompt"></p>
         <textarea rows="6" id="essayBox" placeholder="اكتب إجابتك هنا وطبّق طريقة الهمبورجر..."></textarea>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
@@ -126,7 +129,7 @@
           <button class="btn btn-outline" id="essayNewPrompt" style="padding:9px 18px;font-size:13.5px">سؤال ثاني</button>
         </div>
         <div id="essayResult" style="display:none;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);font-size:13.5px"></div>
-        <p style="margin:10px 0 0;font-size:11.5px;color:var(--ink-soft)">⚠️ هذا تحليل تلقائي بسيط (طول، تقسيم فقرات، استخدام مصطلحات) — مو تصحيح فعلي لمحتوى إجابتك أو دقتها العلمية. يبقى كل شي بمتصفحك، ما يُرسل لأي مكان.</p>
+        <p style="margin:10px 0 0;font-size:11.5px;color:var(--text-soft)">⚠️ هذا تحليل تلقائي بسيط (طول، تقسيم فقرات، استخدام مصطلحات) — مو تصحيح فعلي لمحتوى إجابتك أو دقتها العلمية. يبقى كل شي بمتصفحك، ما يُرسل لأي مكان.</p>
       </div>
     </div>
   </section>
@@ -155,14 +158,14 @@
       <div class="info-card" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
         <div style="font-size:36px">🏛️</div>
         <div style="flex:1;min-width:220px">
-          <h3 style="margin:0 0 6px;color:var(--navy);font-size:16px">المكتبة المركزية بجامعة الملك عبدالعزيز</h3>
-          <p style="margin:0 0 10px;font-size:13.5px;color:var(--ink-soft)">توفر كتب ودوريات وأطروحات وقواعد بيانات إلكترونية تغطي مختلف التخصصات، مع خدمات إعارة وإرشاد بحثي.</p>
+          <h3 style="margin:0 0 6px;color:var(--purple);font-size:16px">المكتبة المركزية بجامعة الملك عبدالعزيز</h3>
+          <p style="margin:0 0 10px;font-size:13.5px;color:var(--text-soft)">توفر كتب ودوريات وأطروحات وقواعد بيانات إلكترونية تغطي مختلف التخصصات، مع خدمات إعارة وإرشاد بحثي.</p>
           <a class="source-link" href="https://www.kau.edu.sa/ar/page/central-library" target="_blank" rel="noopener">الموقع الرسمي للمكتبة ↗</a>
         </div>
       </div>
       <div class="info-card" style="margin-top:16px">
-        <h3 style="margin:0 0 8px;color:var(--navy);font-size:16px">📖 كتب مقترحة لطالب العلوم السياسية</h3>
-        <p style="margin:0;font-size:14px;color:var(--ink-soft)">سيتم إضافتها قريبًا.</p>
+        <h3 style="margin:0 0 8px;color:var(--purple);font-size:16px">📖 كتب مقترحة لطالب العلوم السياسية</h3>
+        <p style="margin:0;font-size:14px;color:var(--text-soft)">سيتم إضافتها قريبًا.</p>
       </div>
     </div>
   </section>
@@ -199,6 +202,7 @@
 
 </div>
 
+<script src="assets/store.js"></script>
 <script src="assets/common.js"></script>
 <script>
 (function(){
