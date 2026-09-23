@@ -1,65 +1,102 @@
-/* مِدراك | common.js — يشترك بين كل صفحات الموقع:
-   الوضع الداكن، طلاب/طالبات، عربي/إنجليزي، العودة للأعلى، مساعد الأكورديون، إغلاق النوافذ المنبثقة بالضغط خارجها. */
+/* مِدراك | common.js — يشترك بين كل صفحات الموقع
+   طلاب/طالبات + عربي/إنجليزي + الوضع الداكن (كلها محفوظة بـlocalStorage)،
+   حقل الجزيئات، شريط تقدّم القراءة، الكشف عند التمرير، محرك أصوات مولّدة، الاحتفال (Confetti).
+   كل خطوة تهيئة مغلّفة بدالة safe() مستقلة — فشل جزء واحد ما يوقف الباقي. */
 (function(){
+  "use strict";
+  function safe(fn, label){
+    try { fn(); } catch(err){ console.error('common.js: "'+label+'" failed:', err); }
+  }
+
   const root = document.getElementById('medrak-root');
   if (!root) return;
+  const html = document.documentElement;
+  const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ===== الوضع الداكن ===== */
-  const darkToggle = document.getElementById('darkToggle');
-  if (darkToggle) {
-    darkToggle.addEventListener('click', function(){
-      root.classList.toggle('dark');
-      this.textContent = root.classList.contains('dark') ? '☀️' : '🌙';
-    });
-  }
+  function LS(key, fallback){ try { const raw = localStorage.getItem(key); return raw === null ? fallback : JSON.parse(raw); } catch(e){ return fallback; } }
+  function LSset(key, val){ try { localStorage.setItem(key, JSON.stringify(val)); } catch(e){} }
 
-  /* ===== طلاب/طالبات + عربي/إنجليزي ===== */
-  const genderMale = document.getElementById('genderMale');
-  const genderFemale = document.getElementById('genderFemale');
-  const langToggleBtn = document.getElementById('langToggle');
-  const genderTextEls = document.querySelectorAll('[data-m][data-f]');
-  const langOnlyEls = document.querySelectorAll('[data-ar][data-en]:not([data-m])');
-  window.medrakState = { isFemale: false, lang: 'ar' };
+  window.medrakState = {
+    isFemale: LS('medrak_gender', false),
+    lang: LS('medrak_lang', 'ar'),
+    theme: LS('medrak_theme', 'light'),
+    muted: LS('medrak_muted', true),
+  };
 
-  function applyAllText(){
-    langOnlyEls.forEach(el => { el.textContent = window.medrakState.lang === 'en' ? el.dataset.en : el.dataset.ar; });
-    genderTextEls.forEach(el => {
-      if (window.medrakState.lang === 'en' && el.dataset.en) { el.textContent = el.dataset.en; }
-      else { el.textContent = window.medrakState.isFemale ? el.dataset.f : el.dataset.m; }
-    });
-  }
-  window.medrakApplyText = applyAllText;
+  /* ===== طلاب/طالبات + عربي/إنجليزي + نصوص ثنائية اللغة ===== */
+  safe(function initToggles(){
+    const genderMale = document.getElementById('genderMale');
+    const genderFemale = document.getElementById('genderFemale');
+    const langToggleBtn = document.getElementById('langToggle');
+    const genderTextEls = document.querySelectorAll('[data-m][data-f]');
+    const langOnlyEls = document.querySelectorAll('[data-ar][data-en]:not([data-m])');
 
-  if (genderMale && genderFemale) {
+    function applyAllText(){
+      langOnlyEls.forEach(el => { el.textContent = window.medrakState.lang === 'en' ? el.dataset.en : el.dataset.ar; });
+      genderTextEls.forEach(el => {
+        if (window.medrakState.lang === 'en' && el.dataset.en) { el.textContent = el.dataset.en; }
+        else { el.textContent = window.medrakState.isFemale ? el.dataset.f : el.dataset.m; }
+      });
+    }
+    window.medrakApplyText = applyAllText;
+
+    function applyGenderVisual(isFemale){
+      root.classList.toggle('fem', isFemale);
+      html.setAttribute('data-gender', isFemale ? 'female' : 'male');
+      if (genderMale && genderFemale) {
+        genderMale.classList.toggle('active', !isFemale);
+        genderFemale.classList.toggle('active', isFemale);
+        genderMale.setAttribute('aria-pressed', String(!isFemale));
+        genderFemale.setAttribute('aria-pressed', String(isFemale));
+      }
+    }
     function setGender(isFemale){
       window.medrakState.isFemale = isFemale;
-      root.classList.toggle('fem', isFemale);
-      genderMale.classList.toggle('active', !isFemale);
-      genderFemale.classList.toggle('active', isFemale);
-      genderMale.setAttribute('aria-pressed', String(!isFemale));
-      genderFemale.setAttribute('aria-pressed', String(isFemale));
+      LSset('medrak_gender', isFemale);
+      applyGenderVisual(isFemale);
       applyAllText();
       if (typeof window.onGenderChange === 'function') window.onGenderChange(isFemale);
     }
     window.medrakSetGender = setGender;
-    genderMale.addEventListener('click', function(){ setGender(false); });
-    genderFemale.addEventListener('click', function(){ setGender(true); });
-  }
+    applyGenderVisual(window.medrakState.isFemale);
+    if (genderMale) genderMale.addEventListener('click', function(){ setGender(false); });
+    if (genderFemale) genderFemale.addEventListener('click', function(){ setGender(true); });
 
-  if (langToggleBtn) {
     function setLanguage(lang){
       window.medrakState.lang = lang;
-      langToggleBtn.textContent = lang === 'en' ? 'AR' : 'EN';
+      LSset('medrak_lang', lang);
+      html.setAttribute('lang', lang);
+      html.setAttribute('dir', 'rtl'); /* التخطيط يبقى RTL دومًا، النص فقط يتبدّل */
+      if (langToggleBtn) langToggleBtn.textContent = lang === 'en' ? 'AR' : 'EN';
       applyAllText();
     }
     window.medrakSetLanguage = setLanguage;
-    langToggleBtn.addEventListener('click', function(){ setLanguage(window.medrakState.lang === 'en' ? 'ar' : 'en'); });
-  }
+    setLanguage(window.medrakState.lang);
+    if (langToggleBtn) langToggleBtn.addEventListener('click', function(){ setLanguage(window.medrakState.lang === 'en' ? 'ar' : 'en'); });
+  }, 'initToggles');
+
+  /* ===== الوضع الداكن (محفوظ، ومطبّق قبل أول رسم عبر سكربت head) ===== */
+  safe(function initTheme(){
+    const darkToggle = document.getElementById('darkToggle');
+    function applyTheme(theme){
+      window.medrakState.theme = theme;
+      LSset('medrak_theme', theme);
+      html.setAttribute('data-theme', theme);
+      if (darkToggle) darkToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+    applyTheme(window.medrakState.theme);
+    if (darkToggle) {
+      darkToggle.addEventListener('click', function(){
+        applyTheme(window.medrakState.theme === 'dark' ? 'light' : 'dark');
+      });
+    }
+  }, 'initTheme');
 
   /* ===== قائمة الجوال (Hamburger) ===== */
-  const menuToggle = document.getElementById('menuToggle');
-  const navLinks = document.querySelector('#medrak-root nav.links');
-  if (menuToggle && navLinks) {
+  safe(function initMobileMenu(){
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.querySelector('#medrak-root nav.links');
+    if (!menuToggle || !navLinks) return;
     menuToggle.addEventListener('click', function(){
       const isOpen = navLinks.classList.toggle('open');
       this.setAttribute('aria-expanded', String(isOpen));
@@ -72,14 +109,63 @@
         menuToggle.textContent = '☰';
       });
     });
-  }
+  }, 'initMobileMenu');
 
   /* ===== العودة للأعلى ===== */
-  const backTop = document.getElementById('backTop');
-  if (backTop) {
+  safe(function initBackTop(){
+    const backTop = document.getElementById('backTop');
+    if (!backTop) return;
     window.addEventListener('scroll', function(){ backTop.classList.toggle('show', window.scrollY > 500); });
-    backTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
-  }
+    backTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior: reducedMotion ? 'auto' : 'smooth'}); });
+  }, 'initBackTop');
+
+  /* ===== شريط تقدّم القراءة ===== */
+  safe(function initScrollProgress(){
+    const bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+    function update(){
+      const h = document.documentElement;
+      const scrolled = h.scrollTop || document.body.scrollTop;
+      const height = (h.scrollHeight || document.body.scrollHeight) - h.clientHeight;
+      bar.style.width = (height > 0 ? (scrolled / height) * 100 : 0) + '%';
+    }
+    window.addEventListener('scroll', update);
+    update();
+  }, 'initScrollProgress');
+
+  /* ===== حقل الجزيئات الزخرفي ===== */
+  safe(function initParticleField(){
+    const field = document.getElementById('particle-field');
+    if (!field || reducedMotion) return;
+    const count = window.innerWidth < 700 ? 14 : 26;
+    for (let i = 0; i < count; i++) {
+      const span = document.createElement('span');
+      span.style.top = Math.random() * 100 + '%';
+      span.style.left = Math.random() * 100 + '%';
+      span.style.animationDuration = (10 + Math.random() * 10) + 's';
+      span.style.animationDelay = (Math.random() * 8) + 's';
+      field.appendChild(span);
+    }
+  }, 'initParticleField');
+
+  /* ===== الكشف عند التمرير (Reveal) ===== */
+  safe(function initReveal(){
+    const sections = document.querySelectorAll('#medrak-root main > section');
+    if (!sections.length) return;
+    sections.forEach(s => s.classList.add('reveal'));
+    if (reducedMotion || !('IntersectionObserver' in window)) {
+      sections.forEach(s => s.classList.add('in'));
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('in'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.08 });
+    sections.forEach(s => observer.observe(s));
+    /* شبكة أمان: أي قسم ما انكشف خلال 3 ثواني (فشل المراقبة) يظهر تلقائيًا */
+    setTimeout(() => sections.forEach(s => s.classList.add('in')), 3000);
+  }, 'initReveal');
 
   /* ===== مساعد الأكورديون العام ===== */
   window.medrakWireAccordion = function(container){
@@ -95,17 +181,12 @@
       });
     });
   };
-  medrakWireAccordion(document);
+  safe(function(){ medrakWireAccordion(document); }, 'accordionInit');
 
-  /* ===== إغلاق أي نافذة منبثقة بالضغط خارجها ===== */
-  document.querySelectorAll('.modal-overlay').forEach(overlay => {
-    overlay.addEventListener('click', function(e){ if (e.target === this) this.classList.remove('show'); });
-  });
-
-  /* تبويبات الـ Tabs العامة (تستخدم في صفحة القسم والمقالات) */
+  /* ===== تبويبات عامة ===== */
   window.medrakWireTabs = function(container){
     container.querySelectorAll('.tab-btn').forEach(btn => {
-      if (btn.dataset.wired) return;
+      if (btn.dataset.wired || btn.disabled) return;
       btn.dataset.wired = '1';
       btn.addEventListener('click', function(){
         const group = this.closest('.tabs').dataset.group || 'default';
@@ -118,6 +199,86 @@
       });
     });
   };
-  medrakWireTabs(document);
+  safe(function(){ medrakWireTabs(document); }, 'tabsInit');
+
+  /* ===== إغلاق أي نافذة منبثقة بالضغط خارجها ===== */
+  safe(function(){
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', function(e){ if (e.target === this) this.classList.remove('show'); });
+    });
+  }, 'modalOutsideClick');
+
+  /* ============================================================
+     محرك أصوات مولّدة عبر Web Audio API — بدون أي ملفات صوتية خارجية
+     ============================================================ */
+  safe(function initSound(){
+    const muteBtn = document.getElementById('muteToggle');
+    let ctx = null;
+    function ensureCtx(){ if (!ctx) { const AC = window.AudioContext || window.webkitAudioContext; if (AC) ctx = new AC(); } return ctx; }
+    function tone(freq, dur, type, gainPeak, delay){
+      const c = ensureCtx(); if (!c) return;
+      const osc = c.createOscillator(); const gain = c.createGain();
+      osc.type = type || 'sine'; osc.frequency.value = freq;
+      const start = c.currentTime + (delay || 0);
+      gain.gain.setValueAtTime(0, start);
+      gain.gain.linearRampToValueAtTime(gainPeak || 0.12, start + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, start + dur);
+      osc.connect(gain); gain.connect(c.destination);
+      osc.start(start); osc.stop(start + dur + 0.05);
+    }
+    function play(name){
+      if (window.medrakState.muted) return;
+      if (name === 'click') tone(600, 0.08, 'sine', 0.08, 0);
+      else if (name === 'success') { tone(660, 0.14, 'sine', 0.12, 0); tone(880, 0.18, 'sine', 0.12, 0.12); }
+      else if (name === 'error') tone(220, 0.22, 'sawtooth', 0.10, 0);
+      else if (name === 'achievement') { tone(523, 0.12, 'sine', 0.12, 0); tone(659, 0.12, 'sine', 0.12, 0.1); tone(784, 0.22, 'sine', 0.14, 0.2); }
+    }
+    window.medrakSound = { play };
+    function applyMuteIcon(){ if (muteBtn) muteBtn.textContent = window.medrakState.muted ? '🔇' : '🔊'; }
+    applyMuteIcon();
+    if (muteBtn) {
+      muteBtn.addEventListener('click', function(){
+        window.medrakState.muted = !window.medrakState.muted;
+        LSset('medrak_muted', window.medrakState.muted);
+        applyMuteIcon();
+        if (!window.medrakState.muted) play('click');
+      });
+    }
+  }, 'initSound');
+
+  /* ============================================================
+     الاحتفال (Confetti) — يُستدعى عند إنجاز حقيقي (إكمال اختبار مثلاً)
+     ============================================================ */
+  window.medrakConfetti = function(){
+    if (reducedMotion) return;
+    const colors = ['#4C2E9E', '#0F9B8E', '#F2600A', '#F0B93E', '#F472B6'];
+    const canvas = document.createElement('canvas');
+    canvas.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:1500';
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    document.body.appendChild(canvas);
+    const ctx2d = canvas.getContext('2d');
+    const pieces = [];
+    for (let i = 0; i < 60; i++) {
+      pieces.push({
+        x: canvas.width/2, y: canvas.height/2,
+        vx: (Math.random()-0.5)*10, vy: -Math.random()*10-4,
+        size: 5+Math.random()*5, rot: Math.random()*360, vr: (Math.random()-0.5)*10,
+        color: colors[Math.floor(Math.random()*colors.length)],
+      });
+    }
+    let frame = 0;
+    function step(){
+      ctx2d.clearRect(0,0,canvas.width,canvas.height);
+      pieces.forEach(p => {
+        p.vy += 0.18; p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+        ctx2d.save(); ctx2d.translate(p.x,p.y); ctx2d.rotate(p.rot*Math.PI/180);
+        ctx2d.fillStyle = p.color; ctx2d.fillRect(-p.size/2,-p.size/2,p.size,p.size);
+        ctx2d.restore();
+      });
+      frame++;
+      if (frame < 100) requestAnimationFrame(step); else canvas.remove();
+    }
+    requestAnimationFrame(step);
+  };
 
 })();

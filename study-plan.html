@@ -5,12 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>الخطة الدراسية | مِدراك</title>
 <meta name="description" content="الخطة الدراسية التفاعلية لتخصص العلوم السياسية بجامعة الملك عبدالعزيز، مع نصائح للتخرج المبكر.">
+<script>
+(function(){
+  try {
+    var theme = JSON.parse(localStorage.getItem('medrak_theme')) || 'light';
+    var gender = JSON.parse(localStorage.getItem('medrak_gender')) || false;
+    var lang = JSON.parse(localStorage.getItem('medrak_lang')) || 'ar';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-gender', gender ? 'female' : 'male');
+    document.documentElement.setAttribute('lang', lang);
+  } catch(e){}
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body style="margin:0">
+<div id="particle-field"></div>
+<div id="scroll-progress"></div>
 <div id="medrak-root">
 <a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>
 
@@ -34,6 +47,7 @@
       </div>
       <button class="icon-btn" id="langToggle" aria-label="Switch language" style="width:auto;padding:0 10px;font-size:13px;font-weight:700">EN</button>
       <button class="icon-btn" id="darkToggle" aria-label="تبديل الوضع الداكن">🌙</button>
+      <button class="icon-btn" id="muteToggle" aria-label="كتم/تفعيل الأصوات">🔇</button>
     </div>
   </div>
 </header>
@@ -340,6 +354,8 @@
     document.getElementById('quizResultDesc').textContent = track === 'ipe'
       ? 'تميل لتحليل العلاقة بين الاقتصاد والسياسة عالميًا — هذا مجال تركيزك المقترح.'
       : 'تميل لتحليل صنع القرار وأثره على المجتمع — هذا مجال تركيزك المقترح.';
+    if (window.medrakSound) window.medrakSound.play('achievement');
+    if (window.medrakConfetti) window.medrakConfetti();
   }
   window.restartQuiz = function(){ quizIndex = 0; scores = {ipe:0, ppd:0}; renderQuiz(); };
   renderQuiz();

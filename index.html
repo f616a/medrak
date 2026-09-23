@@ -5,12 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مِدراك | Medrak — دليلك في تخصص العلوم السياسية</title>
 <meta name="description" content="مِدراك: منصة طلابية مستقلة تشرح تخصص العلوم السياسية بجامعة الملك عبدالعزيز.">
+<script>
+(function(){
+  try {
+    var theme = JSON.parse(localStorage.getItem('medrak_theme')) || 'light';
+    var gender = JSON.parse(localStorage.getItem('medrak_gender')) || false;
+    var lang = JSON.parse(localStorage.getItem('medrak_lang')) || 'ar';
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-gender', gender ? 'female' : 'male');
+    document.documentElement.setAttribute('lang', lang);
+  } catch(e){}
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body style="margin:0">
+<div id="particle-field"></div>
+<div id="scroll-progress"></div>
 <div id="medrak-root">
 <a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>
 
@@ -34,6 +47,7 @@
       </div>
       <button class="icon-btn" id="langToggle" aria-label="Switch language" style="width:auto;padding:0 10px;font-size:13px;font-weight:700">EN</button>
       <button class="icon-btn" id="darkToggle" aria-label="تبديل الوضع الداكن">🌙</button>
+      <button class="icon-btn" id="muteToggle" aria-label="كتم/تفعيل الأصوات">🔇</button>
     </div>
   </div>
 </header>
@@ -384,8 +398,9 @@
       btn.addEventListener('click', function(){
         const isCorrect = item.type === 'tf' ? (i === 0) === item.correct : i === item.correct;
         quickQOpts.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
-        this.style.borderColor = isCorrect ? '#3fa76b' : '#c0392b';
-        this.style.background = isCorrect ? 'rgba(63,167,107,0.12)' : 'rgba(192,57,41,0.12)';
+        this.style.borderColor = isCorrect ? 'var(--correct-text)' : 'var(--wrong-text)';
+        this.style.background = isCorrect ? 'var(--correct-bg)' : 'var(--wrong-bg)';
+        if (window.medrakSound) window.medrakSound.play(isCorrect ? 'success' : 'error');
         quickQExplain.textContent = (isCorrect ? '✅ صح! ' : '❌ الإجابة الصحيحة غير هذي. ') + item.explain;
         quickQExplain.style.display = 'block';
       });
