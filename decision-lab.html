@@ -3,60 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>مختبر القرار | مِدراك</title>
+<title data-ar="مختبر القرار | مِدراك" data-en="Decision Lab | Medrak">مختبر القرار | مِدراك</title>
 <meta name="description" content="غرفة الأزمات السياسية، محاكي صنع السياسات، وابنِ دولتك — سيناريوهات تعليمية خيالية بالكامل لطالب العلوم السياسية.">
 <script>
 (function(){
   try {
-    var theme = JSON.parse(localStorage.getItem('medrak_theme')) || 'light';
-    var gender = JSON.parse(localStorage.getItem('medrak_gender')) || false;
-    var lang = JSON.parse(localStorage.getItem('medrak_lang')) || 'ar';
-    document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.setAttribute('data-gender', gender ? 'female' : 'male');
-    document.documentElement.setAttribute('lang', lang);
+    var d = document.documentElement;
+    var g = function(k, f){ try { var v = localStorage.getItem(k); return v === null ? f : JSON.parse(v); } catch(e){ return f; } };
+    var theme = g('medrak_theme', 'light') === 'dark' ? 'dark' : 'light';
+    var female = !!g('medrak_gender', false);
+    var lang = g('medrak_lang', 'ar') === 'en' ? 'en' : 'ar';
+    var pal = g('medrak_palette', null);
+    if (['classic','rose','emerald','ocean','lavender','sand'].indexOf(pal) < 0) pal = female ? 'rose' : 'classic';
+    var lay = g('medrak_layout', 'sidebar');
+    if (['sidebar','compact','wide','sequential'].indexOf(lay) < 0) lay = 'sidebar';
+    d.setAttribute('data-theme', theme); d.setAttribute('data-palette', pal); d.setAttribute('data-layout', lay);
+    d.setAttribute('data-gender', female ? 'female' : 'male');
+    d.setAttribute('data-spotlight', g('medrak_spotlight', true) === false ? 'off' : 'on');
+    d.setAttribute('lang', lang); d.setAttribute('dir', lang === 'en' ? 'ltr' : 'rtl');
   } catch(e){}
 })();
 </script>
+<link rel="stylesheet" href="assets/themes.css">
 <link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/shell.css">
 </head>
 <body style="margin:0">
 <div id="particle-field"></div>
 <div id="scroll-progress"></div>
+<div id="cursor-spotlight" aria-hidden="true"></div>
 <div id="medrak-root">
 <a href="#main" class="skip-link">تخطَّ إلى المحتوى</a>
 
-<header class="site">
-  <div class="wrap nav-inner">
-    <a href="index.html" class="brand" style="text-decoration:none">مِدراك <small>Medrak</small></a>
-    <nav class="links">
-      <a href="index.html" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
-      <a href="index.html#kau" data-ar="القسم" data-en="Department">القسم</a>
-      <a href="study-plan.html" data-ar="الخطة الدراسية" data-en="Study Plan">الخطة الدراسية</a>
-      <a href="education.html" data-ar="التعليم" data-en="Learning">التعليم</a>
-      <a href="articles.html" data-ar="المقالات" data-en="Articles">المقالات</a>
-      <a href="index.html#faq" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</a>
-      <a href="index.html#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
-      <a href="decision-lab.html" data-ar="مختبر القرار" data-en="Decision Lab">مختبر القرار</a>
-      <a href="communication.html" data-ar="التواصل والتفاوض" data-en="Communication &amp; Negotiation">التواصل والتفاوض</a>
-      <a href="research-lab.html" data-ar="البحث والتحليل" data-en="Research &amp; Analysis">البحث والتحليل</a>
-      <a href="world-institutions.html" data-ar="العالم والمؤسسات" data-en="World &amp; Institutions">العالم والمؤسسات</a>
-      <a href="media-literacy.html" data-ar="الوعي المعلوماتي" data-en="Media Literacy">الوعي المعلوماتي</a>
-      <a href="career.html" data-ar="مستقبلك المهني" data-en="Your Career">مستقبلك المهني</a>
-      <a href="alumni.html" data-ar="خريجو مِدراك" data-en="Medrak Alumni">خريجو مِدراك</a>
-      <a href="profile.html" data-ar="ملفي في مِدراك" data-en="My Profile">ملفي في مِدراك</a>
-    </nav>
-    <div class="nav-actions">
-      <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false">☰</button>
-      <div class="gender-toggle" role="group" aria-label="اختر طلاب أو طالبات">
-        <button class="gender-btn active" id="genderMale" aria-pressed="true">طلاب</button>
-        <button class="gender-btn" id="genderFemale" aria-pressed="false">طالبات</button>
-      </div>
-      <button class="icon-btn" id="langToggle" aria-label="Switch language" style="width:auto;padding:0 10px;font-size:13px;font-weight:700">EN</button>
-      <button class="icon-btn" id="darkToggle" aria-label="تبديل الوضع الداكن">🌙</button>
-      <button class="icon-btn" id="muteToggle" aria-label="كتم/تفعيل الأصوات">🔇</button>
-    </div>
-  </div>
+<header class="topbar no-print">
+  <button type="button" class="tb-btn icon-only nav-toggle" id="navToggle" aria-controls="sidebar" aria-expanded="false" aria-label="القائمة" data-aria-ar="القائمة" data-aria-en="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 7h16 M4 12h16 M4 17h16"/></svg></button>
+  <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">م</span><span>مِدراك</span><small>Medrak</small></a>
+  <span class="spacer"></span>
+  <button type="button" class="tb-btn icon-only" id="tourBtn" aria-haspopup="dialog" aria-label="جولة التعريف بمزايا الموقع" data-aria-ar="جولة التعريف بمزايا الموقع" data-aria-en="Take a tour of the site" title="جولة التعريف" data-title-ar="جولة التعريف" data-title-en="Site tour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M12 11v5 M12 8h.01"/></svg></button>
+  <button type="button" class="tb-btn" id="customizeBtn" aria-haspopup="dialog" aria-label="تخصيص صفحتي" data-aria-ar="تخصيص صفحتي" data-aria-en="Customize my page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.9 1.5-1.9-.4-1.2.4-2.1 1.6-2.1H17a4 4 0 0 0 4-4c0-5-4-10-9-10z M7.5 11.5h.01 M10 7.5h.01 M14.5 7.5h.01"/></svg><span class="tb-label" data-ar="تخصيص صفحتي" data-en="Customize my page">تخصيص صفحتي</span></button>
+  <a class="tb-btn acct-chip" id="acctChip" href="profile.html" aria-label="ملفي"><span class="avatar" id="acctAvatar"></span><span class="tb-label" id="acctName"></span></a>
 </header>
+<nav class="topnav no-print" aria-label="التنقل العلوي" data-aria-ar="التنقل العلوي" data-aria-en="Top navigation"><a  href="index.html" data-page="index.html" aria-label="الرئيسية" data-aria-ar="الرئيسية" data-aria-en="Home" title="الرئيسية" data-title-ar="الرئيسية" data-title-en="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span class="tn-label" data-ar="الرئيسية" data-en="Home">الرئيسية</span></a><a  href="index.html#kau" data-page="index.html" data-hash="#kau" aria-label="عن القسم" data-aria-ar="عن القسم" data-aria-en="The department" title="عن القسم" data-title-ar="عن القسم" data-title-en="The department"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21h18 M5 21V10 M9.5 21V10 M14.5 21V10 M19 21V10 M12 3 3 8h18z"/></svg><span class="tn-label" data-ar="عن القسم" data-en="The department">عن القسم</span></a><a  href="study-plan.html" data-page="study-plan.html" aria-label="الخطة الدراسية" data-aria-ar="الخطة الدراسية" data-aria-en="Study plan" title="الخطة الدراسية" data-title-ar="الخطة الدراسية" data-title-en="Study plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 3v4 M17 3v4 M4 8h16 M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg><span class="tn-label" data-ar="الخطة الدراسية" data-en="Study plan">الخطة الدراسية</span></a><a  href="education.html" data-page="education.html" aria-label="التعليم" data-aria-ar="التعليم" data-aria-en="Learning" title="التعليم" data-title-ar="التعليم" data-title-en="Learning"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2z M12 6.5v13"/></svg><span class="tn-label" data-ar="التعليم" data-en="Learning">التعليم</span></a><a  href="articles.html" data-page="articles.html" aria-label="المقالات" data-aria-ar="المقالات" data-aria-en="Articles" title="المقالات" data-title-ar="المقالات" data-title-en="Articles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z M14 3v5h5 M9 13h6 M9 17h6"/></svg><span class="tn-label" data-ar="المقالات" data-en="Articles">المقالات</span></a><a  href="decision-lab.html" data-page="decision-lab.html" aria-label="مختبر القرار" data-aria-ar="مختبر القرار" data-aria-en="Decision lab" title="مختبر القرار" data-title-ar="مختبر القرار" data-title-en="Decision lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M15.5 8.5 13.5 13.5 8.5 15.5 10.5 10.5z"/></svg><span class="tn-label" data-ar="مختبر القرار" data-en="Decision lab">مختبر القرار</span></a><a  href="communication.html" data-page="communication.html" aria-label="التواصل والتفاوض" data-aria-ar="التواصل والتفاوض" data-aria-en="Communication &amp; negotiation" title="التواصل والتفاوض" data-title-ar="التواصل والتفاوض" data-title-en="Communication &amp; negotiation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1.1-4.3A8 8 0 1 1 21 12z"/></svg><span class="tn-label" data-ar="التواصل والتفاوض" data-en="Communication &amp; negotiation">التواصل والتفاوض</span></a><a  href="research-lab.html" data-page="research-lab.html" aria-label="البحث والتحليل" data-aria-ar="البحث والتحليل" data-aria-en="Research &amp; analysis" title="البحث والتحليل" data-title-ar="البحث والتحليل" data-title-en="Research &amp; analysis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 3h6 M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2.2h12.4a1.5 1.5 0 0 0 1.3-2.2L14 9V3 M7.5 15h9"/></svg><span class="tn-label" data-ar="البحث والتحليل" data-en="Research &amp; analysis">البحث والتحليل</span></a><a  href="world-institutions.html" data-page="world-institutions.html" aria-label="العالم والمؤسسات" data-aria-ar="العالم والمؤسسات" data-aria-en="World &amp; institutions" title="العالم والمؤسسات" data-title-ar="العالم والمؤسسات" data-title-en="World &amp; institutions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M3 12h18 M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span class="tn-label" data-ar="العالم والمؤسسات" data-en="World &amp; institutions">العالم والمؤسسات</span></a><a  href="media-literacy.html" data-page="media-literacy.html" aria-label="الوعي المعلوماتي" data-aria-ar="الوعي المعلوماتي" data-aria-en="Media literacy" title="الوعي المعلوماتي" data-title-ar="الوعي المعلوماتي" data-title-en="Media literacy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 6v6c0 4.4 3.4 8.3 8 9 4.6-.7 8-4.6 8-9V6z M9 12l2 2 4-4"/></svg><span class="tn-label" data-ar="الوعي المعلوماتي" data-en="Media literacy">الوعي المعلوماتي</span></a><a  href="career.html" data-page="career.html" aria-label="مستقبلك المهني" data-aria-ar="مستقبلك المهني" data-aria-en="Your career" title="مستقبلك المهني" data-title-ar="مستقبلك المهني" data-title-en="Your career"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 8h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z M9 8V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3 M3 13h18"/></svg><span class="tn-label" data-ar="مستقبلك المهني" data-en="Your career">مستقبلك المهني</span></a><a  href="alumni.html" data-page="alumni.html" aria-label="خريجو مِدراك" data-aria-ar="خريجو مِدراك" data-aria-en="Medrak alumni" title="خريجو مِدراك" data-title-ar="خريجو مِدراك" data-title-en="Medrak alumni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 9l10-5 10 5-10 5z M6 11.5V16c0 1.2 2.7 3 6 3s6-1.8 6-3v-4.5 M22 9v6"/></svg><span class="tn-label" data-ar="خريجو مِدراك" data-en="Medrak alumni">خريجو مِدراك</span></a><a  href="profile.html" data-page="profile.html" aria-label="ملفي في مِدراك" data-aria-ar="ملفي في مِدراك" data-aria-en="My profile" title="ملفي في مِدراك" data-title-ar="ملفي في مِدراك" data-title-en="My profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M4 21a8 8 0 0 1 16 0"/></svg><span class="tn-label" data-ar="ملفي في مِدراك" data-en="My profile">ملفي في مِدراك</span></a><a  href="index.html#faq" data-page="index.html" data-hash="#faq" aria-label="الأسئلة الشائعة" data-aria-ar="الأسئلة الشائعة" data-aria-en="FAQ" title="الأسئلة الشائعة" data-title-ar="الأسئلة الشائعة" data-title-en="FAQ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7 M12 17h.01"/></svg><span class="tn-label" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</span></a><a  href="index.html#contact" data-page="index.html" data-hash="#contact" aria-label="تواصل معنا" data-aria-ar="تواصل معنا" data-aria-en="Contact us" title="تواصل معنا" data-title-ar="تواصل معنا" data-title-en="Contact us"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z M3 7l9 6 9-6"/></svg><span class="tn-label" data-ar="تواصل معنا" data-en="Contact us">تواصل معنا</span></a></nav>
+<div class="sidebar-backdrop no-print" id="sidebarBackdrop"></div>
+<nav class="sidebar no-print" id="sidebar" aria-label="التنقل الرئيسي" data-aria-ar="التنقل الرئيسي" data-aria-en="Main navigation">
+  <div class="sidebar-head"><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">م</span><span>مِدراك</span></a><button type="button" class="mk-x" id="sidebarClose" aria-label="إغلاق القائمة" data-aria-ar="إغلاق القائمة" data-aria-en="Close menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12 M18 6L6 18"/></svg></button></div>
+  <div class="nav-group-title" data-ar="الأقسام" data-en="Sections">الأقسام</div>
+  <a class="nav-item" href="index.html" data-page="index.html" aria-label="الرئيسية" data-aria-ar="الرئيسية" data-aria-en="Home" title="الرئيسية" data-title-ar="الرئيسية" data-title-en="Home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span class="label" data-ar="الرئيسية" data-en="Home">الرئيسية</span></a><a class="nav-item" href="index.html#kau" data-page="index.html" data-hash="#kau" aria-label="عن القسم" data-aria-ar="عن القسم" data-aria-en="The department" title="عن القسم" data-title-ar="عن القسم" data-title-en="The department"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21h18 M5 21V10 M9.5 21V10 M14.5 21V10 M19 21V10 M12 3 3 8h18z"/></svg><span class="label" data-ar="عن القسم" data-en="The department">عن القسم</span></a><a class="nav-item" href="study-plan.html" data-page="study-plan.html" aria-label="الخطة الدراسية" data-aria-ar="الخطة الدراسية" data-aria-en="Study plan" title="الخطة الدراسية" data-title-ar="الخطة الدراسية" data-title-en="Study plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 3v4 M17 3v4 M4 8h16 M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg><span class="label" data-ar="الخطة الدراسية" data-en="Study plan">الخطة الدراسية</span></a><a class="nav-item" href="education.html" data-page="education.html" aria-label="التعليم" data-aria-ar="التعليم" data-aria-en="Learning" title="التعليم" data-title-ar="التعليم" data-title-en="Learning"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2z M12 6.5v13"/></svg><span class="label" data-ar="التعليم" data-en="Learning">التعليم</span></a><a class="nav-item" href="articles.html" data-page="articles.html" aria-label="المقالات" data-aria-ar="المقالات" data-aria-en="Articles" title="المقالات" data-title-ar="المقالات" data-title-en="Articles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z M14 3v5h5 M9 13h6 M9 17h6"/></svg><span class="label" data-ar="المقالات" data-en="Articles">المقالات</span></a><a class="nav-item" href="decision-lab.html" data-page="decision-lab.html" aria-label="مختبر القرار" data-aria-ar="مختبر القرار" data-aria-en="Decision lab" title="مختبر القرار" data-title-ar="مختبر القرار" data-title-en="Decision lab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M15.5 8.5 13.5 13.5 8.5 15.5 10.5 10.5z"/></svg><span class="label" data-ar="مختبر القرار" data-en="Decision lab">مختبر القرار</span></a><a class="nav-item" href="communication.html" data-page="communication.html" aria-label="التواصل والتفاوض" data-aria-ar="التواصل والتفاوض" data-aria-en="Communication &amp; negotiation" title="التواصل والتفاوض" data-title-ar="التواصل والتفاوض" data-title-en="Communication &amp; negotiation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1.1-4.3A8 8 0 1 1 21 12z"/></svg><span class="label" data-ar="التواصل والتفاوض" data-en="Communication &amp; negotiation">التواصل والتفاوض</span></a><a class="nav-item" href="research-lab.html" data-page="research-lab.html" aria-label="البحث والتحليل" data-aria-ar="البحث والتحليل" data-aria-en="Research &amp; analysis" title="البحث والتحليل" data-title-ar="البحث والتحليل" data-title-en="Research &amp; analysis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 3h6 M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2.2h12.4a1.5 1.5 0 0 0 1.3-2.2L14 9V3 M7.5 15h9"/></svg><span class="label" data-ar="البحث والتحليل" data-en="Research &amp; analysis">البحث والتحليل</span></a><a class="nav-item" href="world-institutions.html" data-page="world-institutions.html" aria-label="العالم والمؤسسات" data-aria-ar="العالم والمؤسسات" data-aria-en="World &amp; institutions" title="العالم والمؤسسات" data-title-ar="العالم والمؤسسات" data-title-en="World &amp; institutions"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M3 12h18 M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span class="label" data-ar="العالم والمؤسسات" data-en="World &amp; institutions">العالم والمؤسسات</span></a><a class="nav-item" href="media-literacy.html" data-page="media-literacy.html" aria-label="الوعي المعلوماتي" data-aria-ar="الوعي المعلوماتي" data-aria-en="Media literacy" title="الوعي المعلوماتي" data-title-ar="الوعي المعلوماتي" data-title-en="Media literacy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 4 6v6c0 4.4 3.4 8.3 8 9 4.6-.7 8-4.6 8-9V6z M9 12l2 2 4-4"/></svg><span class="label" data-ar="الوعي المعلوماتي" data-en="Media literacy">الوعي المعلوماتي</span></a><a class="nav-item" href="career.html" data-page="career.html" aria-label="مستقبلك المهني" data-aria-ar="مستقبلك المهني" data-aria-en="Your career" title="مستقبلك المهني" data-title-ar="مستقبلك المهني" data-title-en="Your career"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 8h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z M9 8V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3 M3 13h18"/></svg><span class="label" data-ar="مستقبلك المهني" data-en="Your career">مستقبلك المهني</span></a><a class="nav-item" href="alumni.html" data-page="alumni.html" aria-label="خريجو مِدراك" data-aria-ar="خريجو مِدراك" data-aria-en="Medrak alumni" title="خريجو مِدراك" data-title-ar="خريجو مِدراك" data-title-en="Medrak alumni"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 9l10-5 10 5-10 5z M6 11.5V16c0 1.2 2.7 3 6 3s6-1.8 6-3v-4.5 M22 9v6"/></svg><span class="label" data-ar="خريجو مِدراك" data-en="Medrak alumni">خريجو مِدراك</span></a><a class="nav-item" href="profile.html" data-page="profile.html" aria-label="ملفي في مِدراك" data-aria-ar="ملفي في مِدراك" data-aria-en="My profile" title="ملفي في مِدراك" data-title-ar="ملفي في مِدراك" data-title-en="My profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M4 21a8 8 0 0 1 16 0"/></svg><span class="label" data-ar="ملفي في مِدراك" data-en="My profile">ملفي في مِدراك</span></a>
+  <div class="nav-group-title" data-ar="المساعدة" data-en="Help">المساعدة</div>
+  <a class="nav-item" href="index.html#faq" data-page="index.html" data-hash="#faq" aria-label="الأسئلة الشائعة" data-aria-ar="الأسئلة الشائعة" data-aria-en="FAQ" title="الأسئلة الشائعة" data-title-ar="الأسئلة الشائعة" data-title-en="FAQ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7 M12 17h.01"/></svg><span class="label" data-ar="الأسئلة الشائعة" data-en="FAQ">الأسئلة الشائعة</span></a><a class="nav-item" href="index.html#contact" data-page="index.html" data-hash="#contact" aria-label="تواصل معنا" data-aria-ar="تواصل معنا" data-aria-en="Contact us" title="تواصل معنا" data-title-ar="تواصل معنا" data-title-en="Contact us"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z M3 7l9 6 9-6"/></svg><span class="label" data-ar="تواصل معنا" data-en="Contact us">تواصل معنا</span></a>
+</nav>
 
 <main id="main">
 
@@ -78,7 +73,7 @@
         </div>
 
         <div id="crisisIntro" class="info-card">
-          <h3 style="margin:0 0 10px;color:var(--purple)">أزمة نهر الأمل 🌊</h3>
+          <h3 style="margin:0 0 10px;color:var(--purple-text)">أزمة نهر الأمل 🌊</h3>
           <p style="margin:0 0 14px;font-size:14.5px">أنت مستشار سياسي في دولة <b>روفينيا</b>. نهر "الأمل" يغذي الزراعة في روفينيا ودولة الجوار <b>كالدوسيا</b> معًا. بعد أن أنشأت روفينيا سدًا جديدًا لتوليد الطاقة، انخفض تدفق المياه إلى كالدوسيا، والتوتر بين الدولتين يتصاعد.</p>
           <div class="grid-cards" style="margin-bottom:14px">
             <div class="field-card"><div class="emoji">📊</div><h3 style="font-size:14px">أدلة متاحة</h3><p>تقرير هيدرولوجي: انخفاض 30% بتدفق المياه لكالدوسيا خلال 6 أشهر.</p></div>
@@ -91,7 +86,7 @@
         <div id="crisisGame" style="display:none">
           <div class="quiz-box" style="max-width:100%">
             <p style="margin:0 0 6px;font-size:12px;color:var(--text-soft)">المرحلة <span id="crisisStageNum">1</span> من 3</p>
-            <h3 id="crisisStageTitle" style="margin:0 0 10px;color:var(--purple)"></h3>
+            <h3 id="crisisStageTitle" style="margin:0 0 10px;color:var(--purple-text)"></h3>
             <p id="crisisStageDesc" style="margin:0 0 16px;font-size:14.5px"></p>
             <div class="quiz-opts" id="crisisChoices"></div>
             <div id="crisisResultBox" style="display:none;margin-top:16px;padding-top:14px;border-top:1px dashed var(--line)">
@@ -103,12 +98,12 @@
         </div>
 
         <div id="crisisFinal" style="display:none" class="info-card">
-          <h3 style="margin:0 0 14px;color:var(--purple)">ملخص القرارات 📋</h3>
+          <h3 style="margin:0 0 14px;color:var(--purple-text)">ملخص القرارات 📋</h3>
           <div id="crisisIndicators" style="display:grid;gap:10px;margin-bottom:18px"></div>
           <div id="crisisChoicesSummary" style="font-size:13.5px;color:var(--text-soft);margin-bottom:16px"></div>
           <div style="text-align:center;margin-bottom:14px">
             <div style="font-size:34px" id="crisisBadgeEmoji"></div>
-            <h3 id="crisisBadgeText" style="margin:6px 0;color:var(--purple)"></h3>
+            <h3 id="crisisBadgeText" style="margin:6px 0;color:var(--purple-text)"></h3>
           </div>
           <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
             <button class="btn btn-outline" id="crisisRetryBtn" data-m="جرّب مسارًا مختلفًا 🔁" data-f="جربي مسارًا مختلفًا 🔁" data-en="Try a Different Path 🔁">جرّب مسارًا مختلفًا 🔁</button>
@@ -130,7 +125,7 @@
         </div>
 
         <div id="policyResult" style="display:none" class="info-card">
-          <h3 style="margin:0 0 14px;color:var(--purple)">لوحة تقييم السياسة 📊</h3>
+          <h3 style="margin:0 0 14px;color:var(--purple-text)">لوحة تقييم السياسة 📊</h3>
           <div id="policyIndicators" style="display:grid;gap:10px;margin-bottom:18px"></div>
           <div id="policySummaryText" style="font-size:13.5px;color:var(--text-soft);margin-bottom:16px"></div>
           <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
@@ -156,7 +151,7 @@
         <div id="nationResult" style="display:none" class="info-card">
           <div style="text-align:center;margin-bottom:18px">
             <svg id="nationEmblem" width="90" height="90" viewBox="0 0 100 100"></svg>
-            <h3 id="nationCardName" style="margin:10px 0 4px;color:var(--purple)"></h3>
+            <h3 id="nationCardName" style="margin:10px 0 4px;color:var(--purple-text)"></h3>
             <p id="nationCardTag" style="margin:0;font-size:13px;color:var(--text-soft)"></p>
           </div>
           <div id="nationSummary" style="font-size:13.5px;margin-bottom:16px"></div>
@@ -205,6 +200,7 @@
 
 <script src="assets/store.js"></script>
 <script src="assets/common.js"></script>
+<script src="assets/shell.js"></script>
 <script>
 (function(){
   const root = document.getElementById('medrak-root');
@@ -414,7 +410,7 @@
     const step = policySteps[policy.step];
     document.getElementById('policyStepNum').textContent = policy.step + 1;
     const body = document.getElementById('policyStepBody');
-    let html = '<p style="margin:0 0 14px;font-weight:700;color:var(--purple)">' + step.title + '</p><div class="quiz-opts" id="policyOptsBox"></div>';
+    let html = '<p style="margin:0 0 14px;font-weight:700;color:var(--purple-text)">' + step.title + '</p><div class="quiz-opts" id="policyOptsBox"></div>';
     if (step.type === 'multi') html += '<button class="btn btn-primary" id="policyNextBtn" style="margin-top:16px" disabled>التالي</button>';
     body.innerHTML = html;
     const optsBox = document.getElementById('policyOptsBox');
@@ -552,7 +548,7 @@
     const step = nationSteps[nation.step - 1];
     document.getElementById('nationStepNum').textContent = nation.step + 1;
     const body = document.getElementById('nationStepBody');
-    body.innerHTML = '<p style="margin:0 0 14px;font-weight:700;color:var(--purple)">' + step.title + '</p><div class="quiz-opts" id="nationOptsBox"></div>';
+    body.innerHTML = '<p style="margin:0 0 14px;font-weight:700;color:var(--purple-text)">' + step.title + '</p><div class="quiz-opts" id="nationOptsBox"></div>';
     const optsBox = document.getElementById('nationOptsBox');
     step.options.forEach(opt => {
       const btn = document.createElement('button');
@@ -572,7 +568,7 @@
   function nationRenderNamePicker(){
     document.getElementById('nationStepNum').textContent = 1;
     const body = document.getElementById('nationStepBody');
-    body.innerHTML = '<p style="margin:0 0 14px;font-weight:700;color:var(--purple)">اختر اسمًا خياليًا لدولتك</p><div class="quiz-opts" id="nationOptsBox"></div>';
+    body.innerHTML = '<p style="margin:0 0 14px;font-weight:700;color:var(--purple-text)">اختر اسمًا خياليًا لدولتك</p><div class="quiz-opts" id="nationOptsBox"></div>';
     const optsBox = document.getElementById('nationOptsBox');
     nationNames.forEach(name => {
       const btn = document.createElement('button');

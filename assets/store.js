@@ -66,7 +66,38 @@ window.MedrakStore = (function(){
     return fetch(base64).then(r => r.blob()).catch(() => null);
   }
 
+  /* ===== التفضيلات (الألوان، الوضع، التصميم، اللغة، الصيغة...) تُصدَّر وتُستورد مع التقدم ===== */
+  const PREF_KEYS = ['medrak_theme','medrak_lang','medrak_gender','medrak_palette','medrak_layout','medrak_spotlight','medrak_muted'];
+  const PREF_OK = {
+    medrak_theme: v => v === 'light' || v === 'dark',
+    medrak_lang: v => v === 'ar' || v === 'en',
+    medrak_gender: v => typeof v === 'boolean',
+    medrak_palette: v => ['classic','rose','emerald','ocean','lavender','sand'].indexOf(v) >= 0,
+    medrak_layout: v => ['sidebar','compact','wide','sequential'].indexOf(v) >= 0,
+    medrak_spotlight: v => typeof v === 'boolean',
+    medrak_muted: v => typeof v === 'boolean',
+  };
+  function readPrefs(){
+    const out = {};
+    PREF_KEYS.forEach(k => { try { const raw = localStorage.getItem(k); if (raw !== null) out[k] = JSON.parse(raw); } catch(e){} });
+    return out;
+  }
+  function writePrefs(obj){
+    if (!obj || typeof obj !== 'object') return;
+    PREF_KEYS.forEach(k => {
+      if (Object.prototype.hasOwnProperty.call(obj, k) && PREF_OK[k](obj[k])) {
+        try { localStorage.setItem(k, JSON.stringify(obj[k])); } catch(e){}
+      }
+    });
+  }
+  function cleanKeys(o){
+    ['__proto__','constructor','prototype'].forEach(k => { try { delete o[k]; } catch(e){} });
+    return o;
+  }
+
   return {
+    /** هل فيه حساب (اسم مستعار محفوظ) على هذا الجهاز؟ */
+    hasAccount(){ const p = readAll().profile; return !!(p && p.nickname); },
     /** يقرأ بيانات ميزة معيّنة (مثال: 'crisisLab', 'policySimulator', 'nickname') */
     get(key, fallback){
       const all = readAll();
@@ -91,6 +122,7 @@ window.MedrakStore = (function(){
       const data = readAll();
       data._exportedAt = new Date().toISOString();
       data._app = 'مِدراك | Medrak';
+      data._prefs = readPrefs();
       const finish = (photoBase64) => {
         if (photoBase64) data._photo = photoBase64;
         const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
@@ -111,12 +143,19 @@ window.MedrakStore = (function(){
         try {
           const incoming = JSON.parse(e.target.result);
           if (typeof incoming !== 'object' || incoming === null || Array.isArray(incoming)) throw new Error('bad-format');
-          const photoBase64 = incoming._photo;
-          delete incoming._exportedAt; delete incoming._app; delete incoming._photo;
+          cleanKeys(incoming);
+          const photoBase64 = (typeof incoming._photo === 'string' && incoming._photo.indexOf('data:image/') === 0) ? incoming._photo : null;
+          const prefs = incoming._prefs;
+          delete incoming._exportedAt; delete incoming._app; delete incoming._photo; delete incoming._prefs;
           const current = readAll();
           const merged = Object.assign({}, current, incoming);
           writeAll(merged);
-          const finish = () => { if (onDone) onDone(merged); };
+          writePrefs(prefs);
+          const finish = () => {
+            try { if (window.medrakPrefs) window.medrakPrefs.reload(); } catch(e){}
+            try { window.dispatchEvent(new Event('medrak:imported')); } catch(e){}
+            if (onDone) onDone(merged);
+          };
           if (photoBase64) { base64ToBlob(photoBase64).then(blob => { if (blob) savePhotoBlob(blob); finish(); }); }
           else finish();
         } catch(err){ if (onError) onError(err); }

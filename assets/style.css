@@ -1,45 +1,14 @@
 /* =====================================================================
-   مِدراك | Medrak — إعادة تصميم كاملة باعتماد نظام Sanaa Sciences Design System
-   نفس بنية المتغيرات وأسماءها حرفيًا، مع لوحة ألوان مِدراك الخاصة (بنفسجي/تركواز)
-   ولوحة موازية لوضع "طالبات" (بورجندي/وردي) بنفس آلية الوضع الداكن تمامًا.
+   مِدراك | Medrak — الأنماط الأساسية للمكوّنات
+   • كل الألوان تأتي من assets/themes.css (لوحات × فاتح/داكن، مفحوصة بمعايير WCAG).
+   • هيكل الصفحة (الشريط العلوي/القائمة الجانبية/النوافذ) في assets/shell.css.
+   • لا نعتمد على أي خط أو ملف خارجي: نستخدم خطوط النظام فقط.
    ===================================================================== */
-
-/* لا نعتمد على أي خط خارجي (Google Fonts أو غيره) امتثالًا لشرط "بدون CDN" —
-   نستخدم فقط الخطوط المثبّتة أصلًا على أنظمة التشغيل (لا تحتاج تحميل أو اتصال إنترنت). */
 :root {
   --font-ar-head: 'Segoe UI', Tahoma, Arial, sans-serif;
   --font-ar-body: 'Segoe UI', Tahoma, Arial, sans-serif;
   --font-en-head: -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --font-en-body: -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-}
-
-/* ===== 1) Design Tokens ===== */
-:root {
-  --purple:      #10233F;
-  --purple-deep: #1A3A63;
-  --purple-soft: #E4C878;
-  --purple-text: #10233F;
-  --teal:        #C9A24B;
-  --teal-deep:   #C9A24B;
-  --blue:        #1D4ED8;
-  --orange:      #F2600A;
-  --yellow:      #F0B93E;
-  --green:       #16A34A;
-  --pink:        #F472B6;
-
-  --bg:        #F7F2E8;
-  --bg-alt:    #FFFDF9;
-  --surface:   #FFFDF9;
-  --surface-2: #F7F2E8;
-  --line:      #E7DFCF;
-  --text:      #1B2230;
-  --text-soft: #5B6472;
-  --text-faint:#8B93A3;
-  --shadow:    0 10px 30px rgba(16,35,63,0.10);
-  --shadow-lg: 0 20px 50px rgba(16,35,63,0.18);
-  --focus:     var(--teal);
-  --correct-bg:#E6F6EC; --correct-text:#1C7A3F;
-  --wrong-bg:  #FDE9EF; --wrong-text:  #B3406B;
 
   --radius-lg: 26px;
   --radius-md: 18px;
@@ -50,61 +19,21 @@
   --dur-fast: .2s;
   --dur-med:  .45s;
   --dur-slow: .8s;
-}
 
-:root[data-theme="dark"] {
-  --bg:        #0D1626;
-  --bg-alt:    #121D30;
-  --surface:   #121D30;
-  --surface-2: #0D1626;
-  --line:      #223252;
-  --text:      #EDEFF4;
-  --text-soft: #A9B3C4;
-  --text-faint:#7C8698;
-  --purple-text: #8FB3F0;
-  --shadow:    0 10px 30px rgba(0,0,0,0.35);
-  --shadow-lg: 0 20px 50px rgba(0,0,0,0.45);
-  --correct-bg:#143526; --correct-text:#6FE3A0;
-  --wrong-bg:  #3A1B2E; --wrong-text:  #F291B4;
-}
-
-:root[data-gender="female"] {
-  --purple:      #6B1626;
-  --purple-deep: #8C1F35;
-  --purple-soft: #F0B8C8;
-  --purple-text: #6B1626;
-  --teal:        #D98BA0;
-  --teal-deep:   #D98BA0;
-  --bg:        #FBF0F1;
-  --bg-alt:    #FFFAFA;
-  --surface:   #FFFAFA;
-  --surface-2: #FBF0F1;
-  --line:      #F0D9DD;
-  --shadow:    0 10px 30px rgba(107,22,38,0.12);
-  --shadow-lg: 0 20px 50px rgba(107,22,38,0.18);
-  --focus:     var(--teal);
-}
-:root[data-gender="female"][data-theme="dark"] {
-  --bg:        #1E0E12;
-  --bg-alt:    #2A1319;
-  --surface:   #2A1319;
-  --surface-2: #1E0E12;
-  --line:      #4A222A;
-  --text:      #F6EBEC;
-  --text-soft: #C9A9AF;
-  --text-faint:#9C7F8A;
-  --purple-text: #F0B8C8;
+  /* كثافة التصميم (تتغير حسب «تصميم الصفحة») */
+  --sec-pad: 64px;
+  --card-pad: 22px;
+  --grid-min: 220px;
 }
 
 /* ===== 2) Reset + إعداد الصفحة ===== */
-html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
+html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; background: var(--bg); }
 html[lang="en"] #medrak-root { font-family: var(--font-en-body); }
 html[lang="en"] #medrak-root h1, html[lang="en"] #medrak-root h2, html[lang="en"] #medrak-root .brand { font-family: var(--font-en-head); }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
 
 #medrak-root {
   font-family: var(--font-ar-body);
-  direction: rtl;
   background: var(--bg);
   color: var(--text);
   line-height: 1.75;
@@ -114,7 +43,7 @@ html[lang="en"] #medrak-root h1, html[lang="en"] #medrak-root h2, html[lang="en"
 }
 #medrak-root * { box-sizing: border-box; }
 #medrak-root img { max-width: 100%; display: block; }
-#medrak-root a { color: inherit; }
+:where(#medrak-root) a { color: inherit; }
 #medrak-root .wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
 #medrak-root h1, #medrak-root h2, #medrak-root h3, #medrak-root .brand { font-family: var(--font-ar-head); }
 
@@ -143,28 +72,6 @@ html[lang="en"] #medrak-root h1, html[lang="en"] #medrak-root h2, html[lang="en"
 #medrak-root main > section.reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
 #medrak-root main > section.reveal.in { opacity: 1; transform: translateY(0); }
 
-/* ===== Header ===== */
-#medrak-root header.site { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
-#medrak-root .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; gap: 16px; position: relative; }
-#medrak-root .brand { display: flex; align-items: baseline; gap: 8px; font-weight: 800; font-size: 22px; color: var(--purple-text); }
-#medrak-root .brand small { font-weight: 400; font-size: 13px; color: var(--text-soft); }
-#medrak-root nav.links { display: flex; gap: 22px; font-size: 15px; flex-wrap: wrap; }
-#medrak-root nav.links a { text-decoration: none; color: var(--text-soft); border-bottom: 2px solid transparent; padding-bottom: 3px; transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease); }
-#medrak-root nav.links a:hover { color: var(--purple-text); border-color: var(--teal); }
-#medrak-root .nav-actions { display: flex; align-items: center; gap: 10px; }
-#medrak-root .icon-btn { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
-#medrak-root .icon-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-#medrak-root .gender-toggle { display: flex; background: var(--surface-2); padding: 4px; border-radius: var(--radius-pill); }
-#medrak-root .gender-btn { padding: 8px 16px; font-size: 13px; font-weight: 700; border: none; background: transparent; color: var(--purple-text); cursor: pointer; font-family: inherit; border-radius: var(--radius-pill); transition: .25s var(--ease); }
-#medrak-root .gender-btn.active { background: var(--purple); color: #fff; }
-#medrak-root .menu-toggle { display: none; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); width: 38px; height: 38px; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; }
-@media (max-width: 900px) {
-  #medrak-root .menu-toggle { display: flex; order: -1; }
-  #medrak-root nav.links { display: none; position: absolute; top: 100%; inset-inline-start: 0; inset-inline-end: 0; background: var(--surface); flex-direction: column; gap: 0; padding: 6px 20px 14px; border-bottom: 1px solid var(--line); box-shadow: var(--shadow); z-index: 40; }
-  #medrak-root nav.links.open { display: flex; }
-  #medrak-root nav.links a { padding: 12px 4px; border-bottom: 1px solid var(--line); }
-}
-
 /* ===== Hero ===== */
 #medrak-root .hero { padding: 72px 0 56px; position: relative; overflow: hidden; }
 #medrak-root .hero::before { content: ""; position: absolute; inset-block-start: -40%; inset-inline-end: -10%; width: 480px; height: 480px; background: radial-gradient(circle, color-mix(in srgb, var(--teal) 25%, transparent), transparent 70%); pointer-events: none; }
@@ -184,7 +91,7 @@ html[lang="en"] #medrak-root h1, html[lang="en"] #medrak-root h2, html[lang="en"
 #medrak-root .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; border-radius: var(--radius-pill); font-weight: 700; font-size: 13.5px; text-decoration: none; border: 1.5px solid transparent; cursor: pointer; transition: .25s var(--ease); font-family: inherit; }
 #medrak-root .btn-primary { background: var(--purple); color: #fff; box-shadow: 0 12px 28px color-mix(in srgb, var(--purple) 30%, transparent); }
 #medrak-root .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 34px color-mix(in srgb, var(--purple) 38%, transparent); }
-#medrak-root .btn-outline { border-color: var(--purple-soft); color: var(--purple-text); background: transparent; }
+#medrak-root .btn-outline { border-color: color-mix(in srgb, var(--purple-text) 55%, var(--bg)); color: var(--purple-text); background: transparent; }
 #medrak-root .btn-outline:hover { background: var(--surface-2); transform: translateY(-2px); }
 #medrak-root .btn-teal { background: var(--teal); color: #fff; box-shadow: 0 12px 26px color-mix(in srgb, var(--teal) 28%, transparent); }
 
@@ -195,14 +102,14 @@ html[lang="en"] #medrak-root h1, html[lang="en"] #medrak-root h2, html[lang="en"
 #medrak-root .disclaimer-chip { display: inline-block; margin-top: 22px; font-size: 12.5px; color: var(--text-soft); background: var(--surface); border: 1px solid var(--line); padding: 8px 14px; border-radius: var(--radius-pill); }
 
 /* ===== Sections ===== */
-#medrak-root section { padding: 64px 0; position: relative; z-index: 1; }
+#medrak-root section { padding: var(--sec-pad) 0; position: relative; z-index: 1; }
 #medrak-root section.alt { background: var(--bg-alt); }
 #medrak-root h2.section-title { font-size: clamp(26px, 3vw, 34px); color: var(--purple-text); margin: 0 0 10px; font-weight: 800; }
 #medrak-root p.section-sub { color: var(--text-soft); max-width: 62ch; margin: 0 0 34px; font-size: 16px; }
 
 /* ===== Cards ===== */
-#medrak-root .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 18px; }
-#medrak-root .field-card, #medrak-root .info-card, #medrak-root .sem-card, #medrak-root .date-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 22px; box-shadow: var(--shadow); transition: box-shadow var(--dur-med) var(--ease); }
+#medrak-root .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min)), 1fr)); gap: 18px; }
+#medrak-root .field-card, #medrak-root .info-card, #medrak-root .sem-card, #medrak-root .date-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: var(--card-pad); box-shadow: var(--shadow); transition: box-shadow var(--dur-med) var(--ease); }
 #medrak-root .field-card:hover, #medrak-root .info-card:hover { box-shadow: var(--shadow-lg); }
 #medrak-root .field-card .emoji { font-size: 26px; margin-bottom: 10px; }
 #medrak-root .field-card h3 { margin: 0 0 8px; font-size: 17px; color: var(--purple-text); }
@@ -219,7 +126,7 @@ html[lang="en"] #medrak-root h1, html[lang="en"] #medrak-root h2, html[lang="en"
 
 /* ===== Accordion ===== */
 #medrak-root .accordion-item { border-bottom: 1px solid var(--line); }
-#medrak-root .accordion-head { width: 100%; text-align: right; background: none; border: none; padding: 16px 4px; font-size: 16px; font-weight: 700; color: var(--text); display: flex; justify-content: space-between; cursor: pointer; font-family: inherit; }
+#medrak-root .accordion-head { width: 100%; text-align: start; background: none; border: none; padding: 16px 4px; font-size: 16px; font-weight: 700; color: var(--text); display: flex; justify-content: space-between; cursor: pointer; font-family: inherit; }
 #medrak-root .accordion-head .plus { color: var(--teal-deep); font-size: 20px; transition: transform var(--dur-fast) var(--ease); }
 #medrak-root .accordion-item.open .plus { transform: rotate(45deg); }
 #medrak-root .accordion-body { max-height: 0; overflow: hidden; transition: max-height var(--dur-med) var(--ease); font-size: 14.5px; color: var(--text-soft); }
@@ -256,23 +163,23 @@ html[lang="en"] #medrak-root h1, html[lang="en"] #medrak-root h2, html[lang="en"
 #medrak-root .term-compact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px,1fr)); gap: 4px; }
 #medrak-root .term-chip { display: flex; justify-content: space-between; gap: 8px; padding: 8px 10px; border-radius: var(--radius-sm); background: var(--surface-2); font-size: 12.5px; line-height: 1.4; }
 #medrak-root .term-chip .term-en { font-weight: 700; color: var(--purple-text); }
-#medrak-root .term-chip .term-ar { color: var(--text-soft); text-align: left; }
+#medrak-root .term-chip .term-ar { color: var(--text-soft); text-align: end; }
 #medrak-root .term-of-day { background: var(--surface); border: 1px dashed var(--teal); border-radius: var(--radius-md); padding: 18px; margin-top: 22px; font-size: 14px; }
 
 /* ===== Quiz ===== */
 #medrak-root .quiz-box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 26px; max-width: 640px; box-shadow: var(--shadow); }
 #medrak-root .quiz-q { font-weight: 700; margin-bottom: 14px; }
 #medrak-root .quiz-opts { display: grid; gap: 10px; }
-#medrak-root .quiz-opt { text-align: right; padding: 12px 16px; border-radius: var(--radius-sm); border: 1px solid var(--line); background: var(--surface-2); cursor: pointer; font-family: inherit; font-size: 14px; transition: border-color var(--dur-fast) var(--ease); }
+#medrak-root .quiz-opt { text-align: start; padding: 12px 16px; border-radius: var(--radius-sm); border: 1px solid var(--line); background: var(--surface-2); color: var(--text); cursor: pointer; font-family: inherit; font-size: 14px; transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease); }
 #medrak-root .quiz-opt:hover { border-color: var(--teal); }
-#medrak-root .quiz-opt:disabled { cursor: default; }
+#medrak-root .quiz-opt:disabled { cursor: default; color: var(--text); }
 #medrak-root .quiz-result { display: none; text-align: center; }
 #medrak-root .quiz-result.show { display: block; }
 #medrak-root .quiz-result .badge { font-size: 40px; }
 
 /* ===== Rating / Forms ===== */
 #medrak-root .stars { display: flex; gap: 6px; font-size: 30px; cursor: pointer; margin-bottom: 16px; }
-#medrak-root .stars span { color: var(--line); transition: color var(--dur-fast) var(--ease); }
+#medrak-root .stars span { color: var(--text-faint); transition: color var(--dur-fast) var(--ease); }
 #medrak-root .stars span.active { color: var(--yellow); }
 #medrak-root textarea, #medrak-root input[type=text], #medrak-root input[type=email], #medrak-root input[type=tel], #medrak-root input[type=search], #medrak-root select.form-select { width: 100%; padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid var(--line); background: var(--surface); color: var(--text); font-family: inherit; font-size: 14px; margin-bottom: 14px; transition: border-color var(--dur-fast) var(--ease); }
 #medrak-root textarea:focus, #medrak-root input:focus, #medrak-root select:focus { border-color: var(--purple-text); }
@@ -283,23 +190,54 @@ html[lang="en"] #medrak-root h1, html[lang="en"] #medrak-root h2, html[lang="en"
 #medrak-root form.native-form { margin: 0; }
 
 /* ===== Footer ===== */
-#medrak-root footer.site { background: var(--purple-deep); color: rgba(255,255,255,0.85); padding: 50px 0 26px; margin-top: 20px; font-size: 14px; position: relative; z-index: 1; }
+#medrak-root footer.site { background: var(--footer-bg); color: rgba(255,255,255,0.88); padding: 50px 0 26px; margin-top: 20px; font-size: 14px; position: relative; z-index: 1; }
 #medrak-root footer .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 30px; margin-bottom: 30px; }
 @media (max-width: 700px) { #medrak-root footer .foot-grid { grid-template-columns: 1fr; } }
 #medrak-root footer h5 { color: #fff; margin: 0 0 12px; font-size: 14px; }
-#medrak-root footer a { color: rgba(255,255,255,0.75); text-decoration: none; display: block; margin-bottom: 8px; font-size: 13.5px; }
+#medrak-root footer a { color: rgba(255,255,255,0.82); text-decoration: none; display: block; margin-bottom: 8px; font-size: 13.5px; }
 #medrak-root footer a:hover { color: var(--purple-soft); }
-#medrak-root .foot-bottom { border-top: 1px solid rgba(255,255,255,0.15); padding-top: 20px; font-size: 12.5px; color: rgba(255,255,255,0.6); }
+#medrak-root .foot-bottom { border-top: 1px solid rgba(255,255,255,0.15); padding-top: 20px; font-size: 12.5px; color: rgba(255,255,255,0.74); }
 #medrak-root .foot-notice { background: rgba(255,255,255,0.08); border-radius: var(--radius-sm); padding: 12px 16px; margin-bottom: 16px; }
 
 /* ===== طباعة نظيفة: نخفي هيكل الموقع بالكامل ونظهر المحتوى المطبوع فقط ===== */
 @media print {
-  #particle-field, #scroll-progress, .back-top, header.site, footer.site, .no-print { display: none !important; }
+  #particle-field, #scroll-progress, #cursor-spotlight, .back-top, .topbar, .topnav, .sidebar, .sidebar-backdrop, .mk-overlay, footer.site, .no-print { display: none !important; }
   #medrak-root { background: #fff !important; color: #000 !important; }
-  body { margin: 0 !important; }
+  #medrak-root main, #medrak-root footer { margin-inline-start: 0 !important; }
+  html, body { margin: 0 !important; background: #fff !important; }
   #cvPreviewBox { background: #fff !important; color: #000 !important; box-shadow: none !important; border: none !important; }
 }
 
 #medrak-root .back-top { position: fixed; bottom: 22px; inset-inline-start: 22px; width: 44px; height: 44px; border-radius: 50%; background: var(--purple); color: #fff; border: none; cursor: pointer; display: none; align-items: center; justify-content: center; font-size: 16px; box-shadow: var(--shadow); z-index: 60; transition: transform var(--dur-fast) var(--ease); }
 #medrak-root .back-top:hover { transform: translateY(-3px); }
 #medrak-root .back-top.show { display: flex; }
+
+
+/* =====================================================================
+   وضوح العناصر التفاعلية بكل الأوضاع (فاتح/داكن) وكل الحالات
+   (مختار/غير مختار، تمرير، ضغط، تعطيل، تركيز)
+   ===================================================================== */
+#medrak-root button, #medrak-root input, #medrak-root select, #medrak-root textarea { font-family: inherit; }
+:where(#medrak-root button) { color: inherit; }
+#medrak-root select option, #medrak-root select optgroup { background: var(--surface); color: var(--text); }
+#medrak-root ::placeholder { color: var(--text-faint); opacity: 1; }
+#medrak-root input[type="checkbox"], #medrak-root input[type="radio"], #medrak-root input[type="range"] { accent-color: var(--purple); }
+#medrak-root ::selection { background: var(--purple); color: #fff; }
+#medrak-root input[type="file"] { color: var(--text-soft); max-width: 100%; }
+#medrak-root input[type="file"]::file-selector-button { font-family: inherit; font-weight: 700; margin-inline-end: 10px; padding: 7px 14px; border-radius: var(--radius-pill); border: 1px solid color-mix(in srgb, var(--purple-text) 55%, var(--bg)); background: var(--surface-2); color: var(--purple-text); cursor: pointer; }
+
+#medrak-root .btn:active { transform: translateY(0) scale(.98); }
+#medrak-root .btn:disabled, #medrak-root .btn[aria-disabled="true"] {
+  background: var(--surface-2); color: var(--text-faint); border: 1.5px solid var(--line); box-shadow: none; cursor: not-allowed; transform: none;
+}
+#medrak-root .quiz-opt:active:not(:disabled) { transform: scale(.99); }
+#medrak-root .quiz-opt:hover:not(:disabled) { background: var(--surface); }
+#medrak-root .tab-btn:hover:not(.active):not(:disabled) { background: var(--surface); }
+#medrak-root .tab-btn:disabled { color: var(--text-faint); cursor: not-allowed; }
+#medrak-root .course-row:focus-visible, #medrak-root .term-item:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+#medrak-root .icon-btn { color: var(--text); }
+
+/* عند الإنجليزي (LTR): كل فقرة تتبع اتجاه لغتها (العربي يبقى يمين، الإنجليزي يسار) */
+html[dir="ltr"] #medrak-root p, html[dir="ltr"] #medrak-root li, html[dir="ltr"] #medrak-root h1,
+html[dir="ltr"] #medrak-root h2, html[dir="ltr"] #medrak-root h3, html[dir="ltr"] #medrak-root h4,
+html[dir="ltr"] #medrak-root .quiz-opt, html[dir="ltr"] #medrak-root label.field-label { unicode-bidi: plaintext; }
