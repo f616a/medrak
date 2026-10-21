@@ -1,0 +1,169 @@
+/* =====================================================================
+   مِدراك | university.css — اختيار الجامعة، معلومات القسم، المصادر، وخطة جامعة الملك سعود
+   الألوان كلها من المتغيرات (themes.css) فتبقى النصوص مقروءة بكل لوحة وكل وضع. الخصائص منطقية (RTL/LTR).
+   ===================================================================== */
+
+/* إظهار/إخفاء عناصر حسب الجامعة المعروضة: data-uni-only="kau" | "ksu" | "kau none" ... */
+html[data-uni="kau"]  [data-uni-only]:not([data-uni-only~="kau"]),
+html[data-uni="ksu"]  [data-uni-only]:not([data-uni-only~="ksu"]),
+html[data-uni="none"] [data-uni-only]:not([data-uni-only~="none"]) { display: none !important; }
+
+/* ---------- محوّل الجامعة بالهيدر ---------- */
+.tb-btn#uniBtn { border-color: var(--line); background: var(--surface); max-width: 260px; }
+.tb-btn#uniBtn .uni-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tb-btn#uniBtn .uni-code { display: none; font-weight: 800; letter-spacing: .04em; }
+.tb-btn#uniBtn .chev { width: 16px; height: 16px; opacity: .7; }
+@media (max-width: 719.98px) {
+  .tb-btn#uniBtn { width: auto; padding: 0 10px; }
+  .tb-btn#uniBtn .uni-name { display: none; }
+  .tb-btn#uniBtn .uni-code { display: inline; }
+}
+.uni-menu { position: fixed; z-index: 1500; background: var(--surface); color: var(--text); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow-lg); padding: 8px; display: flex; flex-direction: column; gap: 2px; }
+.uni-menu[hidden] { display: none; }
+.uni-menu .um-title { font-size: 12px; font-weight: 800; color: var(--text-soft); padding: 8px 10px 6px; }
+.uni-menu button { display: flex; align-items: center; gap: 10px; width: 100%; text-align: start; padding: 10px; border-radius: 12px; border: 1px solid transparent; background: transparent; color: var(--text); font-family: inherit; cursor: pointer; }
+.uni-menu button:hover, .uni-menu button:focus-visible { background: var(--surface-2); border-color: var(--line); outline: none; }
+.uni-menu button[aria-checked="true"] { background: var(--surface-2); border-color: var(--purple-text); }
+.uni-menu .um-check { width: 20px; flex: none; font-weight: 800; color: var(--purple-text); text-align: center; }
+.uni-menu .um-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.uni-menu .um-txt b { font-size: 14px; }
+.uni-menu .um-txt small { font-size: 12px; color: var(--text-soft); line-height: 1.4; }
+
+/* ---------- معاينة رابط المشاركة ---------- */
+.uni-preview { position: sticky; top: var(--topbar-h); z-index: 54; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 10px clamp(12px, 2vw, 24px); background: var(--surface-2); border-bottom: 2px solid var(--purple-text); color: var(--text); font-size: 13.5px; font-weight: 700; }
+.uni-preview .up-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.uni-preview .btn { padding: 8px 16px; font-size: 12.5px; }
+
+/* ---------- بطاقات اختيار الجامعة ---------- */
+.uni-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 14px; margin-bottom: 16px; }
+.uni-card { text-align: start; display: flex; flex-direction: column; gap: 10px; padding: 18px; border-radius: 22px; border: 2px solid var(--line); background: var(--surface); color: var(--text); cursor: pointer; font-family: inherit; position: relative; transition: border-color var(--dur-fast), box-shadow var(--dur-fast), transform var(--dur-fast); }
+.uni-card:hover { border-color: color-mix(in srgb, var(--purple-text) 55%, var(--line)); transform: translateY(-2px); }
+.uni-card:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.uni-card[aria-pressed="true"] { border-color: var(--purple-text); background: var(--surface-2); box-shadow: 0 0 0 4px color-mix(in srgb, var(--purple-text) 22%, transparent); }
+.uni-card .uc-top { display: flex; align-items: center; justify-content: space-between; }
+.uni-card .uc-mark { font-size: 28px; }
+.uni-card .uc-code { font-size: 12px; font-weight: 800; letter-spacing: .06em; padding: 3px 10px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); color: var(--text-soft); }
+.uni-card .uc-name { font-size: 20px; font-weight: 800; color: var(--text); }
+.uni-card .uc-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 13.5px; color: var(--text-soft); }
+.uni-card .uc-picked { display: none; font-size: 13px; font-weight: 800; color: var(--correct-text); }
+.uni-card[aria-pressed="true"] .uc-picked { display: inline; }
+.uni-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.uni-hint { margin: 8px 0 0; font-size: 13px; font-weight: 700; color: var(--text-soft); min-height: 18px; }
+#medrak-root section#uniChooser { padding: 8px 0 24px; }
+.uni-chooser-card { background: linear-gradient(135deg, var(--surface-2), var(--surface)); border: 1px solid var(--line); border-radius: 28px; padding: clamp(18px, 3vw, 32px); box-shadow: var(--shadow); }
+.uni-chooser-card h2 { margin: 0 0 6px; font-size: clamp(22px, 3.4vw, 30px); color: var(--text); }
+.uni-chooser-card > p { margin: 0 0 18px; color: var(--text-soft); line-height: 1.8; }
+.uni-note { margin: 0 0 14px; padding: 8px 14px; border-radius: 12px; background: var(--surface); border: 1px dashed var(--line); font-size: 13px; font-weight: 700; color: var(--text-soft); }
+.ob-card .uni-step .uni-cards { grid-template-columns: 1fr; }
+
+/* ---------- معلومات القسم ---------- */
+.dept-h { margin: 18px 0 8px; font-size: 16px; color: var(--purple-text); }
+.dept-note { margin: 10px 0 0; font-size: 12.5px; color: var(--text-soft); line-height: 1.7; }
+.dept-warn { margin: 12px 0; padding: 10px 14px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line); border-inline-start: 4px solid var(--yellow); font-size: 13.5px; line-height: 1.8; color: var(--text); }
+.dept-list { margin: 0; padding-inline-start: 22px; line-height: 2; color: var(--text); }
+.dept-list.chips { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; line-height: 1.4; }
+.dept-list.chips li { padding: 7px 14px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); font-size: 13.5px; font-weight: 700; }
+.dept-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; align-items: center; }
+.fact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 12px; margin: 14px 0; }
+.fact { padding: 14px; border-radius: 16px; background: var(--surface-2); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px; }
+.fact span { font-size: 12px; color: var(--text-soft); font-weight: 700; }
+.fact b { font-size: 15px; color: var(--text); line-height: 1.5; }
+.adm-block { margin: 14px 0; padding: 14px 16px; border-radius: 16px; background: var(--surface-2); border: 1px solid var(--line); }
+.adm-block h4 { margin: 0 0 6px; font-size: 15px; display: flex; align-items: center; gap: 10px; color: var(--text); }
+.adm-block p { margin: 0; font-size: 13.5px; line-height: 1.85; color: var(--text-soft); }
+.adm-n { width: 26px; height: 26px; border-radius: 50%; background: var(--purple); color: #fff; display: inline-grid; place-items: center; font-size: 13px; font-weight: 800; flex: none; }
+.acad-note { margin: 18px 0 0; padding: 12px 16px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line); font-size: 13px; line-height: 1.8; color: var(--text-soft); }
+
+/* ---------- المصادر الرسمية ---------- */
+.src-lead { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+.src-lead p { margin: 0; color: var(--text-soft); font-size: 14.5px; line-height: 1.8; }
+.src-group { border: 1px solid var(--line); border-radius: 18px; background: var(--surface); margin-bottom: 12px; overflow: hidden; }
+.src-group > summary { cursor: pointer; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; gap: 10px; font-weight: 800; font-size: 15.5px; color: var(--text); list-style: none; }
+.src-group > summary::-webkit-details-marker { display: none; }
+.src-group > summary::after { content: '+'; font-size: 22px; color: var(--teal-deep); margin-inline-start: 10px; }
+.src-group[open] > summary::after { content: '−'; }
+.src-group > summary:focus-visible { outline: 3px solid var(--focus); outline-offset: -3px; }
+.src-count { margin-inline-start: auto; font-size: 12px; padding: 2px 10px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); color: var(--text-soft); }
+.src-list { list-style: none; margin: 0; padding: 0 14px 14px; display: flex; flex-direction: column; gap: 10px; }
+.src-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 14px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line); }
+.src-main { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1 1 260px; }
+.src-main b { font-size: 14px; color: var(--text); line-height: 1.5; }
+.src-meta { font-size: 12.5px; color: var(--text-soft); }
+.src-note { font-size: 12px; color: var(--text-soft); line-height: 1.6; }
+.src-ver { font-size: 12px; font-weight: 700; color: var(--text-soft); }
+.src-open { padding: 8px 16px; font-size: 12.5px; white-space: nowrap; }
+.src-disclaimer { margin-top: 14px; padding: 12px 16px; border-radius: 14px; border: 1px dashed var(--line); font-size: 13px; color: var(--text-soft); line-height: 1.8; }
+
+/* ---------- تذييل التنبيه القانوني ---------- */
+footer.site .foot-notice { text-align: start; line-height: 1.9; }
+footer.site .foot-notice-2 { margin: 8px 0 0; font-size: 12.5px; line-height: 1.9; color: rgba(255,255,255,0.82); }
+
+/* ---------- الخطة الدراسية: لافتة الجامعة + الحالة ---------- */
+.plan-uni-banner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 18px; border-radius: 18px; background: var(--surface); border: 1px solid var(--line); margin-bottom: 14px; }
+.plan-uni-banner .pub-name { font-weight: 800; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.plan-uni-banner .pub-tag { font-size: 12px; font-weight: 800; padding: 3px 12px; border-radius: 999px; background: var(--purple); color: #fff; }
+.plan-uni-banner .pub-acts { display: flex; gap: 8px; flex-wrap: wrap; }
+.plan-uni-banner .btn { padding: 7px 14px; font-size: 12.5px; }
+.plan-gate { text-align: center; }
+.plan-gate .uni-cards { max-width: 720px; margin-inline: auto; text-align: start; }
+
+/* ---------- خطة جامعة الملك سعود ---------- */
+.ksu-status { padding: 14px 18px; border-radius: 18px; background: var(--surface-2); border: 1px solid var(--line); border-inline-start: 5px solid var(--yellow); margin-bottom: 16px; font-size: 14px; line-height: 1.9; color: var(--text); }
+.ksu-status b { color: var(--text); }
+.ksu-status details { margin-top: 8px; }
+.ksu-status summary { cursor: pointer; font-weight: 800; color: var(--purple-text); }
+.ksu-status ol { margin: 10px 0 0; padding-inline-start: 22px; color: var(--text-soft); font-size: 13px; line-height: 1.9; }
+.ksu-curr { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; font-size: 13px; color: var(--text-soft); }
+.ksu-curr b { color: var(--text); }
+.ksu-curr .tag { padding: 3px 12px; border-radius: 999px; border: 1px solid var(--yellow); background: var(--surface-2); color: var(--text); font-weight: 800; font-size: 12px; }
+.ksu-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 12px; margin-bottom: 14px; }
+.ksu-summary .box { padding: 14px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px; }
+.ksu-summary .box span { font-size: 12px; font-weight: 700; color: var(--text-soft); }
+.ksu-summary .box b { font-size: 22px; color: var(--text); }
+.ksu-summary .box small { font-size: 11.5px; color: var(--text-soft); line-height: 1.5; }
+.ksu-bar { background: var(--surface-2); border-radius: 999px; height: 12px; overflow: hidden; border: 1px solid var(--line); }
+.ksu-bar > i { display: block; height: 100%; background: linear-gradient(90deg, var(--purple), var(--teal)); transition: width .3s var(--ease); }
+.ksu-lock { margin: 10px 0 0; font-size: 12.5px; color: var(--text-soft); line-height: 1.8; }
+.ksu-levels { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); gap: 14px; margin-top: 14px; }
+.ksu-level { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 16px; }
+.ksu-level h4 { margin: 0 0 4px; font-size: 15.5px; color: var(--text); display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.ksu-level h4 small { font-size: 12px; color: var(--text-soft); font-weight: 700; }
+.ksu-level .lv-note { margin: 0 0 8px; font-size: 12px; color: var(--text-soft); }
+.krow { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 12px; border: 1px solid transparent; flex-wrap: wrap; }
+.krow + .krow { border-top: 1px dashed var(--line); }
+.krow:hover { background: var(--surface-2); }
+.krow .k-name { flex: 1 1 150px; min-width: 0; text-align: start; background: none; border: 0; padding: 0; font-family: inherit; font-size: 13.5px; font-weight: 700; color: var(--text); cursor: pointer; line-height: 1.5; }
+.krow .k-name:hover { text-decoration: underline; text-underline-offset: 3px; }
+.krow .k-name:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+.krow .k-meta { font-size: 12px; color: var(--text-soft); white-space: nowrap; }
+.krow .k-badge { font-size: 11px; font-weight: 800; padding: 2px 9px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface-2); color: var(--text-soft); white-space: nowrap; }
+.krow .k-badge.req { border-color: var(--purple-text); color: var(--purple-text); }
+.krow select.k-state { width: auto; min-width: 104px; padding: 6px 10px; margin: 0; font-size: 12.5px; font-weight: 700; border-radius: 10px; }
+.krow[data-state="done"] { background: color-mix(in srgb, var(--correct-bg) 70%, var(--surface)); }
+.krow[data-state="current"] { background: color-mix(in srgb, var(--surface-2) 80%, var(--yellow) 12%); }
+.krow[data-state="planned"] { background: var(--surface-2); border-color: var(--line); }
+.krow .k-warn { flex: 1 0 100%; font-size: 11.5px; color: var(--wrong-text); }
+.krow .k-dup { flex: 1 0 100%; font-size: 11.5px; color: var(--text-soft); }
+.ksu-elective { margin-top: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 16px; }
+.ksu-elective h4 { margin: 0 0 4px; font-size: 15.5px; color: var(--text); }
+.ksu-elective .el-count { margin: 4px 0 10px; font-size: 13px; font-weight: 700; color: var(--text-soft); }
+.ksu-elective .el-over { color: var(--yellow); }
+.ksu-legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--text-soft); margin: 4px 0 12px; }
+.ksu-legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-inline-end: 6px; vertical-align: -1px; border: 1px solid var(--line); }
+.ksu-legend .l-done::before { background: var(--correct-bg); }
+.ksu-legend .l-current::before { background: var(--yellow); }
+.ksu-legend .l-planned::before { background: var(--surface-2); border-style: dashed; }
+.ksu-next { margin-top: 14px; padding: 12px 16px; border-radius: 16px; background: var(--surface-2); border: 1px dashed var(--line); font-size: 13.5px; color: var(--text); }
+#courseModal .modal-box .m-note { font-size: 12.5px; color: var(--text-soft); line-height: 1.8; margin: 8px 0; }
+#courseModal .modal-box .m-link { font-size: 13px; }
+
+/* نافذة التخصيص: أزرار الجامعة قد تلتف على الجوال */
+.seg.seg-wrap { flex-wrap: wrap; border-radius: 22px; justify-content: center; }
+.seg.seg-wrap button { padding: 8px 14px; }
+.ob-uni-wrap .ob-inner { padding-top: 22px; }
+.ksu-search { width: 100%; margin: 0 0 12px; }
+
+/* أزرار فوق خلفيات ملوّنة دائمة (بطاقة الهيرو): أبيض بنص داكن — مقروء بكل لوحة ووضع */
+.btn.btn-light, #medrak-root .btn.btn-light { background: #fff; color: #10233F; border: 2px solid #fff; font-weight: 800; box-shadow: none; }
+#medrak-root .btn.btn-light:hover { background: #F2F5FA; }
+.hero-card .uni-none-stat span { color: #fff; font-size: 14.5px; line-height: 1.8; }

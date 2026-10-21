@@ -22,10 +22,11 @@
   /* ============================================================
      التفضيلات
      ============================================================ */
-  const KEYS = { theme:'medrak_theme', lang:'medrak_lang', gender:'medrak_gender', palette:'medrak_palette', layout:'medrak_layout', spotlight:'medrak_spotlight', muted:'medrak_muted' };
+  const KEYS = { theme:'medrak_theme', lang:'medrak_lang', gender:'medrak_gender', palette:'medrak_palette', layout:'medrak_layout', spotlight:'medrak_spotlight', muted:'medrak_muted', university:'medrak_university' };
+  const UNI_VALUES = ['kau', 'ksu', 'none'];
   const PALETTE_IDS = ['classic','rose','emerald','ocean','lavender','sand'];
   const LAYOUT_IDS = ['sidebar','compact','wide','sequential'];
-  const DEFAULTS = { theme:'light', lang:'ar', isFemale:false, palette:null, layout:'sidebar', spotlight:true, muted:true };
+  const DEFAULTS = { theme:'light', lang:'ar', isFemale:false, palette:null, layout:'sidebar', spotlight:true, muted:true, university:null };
 
   function readSaved(){
     const pal = LS(KEYS.palette, null);
@@ -38,6 +39,7 @@
       layout: LAYOUT_IDS.indexOf(lay) >= 0 ? lay : 'sidebar',
       spotlight: LS(KEYS.spotlight, true) !== false,
       muted: LS(KEYS.muted, true) !== false,
+      university: UNI_VALUES.indexOf(LS(KEYS.university, null)) >= 0 ? LS(KEYS.university, null) : null,   /* null = لم يختر بعد | none = يستكشف بدون جامعة */
     };
   }
   const state = readSaved();
@@ -45,11 +47,20 @@
 
   function resolvedPalette(s){ return s.palette || (s.isFemale ? 'rose' : 'classic'); }
 
+  /* الجامعة المعروضة فعليًا: رابط المشاركة ?uni= يعرض جامعة معيّنة مؤقتًا (معاينة) دون تغيير اختيار الطالب المحفوظ */
+  let previewUni = null;
+  try { const q = new URLSearchParams(location.search).get('uni'); if (q === 'kau' || q === 'ksu') previewUni = q; } catch(e){}
+  function effectiveUni(s){ s = s || state; return previewUni || ((s.university === 'kau' || s.university === 'ksu') ? s.university : 'none'); }
+  window.medrakEffectiveUniversity = function(){ return effectiveUni(state); };
+  window.medrakIsUniPreview = function(){ return !!previewUni && previewUni !== state.university; };
+  window.medrakEndUniPreview = function(){ previewUni = null; try { const u = new URL(location.href); u.searchParams.delete('uni'); history.replaceState(null, '', u.pathname + (u.search || '') + u.hash); } catch(e){} applyToDom(state); window.dispatchEvent(new CustomEvent('medrak:prefs', { detail: { state: Object.assign({}, state), prev: Object.assign({}, state) } })); };
+
   function applyToDom(s){
     html.setAttribute('data-theme', s.theme);
     html.setAttribute('data-palette', resolvedPalette(s));
     html.setAttribute('data-layout', s.layout);
     html.setAttribute('data-spotlight', s.spotlight ? 'on' : 'off');
+    html.setAttribute('data-uni', effectiveUni(s));
     html.setAttribute('data-gender', s.isFemale ? 'female' : 'male');
     html.setAttribute('lang', s.lang);
     html.setAttribute('dir', s.lang === 'en' ? 'ltr' : 'rtl');
@@ -87,6 +98,7 @@
     LSset(KEYS.theme, s.theme); LSset(KEYS.lang, s.lang); LSset(KEYS.gender, s.isFemale);
     if (s.palette) LSset(KEYS.palette, s.palette); else LSdel(KEYS.palette);
     LSset(KEYS.layout, s.layout); LSset(KEYS.spotlight, s.spotlight); LSset(KEYS.muted, s.muted);
+    if (s.university) LSset(KEYS.university, s.university); else LSdel(KEYS.university);
   }
 
   window.medrakPrefs = {
@@ -106,6 +118,7 @@
         else if (k === 'lang') state.lang = v === 'en' ? 'en' : 'ar';
         else if (k === 'palette') state.palette = PALETTE_IDS.indexOf(v) >= 0 ? v : null;
         else if (k === 'layout') state.layout = LAYOUT_IDS.indexOf(v) >= 0 ? v : 'sidebar';
+        else if (k === 'university') state.university = UNI_VALUES.indexOf(v) >= 0 ? v : null;
         else if (k === 'isFemale' || k === 'spotlight' || k === 'muted') state[k] = !!v;
       });
       applyToDom(state);
@@ -186,8 +199,12 @@
     if (!window.MedrakStore) return 0;
     const keys = ['crisisLab','policySim','nationBuilder','mediaLiteracy','careerQuiz','pressConference','negotiationRoom','diplomaticLanguage','researchMethodsPlan'];
     let done = keys.filter(function(k){ return !!MedrakStore.get(k); }).length;
-    if (((MedrakStore.get('studyPlanProgress', { completedCodes: [] }) || {}).completedCodes || []).length > 0) done++;
-    if ((MedrakStore.get('semesterTasks', []) || []).length > 0) done++;
+    const uni = (state.university === 'kau' || state.university === 'ksu') ? state.university : null;
+    if (uni) {
+      const sp = MedrakStore.acadGet(uni, 'studyPlanProgress', null) || {};
+      if (((sp.completedCodes || []).length > 0) || (sp.states && Object.keys(sp.states).length > 0)) done++;
+      if ((MedrakStore.acadGet(uni, 'semesterTasks', []) || []).length > 0) done++;
+    }
     if ((MedrakStore.get('interviewAnswers', []) || []).length > 0) done++;
     return Math.round((done / (keys.length + 3)) * 100);
   };

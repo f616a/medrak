@@ -12,7 +12,7 @@
   const state = window.medrakState;
   const reducedMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
-  const ICON_PATHS = {"home": "M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z", "landmark": "M3 21h18 M5 21V10 M9.5 21V10 M14.5 21V10 M19 21V10 M12 3 3 8h18z", "calendar": "M7 3v4 M17 3v4 M4 8h16 M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z", "book": "M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2z M12 6.5v13", "file": "M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z M14 3v5h5 M9 13h6 M9 17h6", "compass": "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M15.5 8.5 13.5 13.5 8.5 15.5 10.5 10.5z", "message": "M21 12a8 8 0 0 1-11.5 7.2L4 20l1.1-4.3A8 8 0 1 1 21 12z", "flask": "M9 3h6 M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2.2h12.4a1.5 1.5 0 0 0 1.3-2.2L14 9V3 M7.5 15h9", "globe": "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M3 12h18 M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z", "shield": "M12 3 4 6v6c0 4.4 3.4 8.3 8 9 4.6-.7 8-4.6 8-9V6z M9 12l2 2 4-4", "briefcase": "M4 8h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z M9 8V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3 M3 13h18", "grad": "M2 9l10-5 10 5-10 5z M6 11.5V16c0 1.2 2.7 3 6 3s6-1.8 6-3v-4.5 M22 9v6", "user": "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M4 21a8 8 0 0 1 16 0", "info": "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M12 11v5 M12 8h.01", "palette": "M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.9 1.5-1.9-.4-1.2.4-2.1 1.6-2.1H17a4 4 0 0 0 4-4c0-5-4-10-9-10z M7.5 11.5h.01 M10 7.5h.01 M14.5 7.5h.01", "help": "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7 M12 17h.01", "mail": "M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z M3 7l9 6 9-6", "menu": "M4 7h16 M4 12h16 M4 17h16", "close": "M6 6l12 12 M18 6L6 18", "camera": "M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z M12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z", "check": "M5 12.5l4.5 4.5L19 7.5", "spark": "M12 3l1.9 5.2L19 10l-5.1 1.8L12 17l-1.9-5.2L5 10l5.1-1.8z M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z", "lock": "M6 11h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1z M8 11V8a4 4 0 0 1 8 0v3", "download": "M12 4v11 M7 11l5 5 5-5 M5 20h14", "upload": "M12 16V5 M7 9l5-5 5 5 M5 20h14", "pencil": "M4 20h4L19 9l-4-4L4 16z M13.5 6.5l4 4"};
+  const ICON_PATHS = {"home": "M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z", "landmark": "M3 21h18 M5 21V10 M9.5 21V10 M14.5 21V10 M19 21V10 M12 3 3 8h18z", "calendar": "M7 3v4 M17 3v4 M4 8h16 M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z", "book": "M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2z M12 6.5v13", "file": "M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z M14 3v5h5 M9 13h6 M9 17h6", "compass": "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M15.5 8.5 13.5 13.5 8.5 15.5 10.5 10.5z", "message": "M21 12a8 8 0 0 1-11.5 7.2L4 20l1.1-4.3A8 8 0 1 1 21 12z", "flask": "M9 3h6 M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2.2h12.4a1.5 1.5 0 0 0 1.3-2.2L14 9V3 M7.5 15h9", "globe": "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M3 12h18 M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z", "shield": "M12 3 4 6v6c0 4.4 3.4 8.3 8 9 4.6-.7 8-4.6 8-9V6z M9 12l2 2 4-4", "briefcase": "M4 8h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z M9 8V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3 M3 13h18", "grad": "M2 9l10-5 10 5-10 5z M6 11.5V16c0 1.2 2.7 3 6 3s6-1.8 6-3v-4.5 M22 9v6", "user": "M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M4 21a8 8 0 0 1 16 0", "info": "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M12 11v5 M12 8h.01", "palette": "M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.9 1.5-1.9-.4-1.2.4-2.1 1.6-2.1H17a4 4 0 0 0 4-4c0-5-4-10-9-10z M7.5 11.5h.01 M10 7.5h.01 M14.5 7.5h.01", "help": "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7 M12 17h.01", "mail": "M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z M3 7l9 6 9-6", "menu": "M4 7h16 M4 12h16 M4 17h16", "close": "M6 6l12 12 M18 6L6 18", "camera": "M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z M12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z", "check": "M5 12.5l4.5 4.5L19 7.5", "spark": "M12 3l1.9 5.2L19 10l-5.1 1.8L12 17l-1.9-5.2L5 10l5.1-1.8z M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z", "lock": "M6 11h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1z M8 11V8a4 4 0 0 1 8 0v3", "download": "M12 4v11 M7 11l5 5 5-5 M5 20h14", "upload": "M12 16V5 M7 9l5-5 5 5 M5 20h14", "pencil": "M4 20h4L19 9l-4-4L4 16z M13.5 6.5l4 4", "chevron": "M6 9l6 6 6-6"};
   const PALETTES = {"classic": {"ar": "كلاسيكي", "en": "Classic", "desc_ar": "كحلي وذهبي", "desc_en": "Navy & gold", "light": {"bg": "#F7F2E8", "surface": "#FFFDF9", "fill": "#10233F", "teal": "#C9A24B", "soft": "#E4C878", "text": "#10233F"}, "dark": {"bg": "#0D1626", "surface": "#121D30", "fill": "#2D5A9E", "teal": "#C9A24B", "soft": "#ECD89D", "text": "#8FB3F0"}}, "rose": {"ar": "عنابي وردي", "en": "Burgundy rose", "desc_ar": "عنابي مع وردي ذهبي", "desc_en": "Burgundy with rose gold", "light": {"bg": "#FBF0F1", "surface": "#FFFAFA", "fill": "#6B1626", "teal": "#D98BA0", "soft": "#F0B8C8", "text": "#6B1626"}, "dark": {"bg": "#1E0E12", "surface": "#2A1319", "fill": "#B03A5B", "teal": "#D98BA0", "soft": "#F3E6EC", "text": "#F0B8C8"}}, "emerald": {"ar": "زمردي", "en": "Emerald", "desc_ar": "أخضر زمردي مع رملي", "desc_en": "Emerald with sand", "light": {"bg": "#F1F7F3", "surface": "#FAFDFB", "fill": "#0F5C4B", "teal": "#C8A24A", "soft": "#BFE8D6", "text": "#0F5C4B"}, "dark": {"bg": "#0C1A15", "surface": "#10241D", "fill": "#1A755E", "teal": "#C8A24A", "soft": "#DCF3E7", "text": "#7FD9B8"}}, "ocean": {"ar": "أزرق ناعم", "en": "Soft blue", "desc_ar": "أزرق هادئ مع تركواز", "desc_en": "Calm blue with teal", "light": {"bg": "#F1F6FB", "surface": "#FAFCFF", "fill": "#245682", "teal": "#2E9C95", "soft": "#BCD6EE", "text": "#1F4A72"}, "dark": {"bg": "#0B1622", "surface": "#101F30", "fill": "#346AA2", "teal": "#2E9C95", "soft": "#E3EFF3", "text": "#8CC3F0"}}, "lavender": {"ar": "لافندر", "en": "Lavender", "desc_ar": "بنفسجي هادئ مع وردي", "desc_en": "Soft purple with pink", "light": {"bg": "#F6F2FC", "surface": "#FFFFFF", "fill": "#5B3FA0", "teal": "#B8559C", "soft": "#D9CCF5", "text": "#4A3290"}, "dark": {"bg": "#130E22", "surface": "#1A1330", "fill": "#7352CC", "teal": "#B8559C", "soft": "#F3EEF5", "text": "#BBA8F2"}}, "sand": {"ar": "رملي", "en": "Sand", "desc_ar": "برونزي رملي دافئ", "desc_en": "Warm bronze sand", "light": {"bg": "#FBF4E8", "surface": "#FFFCF6", "fill": "#7E5220", "teal": "#B8863B", "soft": "#F1D9B0", "text": "#6E451A"}, "dark": {"bg": "#1A130B", "surface": "#231A10", "fill": "#8E5E24", "teal": "#B8863B", "soft": "#F3EFDD", "text": "#E8C58C"}}};
 
   /* ---------------- أدوات صغيرة ---------------- */
@@ -146,6 +146,35 @@
       else if (!e.shiftKey && (document.activeElement === last || !top.dlg.contains(document.activeElement))) { e.preventDefault(); first.focus(); }
     }
   });
+
+  /** نافذة تأكيد بسيطة تُرجع Promise<boolean>. تستخدمها store.importJSON قبل الدمج مع بيانات موجودة */
+  function confirmDialog(titleAr, titleEn, bodyAr, bodyEn, okAr, okEn){
+    return new Promise(function(resolve){
+      let settled = false;
+      const dlg = makeDialog({ id: 'confirm', cls: 'confirm-dialog', label: 'cfTitle', initialFocus: '#cfOk',
+        onRequestClose: function(){ if (!settled) { settled = true; resolve(false); } dlg.close('cancel'); }, onClose: function(){ setTimeout(function(){ dlg.overlay.remove(); }, 400); } });
+      dlg.dlg.style.setProperty('--dlg-w', '460px');
+      dlg.dlg.innerHTML =
+        '<div class="mk-head"><h2 id="cfTitle">' + esc(txt(titleAr, titleEn)) + '</h2></div>' +
+        '<div class="mk-body"><p class="mk-note" style="font-size:14px">' + esc(txt(bodyAr, bodyEn)) + '</p></div>' +
+        '<div class="mk-foot"><button type="button" class="btn btn-primary" id="cfOk">' + esc(txt(okAr, okEn)) + '</button>' +
+        '<button type="button" class="btn btn-outline" id="cfNo">' + esc(txt('إلغاء', 'Cancel')) + '</button></div>';
+      $('#cfOk', dlg.dlg).addEventListener('click', function(){ settled = true; resolve(true); dlg.close('ok'); });
+      $('#cfNo', dlg.dlg).addEventListener('click', function(){ settled = true; resolve(false); dlg.close('no'); });
+      dlg.open();
+    });
+  }
+  window.medrakConfirm = function(summary){
+    summary = summary || {};
+    const names = (summary.universities || []).map(function(id){ const m = window.MedrakUniversity && window.MedrakUniversity.meta(id); return m ? (isEn() ? m.nameEn : m.nameAr) : id; });
+    const who = summary.name ? (isEn() ? ' (profile: ' + summary.name + ')' : ' (الملف: ' + summary.name + ')') : '';
+    const uniAr = names.length ? ' يحتوي بيانات: ' + names.join('، ') + '.' : '';
+    const uniEn = names.length ? ' It contains data for: ' + names.join(', ') + '.' : '';
+    return confirmDialog('استيراد نسخة احتياطية؟', 'Import a backup?',
+      'يوجد بيانات محفوظة على هذا الجهاز. سيُدمج ملف النسخة الاحتياطية معها دون تكرار' + who + '.' + uniAr + ' عند التعارض في نتائج الأدوات يُعتمد ما في الملف، ولن تتغير جامعتك الحالية تلقائيًا. هل تريد المتابعة؟',
+      'This device already has saved data. The backup will be merged with it without duplicates' + who + '.' + uniEn + ' Where tool results conflict the file wins, and your current university will not change automatically. Continue?',
+      'متابعة الاستيراد', 'Continue import');
+  };
 
   /* ============================================================
      القائمة الجانبية والشريط العلوي
@@ -334,9 +363,18 @@
           createdAt: prev.createdAt || new Date().toISOString(),
         }));
         prefs.apply({ isFemale: selGender === 'f' }, true);
-        resetPhotoCache(); obDialog.close('done'); renderAll();
+        resetPhotoCache(); renderAll();
         window.medrakLogActivity();
-        if (!localStorage.getItem('medrak_tour_seen')) setTimeout(openTour, 450);
+        const endOnboarding = function(){
+          obDialog.close('done'); renderAll();
+          if (!localStorage.getItem('medrak_tour_seen')) setTimeout(openTour, 450);
+        };
+        /* الخطوة الثانية: اختيار الجامعة (إن لم يخترها بعد) */
+        if (state.university === null && typeof window.medrakUniStep === 'function') {
+          obDialog.dlg.innerHTML = '<div class="ob-uni-wrap"></div>';
+          window.medrakUniStep($('.ob-uni-wrap', obDialog.dlg), endOnboarding);
+          const first = $('.uni-card', obDialog.dlg); if (first) try { first.focus({ preventScroll: true }); } catch(e){}
+        } else endOnboarding();
       };
       if (photoBlob) MedrakStore.savePhoto(photoBlob).then(function(ok){ finish(!!ok); });
       else { MedrakStore.deletePhoto(); finish(false); }
@@ -437,6 +475,7 @@
     $$('#segTheme button', d).forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.v === state.theme)); });
     $$('#segLang button', d).forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.v === state.lang)); });
     $$('#segGender button', d).forEach(function(b){ b.setAttribute('aria-pressed', String((b.dataset.v === 'f') === state.isFemale)); });
+    $$('#segUni button', d).forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.v === (state.university || 'none'))); });
     $('#cuSpot', d).checked = !!state.spotlight;
     $('#cuSound', d).checked = !state.muted;
     paintPalettes();
@@ -469,6 +508,12 @@
         '<div class="mk-sec"><h3>' + S('اللغة والصيغة', 'Language & address form') + '</h3>' +
           '<div class="mk-row"><span>' + S('اللغة', 'Language') + '</span><div class="seg" id="segLang" role="group"' + aria('اللغة', 'Language') + '><button type="button" data-v="ar" aria-pressed="false">العربية</button><button type="button" data-v="en" aria-pressed="false">English</button></div></div>' +
           '<div class="mk-row" style="margin-top:12px"><span>' + S('صيغة المخاطبة', 'Address form') + '</span><div class="seg" id="segGender" role="group"' + aria('صيغة المخاطبة', 'Address form') + '><button type="button" data-v="m" aria-pressed="false">' + S('مذكر', 'Masculine') + '</button><button type="button" data-v="f" aria-pressed="false">' + S('مؤنث', 'Feminine') + '</button></div></div></div>' +
+        '<div class="mk-sec"><h3>' + S('الجامعة', 'University') + '</h3>' +
+          '<div class="mk-row"><span>' + S('الجامعة المعروضة', 'Displayed university') + '</span><div class="seg seg-wrap" id="segUni" role="group"' + aria('الجامعة المعروضة', 'Displayed university') + '>' +
+            '<button type="button" data-v="kau" aria-pressed="false">' + S('جامعة الملك عبدالعزيز', 'King Abdulaziz Univ.') + '</button>' +
+            '<button type="button" data-v="ksu" aria-pressed="false">' + S('جامعة الملك سعود', 'King Saud Univ.') + '</button>' +
+            '<button type="button" data-v="none" aria-pressed="false">' + S('بدون جامعة', 'No university') + '</button></div></div>' +
+          S('تغيير الجامعة يبدّل الخطة والمقررات والمعلومات الأكاديمية المعروضة، وبيانات كل جامعة تبقى محفوظة ومستقلة.', 'Changing the university switches the displayed plan, courses and academic info; each university’s saved data stays separate.', null, 'p', 'class="mk-note" style="margin:10px 0 0"') + '</div>' +
         '<div class="mk-sec"><h3>' + S('نقل تقدمك بين الأجهزة', 'Move your progress between devices') + '</h3>' +
           S('كل بياناتك محفوظة على هذا الجهاز فقط. لنقلها إلى جهاز ثاني:', 'All your data lives on this device only. To move it to another device:', null, 'p', 'class="mk-note" style="margin-bottom:8px"') +
           '<ol class="mk-steps">' +
@@ -493,6 +538,7 @@
     $$('#segTheme button', d).forEach(function(b){ b.addEventListener('click', function(){ prefs.apply({ theme: b.dataset.v }, false); }); });
     $$('#segLang button', d).forEach(function(b){ b.addEventListener('click', function(){ prefs.apply({ lang: b.dataset.v }, false); }); });
     $$('#segGender button', d).forEach(function(b){ b.addEventListener('click', function(){ prefs.apply({ isFemale: b.dataset.v === 'f' }, false); }); });
+    $$('#segUni button', d).forEach(function(b){ b.addEventListener('click', function(){ prefs.apply({ university: b.dataset.v }, false); }); });
     $('#cuSpot', d).addEventListener('change', function(e){ prefs.apply({ spotlight: e.target.checked }, false); });
     $('#cuSound', d).addEventListener('change', function(e){ prefs.apply({ muted: !e.target.checked }, false); if (e.target.checked && window.medrakSound) window.medrakSound.play('click'); });
     $('#cuX', d).addEventListener('click', cuCancel);
@@ -512,10 +558,17 @@
     $('#cuImport', d).addEventListener('click', function(){ imp.click(); });
     imp.addEventListener('change', function(){
       const f = imp.files && imp.files[0]; if (!f) return;
-      MedrakStore.importJSON(f, function(){
+      MedrakStore.importJSON(f, function(merged, info){
         resetPhotoCache(); cuSnapshot = prefs.saved(); syncCustomize(); renderAll();
-        cuMsg('تم استيراد تقدمك وتفضيلاتك بنجاح ✓', 'Your progress and preferences were imported ✓');
-      }, function(){ cuMsg('⚠️ الملف غير صالح — تأكد إنه نسخة صدّرتها من مِدراك.', '⚠️ Invalid file — make sure it is a backup exported from Medrak.'); });
+        const nm = function(id){ const m = window.MedrakUniversity && window.MedrakUniversity.meta(id); return m ? m : { nameAr: id, nameEn: id }; };
+        let ar = 'تم استيراد تقدمك وتفضيلاتك بنجاح ✓', en = 'Your progress and preferences were imported ✓';
+        if (info && info.universityIgnored) { ar += ' — لم نغيّر جامعتك الحالية (' + nm(info.universityKept).nameAr + ')، والملف يحتوي على ' + nm(info.universityIgnored).nameAr + '.'; en += ' — your current university (' + nm(info.universityKept).nameEn + ') was not changed; the file contains ' + nm(info.universityIgnored).nameEn + '.'; }
+        else if (info && info.legacy) { ar += ' (ملف قديم: اعتُبرت بياناته الأكاديمية لجامعة الملك عبدالعزيز).'; en += ' (older file: its academic data was treated as King Abdulaziz University data).'; }
+        cuMsg(ar, en);
+      }, function(err){
+        if (err && err.message === 'cancelled') cuMsg('تم إلغاء الاستيراد ولم يتغير شيء.', 'Import cancelled; nothing changed.');
+        else cuMsg('⚠️ الملف غير صالح — تأكد إنه نسخة صدّرتها من مِدراك.', '⚠️ Invalid file — make sure it is a backup exported from Medrak.');
+      });
       imp.value = '';
     });
   }
@@ -631,7 +684,7 @@
   window.medrakShell = {
     /** تستدعيها أي صفحة بعد تعديل الملف الشخصي: تحدّث الشريط العلوي وبطاقة الحساب، وتفتح الترحيب لو ما بقي حساب */
     refresh: function(resetPhoto){ renderAll(resetPhoto === true); if (!hasAccount()) openOnboarding(); },
-    openCustomize: openCustomize, openTour: openTour, openOnboarding: openOnboarding };
+    openCustomize: openCustomize, openTour: openTour, openOnboarding: openOnboarding, makeDialog: makeDialog, toast: toast, confirm: window.medrakConfirm };
 
   renderAll();
   if (!hasAccount()) openOnboarding();   /* أول زيارة على هذا الجهاز: اسمك + الجنس + صورة اختيارية */

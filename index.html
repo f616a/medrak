@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-ar="مِدراك | Medrak — دليلك في تخصص العلوم السياسية" data-en="Medrak — Your guide to the Political Science major">مِدراك | Medrak — دليلك في تخصص العلوم السياسية</title>
-<meta name="description" content="مِدراك: منصة طلابية مستقلة تشرح تخصص العلوم السياسية بجامعة الملك عبدالعزيز.">
+<meta name="description" content="مِدراك: منصة طلابية مستقلة تشرح تخصص العلوم السياسية وتنظّم الخطة والمقررات وتطوّر المهارات، لطلاب وطالبات جامعة الملك عبدالعزيز وجامعة الملك سعود.">
 <script>
 (function(){
   try {
@@ -21,12 +21,20 @@
     d.setAttribute('data-gender', female ? 'female' : 'male');
     d.setAttribute('data-spotlight', g('medrak_spotlight', true) === false ? 'off' : 'on');
     d.setAttribute('lang', lang); d.setAttribute('dir', lang === 'en' ? 'ltr' : 'rtl');
+    var uni = g('medrak_university', null);
+    if (uni !== 'kau' && uni !== 'ksu' && uni !== 'none') {
+      uni = null;
+      try { var r = JSON.parse(localStorage.getItem('medrak_profile_v1') || 'null'); if (r && ((r.profile && r.profile.nickname) || r.studyPlanProgress || r.semesterTasks)) uni = 'kau'; } catch(e){}
+    }
+    var q = (location.search.match(/[?&]uni=(kau|ksu)(&|$)/) || [])[1];
+    d.setAttribute('data-uni', q || ((uni === 'kau' || uni === 'ksu') ? uni : 'none'));
   } catch(e){}
 })();
 </script>
 <link rel="stylesheet" href="assets/themes.css">
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="assets/shell.css">
+<link rel="stylesheet" href="assets/university.css">
 </head>
 <body style="margin:0">
 <div id="particle-field"></div>
@@ -39,6 +47,7 @@
   <button type="button" class="tb-btn icon-only nav-toggle" id="navToggle" aria-controls="sidebar" aria-expanded="false" aria-label="القائمة" data-aria-ar="القائمة" data-aria-en="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 7h16 M4 12h16 M4 17h16"/></svg></button>
   <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">م</span><span>مِدراك</span><small>Medrak</small></a>
   <span class="spacer"></span>
+  <button type="button" class="tb-btn" id="uniBtn" aria-haspopup="menu" aria-expanded="false" aria-controls="uniMenu" aria-label="الجامعة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21h18 M5 21V10 M9.5 21V10 M14.5 21V10 M19 21V10 M12 3 3 8h18z"/></svg><span class="uni-name tb-label" id="uniName"></span><span class="uni-code" id="uniCode"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" class="chev"><path d="M6 9l6 6 6-6"/></svg></button>
   <button type="button" class="tb-btn icon-only" id="tourBtn" aria-haspopup="dialog" aria-label="جولة التعريف بمزايا الموقع" data-aria-ar="جولة التعريف بمزايا الموقع" data-aria-en="Take a tour of the site" title="جولة التعريف" data-title-ar="جولة التعريف" data-title-en="Site tour"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M12 11v5 M12 8h.01"/></svg></button>
   <button type="button" class="tb-btn" id="customizeBtn" aria-haspopup="dialog" aria-label="تخصيص صفحتي" data-aria-ar="تخصيص صفحتي" data-aria-en="Customize my page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.9 1.5-1.9-.4-1.2.4-2.1 1.6-2.1H17a4 4 0 0 0 4-4c0-5-4-10-9-10z M7.5 11.5h.01 M10 7.5h.01 M14.5 7.5h.01"/></svg><span class="tb-label" data-ar="تخصيص صفحتي" data-en="Customize my page">تخصيص صفحتي</span></button>
   <a class="tb-btn acct-chip" id="acctChip" href="profile.html" aria-label="ملفي"><span class="avatar" id="acctAvatar"></span><span class="tb-label" id="acctName"></span></a>
@@ -60,19 +69,28 @@
     <div class="wrap"><div class="account-hero" id="accountHero" hidden></div></div>
   </section>
 
+<section id="uniChooser" class="no-print" hidden aria-label="اختيار الجامعة">
+    <div class="wrap"><div class="uni-chooser-card">
+      <h2 data-ar="أنت من أي جامعة؟ 🎓" data-en="Which university are you from? 🎓">أنت من أي جامعة؟ 🎓</h2>
+      <p data-m="اختر جامعتك عشان نعرض لك الخطة والمقررات والمعلومات الأكاديمية المناسبة لك." data-f="اختاري جامعتك عشان نعرض لك الخطة والمقررات والمعلومات الأكاديمية المناسبة لك." data-en="Pick your university so we show you the study plan, courses and academic info that fit you.">اختر جامعتك عشان نعرض لك الخطة والمقررات والمعلومات الأكاديمية المناسبة لك.</p>
+      <p class="uni-note" id="uniExploreNote" hidden data-ar="أنت تستكشف التخصص بدون جامعة محددة — المحتوى العام متاح، ولعرض الخطة الدراسية حدد جامعتك." data-en="You are exploring without a university — general content is available; choose your university to see the study plan.">أنت تستكشف التخصص بدون جامعة محددة — المحتوى العام متاح، ولعرض الخطة الدراسية حدد جامعتك.</p>
+      <div class="uni-host"></div>
+    </div></div>
+  </section>
+
 <section class="hero">
     <div class="wrap hero-grid">
       <div>
-        <h1>مِدراك</h1>
+        <h1>مِدراك<span class="h1-sub" data-ar="— دليلك في تخصص العلوم السياسية" data-en="— Your guide to the Political Science major">— دليلك في تخصص العلوم السياسية</span></h1>
         <p class="tagline" data-ar="السياسة معقدة؟ إحنا نرتبها لك." data-en="Politics is complex. We simplify it for you.">السياسة معقدة؟ إحنا نرتبها لك.</p>
-        <p class="lead" data-ar="مِدراك دليلك في تخصص العلوم السياسية — يشرح لك التخصص قبل لا تدخله، ويرتب لك الخطة والمقررات وأنت داخله، بأسلوب قريب منك وما يعقّد عليك." data-en="Medrak is your guide to the Political Science major — explaining the field before you join, and organizing your plan and courses once you're in, in a simple and friendly way.">مِدراك دليلك في تخصص العلوم السياسية — يشرح لك التخصص قبل لا تدخله، ويرتب لك الخطة والمقررات وأنت داخله، بأسلوب قريب منك وما يعقّد عليك.</p>
+        <p class="lead" data-ar="من فهم التخصص ومقرراته إلى تخطيط رحلتك الجامعية وتطوير مهاراتك، مِدراك يساعدك تمشي بخطوات أوضح." data-en="From understanding the major and its courses to planning your university journey and building your skills, Medrak helps you move forward with clearer steps.">من فهم التخصص ومقرراته إلى تخطيط رحلتك الجامعية وتطوير مهاراتك، مِدراك يساعدك تمشي بخطوات أوضح.</p>
         <div class="cta-row">
           <a href="#what-is" class="btn btn-primary" data-m="اكتشف التخصص" data-f="اكتشفي التخصص" data-en="Discover the Major">اكتشف التخصص</a>
           <a href="study-plan.html" class="btn btn-outline" data-m="شوف الخطة الدراسية" data-f="شوفي الخطة الدراسية" data-en="View the Study Plan">شوف الخطة الدراسية</a>
         </div>
-        <div class="disclaimer-chip" data-ar="📌 مِدراك منصة طلابية مستقلة، وغير تابعة رسميًا لجامعة الملك عبدالعزيز" data-en="📌 Medrak is an independent student platform, not officially affiliated with King Abdulaziz University">📌 مِدراك منصة طلابية مستقلة، وغير تابعة رسميًا لجامعة الملك عبدالعزيز</div>
+        <div class="disclaimer-chip" id="heroDisclaimer" data-ar="📌 مِدراك منصة طلابية مستقلة، وليست تابعة رسميًا لأي جامعة" data-en="📌 Medrak is an independent student platform, not officially affiliated with any university">📌 مِدراك منصة طلابية مستقلة، وليست تابعة رسميًا لأي جامعة</div>
       </div>
-      <div class="hero-card">
+      <div class="hero-card" id="heroStats">
         <div class="stat"><span data-ar="عدد الوحدات الدراسية للتخرج" data-en="Credit hours to graduate">عدد الوحدات الدراسية للتخرج</span><b>128</b></div>
         <div class="stat"><span data-ar="المدة الدراسية النظامية" data-en="Standard duration">المدة الدراسية النظامية</span><b data-ar="4 سنوات" data-en="4 years">4 سنوات</b></div>
         <div class="stat"><span data-ar="مجالات التركيز المتاحة" data-en="Available concentrations">مجالات التركيز المتاحة</span><b>2</b></div>
@@ -101,9 +119,10 @@
   </section>
 <section id="kau">
     <div class="wrap">
-      <h2 class="section-title" data-ar="قسم العلوم السياسية بجامعة الملك عبدالعزيز 🎓" data-en="Political Science Dept. at KAU 🎓">قسم العلوم السياسية بجامعة الملك عبدالعزيز 🎓</h2>
-      <p class="section-sub" data-ar="أهم جزء بالموقع. كل معلومة هنا مبنية على مصادر رسمية من الجامعة، مع رابط المصدر بجانبها." data-en="The most important part of the site. Every fact here is based on official university sources, linked next to it.">أهم جزء بالموقع. كل معلومة هنا مبنية على مصادر رسمية من الجامعة، مع رابط المصدر بجانبها.</p>
+      <h2 id="deptTitle" class="section-title" data-ar="قسم العلوم السياسية بجامعة الملك عبدالعزيز 🎓" data-en="Political Science Dept. at KAU 🎓">قسم العلوم السياسية بجامعة الملك عبدالعزيز 🎓</h2>
+      <p id="deptSub" class="section-sub" data-ar="أهم جزء بالموقع. كل معلومة هنا مبنية على مصادر رسمية من الجامعة، مع رابط المصدر بجانبها." data-en="The most important part of the site. Every fact here is based on official university sources, linked next to it.">أهم جزء بالموقع. كل معلومة هنا مبنية على مصادر رسمية من الجامعة، مع رابط المصدر بجانبها.</p>
 
+      <div id="deptKau" data-uni-only="kau">
       <div class="tabs" role="tablist">
         <button class="tab-btn active" data-tab="about">نبذة عن القسم</button>
         <button class="tab-btn" data-tab="tracks">مجالات التركيز</button>
@@ -141,6 +160,9 @@
           <a class="source-link" href="https://kau.edu.sa/faculty/ar/economics-administration/page/political-science-department" target="_blank" rel="noopener">المصدر الرسمي ↗</a>
         </div>
       </div>
+      </div>
+      <div id="deptKsu" data-uni-only="ksu"></div>
+      <div id="deptNone" data-uni-only="none"><div class="info-card"><p data-ar="اختر جامعتك لنعرض لك معلومات قسمها الأكاديمية: النبذة والأهداف والقبول والتحويل." data-en="Choose your university and we will show its department information: overview, goals, admission and transfer." style="margin:0 0 12px">اختر جامعتك لنعرض لك معلومات قسمها الأكاديمية: النبذة والأهداف والقبول والتحويل.</p><a class="btn btn-primary" href="#uniChooser" data-ar="اختيار الجامعة" data-en="Choose university">اختيار الجامعة</a></div></div>
     </div>
   </section>
 <section id="figures">
@@ -184,12 +206,12 @@
   </section>
 <section id="sources">
     <div class="wrap">
-      <h2 class="section-title" data-ar="المصادر 📎" data-en="Sources 📎">المصادر 📎</h2>
-      <p class="section-sub">كل المعلومات الأكاديمية والرسمية في هذا الموقع مأخوذة من المصادر التالية (تاريخ الاطلاع: 3 سبتمبر 2026):</p>
-      <ul style="padding-inline-start:20px; color:var(--text-soft); font-size:14.5px">
-        <li>صفحة قسم العلوم السياسية — <a class="source-link" href="https://kau.edu.sa/faculty/ar/economics-administration/page/political-science-department" target="_blank" rel="noopener">kau.edu.sa</a></li>
-        <li>دليل متطلبات درجة بكالوريوس العلوم السياسية (خطة دراسية رسمية، PDF) — <a class="source-link" href="https://political-science.kau.edu.sa/Files/120006/Files/157420_Study-plan-ps-ar.pdf" target="_blank" rel="noopener">political-science.kau.edu.sa</a></li>
-      </ul>
+      <h2 class="section-title" data-ar="المصادر الرسمية 📚" data-en="Official Sources 📚">المصادر الرسمية 📚</h2>
+      <div class="src-lead">
+        <p data-ar="نعتمد على المواقع الرسمية للجامعات في عرض المعلومات الأكاديمية، وننصحك بمراجعة المصدر مباشرة للتأكد من أحدث التحديثات." data-en="We rely on the universities’ official websites for academic information, and we advise you to check the source directly for the latest updates.">نعتمد على المواقع الرسمية للجامعات في عرض المعلومات الأكاديمية، وننصحك بمراجعة المصدر مباشرة للتأكد من أحدث التحديثات.</p>
+      </div>
+      <div id="sourcesBox"></div>
+      <p class="src-disclaimer" data-ar="الإشارة إلى المصادر الرسمية لا تعني وجود شراكة أو اعتماد أو إشراف من الجامعات على منصة مِدراك." data-en="Referring to official sources does not imply any partnership, accreditation or supervision of the Medrak platform by the universities.">الإشارة إلى المصادر الرسمية لا تعني وجود شراكة أو اعتماد أو إشراف من الجامعات على منصة مِدراك.</p>
     </div>
   </section>
 <section id="rate">
@@ -252,7 +274,8 @@
 
 <footer class="site">
   <div class="wrap">
-    <div class="foot-notice" data-ar="مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز." data-en="Medrak is an independent student platform and not an official King Abdulaziz University website.">مِدراك منصة طلابية مستقلة وليست موقعًا رسميًا تابعًا لجامعة الملك عبدالعزيز.</div>
+    <div class="foot-notice" data-ar="مِدراك منصة طلابية مستقلة، وليست تابعة رسميًا أو ممثلة لجامعة الملك عبدالعزيز أو جامعة الملك سعود أو لأي جهة جامعية أخرى." data-en="Medrak is an independent student platform and is not officially affiliated with, or representing, King Abdulaziz University, King Saud University or any other university body.">مِدراك منصة طلابية مستقلة، وليست تابعة رسميًا أو ممثلة لجامعة الملك عبدالعزيز أو جامعة الملك سعود أو لأي جهة جامعية أخرى.</div>
+    <p class="foot-notice-2" data-ar="المعلومات الأكاديمية المنشورة لأغراض إرشادية، وقد تختلف الخطط والمقررات والشروط بحسب الدفعة واللوائح والتحديثات الرسمية. يُرجى من الطلاب والطالبات التحقق من صحة البيانات ومتطلبات الدراسة والتخرج والقبول مباشرةً من جامعاتهم، وتُعد المصادر والأنظمة الرسمية للجامعة هي المرجع المعتمد." data-en="The academic information published here is for guidance only. Plans, courses and conditions may vary by cohort, regulations and official updates. Students are asked to verify data and study, graduation and admission requirements directly with their universities; the university’s official sources and systems are the authoritative reference.">المعلومات الأكاديمية المنشورة لأغراض إرشادية، وقد تختلف الخطط والمقررات والشروط بحسب الدفعة واللوائح والتحديثات الرسمية. يُرجى من الطلاب والطالبات التحقق من صحة البيانات ومتطلبات الدراسة والتخرج والقبول مباشرةً من جامعاتهم، وتُعد المصادر والأنظمة الرسمية للجامعة هي المرجع المعتمد.</p>
     <div class="foot-grid">
       <div>
         <h5>مِدراك | Medrak</h5>
@@ -282,6 +305,10 @@
 <script src="assets/store.js"></script>
 <script src="assets/common.js"></script>
 <script src="assets/shell.js"></script>
+<script src="assets/universities/registry.js"></script>
+<script src="assets/universities/kau.js"></script>
+<script src="assets/universities/ksu.js"></script>
+<script src="assets/university-ui.js"></script>
 <script>
 (function(){
   const root = document.getElementById('medrak-root');
@@ -383,18 +410,23 @@
       explain:"الواقعيون يركزون على موازين القوى والصراع، بينما الليبراليون يركزون أكثر على التعاون والأمن الجماعي." },
     { type:"tf", q:"'التحليل الشمولي' في علم السياسة يعني حصر التحليل داخل علم السياسة فقط دون علوم أخرى.",
       correct:false, explain:"غلط — التحليل الشمولي يعني توسيع الرؤية لتشمل تداخل علم السياسة مع علوم أخرى كالتاريخ والاقتصاد والاجتماع." },
-    { type:"mcq", q:"كم عدد الوحدات الدراسية المطلوبة للتخرج من بكالوريوس العلوم السياسية بجامعة الملك عبدالعزيز؟",
+    { uni:"kau", type:"mcq", q:"كم عدد الوحدات الدراسية المطلوبة للتخرج من بكالوريوس العلوم السياسية بجامعة الملك عبدالعزيز؟",
       options:["120 وحدة","128 وحدة","136 وحدة"], correct:1,
       explain:"128 وحدة دراسية، حسب دليل القسم الرسمي." },
-    { type:"tf", q:"مجالا التركيز المتاحان حاليًا بالقسم هما: الاقتصاد السياسي العالمي، والسياسة العامة والتنمية.",
+    { uni:"kau", type:"tf", q:"مجالا التركيز المتاحان حاليًا بالقسم هما: الاقتصاد السياسي العالمي، والسياسة العامة والتنمية.",
       correct:true, explain:"صحيح، ويختار الطالب أحدهما في الفصل الدراسي الرابع." },
+    { uni:"ksu", type:"mcq", q:"كم عدد الساعات المعتمدة المعلنة لبرنامج بكالوريوس العلوم السياسية بجامعة الملك سعود؟",
+      options:["120 ساعة","130 ساعة","140 ساعة"], correct:1,
+      explain:"130 ساعة معتمدة وفق الخطة المنشورة على مواقع الجامعة. (بعض جداول المقررات المنشورة تعطي مجموعًا مختلفًا قليلًا، فتحقق من خطتك مع الجامعة.)" },
   ];
+  const effUni = () => (window.MedrakUniversity ? MedrakUniversity.effective() : "none");
   const quickQText = document.getElementById('quickQText');
   const quickQOpts = document.getElementById('quickQOpts');
   const quickQExplain = document.getElementById('quickQExplain');
   function renderQuickQuestion(){
-    const dayIndex = Math.floor(Math.floor(Date.now() / 86400000) / 2) % quickQuestions.length;
-    const item = quickQuestions[dayIndex];
+    const pool = quickQuestions.filter(q => !q.uni || q.uni === effUni());
+    const dayIndex = Math.floor(Math.floor(Date.now() / 86400000) / 2) % pool.length;
+    const item = pool[dayIndex];
     quickQText.textContent = item.q;
     quickQExplain.style.display = 'none';
     quickQOpts.innerHTML = '';
@@ -423,21 +455,37 @@
      والأسئلة العامة آراء توجيهية عامة وليست معلومة رسمية من الجامعة.
      ============================================================ */
   const faqData = [
-    { q:"كم عدد الوحدات الدراسية المطلوبة للتخرج؟", a:"128 وحدة دراسية موزعة على 4 سنوات، حسب دليل القسم الرسمي.", official:true },
-    { q:"إيش مجالات التركيز المتاحة حاليًا؟", a:"مجالان: الاقتصاد السياسي العالمي (IPE)، والسياسة العامة والتنمية (PP&D)، ويختار الطالب أحدهما في الفصل الرابع.", official:true },
+    { uni:"kau", q:"كم عدد الوحدات الدراسية المطلوبة للتخرج؟", a:"128 وحدة دراسية موزعة على 4 سنوات، حسب دليل القسم الرسمي.", official:true },
+    { uni:"ksu", q:"كم عدد الساعات المعتمدة للتخرج في جامعة الملك سعود؟", a:"تعلن الجامعة 130 ساعة معتمدة موزعة على 4 سنوات. لكن جداول المقررات المنشورة تعطي مجموعًا مختلفًا قليلًا، لذلك نعرض التقدم بصورة تقديرية فقط؛ تأكد من خطتك مع الجامعة.", official:true },
+    { uni:"kau", q:"إيش مجالات التركيز المتاحة حاليًا؟", a:"مجالان: الاقتصاد السياسي العالمي (IPE)، والسياسة العامة والتنمية (PP&D)، ويختار الطالب أحدهما في الفصل الرابع.", official:true },
     { q:"إيش الفرق بين العلوم السياسية والعلاقات الدولية؟", a:"(رأي توجيهي عام وليس معلومة رسمية) العلوم السياسية أشمل وتغطي النظم والفكر والسياسات الداخلية والخارجية، بينما العلاقات الدولية تركّز أكثر على التفاعل بين الدول والمنظمات.", official:false },
     { q:"هل التخصص يعتمد على الحفظ؟", a:"(رأي توجيهي عام) يعتمد أكثر على الفهم والتحليل والربط بين الأحداث والنظريات، مو مجرد حفظ.", official:false },
-    { q:"متى أختار مجال التركيز؟", a:"في الفصل الدراسي الرابع من دراستك بالقسم، حسب دليل الخطة الدراسية.", official:true },
+    { uni:"kau", q:"متى أختار مجال التركيز؟", a:"في الفصل الدراسي الرابع من دراستك بالقسم، حسب دليل الخطة الدراسية.", official:true },
+    { kind:"platform", q:"هل مِدراك تابع لجامعة الملك سعود؟", a:"لا، مِدراك منصة طلابية مستقلة وليست تابعة رسميًا لجامعة الملك سعود أو لأي جامعة أخرى. نستخدم المصادر الجامعية الرسمية مرجعًا للمعلومات الأكاديمية." },
+    { kind:"platform", q:"هل مِدراك تابع لجامعة الملك عبدالعزيز؟", a:"لا، مِدراك منصة مستقلة تساعد طلاب وطالبات العلوم السياسية، وليست جهة رسمية ممثلة للجامعة." },
+    { kind:"platform", q:"هل الخطة الموجودة في مِدراك هي خطتي المعتمدة؟", a:"نعرض الخطط المتاحة من المصادر الجامعية الرسمية، لكن قد تختلف المتطلبات بحسب الدفعة وإصدار الخطة والحالة الأكاديمية للطالب. تأكد من خطتك عبر النظام الأكاديمي أو مرشدك الأكاديمي." },
+    { kind:"platform", q:"هل أقدر أغير جامعتي في مِدراك؟", a:"نعم، يمكنك تغيير الجامعة من أعلى الموقع أو من إعدادات ملفك، دون فقد بياناتك المحفوظة للجامعة السابقة." },
+    { kind:"platform", q:"هل مِدراك يحسب ساعات التخرج؟", a:"يساعدك مِدراك في متابعة ساعاتك ومقرراتك بحسب الخطة المدخلة. لكن هذه الحسابات إرشادية، والمرجع الرسمي لتحديد استيفاء شروط التخرج هو الجامعة." },
+    { kind:"platform", q:"هل أقدر أستخدم مِدراك وأنا ما دخلت الجامعة؟", a:"أكيد. يمكنك استكشاف تخصص العلوم السياسية والاستفادة من المحتوى والأدوات التعليمية العامة دون تحديد جامعة." },
+    { kind:"platform", q:"لماذا أحيانًا تختلف المعلومات عن النظام الأكاديمي؟", a:"قد يكون السبب اختلاف الدفعة أو تحديث الخطة أو وجود استثناءات أكاديمية. اتبع بيانات الجامعة الرسمية، ويمكنك إبلاغ فريق مِدراك بالمعلومة التي تحتاج إلى تحديث." },
   ];
   const faqBox = document.getElementById('faqAccordion');
-  faqData.forEach(item => {
-    const div = document.createElement('div');
-    div.className = 'accordion-item';
-    div.innerHTML = '<button class="accordion-head"><span>'+item.q+'</span><span class="plus">+</span></button>'+
-      '<div class="accordion-body"><div>'+item.a+(item.official ? '' : ' <br><small style="color:var(--teal-deep)">⚠️ هذه إجابة توجيهية من مِدراك، وليست معلومة رسمية من الجامعة.</small>')+'</div></div>';
-    faqBox.appendChild(div);
-  });
-  window.medrakWireAccordion(faqBox);
+  let faqKey = '';
+  function renderFaq(){
+    const key = effUni(); if (key === faqKey && faqBox.children.length) return; faqKey = key;
+    faqBox.innerHTML = '';
+    faqData.filter(item => !item.uni || item.uni === key).forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'accordion-item';
+      const warn = (item.official === false) ? ' <br><small style="color:var(--teal-deep)">⚠️ هذه إجابة توجيهية من مِدراك، وليست معلومة رسمية من الجامعة.</small>' : '';
+      div.innerHTML = '<button class="accordion-head"><span>'+item.q+'</span><span class="plus">+</span></button>'+
+        '<div class="accordion-body"><div>'+item.a+warn+'</div></div>';
+      faqBox.appendChild(div);
+    });
+    window.medrakWireAccordion(faqBox);
+  }
+  renderFaq();
+  window.addEventListener('medrak:prefs', function(){ renderFaq(); renderQuickQuestion(); });
 
 
   /* ===== Star rating ===== */
