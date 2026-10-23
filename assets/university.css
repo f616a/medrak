@@ -167,3 +167,13 @@ footer.site .foot-notice-2 { margin: 8px 0 0; font-size: 12.5px; line-height: 1.
 .btn.btn-light, #medrak-root .btn.btn-light { background: #fff; color: #10233F; border: 2px solid #fff; font-weight: 800; box-shadow: none; }
 #medrak-root .btn.btn-light:hover { background: #F2F5FA; }
 .hero-card .uni-none-stat span { color: #fff; font-size: 14.5px; line-height: 1.8; }
+
+/* ---------- صفحة سياسة الخصوصية ---------- */
+.priv-page .priv-meta { font-size: 13px; color: var(--text-soft); margin: 0 0 18px; }
+.priv-page h2.priv-h { margin: 26px 0 8px; font-size: 19px; color: var(--purple-text); }
+.priv-page p, .priv-page li { line-height: 2; color: var(--text); font-size: 15px; }
+.priv-page ul { padding-inline-start: 22px; margin: 8px 0; }
+.priv-page .priv-box { background: var(--surface-2); border: 1px solid var(--line); border-radius: 18px; padding: 12px 18px; margin: 12px 0; }
+.priv-page .priv-box p { margin: 6px 0; }
+.priv-page .priv-no { border-inline-start: 4px solid var(--correct-text); }
+.priv-page .priv-note { border-inline-start: 4px solid var(--yellow); }

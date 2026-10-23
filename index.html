@@ -310,6 +310,8 @@
 <script src="assets/universities/kau.js"></script>
 <script src="assets/universities/ksu.js"></script>
 <script src="assets/university-ui.js"></script>
+<script src="assets/stats.js"></script>
+<script data-goatcounter="https://medrak1999.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>
 (function(){
   const root = document.getElementById('medrak-root');
@@ -437,7 +439,9 @@
       btn.className = 'quiz-opt';
       btn.textContent = optText;
       btn.addEventListener('click', function(){
+        if (window.medrakTrack) medrakTrack('start_quiz', {quiz_id:'daily_question'});
         const isCorrect = item.type === 'tf' ? (i === 0) === item.correct : i === item.correct;
+        if (window.medrakTrack) medrakTrack('complete_quiz', {quiz_id:'daily_question'});
         quickQOpts.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
         this.style.borderColor = isCorrect ? 'var(--correct-text)' : 'var(--wrong-text)';
         this.style.background = isCorrect ? 'var(--correct-bg)' : 'var(--wrong-bg)';

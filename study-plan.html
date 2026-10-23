@@ -277,6 +277,8 @@
 <script src="assets/universities/kau.js"></script>
 <script src="assets/universities/ksu.js"></script>
 <script src="assets/university-ui.js"></script>
+<script src="assets/stats.js"></script>
+<script data-goatcounter="https://medrak1999.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script src="assets/universities/ksu-plan-ui.js"></script>
 <script>
 (function(){
@@ -621,7 +623,7 @@
       const b = document.createElement('button');
       b.className = 'quiz-opt';
       b.textContent = o.t;
-      b.addEventListener('click', function(){ scores[o.track]++; quizIndex++; renderQuiz(); });
+      b.addEventListener('click', function(){ if (quizIndex === 0) { if (window.medrakTrack) medrakTrack('start_quiz', {quiz_id:'track_quiz'}); } scores[o.track]++; quizIndex++; renderQuiz(); });
       optsDiv.appendChild(b);
     });
   }
@@ -634,6 +636,7 @@
     document.getElementById('quizResultDesc').textContent = track === 'ipe'
       ? 'تميل لتحليل العلاقة بين الاقتصاد والسياسة عالميًا — هذا مجال تركيزك المقترح.'
       : 'تميل لتحليل صنع القرار وأثره على المجتمع — هذا مجال تركيزك المقترح.';
+    if (window.medrakTrack) medrakTrack('complete_quiz', {quiz_id:'track_quiz'});
     if (window.medrakSound) window.medrakSound.play('achievement');
     if (window.medrakConfetti) window.medrakConfetti();
     if (window.medrakRecordAchievement) medrakRecordAchievement('اكتشفت مسارك المقترح: ' + (track === 'ipe' ? 'الاقتصاد السياسي العالمي' : 'السياسة العامة والتنمية'));

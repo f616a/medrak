@@ -95,10 +95,13 @@
   window.medrakApplyText = applyAllText;
 
   function savePrefs(s){
+    const prevUni = (function(){ const v = LS(KEYS.university, null); return UNI_VALUES.indexOf(v) >= 0 ? v : null; })();
     LSset(KEYS.theme, s.theme); LSset(KEYS.lang, s.lang); LSset(KEYS.gender, s.isFemale);
     if (s.palette) LSset(KEYS.palette, s.palette); else LSdel(KEYS.palette);
     LSset(KEYS.layout, s.layout); LSset(KEYS.spotlight, s.spotlight); LSset(KEYS.muted, s.muted);
     if (s.university) LSset(KEYS.university, s.university); else LSdel(KEYS.university);
+    /* يُعلن عن اختيار جامعة جديد فقط عند حفظه فعليًا (لا عند الترحيل التلقائي ولا الاستيراد) — يستمع له القياس المجهول (stats.js) */
+    if (s.university && s.university !== prevUni) { try { window.dispatchEvent(new CustomEvent('medrak:university-selected', { detail: { from: prevUni, to: s.university } })); } catch(e){} }
   }
 
   window.medrakPrefs = {

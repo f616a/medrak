@@ -214,6 +214,8 @@
 <script src="assets/shell.js"></script>
 <script src="assets/universities/registry.js"></script>
 <script src="assets/university-ui.js"></script>
+<script src="assets/stats.js"></script>
+<script data-goatcounter="https://medrak1999.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>
 (function(){
   const root = document.getElementById('medrak-root');
@@ -460,6 +462,7 @@
     }
   }
   function policyAdvance(){
+    if (policy.step === 0) { if (window.medrakTrack) medrakTrack('use_political_simulation', {simulation:'policy_simulator'}); }
     policy.step++;
     if (policy.step >= policySteps.length) policyFinish();
     else policyRenderStep();
@@ -592,6 +595,7 @@
     });
   }
   function nationAdvance(){
+    if (nation.step === 0) { if (window.medrakTrack) medrakTrack('use_political_simulation', {simulation:'nation_builder'}); }
     nation.step++;
     if (nation.step > nationSteps.length) nationFinish();
     else nationRenderStep();

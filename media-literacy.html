@@ -132,6 +132,8 @@
 <script src="assets/shell.js"></script>
 <script src="assets/universities/registry.js"></script>
 <script src="assets/university-ui.js"></script>
+<script src="assets/stats.js"></script>
+<script data-goatcounter="https://medrak1999.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>
 (function(){
   /* ============================================================
@@ -204,6 +206,7 @@
       btn.className = 'quiz-opt';
       btn.textContent = optText;
       btn.addEventListener('click', function(){
+        if (mlIndex === 0) { if (window.medrakTrack) medrakTrack('start_quiz', {quiz_id:'media_literacy'}); }
         const isCorrect = i === item.correct;
         if (isCorrect) mlScore++;
         opts.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
@@ -230,6 +233,7 @@
     document.querySelector('.quiz-box').style.display = 'none';
     document.getElementById('mlDoneBox').style.display = 'block';
     document.getElementById('mlFinalScore').textContent = 'نتيجتك: ' + mlScore + ' من ' + mlTrainings.length;
+    if (window.medrakTrack) medrakTrack('complete_quiz', {quiz_id:'media_literacy'});
     if (window.medrakSound) window.medrakSound.play('achievement');
     if (window.medrakConfetti) window.medrakConfetti();
     if (window.MedrakStore) MedrakStore.set('mediaLiteracy', { bestScore: mlScore, total: mlTrainings.length, completedAt: new Date().toISOString() });

@@ -256,6 +256,8 @@
 <script src="assets/shell.js"></script>
 <script src="assets/universities/registry.js"></script>
 <script src="assets/university-ui.js"></script>
+<script src="assets/stats.js"></script>
+<script data-goatcounter="https://medrak1999.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>
 (function(){
   const careerPaths = [
@@ -385,7 +387,7 @@
       const btn = document.createElement('button');
       btn.className = 'quiz-opt';
       btn.textContent = o.t;
-      btn.addEventListener('click', function(){ cqScores[o.path] = (cqScores[o.path]||0) + 1; cqIndex++; cqRender(); });
+      btn.addEventListener('click', function(){ if (cqIndex === 0) { if (window.medrakTrack) medrakTrack('start_quiz', {quiz_id:'career_quiz'}); } cqScores[o.path] = (cqScores[o.path]||0) + 1; cqIndex++; cqRender(); });
       opts.appendChild(btn);
     });
   }
@@ -398,6 +400,7 @@
       '<p style="font-size:13px;color:var(--text-soft);margin-bottom:14px">تذكّر: هذي نتيجة استرشادية تعليمية بس، مو قرارًا مهنيًا نهائيًا — استكشف أكثر واستشر مرشدك الأكاديمي.</p>'+
       '<button class="btn btn-outline" id="cqRestartBtn" data-m="أعد الاختبار" data-f="أعيدي الاختبار" data-en="Retake Quiz">أعد الاختبار</button></div>';
     document.getElementById('cqRestartBtn').addEventListener('click', function(){ cqIndex = 0; cqScores = {}; cqRender(); });
+    if (window.medrakTrack) medrakTrack('complete_quiz', {quiz_id:'career_quiz'});
     if (window.medrakSound) window.medrakSound.play('achievement');
     if (window.MedrakStore) MedrakStore.set('careerQuiz', { lastResult: match.id, completedAt: new Date().toISOString() });
     if (window.medrakRecordAchievement) medrakRecordAchievement('اكتشفت أقرب مسار مهني لك: ' + match.title);

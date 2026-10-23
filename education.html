@@ -224,6 +224,8 @@
 <script src="assets/shell.js"></script>
 <script src="assets/universities/registry.js"></script>
 <script src="assets/university-ui.js"></script>
+<script src="assets/stats.js"></script>
+<script data-goatcounter="https://medrak1999.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script>
 (function(){
   const root = document.getElementById('medrak-root');
@@ -433,6 +435,7 @@
       btn.className = 'quiz-opt';
       btn.textContent = label;
       btn.addEventListener('click', function(){
+        if (gqIndex === 0) { if (window.medrakTrack) medrakTrack('start_quiz', {quiz_id:'glossary_quiz'}); }
         const answeredTrue = (i === 0);
         const isCorrect = answeredTrue === q.correct;
         if (isCorrect) gqScore++;
@@ -454,6 +457,7 @@
     document.getElementById('gqLive').style.display = 'none';
     document.getElementById('gqResult').style.display = 'block';
     document.getElementById('gqFinalScore').textContent = 'نتيجتك: ' + gqScore + ' من ' + GQ_TOTAL;
+    if (window.medrakTrack) medrakTrack('complete_quiz', {quiz_id:'glossary_quiz'});
     if (window.medrakSound) window.medrakSound.play('achievement');
     if (window.medrakConfetti) window.medrakConfetti();
     if (window.medrakRecordAchievement) medrakRecordAchievement('اختبار المصطلحات: ' + gqScore + ' من ' + GQ_TOTAL);
