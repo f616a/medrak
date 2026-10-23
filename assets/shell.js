@@ -251,7 +251,7 @@
       '<form class="ob-inner" id="obForm" novalidate>' +
         '<div class="ob-brand"><span class="brand-mark" aria-hidden="true">م</span><span>مِدراك</span></div>' +
         S('أهلًا بك في مِدراك 👋', 'Welcome to Medrak 👋', null, 'h1', 'id="obTitle"') +
-        S('قبل ما نبدأ، عرّفنا على نفسك. كل شيء يبقى على جهازك فقط — بدون حسابات ولا خوادم.', 'Before we begin, tell us a little about you. Everything stays on your device — no accounts, no servers.', null, 'p', 'class="ob-sub"') +
+        S('قبل ما نبدأ، عرّفنا على نفسك. ملفك وتقدمك يبقيان على جهازك فقط — بدون حسابات، ولا نرسل بياناتك الشخصية لأي خادم.', 'Before we begin, tell us a little about you. Your profile and progress stay on your device — no accounts, and we never send your personal data to any server.', null, 'p', 'class="ob-sub"') +
         (canResume ? '<div class="ob-resume"><span class="avatar" id="obResumeAv"></span><span class="grow">' + esc(existing.nickname) + '</span><button type="button" class="btn btn-primary" id="obResume" style="padding:9px 16px;font-size:13px"' + '>' + S('متابعة', 'Continue') + '</button></div>' : '') +
         '<div class="ob-avatar-row">' +
           '<div class="avatar" id="obAvatar"></div>' +
@@ -399,7 +399,7 @@
     { ic: 'briefcase', t: ['مستقبلك المهني', 'Your career'], b: ['10 مسارات مهنية، اختبار ميول، مقابلة وظيفية تجريبية، ومنشئ سيرة ذاتية متوافق مع أنظمة ATS.', '10 career paths, an interest quiz, a mock job interview, and an ATS-friendly resume builder.'] },
     { ic: 'grad', t: ['المقالات والخريجون', 'Articles & alumni'], b: ['مقالات أعضاء هيئة التدريس، وتجارب الخريجين بعد التخرج — وتقدر تشارك تجربتك أنت كمان.', 'Faculty articles and graduates’ real post-graduation stories — and you can share yours too.', 'مقالات أعضاء هيئة التدريس، وتجارب الخريجين بعد التخرج — وتقدرين تشاركين تجربتك أنتِ كمان.'] },
     { ic: 'palette', t: ['تخصيص صفحتي', 'Customize my page'], b: ['من زر «تخصيص صفحتي» تختار الألوان والوضع الداكن وتصميم الصفحة واللغة وصيغة المخاطبة ودائرة الضوء، وتنقل تقدمك إلى جهاز ثاني.', 'From “Customize my page” choose colors, dark mode, page layout, language, address form and the cursor spotlight — and move your progress to another device.', 'من زر «تخصيص صفحتي» تختارين الألوان والوضع الداكن وتصميم الصفحة واللغة وصيغة المخاطبة ودائرة الضوء، وتنقلين تقدمك إلى جهاز ثاني.'] },
-    { ic: 'lock', t: ['خصوصيتك', 'Your privacy'], b: ['ملفك وصورتك وتقدمك محفوظة على جهازك فقط — لا حسابات ولا خوادم. احتفظ بنسخة احتياطية من «تخصيص صفحتي» لو غيّرت جهازك.', 'Your profile, photo and progress live on your device only — no accounts, no servers. Keep a backup from “Customize my page” if you change devices.', 'ملفك وصورتك وتقدمك محفوظة على جهازك فقط — لا حسابات ولا خوادم. احتفظي بنسخة احتياطية من «تخصيص صفحتي» لو غيّرتِ جهازك.'] },
+    { ic: 'lock', t: ['خصوصيتك', 'Your privacy'], b: ['ملفك وصورتك وتقدمك محفوظة على جهازك فقط — لا حسابات، ولا نرسل بياناتك الشخصية لأي خادم. احتفظ بنسخة احتياطية من «تخصيص صفحتي» لو غيّرت جهازك.', 'Your profile, photo and progress live on your device only — no accounts, and we never send your personal data to any server. Keep a backup from “Customize my page” if you change devices.', 'ملفك وصورتك وتقدمك محفوظة على جهازك فقط — لا حسابات، ولا نرسل بياناتك الشخصية لأي خادم. احتفظي بنسخة احتياطية من «تخصيص صفحتي» لو غيّرتِ جهازك.'] },
   ];
   function openTour(startAt){
     if (!tourDialog) {
